@@ -63,7 +63,7 @@ const { transparentNav = true, ...seoProps } = Astro.props;
 
 <script>
   (function initScrollAnimations(): void {
-    const targets = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
+    const targets = document.querySelectorAll<HTMLElement>('.animate-on-scroll, .reveal');
     if (!targets.length || !('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver(
       (entries: IntersectionObserverEntry[]): void => {
@@ -74,7 +74,7 @@ const { transparentNav = true, ...seoProps } = Astro.props;
           }
         });
       },
-      { threshold: 0.10, rootMargin: '0px 0px -32px 0px' }
+      { threshold: 0.05, rootMargin: '0px 0px -20px 0px' }
     );
     targets.forEach((el): void => observer.observe(el));
   })();
