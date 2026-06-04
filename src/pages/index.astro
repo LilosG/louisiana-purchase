@@ -1,278 +1,1464 @@
 ---
-// src/pages/index.astro
-// Louisiana Purchase — Homepage
-// High-conversion, editorial luxury layout.
-// Content sections structured for AEO visibility.
-
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
   title="Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego"
   description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Tuesday–Sunday."
+  ogImage="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
   ogType="website"
 >
-  <!-- ─── Hero Section ──────────────────────────────────────────────────── -->
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO — Full bleed night exterior. Louisiana St sign.
+       ═══════════════════════════════════════════════════════════ -->
   <section
     aria-labelledby="hero-headline"
-    class="relative flex items-end min-h-hero-mobile md:min-h-hero-desktop overflow-hidden
-           bg-obsidian-900"
+    class="site-hero"
   >
-    <!-- Background image placeholder — swap for <Picture> when assets are available -->
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 bg-velvet-gradient opacity-80"
-    ></div>
+    <div class="site-hero__image-wrap" aria-hidden="true">
+      <img
+        src="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+        alt="Louisiana Purchase at night — North Park, San Diego"
+        class="site-hero__bg"
+        width="1600"
+        height="1064"
+        fetchpriority="high"
+        decoding="async"
+      />
+      <div class="site-hero__overlay"></div>
+    </div>
 
-    <!-- Cinematic bottom gradient -->
-    <div
-      aria-hidden="true"
-      class="absolute inset-0 bg-hero-bottom-fade"
-    ></div>
+    <div class="site-hero__content">
+      <p class="eyebrow site-hero__eyebrow">North Park, San Diego</p>
 
-    <!-- Hero content -->
-    <div class="relative z-raised max-w-layout mx-auto px-gutter pb-24 md:pb-32">
-
-      <p class="eyebrow mb-6 animate-fade-in">
-        North Park, San Diego — Est. 2018
-      </p>
-
-      <h1
-        id="hero-headline"
-        class="font-display text-5xl md:text-7xl xl:text-8xl font-light
-               text-parchment tracking-tighter leading-none mb-6
-               animate-fade-up"
-      >
+      <h1 id="hero-headline" class="site-hero__headline">
         Louisiana<br />
-        <em class="font-serif not-italic text-gradient-gold">Purchase</em>
+        <em>Purchase</em>
       </h1>
 
-      <p
-        class="font-serif text-lg md:text-xl font-light italic text-parchment/75
-               max-w-prose-narrow mb-10 animate-fade-up"
-        style="animation-delay: 120ms"
-      >
-        Fire-charred oysters. Complex craft cocktails. Chef Quinnton Austin's
-        elevated Creole kitchen — in the heart of North Park.
+      <p class="site-hero__sub">
+        Elevated Creole cuisine. Complex craft cocktails.<br class="hidden md:block" />
+        Chef Quinnton Austin's fire-forward Louisiana kitchen.
       </p>
 
-      <div
-        class="flex flex-col sm:flex-row gap-4 animate-fade-up"
-        style="animation-delay: 240ms"
-      >
+      <div class="site-hero__ctas">
         <a
           href={import.meta.env.PUBLIC_RESERVATIONS_URL}
           target="_blank"
           rel="noopener noreferrer"
-          class="eyebrow inline-flex justify-center px-8 py-4
-                 bg-gold text-obsidian hover:bg-gold-200
-                 transition-all duration-base ease-luxury rounded-sm"
+          class="btn-primary"
           aria-label="Reserve a table at Louisiana Purchase"
         >
           Reserve a Table
         </a>
         <a
           href="/menu"
-          class="eyebrow inline-flex justify-center px-8 py-4
-                 border border-gold/40 text-gold hover:border-gold hover:text-parchment
-                 transition-all duration-base ease-luxury rounded-sm"
+          class="btn-ghost"
           aria-label="View the Louisiana Purchase menu"
         >
           View the Menu
         </a>
       </div>
     </div>
-  </section>
 
-  <!-- ─── AEO: About / Story Block ─────────────────────────────────────── -->
-  <!--
-    Structured as a clear heading-answer layout for AI search engine parsing.
-    Answers high-intent unbranded queries:
-      "upscale southern dining san diego"
-      "best creole restaurant north park"
-      "french quarter cocktail bar san diego"
-  -->
-  <section
-    id="about"
-    aria-labelledby="about-headline"
-    class="py-section lg:py-section-lg bg-obsidian-900 relative"
-  >
-    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
-
-    <div class="max-w-layout mx-auto px-gutter">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-
-        <div class="animate-on-scroll">
-          <p class="eyebrow mb-4">Our Story</p>
-          <h2
-            id="about-headline"
-            class="font-serif text-4xl md:text-5xl font-light text-parchment tracking-tighter mb-6"
-          >
-            A Piece of New Orleans,<br />
-            <span class="text-gradient-gold">Rooted in North Park</span>
-          </h2>
-          <p class="font-sans text-base text-smoke-light leading-relaxed mb-6">
-            Louisiana Purchase brings the opulent soul of the French Quarter to San Diego's most vibrant neighborhood.
-            More than a restaurant — it is an atmosphere: velvet-accented intimate dining, a hidden lush patio,
-            and the kind of craft cocktail program that demands reverence, not speed.
-          </p>
-          <p class="font-sans text-base text-smoke-light leading-relaxed mb-8">
-            Chef Quinnton Austin's kitchen is a love letter to Louisiana — slow-built gumbo, fire-charred Gulf oysters,
-            and elevated Creole plates that honor the tradition without being imprisoned by it.
-          </p>
-
-          <!-- AEO: Key-value data block — scanned by AI engines for structured facts -->
-          <dl class="grid grid-cols-2 gap-6 border-t border-gold/10 pt-8">
-            <div>
-              <dt class="eyebrow mb-1">Cuisine</dt>
-              <dd class="font-serif text-lg text-parchment">Elevated Creole</dd>
-            </div>
-            <div>
-              <dt class="eyebrow mb-1">Location</dt>
-              <dd class="font-serif text-lg text-parchment">North Park, SD</dd>
-            </div>
-            <div>
-              <dt class="eyebrow mb-1">Brunch</dt>
-              <dd class="font-serif text-lg text-parchment">Sat &amp; Sun w/ Live Jazz</dd>
-            </div>
-            <div>
-              <dt class="eyebrow mb-1">Private Events</dt>
-              <dd class="font-serif text-lg text-parchment">Up to 80 Guests</dd>
-            </div>
-          </dl>
-        </div>
-
-        <!-- Visual accent block -->
-        <aside
-          aria-hidden="true"
-          class="relative aspect-portrait bg-velvet-800 rounded-sm overflow-hidden animate-on-scroll"
+    <!-- Quick-facts bar, identical pattern to Coco Maya / Lobby -->
+    <div class="site-hero__facts" aria-label="Key venue information">
+      <div class="hero-fact">
+        <span class="hero-fact__label">Hours Today</span>
+        <span class="hero-fact__value">5 PM – Close</span>
+      </div>
+      <div class="hero-fact hero-fact--link">
+        <span class="hero-fact__label">Happy Hour</span>
+        <a href="/happy-hour" class="hero-fact__value hero-fact__value--gold">
+          Tue – Fri, 4–6 PM
+        </a>
+      </div>
+      <div class="hero-fact hero-fact--link">
+        <span class="hero-fact__label">Jazz Brunch</span>
+        <a href="/brunch" class="hero-fact__value hero-fact__value--gold">
+          Sat &amp; Sun, 10 AM – 3 PM
+        </a>
+      </div>
+      <div class="hero-fact hero-fact--link">
+        <span class="hero-fact__label">Location</span>
+        <a
+          href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero-fact__value hero-fact__value--gold"
         >
-          <div class="absolute inset-0 bg-obsidian-gradient opacity-30"></div>
-          <div class="absolute bottom-8 left-8 right-8">
-            <blockquote class="font-serif text-xl italic text-parchment/80 leading-relaxed">
-              "Fire-forward, deeply rooted, and impossibly precise."
-            </blockquote>
-            <p class="eyebrow mt-3 text-gold">Chef Quinnton Austin</p>
-          </div>
-        </aside>
-
+          North Park, SD
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ─── AEO: Experience Highlights Block ─────────────────────────────── -->
-  <!--
-    Answers queries:
-      "north park date night cocktail lounges"
-      "jazz brunch san diego"
-      "fire charred oysters san diego"
-  -->
-  <section
-    aria-labelledby="experience-headline"
-    class="py-section lg:py-section-lg bg-velvet relative"
-  >
-    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+  <!-- ═══════════════════════════════════════════════════════════
+       ABOUT — Split layout. Interior bar shot + editorial copy.
+       ═══════════════════════════════════════════════════════════ -->
+  <section id="about" aria-labelledby="about-heading" class="section-about">
 
-    <div class="max-w-layout mx-auto px-gutter">
+    <div class="about-grid">
 
-      <header class="text-center mb-16 animate-on-scroll">
-        <p class="eyebrow mb-4">The Experience</p>
-        <h2
-          id="experience-headline"
-          class="font-serif text-4xl md:text-5xl font-light text-parchment tracking-tighter"
-        >
-          Three Ways to Experience Louisiana Purchase
+      <div class="about-image-wrap animate-on-scroll">
+        <img
+          src="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+          alt="Louisiana Purchase interior bar — geometric wood ceiling and velvet seating, North Park San Diego"
+          class="about-image"
+          width="1600"
+          height="1065"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
+      <div class="about-copy animate-on-scroll">
+        <p class="eyebrow about-eyebrow">North Park, San Diego · Est. 2018</p>
+        <h2 id="about-heading" class="about-heading">
+          Where Little Italy's<br />
+          Soul Moved<br />
+          <span class="text-gold">to North Park</span>
         </h2>
+        <p class="about-body">
+          Louisiana Purchase is not a theme bar. It is a place — a genuine piece of
+          New Orleans culture transplanted into the most vibrant neighborhood in San Diego.
+          The geometric-timber ceiling, the candlelit bar, the patio framed by hanging
+          ferns: every element earns its place.
+        </p>
+        <p class="about-body">
+          Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters.
+          Slow-built gumbo. Elevated Creole plates that honor the tradition without being
+          imprisoned by it. The cocktail program — anchored by the Praline Old Fashioned
+          and the Voo Doo Carré — demands reverence, not speed.
+        </p>
+
+        <dl class="about-facts">
+          <div class="about-fact">
+            <dt>Cuisine</dt>
+            <dd>Elevated Creole</dd>
+          </div>
+          <div class="about-fact">
+            <dt>Location</dt>
+            <dd>North Park, SD</dd>
+          </div>
+          <div class="about-fact">
+            <dt>Jazz Brunch</dt>
+            <dd>Sat &amp; Sun</dd>
+          </div>
+          <div class="about-fact">
+            <dt>Private Events</dt>
+            <dd>Up to 80 Guests</dd>
+          </div>
+        </dl>
+
+        <div class="about-ctas">
+          <a href="/menu" class="btn-primary">See the Menu</a>
+          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-text-link">
+            Reserve a Table →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SIGNATURE DRINKS — Horizontal card scroll
+       ═══════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="cocktails-heading" class="section-cocktails">
+    <div class="section-inner">
+
+      <header class="section-header animate-on-scroll">
+        <p class="eyebrow">Craft Program</p>
+        <h2 id="cocktails-heading" class="section-title">
+          Cocktails Built for<br />the French Quarter Soul
+        </h2>
+        <p class="section-subtitle">
+          An obsessive bar program rooted in New Orleans tradition —
+          complex, ceremonial, and utterly precise.
+        </p>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gold/10">
+      <div class="cocktail-grid">
 
-        <!-- Experience: Dining Room -->
-        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll">
-          <p class="eyebrow text-crimson-500">The Dining Room</p>
-          <h3 class="font-serif text-2xl font-light text-parchment">
-            Velvet &amp; Candlelight
-          </h3>
-          <p class="font-sans text-sm text-smoke-light leading-relaxed">
-            An intimate, velvet-accented interior designed for conversations that linger.
-            The full menu, the full cocktail program, and an atmosphere that earns its
-            place in your memory.
-          </p>
-          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
-             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
-            Reserve →
-          </a>
+        <article class="cocktail-card animate-on-scroll">
+          <div class="cocktail-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+              alt="Craft cocktails at Louisiana Purchase — North Park San Diego bar"
+              class="cocktail-card__image"
+              width="1600"
+              height="1066"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="cocktail-card__body">
+            <p class="eyebrow cocktail-card__tag">Signature</p>
+            <h3 class="cocktail-card__name">Praline Old Fashioned</h3>
+            <p class="cocktail-card__desc">Buffalo Trace bourbon, house praline syrup, Peychaud's bitters, expressed orange peel</p>
+            <p class="cocktail-card__price">$18</p>
+          </div>
         </article>
 
-        <!-- Experience: Patio -->
-        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll" style="animation-delay: 100ms">
-          <p class="eyebrow text-gold">The Patio</p>
-          <h3 class="font-serif text-2xl font-light text-parchment">
-            The Hidden Garden
-          </h3>
-          <p class="font-sans text-sm text-smoke-light leading-relaxed">
-            A lush, plant-draped patio retreat — North Park's best-kept secret.
-            Ideal for cocktail hours, intimate gatherings, and evenings that
-            refuse to end.
-          </p>
-          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
-             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
-            Reserve →
-          </a>
+        <article class="cocktail-card animate-on-scroll" style="animation-delay:80ms">
+          <div class="cocktail-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg"
+              alt="Craft cocktails and oysters at Louisiana Purchase San Diego"
+              class="cocktail-card__image"
+              width="1600"
+              height="1060"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="cocktail-card__body">
+            <p class="eyebrow cocktail-card__tag">Chef's Selection</p>
+            <h3 class="cocktail-card__name">Voo Doo Carré</h3>
+            <p class="cocktail-card__desc">Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters</p>
+            <p class="cocktail-card__price">$19</p>
+          </div>
         </article>
 
-        <!-- Experience: Jazz Brunch -->
-        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll" style="animation-delay: 200ms">
-          <p class="eyebrow text-brass-light">Jazz Brunch</p>
-          <h3 class="font-serif text-2xl font-light text-parchment">
-            Saturday &amp; Sunday
-          </h3>
-          <p class="font-sans text-sm text-smoke-light leading-relaxed">
-            Live jazz, Creole brunch plates, and craft cocktails from 10am.
-            San Diego's most indulgent weekend ritual — and North Park's finest
-            Sunday performance.
-          </p>
-          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
-             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
-            Reserve →
-          </a>
+        <article class="cocktail-card animate-on-scroll" style="animation-delay:160ms">
+          <div class="cocktail-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-happy-hour-north-park-website.jpg"
+              alt="Happy hour cocktails at Louisiana Purchase North Park"
+              class="cocktail-card__image"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+              style="object-position: center 30%"
+            />
+          </div>
+          <div class="cocktail-card__body">
+            <p class="eyebrow cocktail-card__tag">Happy Hour</p>
+            <h3 class="cocktail-card__name">Bayou Swizzle</h3>
+            <p class="cocktail-card__desc">Agricole rhum, passion fruit, fresh lime, orgeat, mint, Angostura</p>
+            <p class="cocktail-card__price">$17</p>
+          </div>
         </article>
 
+        <article class="cocktail-card animate-on-scroll" style="animation-delay:240ms">
+          <div class="cocktail-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-date-night-north-park-website.jpg"
+              alt="Louisiana Purchase bar through garden foliage — moody date night atmosphere"
+              class="cocktail-card__image"
+              width="1600"
+              height="1080"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="cocktail-card__body">
+            <p class="eyebrow cocktail-card__tag">The Bar</p>
+            <h3 class="cocktail-card__name">The Full Program</h3>
+            <p class="cocktail-card__desc">An extensive selection of Louisiana-inspired cocktails, curated spirits, and wine</p>
+            <a href="/menu" class="cocktail-card__link">Full Menu →</a>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="section-cta-row animate-on-scroll">
+        <a href="/menu" class="btn-primary">Full Cocktail Menu</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BRUNCH — Full-width image + text overlay, identical to
+       Coco Maya brunch section treatment
+       ═══════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="brunch-heading" class="section-brunch">
+    <div class="brunch-image-wrap" aria-hidden="true">
+      <img
+        src="/images/louisiana-purchase-brunch-north-park-san-diego-website.jpg"
+        alt="Jazz brunch at Louisiana Purchase — North Park San Diego"
+        class="brunch-bg"
+        width="1600"
+        height="1071"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="brunch-overlay"></div>
+    </div>
+    <div class="brunch-content animate-on-scroll">
+      <p class="eyebrow brunch-eyebrow">Saturday &amp; Sunday · 10 AM – 3 PM</p>
+      <h2 id="brunch-heading" class="brunch-heading">
+        Jazz Brunch<br />
+        <em>in North Park</em>
+      </h2>
+      <p class="brunch-body">
+        San Diego's most indulgent weekend ritual. Live jazz, Creole brunch plates,
+        and craft cocktails from 10am. The patio, the music, the morning light through
+        the pergola — come early. Stay late.
+      </p>
+      <div class="brunch-ctas">
+        <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-primary">
+          Reserve for Brunch
+        </a>
+        <a href="/brunch" class="btn-ghost">See the Brunch Menu</a>
       </div>
     </div>
   </section>
 
-  <!-- ─── CTA: Private Events ───────────────────────────────────────────── -->
-  <section
-    aria-labelledby="events-cta-headline"
-    class="py-section bg-obsidian relative overflow-hidden"
-  >
-    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+  <!-- ═══════════════════════════════════════════════════════════
+       FOOD — 4-card grid
+       ═══════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="food-heading" class="section-food">
+    <div class="section-inner">
 
-    <div class="max-w-layout mx-auto px-gutter text-center animate-on-scroll">
-      <p class="eyebrow mb-6">Private Events</p>
-      <h2
-        id="events-cta-headline"
-        class="font-serif text-4xl md:text-6xl font-light text-parchment tracking-tighter mb-6"
-      >
-        Host Something<br />
-        <span class="text-gradient-gold italic">Unforgettable</span>
+      <header class="section-header animate-on-scroll">
+        <p class="eyebrow">The Kitchen</p>
+        <h2 id="food-heading" class="section-title">
+          Food Worth<br />Staying For
+        </h2>
+        <p class="section-subtitle">
+          Chef Quinnton Austin's elevated Creole program —
+          fire-forward, deeply rooted, and obsessively precise.
+        </p>
+      </header>
+
+      <div class="food-grid">
+
+        <article class="food-card food-card--wide animate-on-scroll">
+          <div class="food-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-creole-cuisine-north-park-website.jpg"
+              alt="Lobster pasta and fire-charred oysters — Louisiana Purchase Creole cuisine North Park"
+              class="food-card__image"
+              width="1600"
+              height="1060"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <div class="food-card__body">
+            <p class="eyebrow food-card__tag">Signature</p>
+            <h3 class="food-card__name">Lobster Pasta</h3>
+            <p class="food-card__desc">Half-shell lobster, house Creole cream sauce, toasted breadcrumb</p>
+          </div>
+        </article>
+
+        <article class="food-card animate-on-scroll" style="animation-delay:80ms">
+          <div class="food-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
+              alt="Fire-charred oysters at Louisiana Purchase — San Diego Creole restaurant"
+              class="food-card__image"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+              style="object-position: center 40%"
+            />
+          </div>
+          <div class="food-card__body">
+            <p class="eyebrow food-card__tag">Raw &amp; Fire</p>
+            <h3 class="food-card__name">Fire-Charred Oysters</h3>
+            <p class="food-card__desc">House compound butter, parsley gremolata, toasted breadcrumb</p>
+          </div>
+        </article>
+
+        <article class="food-card animate-on-scroll" style="animation-delay:160ms">
+          <div class="food-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-dinner-north-park-san-diego-website.jpg"
+              alt="Elevated Creole dinner plates at Louisiana Purchase North Park"
+              class="food-card__image"
+              width="1600"
+              height="2400"
+              loading="lazy"
+              decoding="async"
+              style="object-position: center 30%"
+            />
+          </div>
+          <div class="food-card__body">
+            <p class="eyebrow food-card__tag">The Kitchen</p>
+            <h3 class="food-card__name">Steak Étouffée</h3>
+            <p class="food-card__desc">Fire-seared ribeye, house crawfish étouffée, roasted garlic</p>
+          </div>
+        </article>
+
+        <article class="food-card animate-on-scroll" style="animation-delay:240ms">
+          <div class="food-card__image-wrap">
+            <img
+              src="/images/louisiana-purchase-modern-creole-restaurant-website.jpg"
+              alt="Modern Creole cuisine at Louisiana Purchase — North Park San Diego"
+              class="food-card__image"
+              width="1600"
+              height="2381"
+              loading="lazy"
+              decoding="async"
+              style="object-position: center 35%"
+            />
+          </div>
+          <div class="food-card__body">
+            <p class="eyebrow food-card__tag">Chef's Selection</p>
+            <h3 class="food-card__name">Creole Crab Cake</h3>
+            <p class="food-card__desc">Jumbo lump, house remoulade, shaved fennel, pickled mustard seed</p>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="section-cta-row animate-on-scroll">
+        <a href="/menu" class="btn-primary">Full Food Menu</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PRIVATE EVENTS — Full-width image split
+       ═══════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="events-heading" class="section-events">
+
+    <div class="events-image-col" aria-hidden="true">
+      <img
+        src="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+        alt="Private dining at Louisiana Purchase — intimate venue in North Park San Diego"
+        class="events-image"
+        width="1600"
+        height="1066"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+
+    <div class="events-copy-col animate-on-scroll">
+      <p class="eyebrow">Group Bookings</p>
+      <h2 id="events-heading" class="events-heading">
+        Private Events<br />
+        <em>in North Park</em>
       </h2>
-      <p class="font-sans text-base text-smoke-light max-w-prose-narrow mx-auto mb-10">
-        From intimate corporate dinners to full venue buyouts — Louisiana Purchase provides
-        a rare backdrop for events that demand to be remembered. Capacity for up to 80 guests
-        across our dining room and patio.
+      <p class="events-body">
+        Birthdays, corporate dinners, rehearsal events, and full venue buyouts.
+        Louisiana Purchase provides a backdrop that your guests will actually talk about.
       </p>
+      <ul class="events-list" role="list">
+        <li>Corporate Dinners &amp; Executive Events</li>
+        <li>Birthday &amp; Milestone Celebrations</li>
+        <li>Rehearsal Dinners</li>
+        <li>Full Venue &amp; Patio Buyouts</li>
+        <li>Jazz Brunch Buyouts</li>
+      </ul>
       <a
-        href="/private-events"
-        class="eyebrow inline-flex px-10 py-4 border border-gold/40 text-gold
-               hover:bg-gold hover:text-obsidian hover:border-gold
-               transition-all duration-base ease-luxury rounded-sm"
-        aria-label="Learn about private events at Louisiana Purchase"
+        href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-primary"
+        aria-label="Inquire about private events at Louisiana Purchase"
       >
-        Explore Private Events
+        Inquire About Your Event
       </a>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FIND US — Stats bar + map CTA, identical to Lobby pattern
+       ═══════════════════════════════════════════════════════════ -->
+  <section aria-labelledby="find-us-heading" class="section-find-us">
+    <div class="section-inner">
+
+      <div class="stats-bar animate-on-scroll">
+        <div class="stat-item">
+          <span class="stat-value">4.6★</span>
+          <span class="stat-label">Google Rating</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">80+</span>
+          <span class="stat-label">Event Capacity</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">20+</span>
+          <span class="stat-label">Craft Cocktails</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value">Tue–Sun</span>
+          <span class="stat-label">Open Weekly</span>
+        </div>
+      </div>
+
+      <div class="find-us-grid animate-on-scroll">
+
+        <div class="find-us-image-wrap">
+          <img
+            src="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
+            alt="Louisiana Purchase exterior — 3671 30th St, North Park San Diego"
+            class="find-us-image"
+            width="1600"
+            height="1068"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+
+        <div class="find-us-details">
+          <p class="find-us-cross">30th St × University Ave</p>
+          <p class="find-us-neighborhood">North Park · San Diego</p>
+          <h2 id="find-us-heading" class="find-us-address">3671 30th St</h2>
+          <p class="find-us-city">North Park, San Diego, CA 92104</p>
+
+          <dl class="find-us-hours">
+            <div class="find-us-hour-row">
+              <dt>Tuesday – Friday</dt>
+              <dd>5 PM – Close</dd>
+            </div>
+            <div class="find-us-hour-row">
+              <dt>Saturday</dt>
+              <dd>10 AM – Close</dd>
+            </div>
+            <div class="find-us-hour-row">
+              <dt>Sunday</dt>
+              <dd>10 AM – 10 PM</dd>
+            </div>
+            <div class="find-us-hour-row">
+              <dt>Monday</dt>
+              <dd>Closed</dd>
+            </div>
+          </dl>
+
+          <div class="find-us-ctas">
+            <a
+              href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-primary"
+            >
+              Get Directions
+            </a>
+            <a
+              href={`tel:${import.meta.env.PUBLIC_VENUE_PHONE}`}
+              class="btn-text-link"
+            >
+              {import.meta.env.PUBLIC_VENUE_PHONE}
+            </a>
+          </div>
+        </div>
+
+      </div>
     </div>
   </section>
 
 </Layout>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   HOMEPAGE COMPONENT STYLES
+   All values map to tokens defined in tailwind.config.mjs
+   and CSS custom properties in global.css.
+   Zero arbitrary values.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Hero ─────────────────────────────────────────────────── */
+.site-hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.site-hero__image-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.site-hero__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+
+.site-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,8,6,0.25) 0%,
+    rgba(10,8,6,0.15) 40%,
+    rgba(10,8,6,0.85) 80%,
+    rgba(10,8,6,0.98) 100%
+  );
+}
+
+.site-hero__content {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem 7rem;
+  width: 100%;
+}
+
+.site-hero__eyebrow {
+  margin-bottom: 1.5rem;
+  animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.site-hero__headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 10vw, 9rem);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--color-parchment);
+  margin-bottom: 1.5rem;
+  animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 80ms both;
+}
+
+.site-hero__headline em {
+  font-style: italic;
+  background: linear-gradient(135deg, #C9A84C 0%, #EDD07A 50%, #B8922F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: block;
+}
+
+.site-hero__sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(242,235,224,0.72);
+  max-width: 52ch;
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 160ms both;
+}
+
+.site-hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  animation: fade-up 0.8s cubic-bezier(0.16,1,0.3,1) 240ms both;
+}
+
+/* Hero facts bar */
+.site-hero__facts {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid rgba(201,168,76,0.20);
+  background: rgba(10,8,6,0.82);
+  backdrop-filter: blur(8px);
+}
+
+@media (min-width: 768px) {
+  .site-hero__facts {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.hero-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  padding: 1.25rem 1.5rem;
+  border-right: 1px solid rgba(201,168,76,0.12);
+}
+
+.hero-fact:last-child { border-right: none; }
+
+.hero-fact__label {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+}
+
+.hero-fact__value {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--color-parchment);
+}
+
+.hero-fact__value--gold {
+  color: var(--color-gold);
+  transition: color 280ms ease;
+}
+
+.hero-fact__value--gold:hover { color: #EDD07A; }
+
+/* ─── Shared Buttons ────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  background: var(--color-gold);
+  color: var(--color-obsidian);
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 280ms ease, color 280ms ease;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  background: #EDD07A;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  border: 1px solid rgba(201,168,76,0.45);
+  color: var(--color-gold);
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: all 280ms ease;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  background: rgba(201,168,76,0.08);
+  border-color: var(--color-gold);
+}
+
+.btn-text-link {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+  transition: color 280ms ease;
+}
+
+.btn-text-link:hover { color: #EDD07A; }
+
+/* ─── Shared Section Atoms ─────────────────────────────────── */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.section-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--color-parchment);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 0.75rem 0;
+}
+
+.section-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-smoke);
+  max-width: 52ch;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+.section-cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+/* ─── About ─────────────────────────────────────────────────── */
+.section-about {
+  background: var(--color-obsidian);
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-about::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.about-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+}
+
+.about-image-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.25,0.1,0.25,1);
+}
+
+.about-image-wrap:hover .about-image {
+  transform: scale(1.03);
+}
+
+.about-eyebrow { margin-bottom: 1.25rem; }
+
+.about-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--color-parchment);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.text-gold {
+  background: linear-gradient(135deg, #C9A84C 0%, #EDD07A 50%, #B8922F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.about-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-smoke);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+
+.about-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding-top: 1.75rem;
+  margin: 1.75rem 0;
+}
+
+.about-fact dt {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.25rem;
+}
+
+.about-fact dd {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--color-parchment);
+}
+
+.about-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ─── Cocktails ─────────────────────────────────────────────── */
+.section-cocktails {
+  background: var(--color-velvet);
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-cocktails::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+
+.cocktail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(201,168,76,0.12);
+  margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+  .cocktail-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.cocktail-card {
+  background: #0A0806;
+  display: flex;
+  flex-direction: column;
+}
+
+.cocktail-card__image-wrap {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+}
+
+.cocktail-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+}
+
+.cocktail-card:hover .cocktail-card__image {
+  transform: scale(1.05);
+}
+
+.cocktail-card__body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid rgba(201,168,76,0.10);
+}
+
+.cocktail-card__tag {
+  font-size: 0.5625rem;
+  color: var(--color-gold);
+}
+
+.cocktail-card__name {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--color-parchment);
+  line-height: 1.25;
+}
+
+.cocktail-card__desc {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-smoke);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.cocktail-card__price {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-gold);
+  margin-top: auto;
+}
+
+.cocktail-card__link {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-top: auto;
+  transition: color 280ms ease;
+}
+
+.cocktail-card__link:hover { color: #EDD07A; }
+
+/* ─── Brunch ─────────────────────────────────────────────────── */
+.section-brunch {
+  position: relative;
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.brunch-image-wrap {
+  position: absolute;
+  inset: 0;
+}
+
+.brunch-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+.brunch-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    rgba(10,8,6,0.92) 0%,
+    rgba(10,8,6,0.75) 50%,
+    rgba(10,8,6,0.3) 100%
+  );
+}
+
+.brunch-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 6rem 1.5rem;
+  width: 100%;
+  max-width: 640px;
+  margin-left: max(1.5rem, calc((100vw - 1280px) / 2 + 1.5rem));
+}
+
+.brunch-eyebrow { margin-bottom: 1.25rem; }
+
+.brunch-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 300;
+  color: var(--color-parchment);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1.25rem;
+}
+
+.brunch-heading em {
+  font-style: italic;
+  background: linear-gradient(135deg, #C9A84C 0%, #EDD07A 50%, #B8922F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brunch-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: rgba(242,235,224,0.72);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  max-width: 48ch;
+}
+
+.brunch-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ─── Food ─────────────────────────────────────────────────── */
+.section-food {
+  background: #0A0806;
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-food::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: rgba(201,168,76,0.10);
+  margin-top: 3rem;
+}
+
+@media (min-width: 1024px) {
+  .food-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .food-card--wide {
+    grid-row: 1 / 3;
+  }
+}
+
+.food-card {
+  background: #110D0A;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.food-card__image-wrap {
+  overflow: hidden;
+  flex: 1;
+  min-height: 220px;
+}
+
+@media (min-width: 1024px) {
+  .food-card--wide .food-card__image-wrap {
+    min-height: 480px;
+  }
+}
+
+.food-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.25,0.1,0.25,1);
+}
+
+.food-card:hover .food-card__image {
+  transform: scale(1.04);
+}
+
+.food-card__body {
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-top: 1px solid rgba(201,168,76,0.10);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.food-card__tag { font-size: 0.5625rem; }
+
+.food-card__name {
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  font-weight: 300;
+  color: var(--color-parchment);
+}
+
+.food-card__desc {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-smoke);
+  line-height: 1.55;
+}
+
+/* ─── Private Events ────────────────────────────────────────── */
+.section-events {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-velvet);
+  position: relative;
+}
+
+.section-events::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 1;
+}
+
+@media (min-width: 1024px) {
+  .section-events {
+    grid-template-columns: 1fr 1fr;
+    min-height: 72vh;
+  }
+}
+
+.events-image-col {
+  overflow: hidden;
+  min-height: 320px;
+}
+
+@media (min-width: 1024px) {
+  .events-image-col { min-height: auto; }
+}
+
+.events-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.25,0.1,0.25,1);
+}
+
+.events-image-col:hover .events-image {
+  transform: scale(1.03);
+}
+
+.events-copy-col {
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .events-copy-col { padding: 5rem 4rem; }
+}
+
+.events-heading {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--color-parchment);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.events-heading em {
+  font-style: italic;
+  background: linear-gradient(135deg, #C9A84C 0%, #EDD07A 50%, #B8922F 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.events-body {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-smoke);
+  line-height: 1.75;
+  max-width: 48ch;
+}
+
+.events-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.events-list li {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(242,235,224,0.75);
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.events-list li::before {
+  content: '✦';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  font-size: 0.5rem;
+  top: 0.3em;
+}
+
+/* ─── Find Us ────────────────────────────────────────────────── */
+.section-find-us {
+  background: #0A0806;
+  padding: 6rem 0;
+  position: relative;
+}
+
+.section-find-us::before {
+  content: '';
+  display: block;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.4), transparent);
+  position: absolute;
+  top: 0; left: 0; right: 0;
+}
+
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 1px solid rgba(201,168,76,0.15);
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 768px) {
+  .stats-bar { grid-template-columns: repeat(4, 1fr); }
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 2rem 1rem;
+  border-right: 1px solid rgba(201,168,76,0.12);
+  text-align: center;
+}
+
+.stat-item:last-child { border-right: none; }
+
+.stat-value {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--color-smoke);
+}
+
+.find-us-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .find-us-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+}
+
+.find-us-image-wrap {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.find-us-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.find-us-cross {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-smoke);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.find-us-neighborhood {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+}
+
+.find-us-address {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  color: var(--color-parchment);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.375rem;
+}
+
+.find-us-city {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: var(--color-smoke);
+  margin-bottom: 2rem;
+}
+
+.find-us-hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(201,168,76,0.15);
+}
+
+.find-us-hour-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.find-us-hour-row dt {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(242,235,224,0.55);
+}
+
+.find-us-hour-row dd {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-parchment);
+}
+
+.find-us-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* ─── Scroll Animation States ───────────────────────────────── */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.72s cubic-bezier(0.16,1,0.3,1), transform 0.72s cubic-bezier(0.16,1,0.3,1);
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Hero Keyframes ────────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+</style>

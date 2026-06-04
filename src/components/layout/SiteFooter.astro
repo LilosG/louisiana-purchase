@@ -1,0 +1,394 @@
+---
+// src/components/layout/SiteFooter.astro
+// Louisiana Purchase — Site Footer
+---
+---
+
+<footer role="contentinfo" aria-label="Site footer" class="site-footer">
+
+  <div class="site-footer__rule" aria-hidden="true"></div>
+
+  <div class="site-footer__inner">
+
+    <!-- Top grid -->
+    <div class="site-footer__grid">
+
+      <!-- Brand column -->
+      <div class="site-footer__brand-col">
+        <a href="/" class="site-footer__wordmark" aria-label="Louisiana Purchase homepage">
+          <span class="site-footer__wordmark-top">Louisiana</span>
+          <span class="site-footer__wordmark-bottom">Purchase</span>
+        </a>
+        <p class="site-footer__tagline">
+          Elevated Creole cuisine and craft cocktails in the heart of North Park, San Diego.
+        </p>
+        <address class="site-footer__address">
+          <a
+            href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="site-footer__address-link"
+          >
+            3671 30th St<br />
+            North Park, San Diego, CA 92104
+          </a>
+        </address>
+        <div class="site-footer__social" aria-label="Social media links">
+          <a
+            href="https://www.instagram.com/louisianapurchasebar"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Louisiana Purchase on Instagram"
+            class="site-footer__social-link"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://www.facebook.com/louisianapurchasebar"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Louisiana Purchase on Facebook"
+            class="site-footer__social-link"
+          >
+            Facebook
+          </a>
+        </div>
+      </div>
+
+      <!-- Explore column -->
+      <nav aria-labelledby="footer-explore-heading" class="site-footer__nav-col">
+        <h3 id="footer-explore-heading" class="site-footer__col-heading">Explore</h3>
+        <ul role="list" class="site-footer__nav-list">
+          {[
+            { href: '/menu',           label: 'Menu' },
+            { href: '/brunch',         label: 'Jazz Brunch' },
+            { href: '/happy-hour',     label: 'Happy Hour' },
+            { href: '/private-events', label: 'Private Events' },
+            { href: '/about',          label: 'About' },
+            { href: '/contact',        label: 'Contact' },
+          ].map((link) => (
+            <li>
+              <a href={link.href} class="site-footer__nav-link">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <!-- Hours column -->
+      <section aria-labelledby="footer-hours-heading" class="site-footer__hours-col">
+        <h3 id="footer-hours-heading" class="site-footer__col-heading">Hours</h3>
+        <dl class="site-footer__hours">
+          <div class="site-footer__hour-row">
+            <dt>Tuesday – Friday</dt>
+            <dd>5 PM – Close</dd>
+          </div>
+          <div class="site-footer__hour-row">
+            <dt>Saturday</dt>
+            <dd>10 AM – Close</dd>
+          </div>
+          <div class="site-footer__hour-row">
+            <dt>Sunday</dt>
+            <dd>10 AM – 10 PM</dd>
+          </div>
+          <div class="site-footer__hour-row site-footer__hour-row--closed">
+            <dt>Monday</dt>
+            <dd>Closed</dd>
+          </div>
+        </dl>
+        <p class="site-footer__brunch-note">
+          Jazz Brunch: Sat &amp; Sun 10 AM – 3 PM
+        </p>
+      </section>
+
+      <!-- Reserve column -->
+      <section aria-labelledby="footer-reserve-heading" class="site-footer__reserve-col">
+        <h3 id="footer-reserve-heading" class="site-footer__col-heading">Reservations</h3>
+        <ul role="list" class="site-footer__nav-list">
+          <li>
+            <a
+              href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__nav-link"
+            >
+              Reserve a Table
+            </a>
+          </li>
+          <li>
+            <a
+              href={import.meta.env.PUBLIC_ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__nav-link"
+            >
+              Order Online
+            </a>
+          </li>
+          <li>
+            <a
+              href={import.meta.env.PUBLIC_GIFT_CARD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__nav-link"
+            >
+              Gift Cards
+            </a>
+          </li>
+          <li>
+            <a
+              href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="site-footer__nav-link"
+            >
+              Private Events
+            </a>
+          </li>
+        </ul>
+        <a
+          href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="site-footer__reserve-btn"
+          aria-label="Reserve a table at Louisiana Purchase"
+        >
+          Reserve Now
+        </a>
+      </section>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; 3671 30th St, San Diego, CA 92104
+      </p>
+      <p class="site-footer__sub">
+        North Park, San Diego &nbsp;&middot;&nbsp; Creole Dining &amp; Craft Cocktails
+      </p>
+    </div>
+
+  </div>
+</footer>
+
+<style>
+.site-footer {
+  background: #1C1419;
+  position: relative;
+}
+
+.site-footer__rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.45), transparent);
+}
+
+.site-footer__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem 2.5rem;
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(201,168,76,0.10);
+}
+
+@media (min-width: 640px) {
+  .site-footer__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .site-footer__grid { grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; }
+}
+
+/* Brand */
+.site-footer__wordmark {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+  gap: 0.1em;
+  margin-bottom: 1.25rem;
+  width: fit-content;
+}
+
+.site-footer__wordmark-top {
+  font-family: var(--font-sans);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.36em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.60);
+}
+
+.site-footer__wordmark-bottom {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-parchment);
+  transition: color 280ms ease;
+}
+
+.site-footer__wordmark:hover .site-footer__wordmark-bottom { color: var(--color-gold); }
+
+.site-footer__tagline {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: var(--color-smoke);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+  max-width: 32ch;
+}
+
+.site-footer__address {
+  font-style: normal;
+  margin-bottom: 1.5rem;
+}
+
+.site-footer__address-link {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(242,235,224,0.55);
+  line-height: 1.7;
+  transition: color 280ms ease;
+}
+
+.site-footer__address-link:hover { color: var(--color-gold); }
+
+.site-footer__social {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.site-footer__social-link {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(242,235,224,0.45);
+  transition: color 280ms ease;
+}
+
+.site-footer__social-link:hover { color: var(--color-gold); }
+
+/* Nav columns */
+.site-footer__col-heading {
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.25rem;
+}
+
+.site-footer__nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.site-footer__nav-link {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  color: rgba(242,235,224,0.55);
+  transition: color 280ms ease;
+  line-height: 1.4;
+}
+
+.site-footer__nav-link:hover { color: var(--color-parchment); }
+
+/* Hours */
+.site-footer__hours {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  margin-bottom: 1rem;
+}
+
+.site-footer__hour-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-footer__hour-row dt {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(242,235,224,0.45);
+}
+
+.site-footer__hour-row dd {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(242,235,224,0.70);
+  text-align: right;
+}
+
+.site-footer__hour-row--closed dt,
+.site-footer__hour-row--closed dd {
+  color: rgba(242,235,224,0.25);
+}
+
+.site-footer__brunch-note {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: var(--color-gold);
+  opacity: 0.75;
+  letter-spacing: 0.04em;
+  margin-top: 0.75rem;
+}
+
+/* Reserve btn */
+.site-footer__reserve-btn {
+  display: inline-flex;
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-gold);
+  color: var(--color-obsidian);
+  font-family: var(--font-sans);
+  font-size: 0.5625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  transition: background 280ms ease;
+  white-space: nowrap;
+}
+
+.site-footer__reserve-btn:hover { background: #EDD07A; }
+
+/* Bottom */
+.site-footer__bottom {
+  padding-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .site-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.site-footer__copyright,
+.site-footer__sub {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  color: rgba(242,235,224,0.28);
+  letter-spacing: 0.02em;
+}
+</style>

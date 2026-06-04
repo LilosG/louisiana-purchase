@@ -1,43 +1,65 @@
-# Astro Starter Kit: Minimal
+# Louisiana Purchase
+**Creole Dining & Craft Cocktails — North Park, San Diego**
 
-```sh
-npm create astro@latest -- --template minimal
+Premium Astro + Tailwind CSS + TypeScript digital storefront.
+
+## Stack
+- **Framework**: Astro (Static Generation)
+- **Styling**: Tailwind CSS v4 — fully tokenized, zero arbitrary utilities
+- **Language**: TypeScript (strict mode)
+- **Hosting**: Vercel
+- **Fonts**: Cormorant Garamond (serif) + DM Sans (body)
+
+## Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Copy and populate environment variables
+cp .env.example .env
+
+# Start dev server
+npm run dev
+
+# Production build
+npm run build
+
+# Preview production build locally
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Environment Variables
+Copy `.env.example` → `.env` and populate all values before running.
+See `.env.example` for full documentation of each variable.
+**Never commit `.env` or `.env.production` to version control.**
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+## Project Structure
+```
+src/
+├── assets/           # Local optimized images & SVGs
+├── components/
+│   ├── core/         # LocalSEO — headless SEO/AEO engine
+│   ├── layout/       # SiteNav, SiteFooter
+│   └── ui/           # Atomic UI elements
+├── data/
+│   ├── menu.json     # Source-of-truth menu data
+│   └── private-events.ts  # SEO slug registry
+├── layouts/
+│   └── Layout.astro  # Master document wrapper
+├── pages/
+│   ├── index.astro
+│   ├── menu.astro
+│   └── private-events/
+│       ├── index.astro
+│       └── [slug].astro
+├── styles/
+│   └── global.css
+└── types/
+    ├── menu.ts
+    └── seo.ts
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Deployment
+Connected to Vercel via GitHub. Every push to `main` triggers a production deployment.
+Pull requests generate preview deployments automatically.
