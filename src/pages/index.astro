@@ -1,0 +1,278 @@
+---
+// src/pages/index.astro
+// Louisiana Purchase — Homepage
+// High-conversion, editorial luxury layout.
+// Content sections structured for AEO visibility.
+
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego"
+  description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Tuesday–Sunday."
+  ogType="website"
+>
+  <!-- ─── Hero Section ──────────────────────────────────────────────────── -->
+  <section
+    aria-labelledby="hero-headline"
+    class="relative flex items-end min-h-hero-mobile md:min-h-hero-desktop overflow-hidden
+           bg-obsidian-900"
+  >
+    <!-- Background image placeholder — swap for <Picture> when assets are available -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-velvet-gradient opacity-80"
+    ></div>
+
+    <!-- Cinematic bottom gradient -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 bg-hero-bottom-fade"
+    ></div>
+
+    <!-- Hero content -->
+    <div class="relative z-raised max-w-layout mx-auto px-gutter pb-24 md:pb-32">
+
+      <p class="eyebrow mb-6 animate-fade-in">
+        North Park, San Diego — Est. 2018
+      </p>
+
+      <h1
+        id="hero-headline"
+        class="font-display text-5xl md:text-7xl xl:text-8xl font-light
+               text-parchment tracking-tighter leading-none mb-6
+               animate-fade-up"
+      >
+        Louisiana<br />
+        <em class="font-serif not-italic text-gradient-gold">Purchase</em>
+      </h1>
+
+      <p
+        class="font-serif text-lg md:text-xl font-light italic text-parchment/75
+               max-w-prose-narrow mb-10 animate-fade-up"
+        style="animation-delay: 120ms"
+      >
+        Fire-charred oysters. Complex craft cocktails. Chef Quinnton Austin's
+        elevated Creole kitchen — in the heart of North Park.
+      </p>
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 animate-fade-up"
+        style="animation-delay: 240ms"
+      >
+        <a
+          href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="eyebrow inline-flex justify-center px-8 py-4
+                 bg-gold text-obsidian hover:bg-gold-200
+                 transition-all duration-base ease-luxury rounded-sm"
+          aria-label="Reserve a table at Louisiana Purchase"
+        >
+          Reserve a Table
+        </a>
+        <a
+          href="/menu"
+          class="eyebrow inline-flex justify-center px-8 py-4
+                 border border-gold/40 text-gold hover:border-gold hover:text-parchment
+                 transition-all duration-base ease-luxury rounded-sm"
+          aria-label="View the Louisiana Purchase menu"
+        >
+          View the Menu
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AEO: About / Story Block ─────────────────────────────────────── -->
+  <!--
+    Structured as a clear heading-answer layout for AI search engine parsing.
+    Answers high-intent unbranded queries:
+      "upscale southern dining san diego"
+      "best creole restaurant north park"
+      "french quarter cocktail bar san diego"
+  -->
+  <section
+    id="about"
+    aria-labelledby="about-headline"
+    class="py-section lg:py-section-lg bg-obsidian-900 relative"
+  >
+    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+
+    <div class="max-w-layout mx-auto px-gutter">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+        <div class="animate-on-scroll">
+          <p class="eyebrow mb-4">Our Story</p>
+          <h2
+            id="about-headline"
+            class="font-serif text-4xl md:text-5xl font-light text-parchment tracking-tighter mb-6"
+          >
+            A Piece of New Orleans,<br />
+            <span class="text-gradient-gold">Rooted in North Park</span>
+          </h2>
+          <p class="font-sans text-base text-smoke-light leading-relaxed mb-6">
+            Louisiana Purchase brings the opulent soul of the French Quarter to San Diego's most vibrant neighborhood.
+            More than a restaurant — it is an atmosphere: velvet-accented intimate dining, a hidden lush patio,
+            and the kind of craft cocktail program that demands reverence, not speed.
+          </p>
+          <p class="font-sans text-base text-smoke-light leading-relaxed mb-8">
+            Chef Quinnton Austin's kitchen is a love letter to Louisiana — slow-built gumbo, fire-charred Gulf oysters,
+            and elevated Creole plates that honor the tradition without being imprisoned by it.
+          </p>
+
+          <!-- AEO: Key-value data block — scanned by AI engines for structured facts -->
+          <dl class="grid grid-cols-2 gap-6 border-t border-gold/10 pt-8">
+            <div>
+              <dt class="eyebrow mb-1">Cuisine</dt>
+              <dd class="font-serif text-lg text-parchment">Elevated Creole</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">Location</dt>
+              <dd class="font-serif text-lg text-parchment">North Park, SD</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">Brunch</dt>
+              <dd class="font-serif text-lg text-parchment">Sat &amp; Sun w/ Live Jazz</dd>
+            </div>
+            <div>
+              <dt class="eyebrow mb-1">Private Events</dt>
+              <dd class="font-serif text-lg text-parchment">Up to 80 Guests</dd>
+            </div>
+          </dl>
+        </div>
+
+        <!-- Visual accent block -->
+        <aside
+          aria-hidden="true"
+          class="relative aspect-portrait bg-velvet-800 rounded-sm overflow-hidden animate-on-scroll"
+        >
+          <div class="absolute inset-0 bg-obsidian-gradient opacity-30"></div>
+          <div class="absolute bottom-8 left-8 right-8">
+            <blockquote class="font-serif text-xl italic text-parchment/80 leading-relaxed">
+              "Fire-forward, deeply rooted, and impossibly precise."
+            </blockquote>
+            <p class="eyebrow mt-3 text-gold">Chef Quinnton Austin</p>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── AEO: Experience Highlights Block ─────────────────────────────── -->
+  <!--
+    Answers queries:
+      "north park date night cocktail lounges"
+      "jazz brunch san diego"
+      "fire charred oysters san diego"
+  -->
+  <section
+    aria-labelledby="experience-headline"
+    class="py-section lg:py-section-lg bg-velvet relative"
+  >
+    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+
+    <div class="max-w-layout mx-auto px-gutter">
+
+      <header class="text-center mb-16 animate-on-scroll">
+        <p class="eyebrow mb-4">The Experience</p>
+        <h2
+          id="experience-headline"
+          class="font-serif text-4xl md:text-5xl font-light text-parchment tracking-tighter"
+        >
+          Three Ways to Experience Louisiana Purchase
+        </h2>
+      </header>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px bg-gold/10">
+
+        <!-- Experience: Dining Room -->
+        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll">
+          <p class="eyebrow text-crimson-500">The Dining Room</p>
+          <h3 class="font-serif text-2xl font-light text-parchment">
+            Velvet &amp; Candlelight
+          </h3>
+          <p class="font-sans text-sm text-smoke-light leading-relaxed">
+            An intimate, velvet-accented interior designed for conversations that linger.
+            The full menu, the full cocktail program, and an atmosphere that earns its
+            place in your memory.
+          </p>
+          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
+             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
+            Reserve →
+          </a>
+        </article>
+
+        <!-- Experience: Patio -->
+        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll" style="animation-delay: 100ms">
+          <p class="eyebrow text-gold">The Patio</p>
+          <h3 class="font-serif text-2xl font-light text-parchment">
+            The Hidden Garden
+          </h3>
+          <p class="font-sans text-sm text-smoke-light leading-relaxed">
+            A lush, plant-draped patio retreat — North Park's best-kept secret.
+            Ideal for cocktail hours, intimate gatherings, and evenings that
+            refuse to end.
+          </p>
+          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
+             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
+            Reserve →
+          </a>
+        </article>
+
+        <!-- Experience: Jazz Brunch -->
+        <article class="bg-obsidian-800 p-10 flex flex-col gap-5 animate-on-scroll" style="animation-delay: 200ms">
+          <p class="eyebrow text-brass-light">Jazz Brunch</p>
+          <h3 class="font-serif text-2xl font-light text-parchment">
+            Saturday &amp; Sunday
+          </h3>
+          <p class="font-sans text-sm text-smoke-light leading-relaxed">
+            Live jazz, Creole brunch plates, and craft cocktails from 10am.
+            San Diego's most indulgent weekend ritual — and North Park's finest
+            Sunday performance.
+          </p>
+          <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
+             class="eyebrow text-gold hover:text-gold-300 transition-colors duration-base ease-luxury mt-auto">
+            Reserve →
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA: Private Events ───────────────────────────────────────────── -->
+  <section
+    aria-labelledby="events-cta-headline"
+    class="py-section bg-obsidian relative overflow-hidden"
+  >
+    <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+
+    <div class="max-w-layout mx-auto px-gutter text-center animate-on-scroll">
+      <p class="eyebrow mb-6">Private Events</p>
+      <h2
+        id="events-cta-headline"
+        class="font-serif text-4xl md:text-6xl font-light text-parchment tracking-tighter mb-6"
+      >
+        Host Something<br />
+        <span class="text-gradient-gold italic">Unforgettable</span>
+      </h2>
+      <p class="font-sans text-base text-smoke-light max-w-prose-narrow mx-auto mb-10">
+        From intimate corporate dinners to full venue buyouts — Louisiana Purchase provides
+        a rare backdrop for events that demand to be remembered. Capacity for up to 80 guests
+        across our dining room and patio.
+      </p>
+      <a
+        href="/private-events"
+        class="eyebrow inline-flex px-10 py-4 border border-gold/40 text-gold
+               hover:bg-gold hover:text-obsidian hover:border-gold
+               transition-all duration-base ease-luxury rounded-sm"
+        aria-label="Learn about private events at Louisiana Purchase"
+      >
+        Explore Private Events
+      </a>
+    </div>
+  </section>
+
+</Layout>

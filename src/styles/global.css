@@ -1,0 +1,171 @@
+/* ============================================================
+   Louisiana Purchase — Global Stylesheet
+   src/styles/global.css
+   ============================================================
+   Layer order:
+     1. @import tailwindcss  — utility foundation
+     2. @layer base           — typographic reset + CSS custom properties
+     3. @layer components     — reusable, non-utility patterns
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* ─── Custom Property Bridge ──────────────────────────────────────────────── */
+/* Expose Tailwind brand tokens as CSS variables for use in pseudo-elements,
+   SVG fills, and JS-accessed values without arbitrary bracket utilities.    */
+
+@layer base {
+  :root {
+    --color-obsidian:    #0A0806;
+    --color-gold:        #C9A84C;
+    --color-gold-light:  #EDD07A;
+    --color-brass:       #9C7B3C;
+    --color-crimson:     #8B1A2A;
+    --color-parchment:   #F2EBE0;
+    --color-cream:       #E8DFCF;
+    --color-smoke:       #9C9490;
+    --color-velvet:      #1C1419;
+
+    --font-serif:   'Cormorant Garamond', Cormorant, Didot, Georgia, serif;
+    --font-display: 'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
+    --font-sans:    'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+
+    --ease-luxury:    cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+    --ease-reveal:    cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ─── Document Root ─────────────────────────────────────────────── */
+  html {
+    font-family:             var(--font-sans);
+    font-size:               16px;
+    line-height:             1.6;
+    background-color:        var(--color-obsidian);
+    color:                   var(--color-parchment);
+    -webkit-font-smoothing:  antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering:          optimizeLegibility;
+    scroll-behavior:         smooth;
+  }
+
+  body {
+    background-color: var(--color-obsidian);
+    overflow-x:       hidden;
+    min-height:       100svh;
+  }
+
+  /* ─── Selection ─────────────────────────────────────────────────── */
+  ::selection {
+    background-color: var(--color-gold);
+    color:            var(--color-obsidian);
+  }
+
+  /* ─── Focus Ring ────────────────────────────────────────────────── */
+  :focus-visible {
+    outline:        2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  /* ─── Scrollbar ─────────────────────────────────────────────────── */
+  ::-webkit-scrollbar              { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track        { background: var(--color-obsidian); }
+  ::-webkit-scrollbar-thumb        { background: var(--color-brass); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover  { background: var(--color-gold); }
+
+  /* ─── Heading Defaults ──────────────────────────────────────────── */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    line-height: 1.15;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--color-parchment);
+  }
+
+  /* ─── Link Defaults ─────────────────────────────────────────────── */
+  a {
+    color:                   inherit;
+    text-decoration:         none;
+    transition:              color 280ms var(--ease-luxury);
+  }
+
+  /* ─── Image Defaults ────────────────────────────────────────────── */
+  img, picture {
+    max-width: 100%;
+    height:    auto;
+    display:   block;
+  }
+
+  /* ─── List Resets (navigation, UI) ─────────────────────────────── */
+  nav ul, nav ol {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+  }
+}
+
+/* ─── Reusable Component Patterns ────────────────────────────────────────── */
+@layer components {
+
+  /* ─── Gold Rule Divider ─────────────────────────────────────────── */
+  .rule-gold {
+    display:            block;
+    height:             1px;
+    background-image:   linear-gradient(
+                          to right,
+                          transparent,
+                          var(--color-gold),
+                          transparent
+                        );
+    border:             none;
+    opacity:            0.5;
+  }
+
+  /* ─── Eyebrow Label ──────────────────────────────────────────────── */
+  .eyebrow {
+    font-family:     var(--font-sans);
+    font-size:       0.625rem;
+    font-weight:     500;
+    letter-spacing:  0.32em;
+    text-transform:  uppercase;
+    color:           var(--color-gold);
+  }
+
+  /* ─── Gradient Text (Gold) ──────────────────────────────────────── */
+  .text-gradient-gold {
+    background-image:    linear-gradient(135deg, #C9A84C 0%, #EDD07A 50%, #B8922F 100%);
+    background-clip:     text;
+    -webkit-background-clip: text;
+    color:               transparent;
+  }
+
+  /* ─── Hero Overlay (apply on a pseudo-element sibling to the image) */
+  .hero-overlay::after {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(10,8,6,0.96) 100%);
+    pointer-events: none;
+  }
+
+  /* ─── Noise Texture Overlay ─────────────────────────────────────── */
+  .noise-overlay::before {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background-image:   url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index:    1;
+  }
+
+  /* ─── Animate on Scroll — intersection observer targets ─────────── */
+  .animate-on-scroll {
+    opacity:    0;
+    transform:  translateY(24px);
+    transition: opacity 0.72s var(--ease-reveal), transform 0.72s var(--ease-reveal);
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity:   1;
+    transform: translateY(0);
+  }
+}

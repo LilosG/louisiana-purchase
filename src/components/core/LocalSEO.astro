@@ -1,0 +1,215 @@
+---
+// src/components/core/LocalSEO.astro
+// Louisiana Purchase — Centralized SEO & AEO Engine
+//
+// Responsibilities:
+//   1. Injects <meta> tags: title, description, canonical, OG, Twitter Card
+//   2. Programmatically builds and outputs JSON-LD Restaurant schema
+//   3. Outputs breadcrumb JSON-LD when breadcrumbs are supplied
+//   4. Manages robots directives
+//
+// This component is consumed exclusively by src/layouts/Layout.astro.
+// It must never be imported directly into page files.
+
+import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
+
+interface Props extends PageSeoProps {}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage,
+  ogType    = 'website',
+  noindex   = false,
+  schema,
+  breadcrumbs,
+} = Astro.props;
+
+// ─── Venue Identity ─────────────────────────────────────────────────────────
+// These values are static brand truths. They live here, not in environment
+// variables, because they are structural identity facts — not operational
+// platform endpoints that rotate.
+
+const VENUE: VenueSchemaConfig = {
+  name:               'Louisiana Purchase',
+  type:               'Restaurant',
+  description:        "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
+  url:                import.meta.env.PUBLIC_SITE_URL || 'https://louisianapurchasebar.com',
+  phone:              import.meta.env.PUBLIC_VENUE_PHONE || '+16195551234',
+  email:              import.meta.env.PUBLIC_VENUE_EMAIL || 'hello@louisianapurchasebar.com',
+  address: {
+    street:   '3671 30th St',
+    city:     'San Diego',
+    state:    'CA',
+    zip:      '92104',
+    country:  'US',
+  },
+  geo: {
+    // North Park, San Diego — precise coordinates for local search ranking
+    latitude:  32.7474,
+    longitude: -117.1293,
+  },
+  hours: [
+    { dayOfWeek: 'Tuesday',   opens: '17:00', closes: '02:00' },
+    { dayOfWeek: 'Wednesday', opens: '17:00', closes: '02:00' },
+    { dayOfWeek: 'Thursday',  opens: '17:00', closes: '02:00' },
+    { dayOfWeek: 'Friday',    opens: '17:00', closes: '02:00' },
+    { dayOfWeek: 'Saturday',  opens: '10:00', closes: '02:00' },  // Jazz Brunch
+    { dayOfWeek: 'Sunday',    opens: '10:00', closes: '22:00' },  // Jazz Brunch
+  ],
+  cuisines: [
+    'Creole',
+    'Louisiana',
+    'Southern American',
+    'New Orleans',
+    'Cajun',
+    'Cocktail Bar',
+    'American',
+  ],
+  priceRange:           '$$$',
+  image:                '/og-hero.jpg',
+  logo:                 '/logo.png',
+  acceptsReservations:  true,
+  hasMenu:              'https://louisianapurchasebar.com/menu',
+};
+
+// ─── Canonical URL Resolution ────────────────────────────────────────────────
+const siteUrl   = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://louisianapurchasebar.com';
+const pagePath  = Astro.url.pathname;
+const resolvedCanonical = canonical
+  ? `${siteUrl}${canonical}`
+  : `${siteUrl}${pagePath}`;
+
+// ─── OG Image Resolution ─────────────────────────────────────────────────────
+const resolvedOgImage = ogImage
+  ? `${siteUrl}${ogImage}`
+  : `${siteUrl}/og-default.jpg`;
+
+// ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
+const restaurantSchema: Record<string, unknown> = {
+  '@context':   'https://schema.org',
+  '@type':      VENUE.type,
+  name:         VENUE.name,
+  description:  VENUE.description,
+  url:          VENUE.url,
+  telephone:    VENUE.phone,
+  email:        VENUE.email,
+  priceRange:   VENUE.priceRange,
+  image:        `${siteUrl}${VENUE.image}`,
+  logo: {
+    '@type': 'ImageObject',
+    url:     `${siteUrl}${VENUE.logo}`,
+  },
+  address: {
+    '@type':           'PostalAddress',
+    streetAddress:     VENUE.address.street,
+    addressLocality:   VENUE.address.city,
+    addressRegion:     VENUE.address.state,
+    postalCode:        VENUE.address.zip,
+    addressCountry:    VENUE.address.country,
+  },
+  geo: {
+    '@type':    'GeoCoordinates',
+    latitude:   VENUE.geo.latitude,
+    longitude:  VENUE.geo.longitude,
+  },
+  openingHoursSpecification: VENUE.hours.map((h) => ({
+    '@type':     'OpeningHoursSpecification',
+    dayOfWeek:   `https://schema.org/${h.dayOfWeek}`,
+    opens:       h.opens,
+    closes:      h.closes,
+  })),
+  servesCuisine:        VENUE.cuisines,
+  hasMenu:              VENUE.hasMenu,
+  acceptsReservations:  VENUE.acceptsReservations,
+  currenciesAccepted:   'USD',
+  paymentAccepted:      'Cash, Credit Card',
+  amenityFeature: [
+    { '@type': 'LocationFeatureSpecification', name: 'Full Bar',            value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Outdoor Seating',     value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Private Dining Room', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Live Jazz',           value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Weekend Brunch',      value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Reservations',        value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Cocktail Bar',        value: true },
+  ],
+  sameAs: [
+    'https://www.instagram.com/louisianapurchasebar',
+    'https://www.facebook.com/louisianapurchasebar',
+  ],
+};
+
+// ─── JSON-LD: Breadcrumb Schema ───────────────────────────────────────────────
+const buildBreadcrumbSchema = (items: BreadcrumbItem[]): Record<string, unknown> => ({
+  '@context':        'https://schema.org',
+  '@type':           'BreadcrumbList',
+  itemListElement:   items.map((item) => ({
+    '@type':   'ListItem',
+    position:  item.position,
+    name:      item.name,
+    item:      `${siteUrl}${item.url}`,
+  })),
+});
+
+// ─── Page Title Formatting ────────────────────────────────────────────────────
+const BRAND_SUFFIX = 'Louisiana Purchase | North Park, San Diego';
+const formattedTitle = title.includes('Louisiana Purchase')
+  ? title
+  : `${title} — ${BRAND_SUFFIX}`;
+---
+
+<!-- ─── Primary Meta Tags ─────────────────────────────────────────────── -->
+<title>{formattedTitle}</title>
+<meta name="description" content={description} />
+<meta name="author"      content="Louisiana Purchase" />
+<link rel="canonical"    href={resolvedCanonical} />
+
+{noindex
+  ? <meta name="robots" content="noindex, nofollow" />
+  : <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+}
+
+<!-- ─── Open Graph ───────────────────────────────────────────────────── -->
+<meta property="og:type"        content={ogType} />
+<meta property="og:url"         content={resolvedCanonical} />
+<meta property="og:title"       content={formattedTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image"       content={resolvedOgImage} />
+<meta property="og:image:alt"   content={`${VENUE.name} — ${VENUE.address.city}`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name"   content={VENUE.name} />
+<meta property="og:locale"      content="en_US" />
+
+<!-- ─── Twitter Card ────────────────────────────────────────────────── -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:title"       content={formattedTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image"       content={resolvedOgImage} />
+<meta name="twitter:image:alt"   content={`${VENUE.name} — ${VENUE.address.city}`} />
+
+<!-- ─── Geo & Local Business Meta ──────────────────────────────────── -->
+<meta name="geo.region"      content="US-CA" />
+<meta name="geo.placename"   content="San Diego, California" />
+<meta name="geo.position"    content={`${VENUE.geo.latitude};${VENUE.geo.longitude}`} />
+<meta name="ICBM"            content={`${VENUE.geo.latitude}, ${VENUE.geo.longitude}`} />
+
+<!-- ─── JSON-LD: Restaurant Structured Data ─────────────────────────── -->
+<script type="application/ld+json" set:html={JSON.stringify(restaurantSchema, null, 0)} />
+
+<!-- ─── JSON-LD: Breadcrumbs (conditional) ──────────────────────────── -->
+{breadcrumbs && breadcrumbs.length > 0 && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(buildBreadcrumbSchema(breadcrumbs), null, 0)}
+  />
+)}
+
+<!-- ─── JSON-LD: Page-Specific Override (conditional) ───────────────── -->
+{schema && (
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(schema, null, 0)}
+  />
+)}

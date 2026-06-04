@@ -1,0 +1,397 @@
+---
+// src/layouts/Layout.astro
+// Louisiana Purchase — Master Semantic HTML Document Wrapper
+//
+// This is the single shared layout shell for all pages. It:
+//   — Imports and mounts the <LocalSEO/> head engine
+//   — Establishes the <html> / <body> semantic structure
+//   — Imports global.css (sole stylesheet entry point)
+//   — Loads Google Fonts asynchronously (non-render-blocking)
+//   — Mounts the <SiteNav/> and <SiteFooter/> layout shells
+//   — Exposes named slots for page-specific hero/content injection
+//   — Wires the IntersectionObserver scroll animation system (pure Vanilla JS)
+//
+// Props are passed through directly to <LocalSEO/>.
+// Zero client-side framework hydration occurs here.
+
+import LocalSEO from '../components/core/LocalSEO.astro';
+import type { PageSeoProps } from '../types/seo';
+
+import '../styles/global.css';
+
+interface Props extends PageSeoProps {}
+
+const seoProps = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- ─── SEO Engine ──────────────────────────────────────────────────── -->
+    <LocalSEO {...seoProps} />
+
+    <!-- ─── Favicon & App Icons ────────────────────────────────────────── -->
+    <link rel="icon"             type="image/svg+xml"  href="/favicon.svg" />
+    <link rel="icon"             type="image/png"      href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="apple-touch-icon"                       href="/apple-touch-icon.png" sizes="180x180" />
+    <link rel="manifest"         href="/site.webmanifest" />
+    <meta name="theme-color"     content="#0A0806" />
+
+    <!-- ─── Google Fonts (Non-Render-Blocking) ──────────────────────────── -->
+    <!-- Preconnect to reduce DNS + TLS handshake latency -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Load asynchronously — does NOT block first paint -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cormorant+SC:wght@300;400;500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap"
+      />
+    </noscript>
+  </head>
+
+  <body class="bg-obsidian text-parchment font-sans antialiased overflow-x-hidden">
+
+    <!-- ─── Skip to Content (Accessibility) ──────────────────────────── -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-toast focus:px-4 focus:py-2 focus:bg-gold focus:text-obsidian focus:font-sans focus:text-sm focus:font-medium focus:rounded-sm"
+    >
+      Skip to main content
+    </a>
+
+    <!-- ─── Site Navigation Shell ─────────────────────────────────────── -->
+    <!-- Slot: allows pages to override nav appearance (e.g. transparent on hero) -->
+    <slot name="nav">
+      <!-- Default nav placeholder — replace with <SiteNav/> when built -->
+      <header
+        role="banner"
+        aria-label="Site header"
+        class="fixed top-0 left-0 right-0 z-nav h-nav flex items-center justify-between px-gutter
+               border-b border-gold/10 bg-obsidian/90 backdrop-blur-sm
+               transition-all duration-slow ease-luxury"
+      >
+        <a href="/" aria-label="Louisiana Purchase — Return to homepage" class="group">
+          <span class="font-display text-xl font-normal tracking-ultra text-gold uppercase group-hover:text-gold-200 transition-colors duration-base ease-luxury">
+            Louisiana Purchase
+          </span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav role="navigation" aria-label="Main navigation" class="hidden md:flex items-center gap-8">
+          <ul class="flex items-center gap-8" role="list">
+            {[
+              { href: '/menu',           label: 'Menu' },
+              { href: '/private-events', label: 'Private Events' },
+              { href: '/#about',         label: 'About' },
+            ].map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="eyebrow text-smoke-light hover:text-gold transition-colors duration-base ease-luxury"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <!-- Primary CTA — Reservations -->
+          <a
+            href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Make a reservation at Louisiana Purchase"
+            class="eyebrow px-5 py-2.5 border border-gold/40 text-gold
+                   hover:bg-gold hover:text-obsidian hover:border-gold
+                   transition-all duration-base ease-luxury rounded-sm"
+          >
+            Reserve
+          </a>
+        </nav>
+
+        <!-- Mobile Menu Toggle — CSS-state, zero framework JS -->
+        <button
+          id="mobile-nav-toggle"
+          type="button"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+          aria-label="Toggle mobile navigation"
+          class="md:hidden flex flex-col gap-1.5 p-2 group"
+        >
+          <span class="block w-6 h-px bg-parchment transition-all duration-base ease-cinematic group-aria-expanded:rotate-45 group-aria-expanded:translate-y-2"></span>
+          <span class="block w-4 h-px bg-parchment transition-all duration-base ease-cinematic group-aria-expanded:opacity-0"></span>
+          <span class="block w-6 h-px bg-parchment transition-all duration-base ease-cinematic group-aria-expanded:-rotate-45 group-aria-expanded:-translate-y-2"></span>
+        </button>
+      </header>
+
+      <!-- Mobile Navigation Drawer -->
+      <nav
+        id="mobile-nav"
+        role="navigation"
+        aria-label="Mobile navigation"
+        aria-hidden="true"
+        class="fixed inset-0 z-overlay bg-obsidian/98 flex flex-col justify-center items-center
+               opacity-0 pointer-events-none transition-opacity duration-cinematic ease-luxury
+               md:hidden"
+      >
+        <ul class="flex flex-col items-center gap-8 text-center" role="list">
+          {[
+            { href: '/',               label: 'Home' },
+            { href: '/menu',           label: 'Menu' },
+            { href: '/private-events', label: 'Private Events' },
+            { href: '/#about',         label: 'Our Story' },
+          ].map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="font-serif text-3xl font-light text-parchment hover:text-gold
+                       transition-colors duration-base ease-luxury"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-12 flex flex-col items-center gap-4">
+          <a
+            href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="eyebrow px-8 py-3 border border-gold/40 text-gold hover:bg-gold hover:text-obsidian transition-all duration-base ease-luxury rounded-sm"
+          >
+            Make a Reservation
+          </a>
+          <a
+            href={import.meta.env.PUBLIC_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="eyebrow text-smoke-light hover:text-parchment transition-colors duration-base ease-luxury"
+          >
+            Order Online
+          </a>
+        </div>
+      </nav>
+    </slot>
+
+    <!-- ─── Primary Content ────────────────────────────────────────────── -->
+    <main
+      id="main-content"
+      role="main"
+      aria-label="Main content"
+      class="relative"
+    >
+      <slot />
+    </main>
+
+    <!-- ─── Site Footer Shell ──────────────────────────────────────────── -->
+    <slot name="footer">
+      <!-- Default footer — replace with <SiteFooter/> component when built -->
+      <footer
+        role="contentinfo"
+        aria-label="Site footer"
+        class="relative bg-velvet border-t border-gold/10 pt-16 pb-8 px-gutter"
+      >
+        <!-- Gradient rule at top -->
+        <span class="rule-gold absolute top-0 left-0 right-0" aria-hidden="true"></span>
+
+        <div class="max-w-layout mx-auto">
+
+          <!-- Footer Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-gold/10">
+
+            <!-- Brand Column -->
+            <section aria-labelledby="footer-brand">
+              <h2 id="footer-brand" class="font-display text-xl font-normal tracking-ultra text-gold uppercase mb-4">
+                Louisiana Purchase
+              </h2>
+              <address class="not-italic font-sans text-sm text-smoke-light leading-relaxed">
+                3671 30th St<br />
+                North Park, San Diego, CA 92104<br />
+                <a
+                  href={`tel:${import.meta.env.PUBLIC_VENUE_PHONE}`}
+                  class="hover:text-gold transition-colors duration-base ease-luxury"
+                  aria-label="Call Louisiana Purchase"
+                >
+                  {import.meta.env.PUBLIC_VENUE_PHONE}
+                </a>
+              </address>
+            </section>
+
+            <!-- Hours Column — AEO: structured key-value for AI parsers -->
+            <section aria-labelledby="footer-hours">
+              <h3 id="footer-hours" class="eyebrow mb-4">Hours</h3>
+              <dl class="font-sans text-sm text-smoke-light space-y-1.5">
+                <div class="flex justify-between gap-4">
+                  <dt class="text-parchment/60">Tuesday – Friday</dt>
+                  <dd>5pm – Close</dd>
+                </div>
+                <div class="flex justify-between gap-4">
+                  <dt class="text-parchment/60">Saturday</dt>
+                  <dd>10am – Close</dd>
+                </div>
+                <div class="flex justify-between gap-4">
+                  <dt class="text-parchment/60">Sunday</dt>
+                  <dd>10am – 10pm</dd>
+                </div>
+                <div class="flex justify-between gap-4">
+                  <dt class="text-parchment/60">Monday</dt>
+                  <dd>Closed</dd>
+                </div>
+              </dl>
+            </section>
+
+            <!-- CTA Column -->
+            <section aria-labelledby="footer-links">
+              <h3 id="footer-links" class="eyebrow mb-4">Explore</h3>
+              <nav aria-label="Footer navigation">
+                <ul class="space-y-3 font-sans text-sm text-smoke-light" role="list">
+                  <li>
+                    <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors duration-base ease-luxury">
+                      Reserve a Table
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/menu" class="hover:text-gold transition-colors duration-base ease-luxury">
+                      View Our Menu
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/private-events" class="hover:text-gold transition-colors duration-base ease-luxury">
+                      Private Events
+                    </a>
+                  </li>
+                  <li>
+                    <a href={import.meta.env.PUBLIC_GIFT_CARD_URL} target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors duration-base ease-luxury">
+                      Gift Cards
+                    </a>
+                  </li>
+                  <li>
+                    <a href={import.meta.env.PUBLIC_ORDER_URL} target="_blank" rel="noopener noreferrer" class="hover:text-gold transition-colors duration-base ease-luxury">
+                      Order Online
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </section>
+          </div>
+
+          <!-- Footer Base -->
+          <div class="pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <p class="font-sans text-xs text-smoke-dark">
+              &copy; {new Date().getFullYear()} Louisiana Purchase. All rights reserved.
+            </p>
+            <p class="font-sans text-xs text-smoke-dark">
+              North Park, San Diego, CA &nbsp;·&nbsp; Creole Dining &amp; Craft Cocktails
+            </p>
+          </div>
+
+        </div>
+      </footer>
+    </slot>
+
+  </body>
+</html>
+
+<!-- ─── Vanilla JS: Mobile Navigation Toggle ──────────────────────────────── -->
+<!-- Zero-framework. Pure DOM state. Runs after DOMContentLoaded.             -->
+<script>
+  (function initMobileNav(): void {
+    const toggle    = document.getElementById('mobile-nav-toggle') as HTMLButtonElement | null;
+    const drawer    = document.getElementById('mobile-nav')        as HTMLElement | null;
+
+    if (!toggle || !drawer) return;
+
+    const OPEN_CLASS   = 'opacity-100';
+    const CLOSED_CLASS = 'opacity-0';
+
+    function openNav(): void {
+      drawer!.classList.remove(CLOSED_CLASS, 'pointer-events-none');
+      drawer!.classList.add(OPEN_CLASS);
+      drawer!.setAttribute('aria-hidden', 'false');
+      toggle!.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeNav(): void {
+      drawer!.classList.remove(OPEN_CLASS);
+      drawer!.classList.add(CLOSED_CLASS, 'pointer-events-none');
+      drawer!.setAttribute('aria-hidden', 'true');
+      toggle!.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', (): void => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      isOpen ? closeNav() : openNav();
+    });
+
+    // Close on nav link click
+    drawer.querySelectorAll('a').forEach((link: HTMLAnchorElement) => {
+      link.addEventListener('click', closeNav);
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e: KeyboardEvent): void => {
+      if (e.key === 'Escape') closeNav();
+    });
+  })();
+</script>
+
+<!-- ─── Vanilla JS: Scroll Animation IntersectionObserver ────────────────── -->
+<!-- Observes .animate-on-scroll elements and adds .is-visible when in view. -->
+<script>
+  (function initScrollAnimations(): void {
+    const targets = document.querySelectorAll<HTMLElement>('.animate-on-scroll');
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver(
+      (entries: IntersectionObserverEntry[]): void => {
+        entries.forEach((entry: IntersectionObserverEntry): void => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    targets.forEach((el: HTMLElement): void => observer.observe(el));
+  })();
+</script>
+
+<!-- ─── Vanilla JS: Scroll-Condensed Nav ────────────────────────────────── -->
+<script>
+  (function initScrollNav(): void {
+    const header = document.querySelector<HTMLElement>('header[role="banner"]');
+    if (!header) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', (): void => {
+      if (!ticking) {
+        requestAnimationFrame((): void => {
+          if (window.scrollY > 80) {
+            header.classList.add('shadow-obsidian-deep');
+          } else {
+            header.classList.remove('shadow-obsidian-deep');
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+</script>
