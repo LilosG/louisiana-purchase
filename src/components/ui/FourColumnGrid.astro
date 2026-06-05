@@ -1,28 +1,25 @@
 ---
 // src/components/ui/FourColumnGrid.astro
-// Louisiana Purchase — Editorial Four-Column Card Grid Component
-//
-// Used for cocktails, food items, event types, blog posts, and any
-// card-based content grid. Supports 2, 3, and 4 column layouts.
-// All styling via Tailwind config tokens only. Zero hardcoded values.
+// Louisiana Purchase — Editorial Card Grid Component
+// Tailwind v4: standard utility classes only.
 
 interface GridCard {
-  image?:       string;
-  imageAlt?:    string;
-  eyebrow?:     string;
-  title:        string;
-  body?:        string;
-  meta?:        string;       // price, date, tag etc
-  href?:        string;       // makes card clickable
-  external?:    boolean;
-  linkLabel?:   string;       // CTA label if href present
+  image?:     string;
+  imageAlt?:  string;
+  eyebrow?:   string;
+  title:      string;
+  body?:      string;
+  meta?:      string;
+  href?:      string;
+  external?:  boolean;
+  linkLabel?: string;
 }
 
 interface Props {
   cards:    GridCard[];
   cols?:    2 | 3 | 4;
-  dark?:    boolean;          // true = obsidian bg, false = velvet bg
-  divided?: boolean;          // gold hairline dividers between cards
+  dark?:    boolean;
+  divided?: boolean;
 }
 
 const {
@@ -58,13 +55,12 @@ const colClass = {
           class="flex flex-col h-full"
           aria-label={card.title}
         >
-          {/* Image */}
           {card.image && (
-            <div class="aspect-portrait overflow-hidden">
+            <div class="aspect-[3/4] overflow-hidden">
               <img
                 src={card.image}
                 alt={card.imageAlt || card.title}
-                class="w-full h-full object-cover object-center transition-transform duration-cinematic ease-luxury group-hover:scale-[1.05]"
+                class="w-full h-full object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
                 width="800"
@@ -72,15 +68,13 @@ const colClass = {
               />
             </div>
           )}
-
-          {/* Body */}
           <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
             {card.eyebrow && (
-              <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold">
+              <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold">
                 {card.eyebrow}
               </p>
             )}
-            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-base ease-luxury"
+            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
                 style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
               {card.title}
             </h3>
@@ -95,7 +89,7 @@ const colClass = {
               </p>
             )}
             {card.linkLabel && (
-              <span class="font-sans text-2xs font-medium tracking-widest uppercase text-gold mt-2 group-hover:translate-x-1 transition-transform duration-base ease-luxury inline-block">
+              <span class="font-sans text-[0.625rem] font-medium tracking-[0.16em] uppercase text-gold mt-2 group-hover:translate-x-1 transition-transform duration-[280ms] inline-block">
                 {card.linkLabel} →
               </span>
             )}
@@ -103,13 +97,12 @@ const colClass = {
         </a>
       ) : (
         <>
-          {/* Image — no link */}
           {card.image && (
-            <div class="aspect-portrait overflow-hidden">
+            <div class="aspect-[3/4] overflow-hidden">
               <img
                 src={card.image}
                 alt={card.imageAlt || card.title}
-                class="w-full h-full object-cover object-center transition-transform duration-cinematic ease-luxury group-hover:scale-[1.05]"
+                class="w-full h-full object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
                 width="800"
@@ -117,11 +110,9 @@ const colClass = {
               />
             </div>
           )}
-
-          {/* Body — no link */}
           <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
             {card.eyebrow && (
-              <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold">
+              <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold">
                 {card.eyebrow}
               </p>
             )}

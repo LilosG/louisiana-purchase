@@ -1,10 +1,7 @@
 ---
 // src/components/ui/CTABand.astro
 // Louisiana Purchase — Full-Width CTA Band Component
-//
-// Used at the bottom of every page as the primary conversion driver.
-// Supports optional background image mode and solid background mode.
-// All styling via Tailwind config tokens only. Zero hardcoded values.
+// Tailwind v4: standard utility classes only.
 
 interface CTAButton {
   label:     string;
@@ -20,7 +17,7 @@ interface Props {
   ctas:      CTAButton[];
   image?:    string;
   imageAlt?: string;
-  dark?:     boolean;   // true = obsidian bg, false = velvet bg
+  dark?:     boolean;
 }
 
 const {
@@ -39,15 +36,12 @@ const {
   class:list={[
     'relative overflow-hidden',
     image ? 'py-24 md:py-36' : 'py-20 md:py-28',
-    !image && dark ? 'bg-obsidian' : '',
-    !image && !dark ? 'bg-velvet' : '',
+    !image && dark  ? 'bg-obsidian' : '',
+    !image && !dark ? 'bg-velvet'   : '',
   ]}
 >
+  <div class="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(to_right,transparent,rgba(201,168,76,0.40),transparent)]" aria-hidden="true"></div>
 
-  {/* Gold rule top */}
-  <div class="absolute top-0 left-0 right-0 h-px bg-section-divider" aria-hidden="true"></div>
-
-  {/* Background image */}
   {image && (
     <div class="absolute inset-0 z-0" aria-hidden="true">
       <img
@@ -63,24 +57,23 @@ const {
     </div>
   )}
 
-  {/* Content */}
-  <div class="relative z-10 max-w-layout mx-auto px-gutter text-center">
+  <div class="relative z-10 max-w-[1280px] mx-auto px-6 text-center">
 
     {eyebrow && (
-      <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-4">
+      <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold mb-4">
         {eyebrow}
       </p>
     )}
 
     <h2
-      class="font-serif font-light text-parchment tracking-tighter leading-tight mb-4"
+      class="font-serif font-light text-parchment tracking-[-0.02em] leading-tight mb-4"
       style="font-size: clamp(1.875rem, 4vw, 3rem);"
     >
       {title}
     </h2>
 
     {subtitle && (
-      <p class="font-sans font-light text-smoke leading-relaxed max-w-prose-narrow mx-auto mb-10"
+      <p class="font-sans font-light text-smoke leading-relaxed max-w-[52ch] mx-auto mb-10"
          style="font-size: clamp(0.875rem, 1.25vw, 1rem);">
         {subtitle}
       </p>
@@ -93,9 +86,9 @@ const {
           target={cta.external ? '_blank' : undefined}
           rel={cta.external ? 'noopener noreferrer' : undefined}
           class:list={[
-            'inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap',
+            'inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm transition-all duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] whitespace-nowrap',
             {
-              'px-10 py-4 bg-gold text-obsidian hover:bg-gold-200': cta.variant === 'gold',
+              'px-10 py-4 bg-gold text-obsidian hover:bg-gold-200':                           cta.variant === 'gold',
               'px-10 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5': cta.variant === 'outline',
             }
           ]}
@@ -107,7 +100,6 @@ const {
 
   </div>
 
-  {/* Gold rule bottom */}
-  <div class="absolute bottom-0 left-0 right-0 h-px bg-section-divider" aria-hidden="true"></div>
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-[linear-gradient(to_right,transparent,rgba(201,168,76,0.40),transparent)]" aria-hidden="true"></div>
 
 </section>

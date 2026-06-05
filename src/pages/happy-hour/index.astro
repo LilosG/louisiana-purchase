@@ -1,11 +1,8 @@
 ---
 // src/pages/happy-hour/index.astro
 // Louisiana Purchase — Bayou Hour (Happy Hour) Hub Page
-//
 // Slug: /happy-hour — permanent, rebrand-proof URL
-// Page title + headers use verified venue branding: "Bayou Hour"
-// Targets: "happy hour north park", "happy hour san diego", "bayou hour louisiana purchase"
-// SEO/AEO structured with key-value blocks, FAQ, and schema override.
+// Tailwind v4: standard utility classes only.
 
 import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
@@ -33,10 +30,10 @@ const happyHourSchema = {
     '@type': 'OfferCatalog',
     name: 'Bayou Hour Menu',
     itemListElement: [
-      { '@type': 'Offer', name: 'Well Cocktails', price: '9', priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'Draft Beer', price: '6', priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'House Wine', price: '8', priceCurrency: 'USD' },
-      { '@type': 'Offer', name: 'Bayou Hour Bites', price: '10', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Well Cocktails',    price: '9',  priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Draft Beer',         price: '6',  priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'House Wine',         price: '8',  priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Bayou Hour Bites',   price: '10', priceCurrency: 'USD' },
     ],
   },
 };
@@ -48,8 +45,8 @@ const happyHourSchema = {
   canonical="/happy-hour"
   schema={happyHourSchema}
   breadcrumbs={[
-    { name: 'Home',        url: '/',            position: 1 },
-    { name: 'Happy Hour',  url: '/happy-hour',  position: 2 },
+    { name: 'Home',       url: '/',           position: 1 },
+    { name: 'Happy Hour', url: '/happy-hour', position: 2 },
   ]}
 >
 
@@ -62,8 +59,8 @@ const happyHourSchema = {
     image="/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg"
     imageAlt="Bayou Hour cocktails at Louisiana Purchase North Park San Diego"
     ctas={[
-      { label: 'Reserve a Spot', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View Full Menu', href: '/menu', variant: 'outline' },
+      { label: 'Reserve a Spot',  href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View Full Menu',  href: '/menu', variant: 'outline' },
     ]}
     headlineId="hh-headline"
   />
@@ -71,10 +68,10 @@ const happyHourSchema = {
   <!-- ─── Stat Bar ──────────────────────────────────────────────────────── -->
   <StatBar
     stats={[
-      { value: 'Mon – Fri',  label: 'Days Available' },
-      { value: '3 – 5 PM',   label: 'Bayou Hour Window' },
-      { value: '$6+',        label: 'Starting Price' },
-      { value: 'Walk-Ins',   label: 'Always Welcome' },
+      { value: 'Mon – Fri', label: 'Days Available' },
+      { value: '3 – 5 PM',  label: 'Bayou Hour Window' },
+      { value: '$6+',       label: 'Starting Price' },
+      { value: 'Walk-Ins',  label: 'Always Welcome' },
     ]}
     dark={true}
   />
@@ -91,10 +88,10 @@ const happyHourSchema = {
       "Pull up a stool at the marble bar. Order a Praline Old Fashioned at a price that makes it a habit. Let the evening find you.",
     ]}
     facts={[
-      { label: 'Hours',     value: '3 PM – 5 PM' },
-      { label: 'Days',      value: 'Mon – Fri' },
-      { label: 'Location',  value: 'Full Bar & Patio' },
-      { label: 'Walk-Ins',  value: 'Always Welcome' },
+      { label: 'Hours',    value: '3 PM – 5 PM' },
+      { label: 'Days',     value: 'Mon – Fri' },
+      { label: 'Location', value: 'Full Bar & Patio' },
+      { label: 'Walk-Ins', value: 'Always Welcome' },
     ]}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
@@ -103,11 +100,8 @@ const happyHourSchema = {
   />
 
   <!-- ─── Bayou Hour Menu ───────────────────────────────────────────────── -->
-  <section
-    aria-labelledby="hh-menu-heading"
-    class="bg-velvet py-20 md:py-28"
-  >
-    <div class="max-w-layout mx-auto px-gutter">
+  <section aria-labelledby="hh-menu-heading" class="bg-velvet py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
 
       <SectionHeader
         eyebrow="The Deals"
@@ -124,27 +118,27 @@ const happyHourSchema = {
         cards={[
           {
             eyebrow: 'Cocktails',
-            title: 'Well Cocktails',
-            body: 'House spirits, fresh-squeezed mixers, bartender\'s choice of Louisiana-inspired build.',
-            meta: 'From $9',
+            title:   'Well Cocktails',
+            body:    'House spirits, fresh-squeezed mixers, bartender\'s choice of Louisiana-inspired build.',
+            meta:    'From $9',
           },
           {
             eyebrow: 'Beer',
-            title: 'Draft Beer',
-            body: 'Rotating local and domestic draft selections. Cold, clean, and always poured right.',
-            meta: 'From $6',
+            title:   'Draft Beer',
+            body:    'Rotating local and domestic draft selections. Cold, clean, and always poured right.',
+            meta:    'From $6',
           },
           {
             eyebrow: 'Wine',
-            title: 'House Wine',
-            body: 'Red, white, and sparkling by the glass. Curated to complement the Creole kitchen.',
-            meta: 'From $8',
+            title:   'House Wine',
+            body:    'Red, white, and sparkling by the glass. Curated to complement the Creole kitchen.',
+            meta:    'From $8',
           },
           {
             eyebrow: 'Bites',
-            title: 'Bayou Hour Bites',
-            body: 'A rotating selection of small plates from Chef Quinnton Austin\'s kitchen — built for the bar.',
-            meta: 'From $10',
+            title:   'Bayou Hour Bites',
+            body:    'A rotating selection of small plates from Chef Quinnton Austin\'s kitchen — built for the bar.',
+            meta:    'From $10',
           },
         ]}
       />
@@ -152,7 +146,7 @@ const happyHourSchema = {
       <div class="text-center mt-12">
         <a
           href="/menu"
-          class="inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5"
+          class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
         >
           View Full Menu
         </a>
@@ -173,7 +167,7 @@ const happyHourSchema = {
       "Outdoor seating on the lush fern-framed patio is also available — a rare find in a neighborhood where good outdoor space is earned.",
     ]}
     facts={[
-      { label: 'Bar Seating',    value: 'Walk-In' },
+      { label: 'Bar Seating',   value: 'Walk-In' },
       { label: 'Patio',         value: 'Available' },
       { label: 'Neighborhood',  value: 'North Park' },
       { label: 'Address',       value: '2305 University Ave' },
@@ -185,12 +179,9 @@ const happyHourSchema = {
     dark={true}
   />
 
-  <!-- ─── FAQ — AEO Structured ─────────────────────────────────────────── -->
-  <section
-    aria-labelledby="hh-faq-heading"
-    class="bg-velvet py-20 md:py-28"
-  >
-    <div class="max-w-layout mx-auto px-gutter">
+  <!-- ─── FAQ ───────────────────────────────────────────────────────────── -->
+  <section aria-labelledby="hh-faq-heading" class="bg-velvet py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
 
       <SectionHeader
         eyebrow="Need to Know"
@@ -199,7 +190,7 @@ const happyHourSchema = {
         id="hh-faq-heading"
       />
 
-      <dl class="divide-y divide-gold/10 max-w-prose-wide mx-auto">
+      <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
         {[
           {
             q: 'What is Bayou Hour at Louisiana Purchase?',
@@ -222,7 +213,7 @@ const happyHourSchema = {
             a: 'Yes. Bayou Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.',
           },
         ].map((faq) => (
-          <div class="py-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-16 reveal">
+          <div class="py-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 reveal">
             <dt class="font-serif font-light text-parchment" style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
               {faq.q}
             </dt>
