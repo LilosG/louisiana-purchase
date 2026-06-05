@@ -1,0 +1,310 @@
+---
+// src/pages/brunch/index.astro
+// Louisiana Purchase — Brunch Hub Page
+// Slug: /brunch — permanent URL
+// Targets: "brunch north park", "brunch san diego", "weekend brunch san diego"
+
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import AlternatingRow from '../../components/ui/AlternatingRow.astro';
+import StatBar from '../../components/ui/StatBar.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+
+const brunchSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FoodEstablishment',
+  name: 'Louisiana Purchase — Weekend Brunch',
+  description: 'Weekend brunch at Louisiana Purchase in North Park, San Diego. Creole brunch plates, craft cocktails, and an open patio every Saturday and Sunday from 12 PM to 3 PM.',
+  url: `${import.meta.env.PUBLIC_SITE_URL}/brunch`,
+  servesCuisine: ['Creole', 'Southern American', 'New Orleans'],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '2305 University Ave',
+    addressLocality: 'San Diego',
+    addressRegion: 'CA',
+    postalCode: '92104',
+    addressCountry: 'US',
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Saturday', opens: '12:00', closes: '15:00' },
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday',   opens: '12:00', closes: '15:00' },
+  ],
+};
+---
+
+<Layout
+  title="Weekend Brunch in North Park San Diego | Louisiana Purchase"
+  description="Weekend brunch at Louisiana Purchase — North Park's most indulgent Saturday and Sunday ritual. Creole brunch plates, craft cocktails, and an open patio from 12 PM. Reserve your table."
+  canonical="/brunch"
+  schema={brunchSchema}
+  breadcrumbs={[
+    { name: 'Home',   url: '/',       position: 1 },
+    { name: 'Brunch', url: '/brunch', position: 2 },
+  ]}
+>
+
+  <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+  <PageHero
+    eyebrow="Saturday & Sunday · 12 PM – 3 PM"
+    title="Weekend Brunch"
+    titleItalic="in North Park"
+    subtitle="North Park's most indulgent weekend ritual. Creole brunch plates, craft cocktails, and an open patio from noon. Come hungry. Stay for the afternoon."
+    image="/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg"
+    imageAlt="Weekend brunch at Louisiana Purchase North Park San Diego"
+    ctas={[
+      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'outline' },
+    ]}
+    headlineId="brunch-headline"
+  />
+
+  <!-- ─── Stat Bar ──────────────────────────────────────────────────────── -->
+  <StatBar
+    stats={[
+      { value: 'Sat & Sun',  label: 'Days Available' },
+      { value: '12 – 3 PM',  label: 'Brunch Service' },
+      { value: 'Walk-Ins',   label: 'Welcome' },
+      { value: 'Full Patio', label: 'Open' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── The Experience ───────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+    imageAlt="Brunch at Louisiana Purchase North Park San Diego"
+    eyebrow="The Experience"
+    title="Not Just Brunch."
+    titleItalic="An Afternoon Event."
+    body={[
+      "Louisiana Purchase brunch isn't a quick eggs-and-toast affair. It's a full New Orleans-inspired afternoon — Creole plates built for lingering, craft cocktails poured with the same care as dinner service, and a patio that makes San Diego feel like the French Quarter.",
+      "Every Saturday and Sunday from noon. The kind of brunch you plan your weekend around.",
+    ]}
+    facts={[
+      { label: 'Service',    value: '12 PM – 3 PM' },
+      { label: 'Days',       value: 'Sat & Sun' },
+      { label: 'Cuisine',    value: 'Elevated Creole' },
+      { label: 'Patio',      value: 'Open & Available' },
+    ]}
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── Brunch Menu Highlights ───────────────────────────────────────── -->
+  <section aria-labelledby="brunch-menu-heading" class="bg-velvet py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="The Menu"
+        title="Creole Brunch"
+        titleItalic="Plates & Cocktails"
+        subtitle="Chef Quinnton Austin's weekend brunch program — elevated Creole plates and craft cocktails built for a long, indulgent afternoon."
+        id="brunch-menu-heading"
+      />
+
+      <FourColumnGrid
+        cols={4}
+        dark={false}
+        divided={true}
+        cards={[
+          {
+            image:    '/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg',
+            imageAlt: 'Creole brunch plate at Louisiana Purchase',
+            eyebrow:  'Kitchen',
+            title:    'Big Brunch Easies',
+            body:     'Rotating Creole brunch plates built around the season — from crawfish benedicts to fire-forward egg dishes.',
+            href:     '/menu/brunch',
+            linkLabel:'See the Menu',
+          },
+          {
+            image:    '/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg',
+            imageAlt: 'Brunch cocktails at Louisiana Purchase',
+            eyebrow:  'Bar Program',
+            title:    'Brunch Cocktails',
+            body:     'The full bar is open at noon. Praline Old Fashioneds, Bayou Swizzles, Café Brûlot Martinis — no waiting until 5 PM.',
+            href:     '/menu/cocktails',
+            linkLabel:'View Cocktails',
+          },
+          {
+            image:    '/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg',
+            imageAlt: 'Outdoor patio at Louisiana Purchase North Park',
+            eyebrow:  'The Patio',
+            title:    'Open Air Dining',
+            body:     'The lush fern-framed patio is open for brunch service. One of North Park\'s best outdoor dining spaces.',
+          },
+          {
+            image:    '/images/louisiana-purchase-group-dining-san-diego-website.jpg',
+            imageAlt: 'Private brunch at Louisiana Purchase San Diego',
+            eyebrow:  'Group Bookings',
+            title:    'Brunch Buyouts',
+            body:     'Reserve the full venue or patio for a private brunch event. Custom menus and cocktail packages available.',
+            href:     '/private-events/san-diego-brunch-private-event',
+            linkLabel:'Learn More',
+          },
+        ]}
+      />
+
+      <div class="text-center mt-12">
+        <a
+          href="/menu/brunch"
+          class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+        >
+          Full Brunch Menu
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── The Atmosphere ───────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+    imageAlt="Louisiana Purchase interior during weekend brunch"
+    eyebrow="The Setting"
+    title="North Park's"
+    titleItalic="Best Brunch Spot"
+    body={[
+      "Louisiana Purchase sits at the corner of University Ave and 23rd St in the heart of North Park — San Diego's most vibrant dining neighborhood. On weekends, the patio fills early and the bar program runs at full power from the moment doors open.",
+      "Walk-ins are welcome but tables go fast. Reserve ahead for guaranteed seating on the patio or at the bar.",
+    ]}
+    facts={[
+      { label: 'Address',      value: '2305 University Ave' },
+      { label: 'Neighborhood', value: 'North Park, SD' },
+      { label: 'Parking',      value: 'Street & Nearby Lots' },
+      { label: 'Reservations', value: 'Highly Recommended' },
+    ]}
+    ctas={[
+      { label: 'Reserve Now',    href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Get Directions', href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'outline' },
+    ]}
+    reverse={true}
+    dark={true}
+  />
+
+  <!-- ─── Private Brunch Callout ───────────────────────────────────────── -->
+  <section aria-labelledby="private-brunch-heading" class="bg-velvet py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+
+        <div>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">
+            Group Bookings
+          </p>
+          <h2
+            id="private-brunch-heading"
+            class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5"
+            style="font-size: clamp(2rem, 4vw, 3rem);"
+          >
+            Private Brunch<br />
+            <span class="italic text-gold">Events in North Park</span>
+          </h2>
+          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]">
+            Reserve the full venue or patio exclusively for your group. Birthday brunches, baby showers, corporate team events, and milestone celebrations — Louisiana Purchase handles the food, the drinks, and the atmosphere.
+          </p>
+          <ul role="list" class="flex flex-col gap-3 mb-8">
+            {[
+              'Full venue & patio buyouts',
+              'Custom Creole brunch menus',
+              'Dedicated bar & cocktail packages',
+              'Up to 80 guests',
+              'Dedicated events coordinator',
+            ].map((item) => (
+              <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
+                <span class="text-gold text-[0.5rem] mt-1.5">✦</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a
+            href="/private-events/san-diego-brunch-private-event"
+            class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+          >
+            Inquire About a Private Brunch
+          </a>
+        </div>
+
+        <div class="overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px]">
+          <img
+            src="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+            alt="Private brunch event at Louisiana Purchase North Park San Diego"
+            class="w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+            width="1600"
+            height="1066"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FAQ ───────────────────────────────────────────────────────────── -->
+  <section aria-labelledby="brunch-faq-heading" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="Need to Know"
+        title="Brunch FAQ"
+        subtitle="Everything you need to know about weekend brunch at Louisiana Purchase in North Park, San Diego."
+        id="brunch-faq-heading"
+      />
+
+      <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
+        {[
+          {
+            q: 'What days does Louisiana Purchase serve brunch?',
+            a: 'Brunch is served every Saturday and Sunday from 12 PM to 3 PM. The full bar and kitchen are open for the full service window.',
+          },
+          {
+            q: 'Do I need a reservation for brunch?',
+            a: 'Walk-ins are welcome but reservations are strongly recommended, especially on Saturdays. Tables fill quickly on weekend mornings. Reserve online through our reservations link.',
+          },
+          {
+            q: 'What kind of food is served at brunch?',
+            a: 'Louisiana Purchase serves elevated Creole brunch plates inspired by New Orleans weekend dining. Expect rotating seasonal dishes, fire-forward preparations, and Chef Quinnton Austin\'s signature Creole kitchen approach.',
+          },
+          {
+            q: 'Are cocktails available at brunch?',
+            a: 'Yes. The full bar is open from noon including all signature cocktails — Praline Old Fashioneds, Bayou Swizzles, Café Brûlot Martinis, and more. No waiting until dinner.',
+          },
+          {
+            q: 'Can I book a private brunch at Louisiana Purchase?',
+            a: 'Yes. Louisiana Purchase offers full venue and patio buyouts for private brunch events — birthday celebrations, baby showers, corporate gatherings, and more. Inquire through our private events page.',
+          },
+          {
+            q: 'Where is Louisiana Purchase located?',
+            a: 'Louisiana Purchase is located at 2305 University Ave in North Park, San Diego, CA 92104 — at the corner of University Ave and 23rd St.',
+          },
+        ].map((faq) => (
+          <div class="py-8 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-16 reveal">
+            <dt class="font-serif font-light text-parchment" style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
+              {faq.q}
+            </dt>
+            <dd class="font-sans font-light text-smoke leading-relaxed text-sm">
+              {faq.a}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+    </div>
+  </section>
+
+  <!-- ─── CTA Band ──────────────────────────────────────────────────────── -->
+  <CTABand
+    eyebrow="Join Us This Weekend"
+    title="Brunch at Louisiana Purchase."
+    subtitle="Saturday and Sunday from noon. Reserve your table before it fills up."
+    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    ctas={[
+      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'outline' },
+    ]}
+  />
+
+</Layout>
