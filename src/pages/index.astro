@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import '../styles/pages/home.css';
 ---
 
 <Layout
@@ -9,9 +10,7 @@ import Layout from '../layouts/Layout.astro';
   ogType="website"
 >
 
-<!-- ═══════════════════════════════════
-     HERO
-═══════════════════════════════════ -->
+<!-- ─── HERO ──────────────────────────────────────────────── -->
 <section class="hero" aria-labelledby="hero-headline">
   <div class="hero__media" aria-hidden="true">
     <img
@@ -59,42 +58,40 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     ABOUT — split layout
-═══════════════════════════════════ -->
+<!-- ─── ABOUT ────────────────────────────────────────────── -->
 <section id="about" class="about" aria-labelledby="about-h">
-  <div class="about__img-col reveal">
-    <img
-      src="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
-      alt="Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating"
-      class="about__img"
-      width="1600" height="1065"
-      loading="lazy" decoding="async"
-    />
-  </div>
-  <div class="about__copy reveal">
-    <p class="lp-eyebrow">North Park, San Diego · Est. 2018</p>
-    <h2 id="about-h" class="about__title">
-      Where New Orleans<br />Found Its Way<br /><span class="gold-text">to North Park</span>
-    </h2>
-    <p class="about__body">Louisiana Purchase is not a theme bar. It is a place — a genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood. The geometric timber ceiling, the candlelit bar, the patio framed by hanging ferns: every element earns its place.</p>
-    <p class="about__body">Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters. Slow-built gumbo. Elevated Creole plates that honor the tradition without being imprisoned by it. The cocktail program demands reverence, not speed.</p>
-    <dl class="about__facts">
-      <div><dt>Cuisine</dt><dd>Elevated Creole</dd></div>
-      <div><dt>Location</dt><dd>North Park, SD</dd></div>
-      <div><dt>Jazz Brunch</dt><dd>Sat &amp; Sun</dd></div>
-      <div><dt>Private Events</dt><dd>Up to 80 Guests</dd></div>
-    </dl>
-    <div class="about__ctas">
-      <a href="/menu" class="btn-gold">See the Menu</a>
-      <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-text">Reserve a Table →</a>
+  <div class="about__inner">
+    <div class="about__img-col reveal">
+      <img
+        src="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+        alt="Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating"
+        class="about__img"
+        width="1600" height="1065"
+        loading="lazy" decoding="async"
+      />
+    </div>
+    <div class="about__copy reveal">
+      <p class="lp-eyebrow">North Park, San Diego · Est. 2018</p>
+      <h2 id="about-h" class="about__title">
+        Where New Orleans<br />Found Its Way<br /><span class="gold-text">to North Park</span>
+      </h2>
+      <p class="about__body">Louisiana Purchase is not a theme bar. It is a place — a genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood. The geometric timber ceiling, the candlelit bar, the patio framed by hanging ferns: every element earns its place.</p>
+      <p class="about__body">Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters. Slow-built gumbo. Elevated Creole plates that honor the tradition without being imprisoned by it. The cocktail program demands reverence, not speed.</p>
+      <dl class="about__facts">
+        <div><dt>Cuisine</dt><dd>Elevated Creole</dd></div>
+        <div><dt>Location</dt><dd>North Park, SD</dd></div>
+        <div><dt>Jazz Brunch</dt><dd>Sat &amp; Sun</dd></div>
+        <div><dt>Private Events</dt><dd>Up to 80 Guests</dd></div>
+      </dl>
+      <div class="about__ctas">
+        <a href="/menu" class="btn-gold">See the Menu</a>
+        <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-text">Reserve a Table →</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     COCKTAILS
-═══════════════════════════════════ -->
+<!-- ─── COCKTAILS ─────────────────────────────────────────── -->
 <section class="cocktails" aria-labelledby="cocktails-h">
   <div class="section-wrap">
     <header class="section-hd reveal">
@@ -106,9 +103,12 @@ import Layout from '../layouts/Layout.astro';
     <div class="cocktails__grid">
       <article class="ccard reveal">
         <div class="ccard__img-wrap">
-          <img src="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
-            alt="Praline Old Fashioned — Louisiana Purchase signature cocktail on reclaimed wood pedestal"
-            class="ccard__img" width="1600" height="2408" loading="lazy" decoding="async" style="object-position:center 20%" />
+          <img
+            src="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+            alt="Praline Old Fashioned — Louisiana Purchase signature cocktail"
+            class="ccard__img" width="1600" height="2408"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="ccard__body">
           <p class="lp-eyebrow ccard__tag">Signature</p>
@@ -118,11 +118,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="ccard reveal" style="animation-delay:80ms">
+      <article class="ccard reveal">
         <div class="ccard__img-wrap">
-          <img src="/images/louisiana-purchase-drink-menu-north-park-san-diego-website.jpg"
+          <img
+            src="/images/louisiana-purchase-drink-menu-north-park-san-diego-website.jpg"
             alt="Voo Doo Carré — Louisiana Purchase craft cocktail"
-            class="ccard__img" width="1600" height="2393" loading="lazy" decoding="async" style="object-position:center 25%" />
+            class="ccard__img" width="1600" height="2393"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="ccard__body">
           <p class="lp-eyebrow ccard__tag">Chef's Selection</p>
@@ -132,11 +135,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="ccard reveal" style="animation-delay:160ms">
+      <article class="ccard reveal">
         <div class="ccard__img-wrap">
-          <img src="/images/louisiana-purchase-cocktail-menu-north-park-website.jpg"
-            alt="Beignet espresso martini — Louisiana Purchase bar program"
-            class="ccard__img" width="1600" height="2400" loading="lazy" decoding="async" style="object-position:center 30%" />
+          <img
+            src="/images/louisiana-purchase-cocktail-menu-north-park-website.jpg"
+            alt="Café Brûlot Martini — Louisiana Purchase bar program"
+            class="ccard__img" width="1600" height="2400"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="ccard__body">
           <p class="lp-eyebrow ccard__tag">Bar Exclusive</p>
@@ -146,11 +152,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="ccard reveal" style="animation-delay:240ms">
+      <article class="ccard reveal">
         <div class="ccard__img-wrap">
-          <img src="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
-            alt="Craft cocktail at Louisiana Purchase — North Park San Diego"
-            class="ccard__img" width="1600" height="2400" loading="lazy" decoding="async" style="object-position:center 30%" />
+          <img
+            src="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+            alt="Craft cocktails at Louisiana Purchase — North Park San Diego"
+            class="ccard__img" width="1600" height="1060"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="ccard__body">
           <p class="lp-eyebrow ccard__tag">The Bar</p>
@@ -167,18 +176,15 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     BRUNCH — full-bleed
-═══════════════════════════════════ -->
+<!-- ─── BRUNCH ────────────────────────────────────────────── -->
 <section class="brunch" aria-labelledby="brunch-h">
   <div class="brunch__media" aria-hidden="true">
     <img
-      src="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
-      alt="Jazz brunch spread — Louisiana Purchase North Park San Diego"
+      src="/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg"
+      alt="Jazz brunch — Louisiana Purchase North Park San Diego"
       class="brunch__img"
-      width="1600" height="1066"
+      width="1600" height="2387"
       loading="lazy" decoding="async"
-      style="object-position:center 50%"
     />
     <div class="brunch__scrim"></div>
   </div>
@@ -193,9 +199,7 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     FOOD GRID
-═══════════════════════════════════ -->
+<!-- ─── FOOD GRID ──────────────────────────────────────────── -->
 <section class="food" aria-labelledby="food-h">
   <div class="section-wrap">
     <header class="section-hd reveal">
@@ -207,9 +211,12 @@ import Layout from '../layouts/Layout.astro';
     <div class="food__grid">
       <article class="fcard fcard--tall reveal">
         <div class="fcard__img-wrap">
-          <img src="/images/louisiana-purchase-creole-cuisine-north-park-website.jpg"
+          <img
+            src="/images/louisiana-purchase-creole-cuisine-north-park-website.jpg"
             alt="Lobster pasta and fire-charred oysters — Louisiana Purchase Creole cuisine"
-            class="fcard__img" width="1600" height="1060" loading="lazy" decoding="async" />
+            class="fcard__img" width="1600" height="1060"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="fcard__body">
           <p class="lp-eyebrow fcard__tag">Signature</p>
@@ -218,11 +225,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="fcard reveal" style="animation-delay:60ms">
+      <article class="fcard reveal">
         <div class="fcard__img-wrap">
-          <img src="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
+          <img
+            src="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
             alt="Fire-charred oysters at Louisiana Purchase"
-            class="fcard__img" width="1600" height="2400" loading="lazy" decoding="async" style="object-position:center 35%" />
+            class="fcard__img" width="1600" height="2400"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="fcard__body">
           <p class="lp-eyebrow fcard__tag">Raw &amp; Fire</p>
@@ -231,11 +241,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="fcard reveal" style="animation-delay:120ms">
+      <article class="fcard reveal">
         <div class="fcard__img-wrap">
-          <img src="/images/louisiana-purchase-weekend-brunch-san-diego-website.jpg"
+          <img
+            src="/images/louisiana-purchase-weekend-brunch-san-diego-website.jpg"
             alt="Weekend brunch at Louisiana Purchase North Park San Diego"
-            class="fcard__img" width="1600" height="2387" loading="lazy" decoding="async" style="object-position:center 25%" />
+            class="fcard__img" width="1600" height="2387"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="fcard__body">
           <p class="lp-eyebrow fcard__tag">Weekend Brunch</p>
@@ -244,11 +257,14 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </article>
 
-      <article class="fcard reveal" style="animation-delay:180ms">
+      <article class="fcard reveal">
         <div class="fcard__img-wrap">
-          <img src="/images/louisiana-purchase-dinner-north-park-san-diego-website.jpg"
+          <img
+            src="/images/louisiana-purchase-dinner-north-park-san-diego-website.jpg"
             alt="Steak étouffée — elevated Creole dinner at Louisiana Purchase"
-            class="fcard__img" width="1600" height="2400" loading="lazy" decoding="async" style="object-position:center 25%" />
+            class="fcard__img" width="1600" height="2400"
+            loading="lazy" decoding="async"
+          />
         </div>
         <div class="fcard__body">
           <p class="lp-eyebrow fcard__tag">The Kitchen</p>
@@ -264,18 +280,11 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     MOOD BREAK — "eat me" neon
-═══════════════════════════════════ -->
-</div>
-
-<!-- ═══════════════════════════════════
-     PRIVATE EVENTS
-═══════════════════════════════════ -->
+<!-- ─── PRIVATE EVENTS ────────────────────────────────────── -->
 <section class="events" aria-labelledby="events-h">
   <div class="events__img-col">
     <img
-      src="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+      src="/images/louisiana-purchase-special-events-north-park-website.jpg"
       alt="Private dining at Louisiana Purchase North Park San Diego"
       class="events__img"
       width="1600" height="1066"
@@ -297,9 +306,7 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- ═══════════════════════════════════
-     FIND US
-═══════════════════════════════════ -->
+<!-- ─── FIND US ────────────────────────────────────────────── -->
 <section class="findus" aria-labelledby="findus-h">
   <div class="section-wrap">
     <div class="stats-row reveal">
@@ -340,4 +347,3 @@ import Layout from '../layouts/Layout.astro';
 </section>
 
 </Layout>
-
