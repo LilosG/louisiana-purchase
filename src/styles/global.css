@@ -54,6 +54,11 @@
     min-height:       100svh;
   }
 
+  .site-main {
+    background-color: var(--color-obsidian);
+    position: relative;
+  }
+
   /* ─── Selection ─────────────────────────────────────────────────── */
   ::selection {
     background-color: var(--color-gold);
