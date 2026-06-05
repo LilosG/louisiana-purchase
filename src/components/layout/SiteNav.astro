@@ -1,7 +1,7 @@
 ---
 // src/components/layout/SiteNav.astro
 // Louisiana Purchase — Site Navigation
-// Full site nav: Menu, Brunch, Happy Hour, Events, Private Events, The Space, About, Contact
+// Desktop nav shows at 1280px+. Contact in footer only.
 
 interface Props {
   transparent?: boolean;
@@ -18,12 +18,12 @@ const navLinks = [
   { href: '/private-events', label: 'Private Events' },
   { href: '/the-space',      label: 'The Space' },
   { href: '/about',          label: 'About' },
-  { href: '/contact',        label: 'Contact' },
 ];
 
 const mobileLinks = [
   { href: '/',               label: 'Home' },
   ...navLinks,
+  { href: '/contact',        label: 'Contact' },
 ];
 ---
 
@@ -35,20 +35,20 @@ const mobileLinks = [
 >
   <div class="site-nav__inner">
 
-    <!-- Wordmark -->
     <a href="/" class="site-nav__brand" aria-label="Louisiana Purchase — return to homepage">
       <span class="site-nav__wordmark-top">Louisiana</span>
       <span class="site-nav__wordmark-bottom">Purchase</span>
     </a>
 
-    <!-- Desktop Nav -->
     <nav role="navigation" aria-label="Main navigation" class="site-nav__links">
       <ul role="list">
         {navLinks.map((link) => (
           <li>
             <a
               href={link.href}
-              class:list={['site-nav__link', { 'site-nav__link--active': currentPath === link.href || currentPath.startsWith(link.href + '/') }]}
+              class:list={['site-nav__link', {
+                'site-nav__link--active': currentPath === link.href || currentPath.startsWith(link.href + '/')
+              }]}
               aria-current={currentPath === link.href ? 'page' : undefined}
             >
               {link.label}
@@ -58,7 +58,6 @@ const mobileLinks = [
       </ul>
     </nav>
 
-    <!-- Desktop CTAs -->
     <div class="site-nav__ctas">
       <a
         href={import.meta.env.PUBLIC_ORDER_URL}
@@ -80,7 +79,6 @@ const mobileLinks = [
       </a>
     </div>
 
-    <!-- Mobile Toggle -->
     <button
       id="nav-mobile-toggle"
       type="button"
@@ -97,7 +95,6 @@ const mobileLinks = [
   </div>
 </header>
 
-<!-- Mobile Drawer -->
 <div
   id="nav-mobile-drawer"
   role="dialog"
@@ -110,28 +107,15 @@ const mobileLinks = [
     <ul role="list" class="site-nav__drawer-list">
       {mobileLinks.map((link) => (
         <li>
-          <a href={link.href} class="site-nav__drawer-link">
-            {link.label}
-          </a>
+          <a href={link.href} class="site-nav__drawer-link">{link.label}</a>
         </li>
       ))}
     </ul>
-
     <div class="site-nav__drawer-ctas">
-      <a
-        href={import.meta.env.PUBLIC_RESERVATIONS_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="site-nav__drawer-reserve"
-      >
+      <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="site-nav__drawer-reserve">
         Reserve a Table
       </a>
-      <a
-        href={import.meta.env.PUBLIC_ORDER_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="site-nav__drawer-order"
-      >
+      <a href={import.meta.env.PUBLIC_ORDER_URL} target="_blank" rel="noopener noreferrer" class="site-nav__drawer-order">
         Order Online
       </a>
     </div>
@@ -162,14 +146,14 @@ const mobileLinks = [
 }
 
 .site-nav__inner {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 1.5rem;
-  height: 4.5rem;
+  padding: 0 2rem;
+  height: 5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 /* Wordmark */
@@ -183,7 +167,7 @@ const mobileLinks = [
 
 .site-nav__wordmark-top {
   font-family: var(--font-sans);
-  font-size: 0.4375rem;
+  font-size: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.36em;
   text-transform: uppercase;
@@ -193,7 +177,7 @@ const mobileLinks = [
 
 .site-nav__wordmark-bottom {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -202,25 +186,23 @@ const mobileLinks = [
 }
 
 .site-nav__brand:hover .site-nav__wordmark-top,
-.site-nav__brand:hover .site-nav__wordmark-bottom {
-  color: var(--color-gold);
-}
+.site-nav__brand:hover .site-nav__wordmark-bottom { color: var(--color-gold); }
 
-/* Desktop links */
+/* Desktop links — show at 1280px */
 .site-nav__links {
   display: none;
   flex: 1;
   justify-content: center;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .site-nav__links { display: flex; }
 }
 
 .site-nav__links ul {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1.75rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -228,7 +210,7 @@ const mobileLinks = [
 
 .site-nav__link {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -238,25 +220,23 @@ const mobileLinks = [
 }
 
 .site-nav__link:hover,
-.site-nav__link--active {
-  color: var(--color-gold);
-}
+.site-nav__link--active { color: var(--color-gold); }
 
-/* Desktop CTAs */
+/* Desktop CTAs — show at 1280px */
 .site-nav__ctas {
   display: none;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.875rem;
   flex-shrink: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .site-nav__ctas { display: flex; }
 }
 
 .site-nav__cta-order {
   font-family: var(--font-sans);
-  font-size: 0.625rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -269,13 +249,13 @@ const mobileLinks = [
 
 .site-nav__cta-reserve {
   font-family: var(--font-sans);
-  font-size: 0.5625rem;
+  font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-obsidian);
   background: var(--color-gold);
-  padding: 0.5rem 1rem;
+  padding: 0.625rem 1.375rem;
   border-radius: 2px;
   transition: background 280ms ease;
   white-space: nowrap;
@@ -283,7 +263,7 @@ const mobileLinks = [
 
 .site-nav__cta-reserve:hover { background: var(--color-gold-light); }
 
-/* Mobile toggle */
+/* Mobile toggle — hidden at 1280px */
 .site-nav__mobile-toggle {
   display: flex;
   flex-direction: column;
@@ -297,7 +277,7 @@ const mobileLinks = [
   padding: 0.5rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .site-nav__mobile-toggle { display: none; }
 }
 
@@ -359,13 +339,13 @@ const mobileLinks = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.375rem;
   text-align: center;
 }
 
 .site-nav__drawer-link {
   font-family: var(--font-serif);
-  font-size: clamp(1.625rem, 5vw, 2.25rem);
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   font-weight: 300;
   color: var(--color-parchment);
   letter-spacing: -0.01em;
@@ -390,7 +370,7 @@ const mobileLinks = [
   width: 100%;
   text-align: center;
   font-family: var(--font-sans);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: 500;
   letter-spacing: 0.24em;
   text-transform: uppercase;
@@ -405,7 +385,7 @@ const mobileLinks = [
 
 .site-nav__drawer-order {
   font-family: var(--font-sans);
-  font-size: 0.5625rem;
+  font-size: 0.625rem;
   font-weight: 500;
   letter-spacing: 0.20em;
   text-transform: uppercase;
