@@ -1,0 +1,126 @@
+---
+// src/components/ui/PageHero.astro
+// Louisiana Purchase — Shared Page Hero Component
+//
+// Used by all interior pages. Accepts image, eyebrow, title, subtitle, and CTA props.
+// All styling via Tailwind config tokens only. Zero hardcoded values.
+// Supports: text-only mode (no image), image-background mode, and split mode.
+
+interface CTAButton {
+  label:    string;
+  href:     string;
+  external?: boolean;
+  variant:  'gold' | 'outline' | 'text';
+}
+
+interface Props {
+  eyebrow?:    string;
+  title:       string;
+  titleItalic?: string;    // renders as italic serif line below title
+  subtitle?:   string;
+  image?:      string;
+  imageAlt?:   string;
+  ctas?:       CTAButton[];
+  headlineId?: string;
+  centered?:   boolean;
+}
+
+const {
+  eyebrow,
+  title,
+  titleItalic,
+  subtitle,
+  image,
+  imageAlt = '',
+  ctas = [],
+  headlineId = 'page-headline',
+  centered = false,
+} = Astro.props;
+---
+
+<section
+  aria-labelledby={headlineId}
+  class="relative flex flex-col justify-end min-h-hero-mobile md:min-h-[72vh] overflow-hidden bg-obsidian"
+>
+
+  {/* Background image */}
+  {image && (
+    <div class="absolute inset-0 z-0" aria-hidden="true">
+      <img
+        src={image}
+        alt={imageAlt}
+        class="w-full h-full object-cover object-center"
+        loading="eager"
+        decoding="async"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/20 via-obsidian/60 to-obsidian/95"></div>
+    </div>
+  )}
+
+  {/* No image — gradient background */}
+  {!image && (
+    <div class="absolute inset-0 z-0 bg-velvet-gradient opacity-60" aria-hidden="true"></div>
+  )}
+
+  {/* Gold rule top accent */}
+  <div class="absolute top-0 left-0 right-0 h-px bg-section-divider z-10" aria-hidden="true"></div>
+
+  {/* Content */}
+  <div class={`relative z-10 max-w-layout mx-auto w-full px-gutter pb-16 md:pb-24 pt-32 md:pt-40 ${centered ? 'text-center' : ''}`}>
+
+    {eyebrow && (
+      <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-4 md:mb-6">
+        {eyebrow}
+      </p>
+    )}
+
+    <h1
+      id={headlineId}
+      class="font-display font-light text-parchment tracking-tighter leading-none mb-4 animate-fade-up"
+      style="font-size: clamp(3rem, 8vw, 7rem);"
+    >
+      {title}
+      {titleItalic && (
+        <span class="block font-serif italic font-light text-gold tracking-tight" style="font-size: clamp(2.75rem, 7vw, 6.5rem);">
+          {titleItalic}
+        </span>
+      )}
+    </h1>
+
+    {subtitle && (
+      <p class="font-sans font-light text-parchment/70 max-w-prose-narrow leading-relaxed mb-10 animate-fade-in"
+         style="font-size: clamp(0.9375rem, 1.5vw, 1.125rem);">
+        {subtitle}
+      </p>
+    )}
+
+    {ctas.length > 0 && (
+      <div class={`flex flex-wrap gap-4 ${centered ? 'justify-center' : ''} animate-fade-up`}>
+        {ctas.map((cta) => (
+          <a
+            href={cta.href}
+            target={cta.external ? '_blank' : undefined}
+            rel={cta.external ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap',
+              {
+                'px-8 py-4 bg-gold text-obsidian hover:bg-gold-200': cta.variant === 'gold',
+                'px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5': cta.variant === 'outline',
+                'text-gold hover:text-gold-200': cta.variant === 'text',
+              }
+            ]}
+          >
+            {cta.label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {/* Slot for custom content below CTAs */}
+    <slot />
+
+  </div>
+
+</section>

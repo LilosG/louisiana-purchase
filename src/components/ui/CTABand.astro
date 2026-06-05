@@ -1,0 +1,113 @@
+---
+// src/components/ui/CTABand.astro
+// Louisiana Purchase — Full-Width CTA Band Component
+//
+// Used at the bottom of every page as the primary conversion driver.
+// Supports optional background image mode and solid background mode.
+// All styling via Tailwind config tokens only. Zero hardcoded values.
+
+interface CTAButton {
+  label:     string;
+  href:      string;
+  external?: boolean;
+  variant:   'gold' | 'outline';
+}
+
+interface Props {
+  eyebrow?:  string;
+  title:     string;
+  subtitle?: string;
+  ctas:      CTAButton[];
+  image?:    string;
+  imageAlt?: string;
+  dark?:     boolean;   // true = obsidian bg, false = velvet bg
+}
+
+const {
+  eyebrow,
+  title,
+  subtitle,
+  ctas,
+  image,
+  imageAlt = '',
+  dark = false,
+} = Astro.props;
+---
+
+<section
+  aria-label={title}
+  class:list={[
+    'relative overflow-hidden',
+    image ? 'py-24 md:py-36' : 'py-20 md:py-28',
+    !image && dark ? 'bg-obsidian' : '',
+    !image && !dark ? 'bg-velvet' : '',
+  ]}
+>
+
+  {/* Gold rule top */}
+  <div class="absolute top-0 left-0 right-0 h-px bg-section-divider" aria-hidden="true"></div>
+
+  {/* Background image */}
+  {image && (
+    <div class="absolute inset-0 z-0" aria-hidden="true">
+      <img
+        src={image}
+        alt={imageAlt}
+        class="w-full h-full object-cover object-center"
+        loading="lazy"
+        decoding="async"
+        width="1600"
+        height="900"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/80 to-obsidian/90"></div>
+    </div>
+  )}
+
+  {/* Content */}
+  <div class="relative z-10 max-w-layout mx-auto px-gutter text-center">
+
+    {eyebrow && (
+      <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-4">
+        {eyebrow}
+      </p>
+    )}
+
+    <h2
+      class="font-serif font-light text-parchment tracking-tighter leading-tight mb-4"
+      style="font-size: clamp(1.875rem, 4vw, 3rem);"
+    >
+      {title}
+    </h2>
+
+    {subtitle && (
+      <p class="font-sans font-light text-smoke leading-relaxed max-w-prose-narrow mx-auto mb-10"
+         style="font-size: clamp(0.875rem, 1.25vw, 1rem);">
+        {subtitle}
+      </p>
+    )}
+
+    <div class="flex flex-col sm:flex-row justify-center gap-4">
+      {ctas.map((cta) => (
+        <a
+          href={cta.href}
+          target={cta.external ? '_blank' : undefined}
+          rel={cta.external ? 'noopener noreferrer' : undefined}
+          class:list={[
+            'inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap',
+            {
+              'px-10 py-4 bg-gold text-obsidian hover:bg-gold-200': cta.variant === 'gold',
+              'px-10 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5': cta.variant === 'outline',
+            }
+          ]}
+        >
+          {cta.label}
+        </a>
+      ))}
+    </div>
+
+  </div>
+
+  {/* Gold rule bottom */}
+  <div class="absolute bottom-0 left-0 right-0 h-px bg-section-divider" aria-hidden="true"></div>
+
+</section>

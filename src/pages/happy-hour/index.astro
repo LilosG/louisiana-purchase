@@ -1,0 +1,251 @@
+---
+// src/pages/happy-hour/index.astro
+// Louisiana Purchase — Bayou Hour (Happy Hour) Hub Page
+//
+// Slug: /happy-hour — permanent, rebrand-proof URL
+// Page title + headers use verified venue branding: "Bayou Hour"
+// Targets: "happy hour north park", "happy hour san diego", "bayou hour louisiana purchase"
+// SEO/AEO structured with key-value blocks, FAQ, and schema override.
+
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import AlternatingRow from '../../components/ui/AlternatingRow.astro';
+import StatBar from '../../components/ui/StatBar.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+
+const happyHourSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FoodEstablishment',
+  name: 'Louisiana Purchase — Bayou Hour',
+  description: 'Bayou Hour at Louisiana Purchase in North Park, San Diego. Discounted craft cocktails and small bites Monday through Friday, 3 PM to 5 PM.',
+  url: `${import.meta.env.PUBLIC_SITE_URL}/happy-hour`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '2305 University Ave',
+    addressLocality: 'San Diego',
+    addressRegion: 'CA',
+    postalCode: '92104',
+    addressCountry: 'US',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Bayou Hour Menu',
+    itemListElement: [
+      { '@type': 'Offer', name: 'Well Cocktails', price: '9', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Draft Beer', price: '6', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'House Wine', price: '8', priceCurrency: 'USD' },
+      { '@type': 'Offer', name: 'Bayou Hour Bites', price: '10', priceCurrency: 'USD' },
+    ],
+  },
+};
+---
+
+<Layout
+  title="Bayou Hour — Happy Hour in North Park San Diego | Louisiana Purchase"
+  description="Bayou Hour at Louisiana Purchase — North Park's best happy hour. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome."
+  canonical="/happy-hour"
+  schema={happyHourSchema}
+  breadcrumbs={[
+    { name: 'Home',        url: '/',            position: 1 },
+    { name: 'Happy Hour',  url: '/happy-hour',  position: 2 },
+  ]}
+>
+
+  <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
+  <PageHero
+    eyebrow="Monday – Friday · 3 PM – 5 PM"
+    title="Bayou Hour"
+    titleItalic="North Park's Finest"
+    subtitle="The best hour of your workday. Discounted craft cocktails, ice-cold draft beer, and Creole bites at the bar — every Monday through Friday from 3 to 5 PM."
+    image="/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg"
+    imageAlt="Bayou Hour cocktails at Louisiana Purchase North Park San Diego"
+    ctas={[
+      { label: 'Reserve a Spot', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View Full Menu', href: '/menu', variant: 'outline' },
+    ]}
+    headlineId="hh-headline"
+  />
+
+  <!-- ─── Stat Bar ──────────────────────────────────────────────────────── -->
+  <StatBar
+    stats={[
+      { value: 'Mon – Fri',  label: 'Days Available' },
+      { value: '3 – 5 PM',   label: 'Bayou Hour Window' },
+      { value: '$6+',        label: 'Starting Price' },
+      { value: 'Walk-Ins',   label: 'Always Welcome' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── What Is Bayou Hour ────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    imageAlt="Craft cocktails during Bayou Hour at Louisiana Purchase"
+    eyebrow="The Ritual"
+    title="More Than a Discount."
+    titleItalic="A Daily Ceremony."
+    body={[
+      "Bayou Hour isn't just a price break — it's the best time to experience Louisiana Purchase the way it was meant to be enjoyed. The bar is alive, the pours are generous, and the energy of North Park at the end of a workday fills the room.",
+      "Pull up a stool at the marble bar. Order a Praline Old Fashioned at a price that makes it a habit. Let the evening find you.",
+    ]}
+    facts={[
+      { label: 'Hours',     value: '3 PM – 5 PM' },
+      { label: 'Days',      value: 'Mon – Fri' },
+      { label: 'Location',  value: 'Full Bar & Patio' },
+      { label: 'Walk-Ins',  value: 'Always Welcome' },
+    ]}
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── Bayou Hour Menu ───────────────────────────────────────────────── -->
+  <section
+    aria-labelledby="hh-menu-heading"
+    class="bg-velvet py-20 md:py-28"
+  >
+    <div class="max-w-layout mx-auto px-gutter">
+
+      <SectionHeader
+        eyebrow="The Deals"
+        title="Bayou Hour Menu"
+        titleItalic="What's On Offer"
+        subtitle="A curated selection of discounted cocktails, beer, wine, and Creole bites — available at the bar and patio every weekday afternoon."
+        id="hh-menu-heading"
+      />
+
+      <FourColumnGrid
+        cols={4}
+        dark={false}
+        divided={true}
+        cards={[
+          {
+            eyebrow: 'Cocktails',
+            title: 'Well Cocktails',
+            body: 'House spirits, fresh-squeezed mixers, bartender\'s choice of Louisiana-inspired build.',
+            meta: 'From $9',
+          },
+          {
+            eyebrow: 'Beer',
+            title: 'Draft Beer',
+            body: 'Rotating local and domestic draft selections. Cold, clean, and always poured right.',
+            meta: 'From $6',
+          },
+          {
+            eyebrow: 'Wine',
+            title: 'House Wine',
+            body: 'Red, white, and sparkling by the glass. Curated to complement the Creole kitchen.',
+            meta: 'From $8',
+          },
+          {
+            eyebrow: 'Bites',
+            title: 'Bayou Hour Bites',
+            body: 'A rotating selection of small plates from Chef Quinnton Austin\'s kitchen — built for the bar.',
+            meta: 'From $10',
+          },
+        ]}
+      />
+
+      <div class="text-center mt-12">
+        <a
+          href="/menu"
+          class="inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5"
+        >
+          View Full Menu
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── The Atmosphere ───────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+    imageAlt="The bar at Louisiana Purchase North Park San Diego during happy hour"
+    eyebrow="The Setting"
+    title="The Bar at"
+    titleItalic="Louisiana Purchase"
+    body={[
+      "The marble bar at Louisiana Purchase is the heart of the room. During Bayou Hour, it's where regulars settle in, where strangers become familiar, and where North Park's best cocktail program is most accessible.",
+      "Outdoor seating on the lush fern-framed patio is also available — a rare find in a neighborhood where good outdoor space is earned.",
+    ]}
+    facts={[
+      { label: 'Bar Seating',    value: 'Walk-In' },
+      { label: 'Patio',         value: 'Available' },
+      { label: 'Neighborhood',  value: 'North Park' },
+      { label: 'Address',       value: '2305 University Ave' },
+    ]}
+    ctas={[
+      { label: 'Get Directions', href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'outline' },
+    ]}
+    reverse={true}
+    dark={true}
+  />
+
+  <!-- ─── FAQ — AEO Structured ─────────────────────────────────────────── -->
+  <section
+    aria-labelledby="hh-faq-heading"
+    class="bg-velvet py-20 md:py-28"
+  >
+    <div class="max-w-layout mx-auto px-gutter">
+
+      <SectionHeader
+        eyebrow="Need to Know"
+        title="Happy Hour FAQ"
+        subtitle="Everything you need to know about Bayou Hour at Louisiana Purchase in North Park, San Diego."
+        id="hh-faq-heading"
+      />
+
+      <dl class="divide-y divide-gold/10 max-w-prose-wide mx-auto">
+        {[
+          {
+            q: 'What is Bayou Hour at Louisiana Purchase?',
+            a: 'Bayou Hour is Louisiana Purchase\'s daily happy hour in North Park, San Diego. It runs Monday through Friday from 3 PM to 5 PM and features discounted craft cocktails, draft beer, house wine, and rotating Creole small plates.',
+          },
+          {
+            q: 'What days does happy hour run at Louisiana Purchase?',
+            a: 'Bayou Hour runs Monday through Friday, 3 PM to 5 PM. Louisiana Purchase is open seven days a week — Monday through Thursday 3–9 PM, Friday 3–10 PM, Saturday 12–10 PM, and Sunday 12–8 PM.',
+          },
+          {
+            q: 'Do I need a reservation for happy hour?',
+            a: 'Walk-ins are always welcome during Bayou Hour. Bar and patio seating is available on a first-come basis. If you\'d prefer a reserved table, you can book through our reservations link.',
+          },
+          {
+            q: 'Where is Louisiana Purchase located?',
+            a: 'Louisiana Purchase is located at 2305 University Ave in North Park, San Diego, CA 92104 — at the intersection of University Ave and 23rd St.',
+          },
+          {
+            q: 'Is there food available during happy hour?',
+            a: 'Yes. Bayou Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.',
+          },
+        ].map((faq) => (
+          <div class="py-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-16 reveal">
+            <dt class="font-serif font-light text-parchment" style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
+              {faq.q}
+            </dt>
+            <dd class="font-sans font-light text-smoke leading-relaxed text-sm">
+              {faq.a}
+            </dd>
+          </div>
+        ))}
+      </dl>
+
+    </div>
+  </section>
+
+  <!-- ─── CTA Band ──────────────────────────────────────────────────────── -->
+  <CTABand
+    eyebrow="Join Us"
+    title="Come for the Deals. Stay for the Night."
+    subtitle="Bayou Hour starts at 3 PM — but Louisiana Purchase is open until 9 or 10. Reserve a table and let the evening unfold."
+    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
+    ]}
+  />
+
+</Layout>

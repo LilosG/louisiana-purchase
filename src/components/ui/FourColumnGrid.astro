@@ -1,0 +1,148 @@
+---
+// src/components/ui/FourColumnGrid.astro
+// Louisiana Purchase — Editorial Four-Column Card Grid Component
+//
+// Used for cocktails, food items, event types, blog posts, and any
+// card-based content grid. Supports 2, 3, and 4 column layouts.
+// All styling via Tailwind config tokens only. Zero hardcoded values.
+
+interface GridCard {
+  image?:       string;
+  imageAlt?:    string;
+  eyebrow?:     string;
+  title:        string;
+  body?:        string;
+  meta?:        string;       // price, date, tag etc
+  href?:        string;       // makes card clickable
+  external?:    boolean;
+  linkLabel?:   string;       // CTA label if href present
+}
+
+interface Props {
+  cards:    GridCard[];
+  cols?:    2 | 3 | 4;
+  dark?:    boolean;          // true = obsidian bg, false = velvet bg
+  divided?: boolean;          // gold hairline dividers between cards
+}
+
+const {
+  cards,
+  cols = 4,
+  dark = true,
+  divided = true,
+} = Astro.props;
+
+const colClass = {
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-2 lg:grid-cols-4',
+}[cols];
+---
+
+<ul
+  role="list"
+  class:list={[
+    'grid',
+    colClass,
+    divided ? 'gap-px bg-gold/10' : 'gap-6',
+  ]}
+>
+  {cards.map((card) => (
+    <li class:list={[dark ? 'bg-obsidian' : 'bg-velvet', 'flex flex-col group reveal']}>
+
+      {card.href ? (
+        <a
+          href={card.href}
+          target={card.external ? '_blank' : undefined}
+          rel={card.external ? 'noopener noreferrer' : undefined}
+          class="flex flex-col h-full"
+          aria-label={card.title}
+        >
+          {/* Image */}
+          {card.image && (
+            <div class="aspect-portrait overflow-hidden">
+              <img
+                src={card.image}
+                alt={card.imageAlt || card.title}
+                class="w-full h-full object-cover object-center transition-transform duration-cinematic ease-luxury group-hover:scale-[1.05]"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="1067"
+              />
+            </div>
+          )}
+
+          {/* Body */}
+          <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
+            {card.eyebrow && (
+              <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold">
+                {card.eyebrow}
+              </p>
+            )}
+            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-base ease-luxury"
+                style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
+              {card.title}
+            </h3>
+            {card.body && (
+              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm">
+                {card.body}
+              </p>
+            )}
+            {card.meta && (
+              <p class="font-mono text-sm text-gold mt-auto pt-2">
+                {card.meta}
+              </p>
+            )}
+            {card.linkLabel && (
+              <span class="font-sans text-2xs font-medium tracking-widest uppercase text-gold mt-2 group-hover:translate-x-1 transition-transform duration-base ease-luxury inline-block">
+                {card.linkLabel} →
+              </span>
+            )}
+          </div>
+        </a>
+      ) : (
+        <>
+          {/* Image — no link */}
+          {card.image && (
+            <div class="aspect-portrait overflow-hidden">
+              <img
+                src={card.image}
+                alt={card.imageAlt || card.title}
+                class="w-full h-full object-cover object-center transition-transform duration-cinematic ease-luxury group-hover:scale-[1.05]"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="1067"
+              />
+            </div>
+          )}
+
+          {/* Body — no link */}
+          <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
+            {card.eyebrow && (
+              <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold">
+                {card.eyebrow}
+              </p>
+            )}
+            <h3 class="font-serif font-light text-parchment leading-snug"
+                style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
+              {card.title}
+            </h3>
+            {card.body && (
+              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm">
+                {card.body}
+              </p>
+            )}
+            {card.meta && (
+              <p class="font-mono text-sm text-gold mt-auto pt-2">
+                {card.meta}
+              </p>
+            )}
+          </div>
+        </>
+      )}
+
+    </li>
+  ))}
+</ul>

@@ -1,0 +1,69 @@
+---
+// src/components/ui/StatBar.astro
+// Louisiana Purchase — Stat / Metric Bar Component
+//
+// Displays a row of key venue metrics or facts.
+// Used on homepage, private events, brunch, and other hub pages.
+// All styling via Tailwind config tokens only. Zero hardcoded values.
+
+interface Stat {
+  value:    string;
+  label:    string;
+  href?:    string;     // optional — makes the value a link
+  external?: boolean;
+}
+
+interface Props {
+  stats:  Stat[];
+  dark?:  boolean;   // true = obsidian bg, false = velvet bg
+}
+
+const {
+  stats,
+  dark = true,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'relative grid border-y border-gold/15',
+    dark ? 'bg-obsidian' : 'bg-velvet',
+    stats.length === 2 ? 'grid-cols-2' : '',
+    stats.length === 3 ? 'grid-cols-3' : '',
+    stats.length === 4 ? 'grid-cols-2 md:grid-cols-4' : '',
+    stats.length > 4  ? 'grid-cols-2 md:grid-cols-3 lg:grid-cols-6' : '',
+  ]}
+  role="list"
+>
+  {stats.map((stat, i) => (
+    <div
+      class:list={[
+        'flex flex-col items-center justify-center text-center gap-2 py-8 px-4 md:py-10',
+        i < stats.length - 1 ? 'border-r border-gold/12' : '',
+      ]}
+      role="listitem"
+    >
+      {stat.href ? (
+        <a
+          href={stat.href}
+          target={stat.external ? '_blank' : undefined}
+          rel={stat.external ? 'noopener noreferrer' : undefined}
+          class="font-display font-light text-gold leading-none tracking-tighter hover:text-gold-200 transition-colors duration-base ease-luxury"
+          style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);"
+        >
+          {stat.value}
+        </a>
+      ) : (
+        <span
+          class="font-display font-light text-gold leading-none tracking-tighter"
+          style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);"
+        >
+          {stat.value}
+        </span>
+      )}
+      <span class="font-sans text-2xs font-medium tracking-spaced uppercase text-smoke">
+        {stat.label}
+      </span>
+    </div>
+  ))}
+</div>

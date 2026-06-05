@@ -1,0 +1,136 @@
+---
+// src/components/ui/AlternatingRow.astro
+// Louisiana Purchase — Asymmetric Editorial Row Component
+//
+// Full-width alternating image/copy layout per The Lobby Tiki Bar standard.
+// Image and copy swap sides based on the `reverse` prop.
+// All styling via Tailwind config tokens only. Zero hardcoded values.
+
+interface Props {
+  image:        string;
+  imageAlt:     string;
+  eyebrow?:     string;
+  title:        string;
+  titleItalic?: string;
+  body:         string[];        // array of paragraphs
+  ctas?:        { label: string; href: string; external?: boolean; variant: 'gold' | 'outline' | 'text' }[];
+  facts?:       { label: string; value: string }[];
+  reverse?:     boolean;         // flip image/copy sides
+  dark?:        boolean;         // dark bg variant (default) vs velvet
+  headingId?:   string;
+}
+
+const {
+  image,
+  imageAlt,
+  eyebrow,
+  title,
+  titleItalic,
+  body,
+  ctas = [],
+  facts = [],
+  reverse = false,
+  dark = true,
+  headingId,
+} = Astro.props;
+---
+
+<div class:list={[
+  'grid grid-cols-1 lg:grid-cols-2 min-h-[70vh]',
+  dark ? 'bg-obsidian' : 'bg-velvet',
+]}>
+
+  {/* Image column */}
+  <div class:list={[
+    'relative overflow-hidden min-h-[50vw] lg:min-h-0',
+    reverse ? 'lg:order-2' : 'lg:order-1',
+  ]}>
+    <img
+      src={image}
+      alt={imageAlt}
+      class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-cinematic ease-luxury hover:scale-[1.03]"
+      loading="lazy"
+      decoding="async"
+      width="1600"
+      height="1065"
+    />
+    {/* Gold accent edge */}
+    <div class:list={[
+      'absolute top-0 bottom-0 w-px bg-section-divider opacity-60',
+      reverse ? 'left-0' : 'right-0',
+    ]} aria-hidden="true"></div>
+  </div>
+
+  {/* Copy column */}
+  <div class:list={[
+    'flex flex-col justify-center px-gutter py-16 md:py-24 lg:px-16 xl:px-24',
+    reverse ? 'lg:order-1' : 'lg:order-2',
+  ]}>
+
+    {eyebrow && (
+      <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-4 reveal">
+        {eyebrow}
+      </p>
+    )}
+
+    <h2
+      id={headingId}
+      class="font-display font-light text-parchment tracking-tighter leading-none mb-5 reveal"
+      style="font-size: clamp(2rem, 4vw, 3.25rem);"
+    >
+      {title}
+      {titleItalic && (
+        <span class="block font-serif italic font-light text-gold tracking-tight" style="font-size: clamp(1.875rem, 3.75vw, 3rem);">
+          {titleItalic}
+        </span>
+      )}
+    </h2>
+
+    {body.map((paragraph) => (
+      <p class="font-sans font-light text-smoke leading-relaxed mb-4 reveal" style="font-size: clamp(0.9375rem, 1.25vw, 1rem);">
+        {paragraph}
+      </p>
+    ))}
+
+    {facts.length > 0 && (
+      <dl class="grid grid-cols-2 gap-4 mt-6 mb-8 pt-6 border-t border-gold/15 reveal">
+        {facts.map((fact) => (
+          <div>
+            <dt class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-1">
+              {fact.label}
+            </dt>
+            <dd class="font-serif font-light text-parchment text-lg">
+              {fact.value}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )}
+
+    {ctas.length > 0 && (
+      <div class="flex flex-wrap gap-4 mt-6 reveal">
+        {ctas.map((cta) => (
+          <a
+            href={cta.href}
+            target={cta.external ? '_blank' : undefined}
+            rel={cta.external ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'inline-flex items-center justify-center font-sans text-2xs font-medium tracking-ultra uppercase rounded-sm transition-all duration-base ease-luxury whitespace-nowrap',
+              {
+                'px-8 py-4 bg-gold text-obsidian hover:bg-gold-200': cta.variant === 'gold',
+                'px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5': cta.variant === 'outline',
+                'text-gold hover:text-gold-200 underline-offset-4': cta.variant === 'text',
+              }
+            ]}
+          >
+            {cta.label}
+          </a>
+        ))}
+      </div>
+    )}
+
+    <slot />
+
+  </div>
+
+</div>

@@ -1,0 +1,68 @@
+---
+// src/components/ui/SectionHeader.astro
+// Louisiana Purchase — Shared Section Header Component
+//
+// Used for all section headings across every page.
+// Props-driven. All styling via Tailwind config tokens only.
+
+interface Props {
+  eyebrow?:   string;
+  title:      string;
+  titleItalic?: string;   // optional italic serif second line
+  subtitle?:  string;
+  centered?:  boolean;
+  light?:     boolean;    // light background variant
+  id?:        string;     // for aria-labelledby
+}
+
+const {
+  eyebrow,
+  title,
+  titleItalic,
+  subtitle,
+  centered = true,
+  light = false,
+  id,
+} = Astro.props;
+---
+
+<header class:list={['mb-12 md:mb-16', { 'text-center': centered }]}>
+
+  {eyebrow && (
+    <p class="font-sans text-2xs font-medium tracking-spaced uppercase text-gold mb-3">
+      {eyebrow}
+    </p>
+  )}
+
+  <h2
+    id={id}
+    class:list={[
+      'font-display font-light tracking-tighter leading-none mb-4',
+      light ? 'text-obsidian' : 'text-parchment',
+    ]}
+    style="font-size: clamp(2.25rem, 5vw, 4rem);"
+  >
+    {title}
+    {titleItalic && (
+      <span class:list={[
+        'block font-serif italic font-light tracking-tight',
+        light ? 'text-obsidian/80' : 'text-gold',
+      ]}
+      style="font-size: clamp(2rem, 4.5vw, 3.5rem);">
+        {titleItalic}
+      </span>
+    )}
+  </h2>
+
+  {subtitle && (
+    <p class:list={[
+      'font-sans font-light leading-relaxed max-w-prose-narrow',
+      centered ? 'mx-auto' : '',
+      light ? 'text-obsidian/60' : 'text-smoke',
+    ]}
+    style="font-size: clamp(0.9375rem, 1.25vw, 1rem);">
+      {subtitle}
+    </p>
+  )}
+
+</header>
