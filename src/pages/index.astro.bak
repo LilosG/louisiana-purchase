@@ -5,7 +5,7 @@ import '../styles/pages/home.css';
 
 <Layout
   title="Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego"
-  description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Monday–Sunday."
+  description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Tuesday–Sunday."
   ogImage="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
   ogType="website"
 >
@@ -41,23 +41,19 @@ import '../styles/pages/home.css';
   <div class="hero__bar" aria-label="Key venue information">
     <div class="hbar-item">
       <span class="hbar-label">Hours Today</span>
-      <span class="hbar-val">Open Daily</span>
-      <span class="hbar-sub">Mon–Thu 3–9 · Fri 3–10</span>
+      <span class="hbar-val">5 PM – Close</span>
     </div>
     <div class="hbar-item">
-      <span class="hbar-label">Bayou Hour</span>
-      <a href="/happy-hour" class="hbar-val hbar-val--link">Mon – Fri</a>
-      <span class="hbar-sub">3 PM – 5 PM</span>
+      <span class="hbar-label">Happy Hour</span>
+      <a href="/happy-hour" class="hbar-val hbar-val--link">Tue – Fri, 4–6 PM</a>
     </div>
     <div class="hbar-item">
-      <span class="hbar-label">Brunch</span>
-      <a href="/brunch" class="hbar-val hbar-val--link">Sat &amp; Sun</a>
-      <span class="hbar-sub">12 PM – 3 PM</span>
+      <span class="hbar-label">Jazz Brunch</span>
+      <a href="/brunch" class="hbar-val hbar-val--link">Sat &amp; Sun, 10 AM</a>
     </div>
     <div class="hbar-item">
       <span class="hbar-label">Location</span>
-      <a href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="hbar-val hbar-val--link">North Park, SD</a>
-      <span class="hbar-sub">2305 University Ave</span>
+      <a href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="hbar-val hbar-val--link">North Park, SD</a>
     </div>
   </div>
 </section>
@@ -84,7 +80,7 @@ import '../styles/pages/home.css';
       <dl class="about__facts">
         <div><dt>Cuisine</dt><dd>Elevated Creole</dd></div>
         <div><dt>Location</dt><dd>North Park, SD</dd></div>
-        <div><dt>Brunch</dt><dd>Sat &amp; Sun</dd></div>
+        <div><dt>Jazz Brunch</dt><dd>Sat &amp; Sun</dd></div>
         <div><dt>Private Events</dt><dd>Up to 80 Guests</dd></div>
       </dl>
       <div class="about__ctas">
@@ -185,7 +181,7 @@ import '../styles/pages/home.css';
   <div class="brunch__media" aria-hidden="true">
     <img
       src="/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg"
-      alt="Weekend brunch — Louisiana Purchase North Park San Diego"
+      alt="Jazz brunch — Louisiana Purchase North Park San Diego"
       class="brunch__img"
       width="1600" height="2387"
       loading="lazy" decoding="async"
@@ -193,9 +189,9 @@ import '../styles/pages/home.css';
     <div class="brunch__scrim"></div>
   </div>
   <div class="brunch__content reveal">
-    <p class="lp-eyebrow">Saturday &amp; Sunday · 12 PM – 3 PM</p>
-    <h2 id="brunch-h" class="brunch__title">Weekend Brunch<br /><em>in North Park</em></h2>
-    <p class="brunch__body">San Diego's most indulgent weekend ritual. Creole brunch plates and craft cocktails from noon. The patio, the music, the afternoon light through the pergola — come hungry. Stay late.</p>
+    <p class="lp-eyebrow">Saturday &amp; Sunday · 10 AM – 3 PM</p>
+    <h2 id="brunch-h" class="brunch__title">Jazz Brunch<br /><em>in North Park</em></h2>
+    <p class="brunch__body">San Diego's most indulgent weekend ritual. Live jazz, Creole brunch plates, and craft cocktails from 10am. The patio, the music, the morning light through the pergola — come early. Stay late.</p>
     <div class="brunch__ctas">
       <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-gold">Reserve for Brunch</a>
       <a href="/brunch" class="btn-outline">See the Brunch Menu</a>
@@ -369,7 +365,7 @@ import '../styles/pages/home.css';
       <li>Birthday &amp; Milestone Celebrations</li>
       <li>Rehearsal Dinners</li>
       <li>Full Venue &amp; Patio Buyouts</li>
-      <li>Brunch Buyouts</li>
+      <li>Jazz Brunch Buyouts</li>
     </ul>
     <a href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL} target="_blank" rel="noopener noreferrer" class="btn-gold">Inquire About Your Event</a>
   </div>
@@ -382,32 +378,32 @@ import '../styles/pages/home.css';
       <div class="stat"><span class="stat__val">4.6★</span><span class="stat__lbl">Google Rating</span></div>
       <div class="stat"><span class="stat__val">80+</span><span class="stat__lbl">Event Capacity</span></div>
       <div class="stat"><span class="stat__val">20+</span><span class="stat__lbl">Craft Cocktails</span></div>
-      <div class="stat"><span class="stat__val">7 Days</span><span class="stat__lbl">Open Weekly</span></div>
+      <div class="stat"><span class="stat__val">Tue–Sun</span><span class="stat__lbl">Open Weekly</span></div>
     </div>
 
     <div class="findus__grid reveal">
       <div class="findus__img-wrap">
         <img
           src="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
-          alt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
+          alt="Louisiana Purchase exterior — 3671 30th St North Park San Diego"
           class="findus__img"
           width="1600" height="1068"
           loading="lazy" decoding="async"
         />
       </div>
       <div class="findus__details">
-        <p class="findus__cross">University Ave × 23rd St</p>
+        <p class="findus__cross">30th St × University Ave</p>
         <p class="lp-eyebrow findus__hood">North Park · San Diego</p>
-        <h2 id="findus-h" class="findus__addr">2305 University Ave</h2>
+        <h2 id="findus-h" class="findus__addr">3671 30th St</h2>
         <p class="findus__city">North Park, San Diego, CA 92104</p>
         <dl class="findus__hours">
-          <div><dt>Monday – Thursday</dt><dd>3 PM – 9 PM</dd></div>
-          <div><dt>Friday</dt><dd>3 PM – 10 PM</dd></div>
-          <div><dt>Saturday</dt><dd>12 PM – 10 PM</dd></div>
-          <div><dt>Sunday</dt><dd>12 PM – 8 PM</dd></div>
+          <div><dt>Tuesday – Friday</dt><dd>5 PM – Close</dd></div>
+          <div><dt>Saturday</dt><dd>10 AM – Close</dd></div>
+          <div><dt>Sunday</dt><dd>10 AM – 10 PM</dd></div>
+          <div class="closed"><dt>Monday</dt><dd>Closed</dd></div>
         </dl>
         <div class="findus__ctas">
-          <a href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="btn-gold">Get Directions</a>
+          <a href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="btn-gold">Get Directions</a>
           <a href={`tel:${import.meta.env.PUBLIC_VENUE_PHONE}`} class="btn-text">{import.meta.env.PUBLIC_VENUE_PHONE}</a>
         </div>
       </div>

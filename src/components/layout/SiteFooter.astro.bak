@@ -2,6 +2,7 @@
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
 ---
+---
 
 <footer role="contentinfo" aria-label="Site footer" class="site-footer">
 
@@ -23,12 +24,12 @@
         </p>
         <address class="site-footer__address">
           <a
-            href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104"
+            href="https://maps.google.com/?q=3671+30th+St+San+Diego+CA+92104"
             target="_blank"
             rel="noopener noreferrer"
             class="site-footer__address-link"
           >
-            2305 University Ave<br />
+            3671 30th St<br />
             North Park, San Diego, CA 92104
           </a>
         </address>
@@ -60,7 +61,7 @@
         <ul role="list" class="site-footer__nav-list">
           {[
             { href: '/menu',           label: 'Menu' },
-            { href: '/brunch',         label: 'Brunch' },
+            { href: '/brunch',         label: 'Jazz Brunch' },
             { href: '/happy-hour',     label: 'Happy Hour' },
             { href: '/private-events', label: 'Private Events' },
             { href: '/about',          label: 'About' },
@@ -80,27 +81,24 @@
         <h3 id="footer-hours-heading" class="site-footer__col-heading">Hours</h3>
         <dl class="site-footer__hours">
           <div class="site-footer__hour-row">
-            <dt>Monday – Thursday</dt>
-            <dd>3 PM – 9 PM</dd>
-          </div>
-          <div class="site-footer__hour-row">
-            <dt>Friday</dt>
-            <dd>3 PM – 10 PM</dd>
+            <dt>Tuesday – Friday</dt>
+            <dd>5 PM – Close</dd>
           </div>
           <div class="site-footer__hour-row">
             <dt>Saturday</dt>
-            <dd>12 PM – 10 PM</dd>
+            <dd>10 AM – Close</dd>
           </div>
           <div class="site-footer__hour-row">
             <dt>Sunday</dt>
-            <dd>12 PM – 8 PM</dd>
+            <dd>10 AM – 10 PM</dd>
+          </div>
+          <div class="site-footer__hour-row site-footer__hour-row--closed">
+            <dt>Monday</dt>
+            <dd>Closed</dd>
           </div>
         </dl>
         <p class="site-footer__brunch-note">
-          Brunch: Sat &amp; Sun 12–3 PM
-        </p>
-        <p class="site-footer__brunch-note">
-          Bayou Hour: Mon–Fri 3–5 PM
+          Jazz Brunch: Sat &amp; Sun 10 AM – 3 PM
         </p>
       </section>
 
@@ -165,7 +163,7 @@
     <!-- Bottom bar -->
     <div class="site-footer__bottom">
       <p class="site-footer__copyright">
-        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; 2305 University Ave, San Diego, CA 92104
+        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; 3671 30th St, San Diego, CA 92104
       </p>
       <p class="site-footer__sub">
         North Park, San Diego &nbsp;&middot;&nbsp; Creole Dining &amp; Craft Cocktails
@@ -177,7 +175,7 @@
 
 <style>
 .site-footer {
-  background: var(--color-velvet);
+  background: #1C1419;
   position: relative;
 }
 
@@ -337,13 +335,18 @@
   text-align: right;
 }
 
+.site-footer__hour-row--closed dt,
+.site-footer__hour-row--closed dd {
+  color: rgba(242,235,224,0.25);
+}
+
 .site-footer__brunch-note {
   font-family: var(--font-sans);
   font-size: 0.6875rem;
   color: var(--color-gold);
   opacity: 0.75;
   letter-spacing: 0.04em;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 /* Reserve btn */
@@ -363,7 +366,7 @@
   white-space: nowrap;
 }
 
-.site-footer__reserve-btn:hover { background: var(--color-gold-light); }
+.site-footer__reserve-btn:hover { background: #EDD07A; }
 
 /* Bottom */
 .site-footer__bottom {

@@ -33,7 +33,7 @@ const currentPath = Astro.url.pathname;
           { href: '/menu',            label: 'Menu' },
           { href: '/happy-hour',      label: 'Happy Hour' },
           { href: '/private-events',  label: 'Private Events' },
-          { href: '/brunch',          label: 'Brunch' },
+          { href: '/brunch',          label: 'Jazz Brunch' },
           { href: '/about',           label: 'About' },
         ].map((link) => (
           <li>
@@ -103,7 +103,7 @@ const currentPath = Astro.url.pathname;
         { href: '/',                label: 'Home' },
         { href: '/menu',            label: 'Menu' },
         { href: '/happy-hour',      label: 'Happy Hour' },
-        { href: '/brunch',          label: 'Brunch' },
+        { href: '/brunch',          label: 'Jazz Brunch' },
         { href: '/private-events',  label: 'Private Events' },
         { href: '/about',           label: 'About' },
       ].map((link) => (
@@ -278,7 +278,7 @@ const currentPath = Astro.url.pathname;
   transition: background 280ms ease;
 }
 
-.site-nav__cta-reserve:hover { background: var(--color-gold-light); }
+.site-nav__cta-reserve:hover { background: #EDD07A; }
 
 /* Mobile toggle */
 .site-nav__mobile-toggle {
@@ -397,7 +397,7 @@ const currentPath = Astro.url.pathname;
   transition: background 280ms ease;
 }
 
-.site-nav__drawer-reserve:hover { background: var(--color-gold-light); }
+.site-nav__drawer-reserve:hover { background: #EDD07A; }
 
 .site-nav__drawer-order {
   font-family: var(--font-sans);
