@@ -1,0 +1,214 @@
+---
+// src/pages/about/index.astro
+// Louisiana Purchase — About Page
+// Targets: "about louisiana purchase", "creole restaurant north park", "chef quinnton austin san diego"
+
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import AlternatingRow from '../../components/ui/AlternatingRow.astro';
+import StatBar from '../../components/ui/StatBar.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+---
+
+<Layout
+  title="About Louisiana Purchase — Creole Dining in North Park San Diego"
+  description="Louisiana Purchase is a French Quarter-inspired Creole dining destination in North Park, San Diego. Chef Quinnton Austin's fire-forward Louisiana kitchen, an obsessive craft cocktail program, and a room worth lingering in. Est. 2018."
+  canonical="/about"
+  breadcrumbs={[
+    { name: 'Home',  url: '/',      position: 1 },
+    { name: 'About', url: '/about', position: 2 },
+  ]}
+>
+
+  <PageHero
+    eyebrow="North Park, San Diego · Est. 2018"
+    title="Louisiana Purchase"
+    titleItalic="A Genuine Place"
+    subtitle="Not a theme bar. Not a concept. A genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood — and built to last."
+    image="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+    imageAlt="Louisiana Purchase interior — North Park San Diego"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
+    ]}
+    headlineId="about-headline"
+  />
+
+  <StatBar
+    stats={[
+      { value: 'Est. 2018', label: 'North Park Original' },
+      { value: 'Creole',    label: 'Cuisine' },
+      { value: '80+',       label: 'Event Capacity' },
+      { value: '7 Days',    label: 'Open Weekly' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── The Story ─────────────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    imageAlt="Louisiana Purchase at night — North Park San Diego"
+    eyebrow="The Story"
+    title="Where New Orleans"
+    titleItalic="Found North Park"
+    body={[
+      "Louisiana Purchase opened in 2018 with a single, clear intention — to bring the genuine hospitality culture of New Orleans to San Diego's most vibrant neighborhood. Not a theme bar with beads and hurricane glasses. A real place, with real food, a real bar program, and the kind of atmosphere that makes you want to stay.",
+      "The geometric timber ceiling, the marble bar, the candlelit tables, the lush patio framed by hanging ferns — every element was chosen deliberately. This is a room that earns its place.",
+    ]}
+    facts={[
+      { label: 'Established', value: '2018' },
+      { label: 'Neighborhood', value: 'North Park, SD' },
+      { label: 'Concept',      value: 'Elevated Creole' },
+      { label: 'Address',      value: '2305 University Ave' },
+    ]}
+    ctas={[
+      { label: 'See the Space', href: '/the-space', variant: 'gold' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── Chef Quinnton Austin ─────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-modern-creole-restaurant-website.jpg"
+    imageAlt="Chef Quinnton Austin's Creole kitchen at Louisiana Purchase"
+    eyebrow="The Chef"
+    title="Chef Quinnton Austin"
+    titleItalic="The Kitchen Behind It All"
+    body={[
+      "Chef Quinnton Austin's culinary program at Louisiana Purchase is built on a deep respect for Louisiana cooking traditions — and an obsessive commitment to doing them right. Fire-charred oysters. Dark roux gumbo slow-built over three hours. Gulf shrimp in Worcestershire butter. Elevated Creole plates that honor the tradition without being imprisoned by it.",
+      "Every plate is a deliberate act. The menu evolves with the season but the precision never wavers.",
+    ]}
+    facts={[
+      { label: 'Style',     value: 'Elevated Creole' },
+      { label: 'Signature', value: 'Fire-Charred Oysters' },
+      { label: 'Approach',  value: 'Fire-Forward' },
+      { label: 'Menu',      value: 'Seasonally Driven' },
+    ]}
+    ctas={[
+      { label: 'Explore the Menu', href: '/menu', variant: 'gold' },
+    ]}
+    reverse={true}
+    dark={false}
+  />
+
+  <!-- ─── The Bar Program ──────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
+    eyebrow="The Bar"
+    title="An Obsessive"
+    titleItalic="Cocktail Program"
+    body={[
+      "The bar program at Louisiana Purchase is not an afterthought. It is the other half of the experience — a French Quarter-rooted craft cocktail program built with the same care and precision as the kitchen.",
+      "The Praline Old Fashioned. The Voo Doo Carré. The Café Brûlot Martini. Cocktails that tell a story, require patience to make, and reward the person drinking them. Bayou Hour runs Monday through Friday from 3 to 5 PM.",
+    ]}
+    facts={[
+      { label: 'Signature',  value: 'Praline Old Fashioned' },
+      { label: 'Selection',  value: '20+ Cocktails' },
+      { label: 'Bayou Hour', value: 'Mon–Fri 3–5 PM' },
+      { label: 'Bar Hours',  value: 'Open Daily' },
+    ]}
+    ctas={[
+      { label: 'View Cocktail Menu', href: '/menu/cocktails', variant: 'gold' },
+      { label: 'Bayou Hour',         href: '/happy-hour', variant: 'outline' },
+    ]}
+    dark={true}
+  />
+
+  <!-- ─── What We Offer ────────────────────────────────────────────────── -->
+  <section aria-labelledby="offerings-heading" class="bg-velvet py-20 md:py-24">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="Everything We Offer"
+        title="The Full Experience"
+        subtitle="Louisiana Purchase is more than a dinner reservation. Here is everything you can experience at 2305 University Ave."
+        id="offerings-heading"
+      />
+
+      <FourColumnGrid
+        cols={4}
+        dark={false}
+        divided={true}
+        cards={[
+          {
+            image:     '/images/louisiana-purchase-modern-creole-restaurant-website.jpg',
+            imageAlt:  'Dinner at Louisiana Purchase',
+            eyebrow:   'Tue – Sun',
+            title:     'Dinner',
+            body:      'Chef Quinnton Austin\'s elevated Creole dinner program — fire-charred, slow-built, and obsessively precise.',
+            href:      '/menu/dinner',
+            linkLabel: 'View Menu',
+          },
+          {
+            image:     '/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg',
+            imageAlt:  'Weekend brunch at Louisiana Purchase',
+            eyebrow:   'Sat & Sun · 12–3 PM',
+            title:     'Brunch',
+            body:      'North Park\'s most indulgent weekend ritual. Creole plates, craft cocktails, and an open patio from noon.',
+            href:      '/brunch',
+            linkLabel: 'Learn More',
+          },
+          {
+            image:     '/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg',
+            imageAlt:  'Happy hour at Louisiana Purchase',
+            eyebrow:   'Mon–Fri · 3–5 PM',
+            title:     'Bayou Hour',
+            body:      'North Park\'s best happy hour. Discounted cocktails, draft beer, and Creole bites every weekday afternoon.',
+            href:      '/happy-hour',
+            linkLabel: 'Learn More',
+          },
+          {
+            image:     '/images/louisiana-purchase-private-dining-san-diego-website.jpg',
+            imageAlt:  'Private events at Louisiana Purchase',
+            eyebrow:   'Up to 80 Guests',
+            title:     'Private Events',
+            body:      'Corporate dinners, birthday celebrations, rehearsal events, and full venue buyouts. Custom menus available.',
+            href:      '/private-events',
+            linkLabel: 'Inquire',
+          },
+        ]}
+      />
+
+    </div>
+  </section>
+
+  <!-- ─── North Park ───────────────────────────────────────────────────── -->
+  <AlternatingRow
+    image="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
+    imageAlt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
+    eyebrow="The Neighborhood"
+    title="North Park,"
+    titleItalic="San Diego"
+    body={[
+      "North Park is San Diego's most vibrant dining and nightlife neighborhood — a walkable grid of independent restaurants, craft bars, coffee shops, and music venues that has become the cultural center of the city.",
+      "Louisiana Purchase sits at the corner of University Ave and 23rd St, in the heart of it all. Open seven days a week.",
+    ]}
+    facts={[
+      { label: 'Address',      value: '2305 University Ave' },
+      { label: 'Neighborhood', value: 'North Park, San Diego' },
+      { label: 'Open',         value: '7 Days a Week' },
+      { label: 'Zip Code',     value: '92104' },
+    ]}
+    ctas={[
+      { label: 'Get Directions', href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'gold' },
+      { label: 'Contact Us',     href: '/contact', variant: 'outline' },
+    ]}
+    reverse={true}
+    dark={false}
+  />
+
+  <CTABand
+    eyebrow="Come Experience It"
+    title="Louisiana Purchase Awaits."
+    subtitle="Open Tuesday through Sunday. Walk-ins welcome at the bar. Reservations recommended for dining."
+    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
+    ]}
+  />
+
+</Layout>
