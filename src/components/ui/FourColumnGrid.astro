@@ -1,7 +1,7 @@
 ---
 // src/components/ui/FourColumnGrid.astro
 // Louisiana Purchase — Editorial Card Grid Component
-// Tailwind v4: standard utility classes only.
+// Matches homepage cocktail grid card treatment — solid dark cards, image + copy.
 
 interface GridCard {
   image?:     string;
@@ -34,6 +34,8 @@ const colClass = {
   3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
   4: 'grid-cols-2 lg:grid-cols-4',
 }[cols];
+
+const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
 ---
 
 <ul
@@ -41,11 +43,11 @@ const colClass = {
   class:list={[
     'grid',
     colClass,
-    divided ? 'gap-px bg-gold/10' : 'gap-6',
+    divided ? 'gap-px bg-gold/10' : 'gap-4',
   ]}
 >
   {cards.map((card) => (
-    <li class:list={[dark ? 'bg-obsidian' : 'bg-velvet', 'flex flex-col group reveal']}>
+    <li class:list={[cardBg, 'flex flex-col group reveal']}>
 
       {card.href ? (
         <a
@@ -60,7 +62,7 @@ const colClass = {
               <img
                 src={card.image}
                 alt={card.imageAlt || card.title}
-                class="w-full h-full object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
+                class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
                 width="800"
@@ -68,28 +70,28 @@ const colClass = {
               />
             </div>
           )}
-          <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
+          <div class="flex flex-col flex-1 gap-2 p-6 md:p-7">
             {card.eyebrow && (
-              <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold">
+              <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">
                 {card.eyebrow}
               </p>
             )}
-            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
+            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-[280ms]"
                 style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
               {card.title}
             </h3>
             {card.body && (
-              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm">
+              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm mt-1">
                 {card.body}
               </p>
             )}
             {card.meta && (
-              <p class="font-mono text-sm text-gold mt-auto pt-2">
+              <p class="font-mono text-sm text-gold mt-auto pt-3 border-t border-gold/10">
                 {card.meta}
               </p>
             )}
             {card.linkLabel && (
-              <span class="font-sans text-[0.625rem] font-medium tracking-[0.16em] uppercase text-gold mt-2 group-hover:translate-x-1 transition-transform duration-[280ms] inline-block">
+              <span class="font-sans text-[0.5625rem] font-medium tracking-[0.16em] uppercase text-gold mt-2 group-hover:translate-x-1 transition-transform duration-[280ms] inline-block">
                 {card.linkLabel} →
               </span>
             )}
@@ -102,7 +104,7 @@ const colClass = {
               <img
                 src={card.image}
                 alt={card.imageAlt || card.title}
-                class="w-full h-full object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
+                class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
                 width="800"
@@ -110,9 +112,9 @@ const colClass = {
               />
             </div>
           )}
-          <div class="flex flex-col flex-1 gap-2 p-5 md:p-6 border-t border-gold/10">
+          <div class="flex flex-col flex-1 gap-2 p-6 md:p-7">
             {card.eyebrow && (
-              <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold">
+              <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">
                 {card.eyebrow}
               </p>
             )}
@@ -121,12 +123,12 @@ const colClass = {
               {card.title}
             </h3>
             {card.body && (
-              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm">
+              <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm mt-1">
                 {card.body}
               </p>
             )}
             {card.meta && (
-              <p class="font-mono text-sm text-gold mt-auto pt-2">
+              <p class="font-mono text-sm text-gold mt-auto pt-3 border-t border-gold/10">
                 {card.meta}
               </p>
             )}
