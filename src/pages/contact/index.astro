@@ -1,0 +1,192 @@
+---
+// src/pages/contact/index.astro
+// Louisiana Purchase — Contact Page
+
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+---
+
+<Layout
+  title="Contact Louisiana Purchase | North Park San Diego"
+  description="Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave."
+  canonical="/contact"
+  breadcrumbs={[
+    { name: 'Home',    url: '/',        position: 1 },
+    { name: 'Contact', url: '/contact', position: 2 },
+  ]}
+>
+
+  <PageHero
+    eyebrow="Get in Touch"
+    title="Contact Us"
+    titleItalic="We'd Love to Hear From You"
+    subtitle="Reservations, private event inquiries, general questions — our team is here to help."
+    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    imageAlt="Louisiana Purchase — North Park San Diego"
+    headlineId="contact-headline"
+  />
+
+  <!-- ─── Contact Grid ─────────────────────────────────────────────────── -->
+  <section aria-labelledby="contact-methods-heading" class="bg-obsidian py-20 md:py-24">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="How to Reach Us"
+        title="Contact"
+        titleItalic="Louisiana Purchase"
+        subtitle="Choose the best way to connect with us below."
+        id="contact-methods-heading"
+      />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gold/10">
+
+        <!-- Reservations -->
+        <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Reservations</p>
+          <h3 class="font-serif font-light text-parchment text-xl">Reserve a Table</h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
+            Book your table online through our reservations system. Available for all dining services — dinner, brunch, and bar seating.
+          </p>
+          <a
+            href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
+          >
+            Book Now
+          </a>
+        </div>
+
+        <!-- Private Events -->
+        <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Private Events</p>
+          <h3 class="font-serif font-light text-parchment text-xl">Event Inquiries</h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
+            Planning a private dinner, corporate event, birthday, or full venue buyout? Submit an inquiry and our events team responds within 24 hours.
+          </p>
+          <a
+            href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
+          >
+            Submit Inquiry
+          </a>
+        </div>
+
+        <!-- Order Online -->
+        <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Order Online</p>
+          <h3 class="font-serif font-light text-parchment text-xl">Takeout & Delivery</h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
+            Order Louisiana Purchase for takeout or delivery. The full menu is available online through our ordering system.
+          </p>
+          <a
+            href={import.meta.env.PUBLIC_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms] mt-auto"
+          >
+            Order Now
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Location & Hours ─────────────────────────────────────────────── -->
+  <section aria-labelledby="location-hours-heading" class="bg-velvet py-20 md:py-24">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+        <!-- Address & Directions -->
+        <div>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Location</p>
+          <h2 id="location-hours-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
+            2305 University Ave<br /><span class="italic text-gold">North Park, San Diego</span>
+          </h2>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed mb-6 max-w-[40ch]">
+            Located at the intersection of University Ave and 23rd St in the heart of North Park. Street parking available on University Ave and surrounding streets.
+          </p>
+          <a
+            href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]"
+          >
+            Get Directions
+          </a>
+        </div>
+
+        <!-- Hours -->
+        <div>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Hours</p>
+          <dl class="flex flex-col gap-3 mb-6">
+            {[
+              { day: 'Monday – Thursday', hours: '3 PM – 9 PM' },
+              { day: 'Friday',            hours: '3 PM – 10 PM' },
+              { day: 'Saturday',          hours: '12 PM – 10 PM' },
+              { day: 'Sunday',            hours: '12 PM – 8 PM' },
+            ].map((item) => (
+              <div class="flex justify-between gap-8 py-3 border-b border-gold/10">
+                <dt class="font-sans text-sm text-smoke/80">{item.day}</dt>
+                <dd class="font-sans text-sm text-parchment">{item.hours}</dd>
+              </div>
+            ))}
+          </dl>
+          <p class="font-sans text-[0.75rem] text-gold/70 tracking-[0.04em]">
+            Brunch: Saturday & Sunday 12–3 PM<br />
+            Bayou Hour: Monday–Friday 3–5 PM
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Social ───────────────────────────────────────────────────────── -->
+  <section aria-labelledby="social-heading" class="bg-obsidian py-16 md:py-20">
+    <div class="max-w-[1280px] mx-auto px-6 text-center">
+      <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-4">Follow Along</p>
+      <h2 id="social-heading" class="font-serif font-light text-parchment tracking-[-0.02em] mb-6" style="font-size: clamp(1.5rem, 3vw, 2.25rem);">
+        @LouisianaPurchaseBar
+      </h2>
+      <p class="font-sans font-light text-smoke text-sm leading-relaxed max-w-[44ch] mx-auto mb-8">
+        Follow us on Instagram and Facebook for daily specials, event announcements, and a behind-the-scenes look at the kitchen and bar.
+      </p>
+      <div class="flex justify-center gap-4">
+        <a
+          href="https://www.instagram.com/louisianapurchasebar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
+        >
+          Instagram
+        </a>
+        <a
+          href="https://www.facebook.com/louisianapurchasebar"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
+        >
+          Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Ready to Visit"
+    title="We'll See You Soon."
+    subtitle="Reserve your table or stop in for Bayou Hour — Louisiana Purchase is open seven days a week."
+    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Get Directions',  href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'outline' },
+    ]}
+  />
+
+</Layout>
