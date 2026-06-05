@@ -357,7 +357,7 @@
 /* ─── FOOD GRID ──────────────────────────────────────────────── */
 .food {
   background: var(--color-obsidian);
-  padding: 7rem 0;
+  padding: 7rem 0 0;
   position: relative;
 }
 .food::before {
@@ -524,4 +524,22 @@
 @keyframes fadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+/* ─── DISH STRIP ─────────────────────────────────────────────── */
+.dish-strip {
+  background: var(--color-obsidian);
+  padding: 7rem 0;
+  position: relative;
+}
+.dish-strip::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,.4), transparent);
+}
+
+/* fcard no-label variant — image fills card, no text body */
+.fcard:not(:has(.fcard__body)) .fcard__img-wrap {
+  flex: 1;
+  min-height: 100%;
 }
