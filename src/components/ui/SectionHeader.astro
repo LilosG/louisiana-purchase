@@ -1,7 +1,7 @@
 ---
 // src/components/ui/SectionHeader.astro
 // Louisiana Purchase — Shared Section Header Component
-// Tailwind v4: standard utility classes only.
+// font-serif for titles — matches homepage section title treatment.
 
 interface Props {
   eyebrow?:     string;
@@ -24,10 +24,10 @@ const {
 } = Astro.props;
 ---
 
-<header class:list={['mb-12 md:mb-16', { 'text-center': centered }]}>
+<header class:list={['mb-10 md:mb-14', { 'text-center': centered }]}>
 
   {eyebrow && (
-    <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold mb-3">
+    <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">
       {eyebrow}
     </p>
   )}
@@ -35,16 +35,16 @@ const {
   <h2
     id={id}
     class:list={[
-      'font-display font-light tracking-[-0.03em] leading-none mb-4',
+      'font-serif font-light tracking-[-0.02em] leading-[1.05] mb-3',
       light ? 'text-obsidian' : 'text-parchment',
     ]}
-    style="font-size: clamp(2.25rem, 5vw, 4rem);"
+    style="font-size: clamp(2.25rem, 5vw, 3.75rem);"
   >
     {title}
     {titleItalic && (
       <span
         class:list={[
-          'block font-serif italic font-light tracking-[-0.01em]',
+          'block italic font-light',
           light ? 'text-obsidian/80' : 'text-gold',
         ]}
         style="font-size: clamp(2rem, 4.5vw, 3.5rem);"
@@ -57,11 +57,10 @@ const {
   {subtitle && (
     <p
       class:list={[
-        'font-sans font-light leading-relaxed max-w-[52ch]',
+        'font-sans font-light leading-relaxed max-w-[58ch] text-[0.9375rem]',
         centered ? 'mx-auto' : '',
         light ? 'text-obsidian/60' : 'text-smoke',
       ]}
-      style="font-size: clamp(0.9375rem, 1.25vw, 1rem);"
     >
       {subtitle}
     </p>

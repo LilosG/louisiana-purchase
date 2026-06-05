@@ -1,7 +1,7 @@
 ---
 // src/components/ui/StatBar.astro
-// Louisiana Purchase — Stat / Metric Bar Component
-// Tailwind v4: standard utility classes only.
+// Louisiana Purchase — Compact Stat / Metric Bar
+// Mirrors the homepage hero bar proportions — tight, refined, not oversized.
 
 interface Stat {
   value:     string;
@@ -20,7 +20,7 @@ const { stats, dark = true } = Astro.props;
 
 <div
   class:list={[
-    'relative grid border-y border-gold/20',
+    'grid border-y border-gold/20',
     dark ? 'bg-obsidian' : 'bg-velvet',
     stats.length === 2 ? 'grid-cols-2' : '',
     stats.length === 3 ? 'grid-cols-3' : '',
@@ -32,8 +32,8 @@ const { stats, dark = true } = Astro.props;
   {stats.map((stat, i) => (
     <div
       class:list={[
-        'flex flex-col items-center justify-center text-center gap-2 py-8 px-4 md:py-10',
-        i < stats.length - 1 ? 'border-r border-gold/15' : '',
+        'flex flex-col items-center justify-center text-center gap-1.5 py-6 px-4',
+        i < stats.length - 1 ? 'border-r border-gold/12' : '',
       ]}
       role="listitem"
     >
@@ -42,20 +42,20 @@ const { stats, dark = true } = Astro.props;
           href={stat.href}
           target={stat.external ? '_blank' : undefined}
           rel={stat.external ? 'noopener noreferrer' : undefined}
-          class="font-display font-light text-gold leading-none tracking-[-0.03em] hover:text-gold-200 transition-colors duration-[280ms] ease-[cubic-bezier(0.25,0.1,0.25,1)]"
-          style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);"
+          class="font-serif font-light text-parchment leading-none tracking-[-0.01em] hover:text-gold transition-colors duration-[280ms]"
+          style="font-size: clamp(1.125rem, 2vw, 1.375rem);"
         >
           {stat.value}
         </a>
       ) : (
         <span
-          class="font-display font-light text-gold leading-none tracking-[-0.03em]"
-          style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);"
+          class="font-serif font-light text-parchment leading-none tracking-[-0.01em]"
+          style="font-size: clamp(1.125rem, 2vw, 1.375rem);"
         >
           {stat.value}
         </span>
       )}
-      <span class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-smoke">
+      <span class="font-sans text-[0.5rem] font-medium tracking-[0.28em] uppercase text-gold/60">
         {stat.label}
       </span>
     </div>
