@@ -1,7 +1,7 @@
 ---
 // src/components/ui/PageHero.astro
 // Louisiana Purchase — Shared Page Hero Component
-// Tailwind v4: standard utility classes only, no custom token class names.
+// Tailwind v4: standard utility classes only.
 
 interface CTAButton {
   label:     string;
@@ -37,7 +37,7 @@ const {
 
 <section
   aria-labelledby={headlineId}
-  class="relative flex flex-col justify-end min-h-svh overflow-hidden bg-obsidian"
+  class="relative flex flex-col justify-end min-h-[72vh] overflow-hidden bg-obsidian"
 >
   {image && (
     <div class="absolute inset-0 z-0" aria-hidden="true">
@@ -50,7 +50,7 @@ const {
         width="1600"
         height="900"
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/20 via-obsidian/60 to-obsidian/95"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-obsidian/20 via-obsidian/55 to-obsidian/95"></div>
     </div>
   )}
 
@@ -60,30 +60,29 @@ const {
 
   <div class="absolute top-0 left-0 right-0 h-px bg-[linear-gradient(to_right,transparent,rgba(201,168,76,0.40),transparent)] z-10" aria-hidden="true"></div>
 
-  <div class={`relative z-10 max-w-[1280px] mx-auto w-full px-6 pb-16 md:pb-24 pt-32 md:pt-40 ${centered ? 'text-center' : ''}`}>
+  <div class={`relative z-10 max-w-[1280px] mx-auto w-full px-6 pb-14 md:pb-20 pt-24 md:pt-32 ${centered ? 'text-center' : ''}`}>
 
     {eyebrow && (
-      <p class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold mb-4 md:mb-6">
+      <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-4 md:mb-5">
         {eyebrow}
       </p>
     )}
 
     <h1
       id={headlineId}
-      class="font-display font-light text-parchment tracking-[-0.03em] leading-none mb-4 animate-fade-up"
-      style="font-size: clamp(3rem, 8vw, 7rem);"
+      class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-4 animate-fade-up"
+      style="font-size: clamp(2.75rem, 7vw, 6rem);"
     >
       {title}
       {titleItalic && (
-        <span class="block font-serif italic font-light text-gold tracking-[-0.01em]" style="font-size: clamp(2.75rem, 7vw, 6.5rem);">
+        <span class="block italic font-light text-gold" style="font-size: clamp(2.5rem, 6.5vw, 5.5rem);">
           {titleItalic}
         </span>
       )}
     </h1>
 
     {subtitle && (
-      <p class="font-sans font-light text-parchment/70 max-w-[52ch] leading-relaxed mb-10 animate-fade-in"
-         style="font-size: clamp(0.9375rem, 1.5vw, 1.125rem);">
+      <p class="font-sans font-light text-parchment/70 max-w-[52ch] leading-relaxed mb-8 animate-fade-in text-[0.9375rem] md:text-base">
         {subtitle}
       </p>
     )}
