@@ -1,6 +1,10 @@
 ---
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
+import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
+
+const SELF_URL = 'https://louisianapurchasesd.com';
+const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
 ---
 
 <footer role="contentinfo" aria-label="Site footer" class="site-footer">
@@ -162,14 +166,33 @@
 
     </div>
 
+    <!-- GPH Network -->
+    <div class="site-footer__network">
+      <a href={GRIND_AND_PROSPER_URL} target="_blank" rel="noopener noreferrer" class="site-footer__network-label">
+        Grind &amp; Prosper Hospitality
+      </a>
+      <div class="site-footer__network-links">
+        {portfolio.map((v) => (
+          <a href={v.url} target="_blank" rel="noopener noreferrer" class="site-footer__network-link">
+            {v.name}
+          </a>
+        ))}
+      </div>
+    </div>
+
     <!-- Bottom bar -->
     <div class="site-footer__bottom">
       <p class="site-footer__copyright">
         &copy; {new Date().getFullYear()} Louisiana Purchase &bull; 2305 University Ave, San Diego, CA 92104
       </p>
-      <p class="site-footer__sub">
-        North Park, San Diego &nbsp;&middot;&nbsp; Creole Dining &amp; Craft Cocktails
-      </p>
+      <div class="site-footer__bottom-right">
+        <p class="site-footer__sub">
+          North Park, San Diego &nbsp;&middot;&nbsp; Creole Dining &amp; Craft Cocktails
+        </p>
+        <a href="https://lilosgrowth.com" target="_blank" rel="noopener noreferrer" class="site-footer__lilos-credit">
+          Website by Lilos Growth
+        </a>
+      </div>
     </div>
 
   </div>
@@ -388,4 +411,64 @@
   color: rgba(242,235,224,0.28);
   letter-spacing: 0.02em;
 }
+
+.site-footer__network {
+  padding-top: 2.5rem;
+  padding-bottom: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .site-footer__network {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+}
+
+.site-footer__network-label {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(242,235,224,0.30);
+  transition: color 280ms ease;
+  white-space: nowrap;
+}
+
+.site-footer__network-label:hover { color: var(--color-gold); }
+
+.site-footer__network-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+}
+
+.site-footer__network-link {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: rgba(242,235,224,0.25);
+  transition: color 280ms ease;
+}
+
+.site-footer__network-link:hover { color: rgba(242,235,224,0.60); }
+
+.site-footer__bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.site-footer__lilos-credit {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  color: rgba(242,235,224,0.50);
+  transition: color 280ms ease;
+  white-space: nowrap;
+}
+
+.site-footer__lilos-credit:hover { color: var(--color-gold); }
 </style>
