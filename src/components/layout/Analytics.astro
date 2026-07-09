@@ -1,0 +1,40 @@
+---
+const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+{GA_ID && (
+  <>
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+    <script define:vars={{ GA_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    </script>
+    <script>
+      // Tracks clicks on embedded reservation/order/gift-card/private-event links,
+      // since GA4 can't see completions inside third-party domains (Resy, Toast, Tripleseat).
+      // This only fires an event on click (intent), not confirmation.
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="tripleseat.com"]');
+        if (!link) return;
+
+        let eventName = 'external_link_click';
+        try {
+          const href = link.href.toLowerCase();
+          if (href.includes('resy.com')) eventName = 'reservation_click';
+          else if (href.includes('giftcard')) eventName = 'gift_card_click';
+          else if (href.includes('toasttab.com')) eventName = 'order_click';
+          else if (href.includes('catering')) eventName = 'catering_click';
+          else if (href.includes('tripleseat.com')) eventName = 'private_events_click';
+        } catch (err) {}
+
+        if (typeof gtag === 'function') {
+          gtag('event', eventName, {
+            link_url: link.href,
+            page_path: window.location.pathname,
+          });
+        }
+      }, { passive: true });
+    </script>
+  </>
+)}
