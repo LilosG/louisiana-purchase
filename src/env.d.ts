@@ -10,13 +10,9 @@ interface ImportMetaEnv {
   readonly PUBLIC_ORDER_URL:            string;   // Toast Tab online ordering link
   readonly PUBLIC_GIFT_CARD_URL:        string;   // Gift card purchase portal
   readonly PUBLIC_PRIVATE_EVENTS_URL:   string;   // Tripleseat private event inquiry form
-  readonly PUBLIC_CATERING_URL:         string;   // Catering inquiry link
 
   // ─── Analytics & Tracking ─────────────────────────────────────────
   readonly PUBLIC_GA_MEASUREMENT_ID:    string;   // Google Analytics 4 Measurement ID
-  readonly PUBLIC_GTM_CONTAINER_ID:     string;   // Google Tag Manager Container ID
-  readonly PUBLIC_META_PIXEL_ID:        string;   // Meta (Facebook) Pixel ID
-  readonly PUBLIC_UTM_SOURCE:           string;   // UTM source tag (e.g., 'louisiana-purchase')
 
   // ─── Business Configuration ────────────────────────────────────────
   readonly PUBLIC_SITE_URL:             string;   // Canonical production URL (https://...)
