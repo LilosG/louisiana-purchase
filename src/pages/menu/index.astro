@@ -11,6 +11,8 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import MenuShowcase from '../../components/ui/MenuShowcase.astro';
+import { IMAGES } from '../../assets/images';
 ---
 
 <Layout
@@ -29,7 +31,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     title="The Menu"
     titleItalic="Louisiana Purchase"
     subtitle="Chef Quinnton Austin's fire-forward Creole kitchen, an obsessive craft cocktail program, and a weekend brunch worth planning your Saturday around."
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     imageAlt="Louisiana Purchase menu — North Park San Diego"
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
@@ -67,7 +69,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         divided={true}
         cards={[
           {
-            image:     '/images/louisiana-purchase-modern-creole-restaurant-website.jpg',
+            image:     IMAGES['louisiana-purchase-modern-creole-restaurant-website'],
             imageAlt:  'Dinner at Louisiana Purchase North Park San Diego',
             eyebrow:   'Tue – Sun · 3 PM',
             title:     'Dinner',
@@ -76,7 +78,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
             linkLabel: 'View Dinner Menu',
           },
           {
-            image:     '/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg',
+            image:     IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website'],
             imageAlt:  'Craft cocktails at Louisiana Purchase North Park',
             eyebrow:   'Full Bar · Open Daily',
             title:     'Cocktails',
@@ -85,7 +87,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
             linkLabel: 'View Cocktail Menu',
           },
           {
-            image:     '/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg',
+            image:     IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website'],
             imageAlt:  'Weekend brunch at Louisiana Purchase North Park',
             eyebrow:   'Sat & Sun · 12 – 3 PM',
             title:     'Brunch',
@@ -101,7 +103,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Dinner Highlight ─────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
     imageAlt="Fire-charred oysters and Creole plates at Louisiana Purchase"
     eyebrow="The Kitchen"
     title="Chef Quinnton Austin's"
@@ -124,7 +126,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Cocktails Highlight ──────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-drink-menu-north-park-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-drink-menu-north-park-san-diego-website']}
     imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
     eyebrow="The Bar Program"
     title="Cocktails Built for"
@@ -149,7 +151,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Brunch Highlight ─────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
     imageAlt="Weekend brunch at Louisiana Purchase North Park San Diego"
     eyebrow="Weekend Brunch"
     title="Saturday & Sunday"
@@ -183,44 +185,11 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         id="featured-heading"
       />
 
-      <FourColumnGrid
+      <MenuShowcase
+        itemIds={['praline-old-fashioned', 'voo-doo-carre', 'fire-charred-oysters', 'louisiana-shrimp']}
         cols={4}
         dark={false}
         divided={true}
-        cards={[
-          {
-            image:    '/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg',
-            imageAlt: 'Praline Old Fashioned — Louisiana Purchase signature cocktail',
-            eyebrow:  'Signature Cocktail',
-            title:    'Praline Old Fashioned',
-            body:     'Buffalo Trace bourbon, house praline syrup, Peychaud\'s bitters, expressed orange peel.',
-            meta:     '$18',
-          },
-          {
-            image:    '/images/louisiana-purchase-cocktail-menu-north-park-website.jpg',
-            imageAlt: 'Voo Doo Carré — Louisiana Purchase craft cocktail',
-            eyebrow:  'Bar Exclusive',
-            title:    'Voo Doo Carré',
-            body:     'Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters.',
-            meta:     '$19',
-          },
-          {
-            image:    '/images/louisiana-purchase-modern-creole-restaurant-website.jpg',
-            imageAlt: 'Fire-charred oysters at Louisiana Purchase',
-            eyebrow:  'Raw & Fire',
-            title:    'Fire-Charred Oysters',
-            body:     'Pacific oysters charred over live fire, house compound butter, parsley gremolata, toasted breadcrumb.',
-            meta:     '$24',
-          },
-          {
-            image:    '/images/louisiana-purchase-group-dining-san-diego-website.jpg',
-            imageAlt: 'Louisiana BBQ Shrimp at Louisiana Purchase',
-            eyebrow:  'Signature Plate',
-            title:    'Louisiana BBQ Shrimp',
-            body:     'Head-on Gulf shrimp, Worcestershire butter sauce, cracked black pepper, rosemary, toasted French bread.',
-            meta:     '$28',
-          },
-        ]}
       />
 
     </div>
@@ -231,7 +200,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     eyebrow="Ready to Dine"
     title="Reserve Your Table."
     subtitle="Louisiana Purchase is open Tuesday through Sunday. Walk-ins welcome at the bar."
-    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'Order Online',    href: import.meta.env.PUBLIC_ORDER_URL, external: true, variant: 'outline' },

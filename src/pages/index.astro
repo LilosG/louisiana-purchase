@@ -1,418 +1,265 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import '../styles/pages/home.css';
+import PageHero from '../components/ui/PageHero.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import AlternatingRow from '../components/ui/AlternatingRow.astro';
+import FourColumnGrid from '../components/ui/FourColumnGrid.astro';
+import StatBar from '../components/ui/StatBar.astro';
+import CTABand from '../components/ui/CTABand.astro';
+import MenuShowcase from '../components/ui/MenuShowcase.astro';
+import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_PHONE_FALLBACK, DISPLAY_HOURS, BAYOU_HOUR, BRUNCH_HOURS, GOOGLE_RATING, EVENT_CAPACITY } from '../data/venue';
+import { IMAGES } from '../assets/images';
+
+const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
 ---
 
 <Layout
   title="Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego"
   description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Monday–Sunday."
-  ogImage="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+  ogImage="/og-image.jpg"
   ogType="website"
 >
 
-<!-- ─── HERO ──────────────────────────────────────────────── -->
-<section class="hero" aria-labelledby="hero-headline">
-  <div class="hero__media" aria-hidden="true">
-    <img
-      src="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
-      alt="Louisiana Purchase at night — North Park, San Diego"
-      class="hero__img"
-      width="1600" height="1064"
-      fetchpriority="high" decoding="async"
-    />
-    <div class="hero__scrim"></div>
-  </div>
+  <!-- ─── HERO ──────────────────────────────────────────────── -->
+  <PageHero
+    eyebrow="North Park, San Diego"
+    title="Louisiana"
+    titleItalic="Purchase"
+    subtitle="Elevated Creole cuisine & complex craft cocktails. Chef Quinnton Austin's fire-forward Louisiana kitchen."
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
+    imageAlt="Louisiana Purchase at night — North Park, San Diego"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
+    ]}
+    headlineId="hero-headline"
+  />
 
-  <div class="hero__body">
-    <p class="lp-eyebrow hero__eyebrow">North Park, San Diego</p>
-    <h1 id="hero-headline" class="hero__title">
-      Louisiana<br /><em>Purchase</em>
-    </h1>
-    <p class="hero__sub">
-      Elevated Creole cuisine &amp; complex craft cocktails.<br class="md-break" />
-      Chef Quinnton Austin's fire-forward Louisiana kitchen.
-    </p>
-    <div class="hero__ctas">
-      <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-gold">Reserve a Table</a>
-      <a href="/menu" class="btn-outline">View the Menu</a>
-    </div>
-  </div>
+  <StatBar
+    stats={[
+      { value: 'Open Daily',      label: 'Hours Today' },
+      { value: BAYOU_HOUR.days,   label: BAYOU_HOUR.label,   href: '/happy-hour' },
+      { value: BRUNCH_HOURS.days, label: BRUNCH_HOURS.label, href: '/brunch' },
+      { value: 'North Park, SD',  label: 'Location', href: VENUE_MAPS_URL, external: true },
+    ]}
+    dark={true}
+  />
 
-  <div class="hero__bar" aria-label="Key venue information">
-    <div class="hbar-item">
-      <span class="hbar-label">Hours Today</span>
-      <span class="hbar-val">Open Daily</span>
-      <span class="hbar-sub">Mon–Thu 3–9 · Fri 3–10</span>
-    </div>
-    <div class="hbar-item">
-      <span class="hbar-label">Bayou Hour</span>
-      <a href="/happy-hour" class="hbar-val hbar-val--link">Mon – Fri</a>
-      <span class="hbar-sub">3 PM – 5 PM</span>
-    </div>
-    <div class="hbar-item">
-      <span class="hbar-label">Brunch</span>
-      <a href="/brunch" class="hbar-val hbar-val--link">Sat &amp; Sun</a>
-      <span class="hbar-sub">12 PM – 3 PM</span>
-    </div>
-    <div class="hbar-item">
-      <span class="hbar-label">Location</span>
-      <a href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="hbar-val hbar-val--link">North Park, SD</a>
-      <span class="hbar-sub">2305 University Ave</span>
-    </div>
-  </div>
-</section>
+  <!-- ─── ABOUT ────────────────────────────────────────────── -->
+  <AlternatingRow
+    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
+    imageAlt="Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating"
+    eyebrow="North Park, San Diego · Est. 2018"
+    title="Where New Orleans Found"
+    titleItalic="Its Way to North Park"
+    body={[
+      "Louisiana Purchase is not a theme bar. It is a place — a genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood. The geometric timber ceiling, the candlelit bar, the patio framed by hanging ferns: every element earns its place.",
+      "Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters. Slow-built gumbo. Elevated Creole plates that honor the tradition without being imprisoned by it. The cocktail program demands reverence, not speed.",
+    ]}
+    facts={[
+      { label: 'Cuisine',        value: 'Elevated Creole' },
+      { label: 'Location',       value: 'North Park, SD' },
+      { label: 'Brunch',         value: BRUNCH_HOURS.days },
+      { label: 'Private Events', value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
+    ]}
+    ctas={[
+      { label: 'See the Menu',    href: '/menu', variant: 'gold' },
+      { label: 'Reserve a Table →', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'text' },
+    ]}
+    dark={true}
+    headingId="about-h"
+  />
 
-<!-- ─── ABOUT ────────────────────────────────────────────── -->
-<section id="about" class="about" aria-labelledby="about-h">
-  <div class="about__inner">
-    <div class="about__img-col reveal">
-      <img
-        src="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
-        alt="Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating"
-        class="about__img"
-        width="1600" height="1065"
-        loading="lazy" decoding="async"
+  <!-- ─── COCKTAILS ─────────────────────────────────────────── -->
+  <section aria-labelledby="cocktails-h" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="Craft Program"
+        title="Cocktails Built for"
+        titleItalic="the French Quarter Soul"
+        subtitle="An obsessive bar program rooted in New Orleans tradition — complex, ceremonial, and utterly precise."
+        id="cocktails-h"
       />
-    </div>
-    <div class="about__copy reveal">
-      <p class="lp-eyebrow">North Park, San Diego · Est. 2018</p>
-      <h2 id="about-h" class="about__title">
-        Where New Orleans<br />Found Its Way<br /><span class="gold-text">to North Park</span>
-      </h2>
-      <p class="about__body">Louisiana Purchase is not a theme bar. It is a place — a genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood. The geometric timber ceiling, the candlelit bar, the patio framed by hanging ferns: every element earns its place.</p>
-      <p class="about__body">Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters. Slow-built gumbo. Elevated Creole plates that honor the tradition without being imprisoned by it. The cocktail program demands reverence, not speed.</p>
-      <dl class="about__facts">
-        <div><dt>Cuisine</dt><dd>Elevated Creole</dd></div>
-        <div><dt>Location</dt><dd>North Park, SD</dd></div>
-        <div><dt>Brunch</dt><dd>Sat &amp; Sun</dd></div>
-        <div><dt>Private Events</dt><dd>Up to 80 Guests</dd></div>
-      </dl>
-      <div class="about__ctas">
-        <a href="/menu" class="btn-gold">See the Menu</a>
-        <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-text">Reserve a Table →</a>
+
+      <MenuShowcase section="cocktails" cols={4} dark={true} divided={true} />
+
+      <div class="text-center mt-10">
+        <a href="/menu/cocktails" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
+          Full Cocktail Menu
+        </a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ─── COCKTAILS ─────────────────────────────────────────── -->
-<section class="cocktails" aria-labelledby="cocktails-h">
-  <div class="section-wrap">
-    <header class="section-hd reveal">
-      <p class="lp-eyebrow">Craft Program</p>
-      <h2 id="cocktails-h" class="section-title">Cocktails Built for<br />the French Quarter Soul</h2>
-      <p class="section-sub">An obsessive bar program rooted in New Orleans tradition — complex, ceremonial, and utterly precise.</p>
-    </header>
+  <!-- ─── BRUNCH ────────────────────────────────────────────── -->
+  <AlternatingRow
+    image={IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website']}
+    imageAlt="Weekend brunch — Louisiana Purchase North Park San Diego"
+    eyebrow={`${BRUNCH_HOURS.days} · ${BRUNCH_HOURS.window}`}
+    title="Weekend Brunch"
+    titleItalic="in North Park"
+    body={[
+      "San Diego's most indulgent weekend ritual. Creole brunch plates and craft cocktails from noon. The patio, the music, the afternoon light through the pergola — come hungry. Stay late.",
+    ]}
+    facts={[
+      { label: 'Days',     value: BRUNCH_HOURS.days },
+      { label: 'Service',  value: BRUNCH_HOURS.window },
+      { label: 'Patio',    value: 'Open' },
+      { label: 'Walk-Ins', value: 'Welcome' },
+    ]}
+    ctas={[
+      { label: 'Reserve for Brunch',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'See the Brunch Menu',  href: '/brunch', variant: 'outline' },
+    ]}
+    reverse={true}
+    dark={false}
+  />
 
-    <div class="cocktails__grid">
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
-            alt="Praline Old Fashioned — Louisiana Purchase signature cocktail"
-            class="ccard__img" width="1600" height="2408"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Signature</p>
-          <h3 class="ccard__name">Praline Old Fashioned</h3>
-          <p class="ccard__desc">Buffalo Trace bourbon, house praline syrup, Peychaud's bitters, expressed orange peel</p>
-          <p class="ccard__price">$18</p>
-        </div>
-      </article>
+  <!-- ─── FOOD GRID ──────────────────────────────────────────── -->
+  <section aria-labelledby="food-h" class="bg-velvet py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
 
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-drink-menu-north-park-san-diego-website.jpg"
-            alt="Voo Doo Carré — Louisiana Purchase craft cocktail"
-            class="ccard__img" width="1600" height="2393"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Chef's Selection</p>
-          <h3 class="ccard__name">Voo Doo Carré</h3>
-          <p class="ccard__desc">Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters</p>
-          <p class="ccard__price">$19</p>
-        </div>
-      </article>
+      <SectionHeader
+        eyebrow="The Experience"
+        title="A Place Worth"
+        titleItalic="Coming Back To"
+        subtitle="From the fire-forward kitchen to the candlelit bar and lush open patio — Louisiana Purchase is built to be experienced in person."
+        id="food-h"
+      />
 
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-cocktail-menu-north-park-website.jpg"
-            alt="Café Brûlot Martini — Louisiana Purchase bar program"
-            class="ccard__img" width="1600" height="2400"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Bar Exclusive</p>
-          <h3 class="ccard__name">Café Brûlot Martini</h3>
-          <p class="ccard__desc">Cold-brew spirit, house café brûlot syrup, egg white, beignet garnish</p>
-          <p class="ccard__price">$17</p>
-        </div>
-      </article>
+      <FourColumnGrid
+        cols={4}
+        dark={false}
+        divided={true}
+        cards={[
+          {
+            image:    IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website'],
+            imageAlt: 'Louisiana Purchase at night — North Park San Diego',
+            eyebrow:  'Exterior',
+            title:    'The Room',
+          },
+          {
+            image:    IMAGES['louisiana-purchase-modern-creole-restaurant-website'],
+            imageAlt: 'Elevated Creole cuisine at Louisiana Purchase',
+            eyebrow:  'The Kitchen',
+            title:    'Elevated Creole',
+          },
+          {
+            image:    IMAGES['louisiana-purchase-cocktail-bar-north-park-website'],
+            imageAlt: 'Craft cocktails at Louisiana Purchase North Park',
+            eyebrow:  'The Bar',
+            title:    'Craft Cocktails',
+          },
+          {
+            image:    IMAGES['louisiana-purchase-group-dining-san-diego-website'],
+            imageAlt: 'Dining at Louisiana Purchase North Park San Diego',
+            eyebrow:  'The Table',
+            title:    'Group Dining',
+          },
+        ]}
+      />
 
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg"
-            alt="Craft cocktails at Louisiana Purchase — North Park San Diego"
-            class="ccard__img" width="1600" height="1060"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">The Bar</p>
-          <h3 class="ccard__name">Bayou Swizzle</h3>
-          <p class="ccard__desc">Agricole rhum, passion fruit, fresh lime, orgeat, mint, Angostura</p>
-          <a href="/menu" class="ccard__link">Full Menu →</a>
-        </div>
-      </article>
+      <div class="text-center mt-10">
+        <a href="/menu" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
+          Explore the Menu
+        </a>
+      </div>
     </div>
+  </section>
 
-    <div class="section-cta reveal">
-      <a href="/menu" class="btn-gold">Full Cocktail Menu</a>
+  <!-- ─── FOOD STRIP ────────────────────────────────────────── -->
+  <section aria-labelledby="dish-h" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="The Kitchen"
+        title="Food Worth"
+        titleItalic="Staying For"
+        subtitle="Chef Quinnton Austin's elevated Creole program — fire-forward, deeply rooted, obsessively precise."
+        id="dish-h"
+      />
+
+      <MenuShowcase
+        itemIds={['steak-etouffee', 'fire-charred-oysters', 'lobster-pasta', 'fried-oysters-and-fries']}
+        cols={4}
+        dark={true}
+        divided={true}
+      />
+
+      <div class="text-center mt-10">
+        <a href="/menu/dinner" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
+          Full Food Menu
+        </a>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ─── BRUNCH ────────────────────────────────────────────── -->
-<section class="brunch" aria-labelledby="brunch-h">
-  <div class="brunch__media" aria-hidden="true">
-    <img
-      src="/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg"
-      alt="Weekend brunch — Louisiana Purchase North Park San Diego"
-      class="brunch__img"
-      width="1600" height="2387"
-      loading="lazy" decoding="async"
-    />
-    <div class="brunch__scrim"></div>
-  </div>
-  <div class="brunch__content reveal">
-    <p class="lp-eyebrow">Saturday &amp; Sunday · 12 PM – 3 PM</p>
-    <h2 id="brunch-h" class="brunch__title">Weekend Brunch<br /><em>in North Park</em></h2>
-    <p class="brunch__body">San Diego's most indulgent weekend ritual. Creole brunch plates and craft cocktails from noon. The patio, the music, the afternoon light through the pergola — come hungry. Stay late.</p>
-    <div class="brunch__ctas">
-      <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer" class="btn-gold">Reserve for Brunch</a>
-      <a href="/brunch" class="btn-outline">See the Brunch Menu</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FOOD GRID ──────────────────────────────────────────── -->
-<section class="food" aria-labelledby="food-h">
-  <div class="section-wrap">
-    <header class="section-hd reveal">
-      <p class="lp-eyebrow">The Experience</p>
-      <h2 id="food-h" class="section-title">A Place Worth<br />Coming Back To</h2>
-      <p class="section-sub">From the fire-forward kitchen to the candlelit bar and lush open patio — Louisiana Purchase is built to be experienced in person.</p>
-    </header>
-
-    <div class="food__grid">
-      <article class="fcard fcard--tall reveal">
-        <div class="fcard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
-            alt="Louisiana Purchase at night — North Park San Diego"
-            class="fcard__img" width="1600" height="1064"
-            loading="lazy" decoding="async"
-          />
-        </div>
-      </article>
-
-      <article class="fcard reveal">
-        <div class="fcard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-modern-creole-restaurant-website.jpg"
-            alt="Elevated Creole cuisine at Louisiana Purchase"
-            class="fcard__img" width="1600" height="2381"
-            loading="lazy" decoding="async"
-          />
-        </div>
-      </article>
-
-      <article class="fcard reveal">
-        <div class="fcard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
-            alt="Craft cocktails at Louisiana Purchase North Park"
-            class="fcard__img" width="1600" height="1066"
-            loading="lazy" decoding="async"
-          />
-        </div>
-      </article>
-
-      <article class="fcard reveal">
-        <div class="fcard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
-            alt="Dining at Louisiana Purchase North Park San Diego"
-            class="fcard__img" width="1600" height="2400"
-            loading="lazy" decoding="async"
-          />
-        </div>
-      </article>
-    </div>
-
-    <div class="section-cta reveal">
-      <a href="/menu" class="btn-gold">Explore the Menu</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FOOD STRIP ────────────────────────────────────────── -->
-<section class="dish-strip" aria-labelledby="dish-h">
-  <div class="section-wrap">
-    <header class="section-hd reveal">
-      <p class="lp-eyebrow">The Kitchen</p>
-      <h2 id="dish-h" class="section-title">Food Worth<br />Staying For</h2>
-      <p class="section-sub">Chef Quinnton Austin's elevated Creole program — fire-forward, deeply rooted, obsessively precise.</p>
-    </header>
-
-    <div class="cocktails__grid">
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-modern-creole-restaurant-website.jpg"
-            alt="Steak étouffée — Louisiana Purchase signature dish"
-            class="ccard__img" width="1600" height="2381"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Signature</p>
-          <h3 class="ccard__name">Steak Étouffée</h3>
-          <p class="ccard__desc">Fire-seared ribeye, crawfish étouffée, roasted garlic</p>
-          <p class="ccard__price">$42</p>
-        </div>
-      </article>
-
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
-            alt="Fire-charred oysters — Louisiana Purchase raw bar"
-            class="ccard__img" width="1600" height="2400"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Raw &amp; Fire</p>
-          <h3 class="ccard__name">Fire-Charred Oysters</h3>
-          <p class="ccard__desc">House compound butter, parsley gremolata, toasted breadcrumb</p>
-          <p class="ccard__price">$24</p>
-        </div>
-      </article>
-
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
-            alt="Lobster pasta — Louisiana Purchase Creole kitchen"
-            class="ccard__img" width="1600" height="1066"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">Chef's Selection</p>
-          <h3 class="ccard__name">Lobster Pasta</h3>
-          <p class="ccard__desc">Half-shell lobster, Creole cream sauce, toasted breadcrumb</p>
-          <p class="ccard__price">$38</p>
-        </div>
-      </article>
-
-      <article class="ccard reveal">
-        <div class="ccard__img-wrap">
-          <img
-            src="/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg"
-            alt="Fried oysters and fries — Louisiana Purchase kitchen"
-            class="ccard__img" width="1600" height="2429"
-            loading="lazy" decoding="async"
-          />
-        </div>
-        <div class="ccard__body">
-          <p class="lp-eyebrow ccard__tag">The Kitchen</p>
-          <h3 class="ccard__name">Fried Oysters &amp; Fries</h3>
-          <p class="ccard__desc">Crispy fried Gulf oysters, seasoned fries, house remoulade</p>
-          <p class="ccard__price">$26</p>
-        </div>
-      </article>
-    </div>
-
-    <div class="section-cta reveal">
-      <a href="/menu" class="btn-gold">Full Food Menu</a>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PRIVATE EVENTS ────────────────────────────────────── -->
-<section class="events" aria-labelledby="events-h">
-  <div class="events__img-col">
-    <img
-      src="/images/louisiana-purchase-date-night-north-park-website.jpg"
-      alt="Private dining atmosphere at Louisiana Purchase North Park San Diego"
-      class="events__img"
-      width="1600" height="1066"
-      loading="lazy" decoding="async"
-    />
-  </div>
-  <div class="events__copy reveal">
-    <p class="lp-eyebrow">Group Bookings</p>
-    <h2 id="events-h" class="events__title">Private Events<br /><em>in North Park</em></h2>
-    <p class="events__body">Birthdays, corporate dinners, rehearsal events, and full venue buyouts. Louisiana Purchase provides a backdrop your guests will actually talk about.</p>
-    <ul class="events__list" role="list">
-      <li>Corporate Dinners &amp; Executive Events</li>
-      <li>Birthday &amp; Milestone Celebrations</li>
-      <li>Rehearsal Dinners</li>
-      <li>Full Venue &amp; Patio Buyouts</li>
-      <li>Brunch Buyouts</li>
+  <!-- ─── PRIVATE EVENTS ────────────────────────────────────── -->
+  <AlternatingRow
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
+    imageAlt="Private dining atmosphere at Louisiana Purchase North Park San Diego"
+    eyebrow="Group Bookings"
+    title="Private Events"
+    titleItalic="in North Park"
+    body={[
+      "Birthdays, corporate dinners, rehearsal events, and full venue buyouts. Louisiana Purchase provides a backdrop your guests will actually talk about.",
+    ]}
+    ctas={[
+      { label: 'Inquire About Your Event', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+    ]}
+    dark={true}
+    headingId="events-h"
+  >
+    <ul role="list" class="flex flex-col gap-2.5 mt-2 mb-8">
+      {['Corporate Dinners & Executive Events', 'Birthday & Milestone Celebrations', 'Rehearsal Dinners', 'Full Venue & Patio Buyouts', 'Brunch Buyouts'].map((item) => (
+        <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
+          <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">✦</span>
+          {item}
+        </li>
+      ))}
     </ul>
-    <a href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL} target="_blank" rel="noopener noreferrer" class="btn-gold">Inquire About Your Event</a>
-  </div>
-</section>
+  </AlternatingRow>
 
-<!-- ─── FIND US ────────────────────────────────────────────── -->
-<section class="findus" aria-labelledby="findus-h">
-  <div class="section-wrap">
-    <div class="stats-row reveal">
-      <div class="stat"><span class="stat__val">4.6★</span><span class="stat__lbl">Google Rating</span></div>
-      <div class="stat"><span class="stat__val">80+</span><span class="stat__lbl">Event Capacity</span></div>
-      <div class="stat"><span class="stat__val">20+</span><span class="stat__lbl">Craft Cocktails</span></div>
-      <div class="stat"><span class="stat__val">7 Days</span><span class="stat__lbl">Open Weekly</span></div>
-    </div>
+  <!-- ─── FIND US ────────────────────────────────────────────── -->
+  <StatBar
+    stats={[
+      { value: `${GOOGLE_RATING}★`,             label: 'Google Rating' },
+      { value: `${EVENT_CAPACITY.fullVenue}+`,  label: 'Event Capacity' },
+      { value: '20+',                           label: 'Craft Cocktails' },
+      { value: '7 Days',                        label: 'Open Weekly' },
+    ]}
+    dark={true}
+  />
 
-    <div class="findus__grid reveal">
-      <div class="findus__img-wrap">
-        <img
-          src="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
-          alt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
-          class="findus__img"
-          width="1600" height="1068"
-          loading="lazy" decoding="async"
-        />
-      </div>
-      <div class="findus__details">
-        <p class="findus__cross">University Ave × 23rd St</p>
-        <p class="lp-eyebrow findus__hood">North Park · San Diego</p>
-        <h2 id="findus-h" class="findus__addr">2305 University Ave</h2>
-        <p class="findus__city">North Park, San Diego, CA 92104</p>
-        <dl class="findus__hours">
-          <div><dt>Monday – Thursday</dt><dd>3 PM – 9 PM</dd></div>
-          <div><dt>Friday</dt><dd>3 PM – 10 PM</dd></div>
-          <div><dt>Saturday</dt><dd>12 PM – 10 PM</dd></div>
-          <div><dt>Sunday</dt><dd>12 PM – 8 PM</dd></div>
-        </dl>
-        <div class="findus__ctas">
-          <a href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer" class="btn-gold">Get Directions</a>
-          <a href={`tel:${import.meta.env.PUBLIC_VENUE_PHONE}`} class="btn-text">{import.meta.env.PUBLIC_VENUE_PHONE}</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+  <AlternatingRow
+    image={IMAGES['louisiana-purchase-seafood-restaurant-san-diego-website']}
+    imageAlt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
+    eyebrow={`${VENUE_ADDRESS.neighborhood} · ${VENUE_ADDRESS.city}`}
+    title={VENUE_ADDRESS.street}
+    titleItalic={VENUE_ADDRESS.crossStreet}
+    body={[
+      `${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip}`,
+    ]}
+    facts={DISPLAY_HOURS}
+    ctas={[
+      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'gold' },
+      { label: phone,            href: `tel:${phone}`, variant: 'text' },
+    ]}
+    reverse={true}
+    dark={false}
+    headingId="findus-h"
+  />
+
+  <CTABand
+    eyebrow="Come Experience It"
+    title="Louisiana Purchase Awaits."
+    subtitle="Open Tuesday through Sunday. Walk-ins welcome at the bar. Reservations recommended for dining."
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
+    ]}
+  />
 
 </Layout>

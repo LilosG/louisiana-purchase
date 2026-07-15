@@ -1,0 +1,87 @@
+---
+// src/pages/menu/brunch/index.astro
+// Louisiana Purchase — Brunch Menu Page
+// Targets: "brunch menu north park", "weekend brunch san diego"
+
+import Layout from '../../../layouts/Layout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import SectionHeader from '../../../components/ui/SectionHeader.astro';
+import StatBar from '../../../components/ui/StatBar.astro';
+import CTABand from '../../../components/ui/CTABand.astro';
+import MenuShowcase from '../../../components/ui/MenuShowcase.astro';
+import { CANONICAL_DOMAIN, BRUNCH_HOURS } from '../../../data/venue';
+import { IMAGES } from '../../../assets/images';
+
+const brunchMenuSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Menu',
+  name: 'Louisiana Purchase — Brunch Menu',
+  description: "Louisiana Purchase's weekend Creole brunch menu in North Park, San Diego.",
+  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/menu/brunch`,
+};
+---
+
+<Layout
+  title="Brunch Menu — Weekend Creole Brunch | Louisiana Purchase North Park"
+  description="Louisiana Purchase's weekend Creole brunch menu in North Park, San Diego. Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits — served Saturday and Sunday from noon."
+  canonical="/menu/brunch"
+  schema={brunchMenuSchema}
+  breadcrumbs={[
+    { name: 'Home',   url: '/',           position: 1 },
+    { name: 'Menu',   url: '/menu',       position: 2 },
+    { name: 'Brunch', url: '/menu/brunch', position: 3 },
+  ]}
+>
+
+  <PageHero
+    eyebrow={`${BRUNCH_HOURS.days} · ${BRUNCH_HOURS.window}`}
+    title="Brunch"
+    titleItalic="Louisiana Purchase"
+    subtitle="North Park's most indulgent weekend ritual. Creole brunch plates and craft cocktails from noon — the patio, the music, the afternoon light through the pergola."
+    image={IMAGES['louisiana-purchase-brunch-dishes-overview-north-park-website']}
+    imageAlt="Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits at Louisiana Purchase brunch"
+    ctas={[
+      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Brunch Details',     href: '/brunch', variant: 'outline' },
+    ]}
+    headlineId="brunch-menu-headline"
+  />
+
+  <StatBar
+    stats={[
+      { value: BRUNCH_HOURS.days,   label: 'Days Available' },
+      { value: BRUNCH_HOURS.window, label: 'Brunch Service' },
+      { value: 'Walk-Ins',          label: 'Welcome' },
+      { value: 'Full Patio',        label: 'Open' },
+    ]}
+    dark={true}
+  />
+
+  <section aria-labelledby="brunch-menu-heading" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="The Menu"
+        title="Creole Brunch"
+        titleItalic="Plates"
+        subtitle="Chef Quinnton Austin's weekend brunch program — elevated Creole plates built for a long, indulgent afternoon."
+        id="brunch-menu-heading"
+      />
+
+      <MenuShowcase section="brunch" cols={3} dark={true} divided={true} />
+
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Join Us This Weekend"
+    title="Brunch at Louisiana Purchase."
+    subtitle={`${BRUNCH_HOURS.days} from noon. Reserve your table before it fills up.`}
+    image={IMAGES['louisiana-purchase-weekend-brunch-san-diego-website']}
+    ctas={[
+      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Brunch Details',     href: '/brunch', variant: 'outline' },
+    ]}
+  />
+
+</Layout>

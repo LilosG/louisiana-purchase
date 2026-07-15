@@ -10,7 +10,26 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import ChecklistItems from '../../components/ui/ChecklistItems.astro';
 import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
+import { VENUE_ADDRESS, EVENT_CAPACITY } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
+
+const PROCESS_STEPS = [
+  { step: '01', title: 'Submit an Inquiry',     body: 'Tell us your event date, headcount, and vision. Our events team responds within 24 hours.' },
+  { step: '02', title: 'Custom Proposal',       body: 'We\'ll put together a tailored proposal — menu options, room configuration, pricing, and cocktail packages.' },
+  { step: '03', title: 'Confirm & Personalize', body: 'Finalize the agreement and refine every detail — from signature cocktail selections to dietary accommodations.' },
+  { step: '04', title: 'Your Event',            body: 'Show up and experience it. Our team handles everything from setup to service so you can be present for every moment.' },
+];
+
+const FAQ_ITEMS = [
+  { q: 'What is the minimum guest count for a private event?',  a: 'Minimums vary by space and date. The private dining room requires a food and beverage minimum for groups of 15 or more. Full venue buyouts have their own minimum. Contact our events team for specifics.' },
+  { q: 'Can I customize the menu for my event?',                a: 'Yes. Chef Quinnton Austin and our culinary team offer fully bespoke menu curation for private events — from passed cocktail-hour bites to multi-course Creole dinner experiences.' },
+  { q: 'Does Louisiana Purchase offer cocktail pairings?',      a: 'Our bar program specializes in custom cocktail pairings and curated open bar packages. All signature cocktails including the Praline Old Fashioned and Voo Doo Carré are available for event menus.' },
+  { q: 'How far in advance should I book?',                     a: 'We recommend inquiring at least 3–4 weeks in advance for weekday events and 6–8 weeks for weekend dates. Popular dates book quickly, especially Friday and Saturday evenings.' },
+  { q: 'Is parking available near Louisiana Purchase?',         a: `Street parking is available on University Ave and surrounding streets in North Park. Several nearby parking lots are within a short walk of the venue at ${VENUE_ADDRESS.street}.` },
+];
+
 ---
 
 <Layout
@@ -28,7 +47,7 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
     title="Private Events"
     titleItalic="Worth Remembering"
     subtitle="Louisiana Purchase offers an unparalleled private dining and event experience in North Park, San Diego. From intimate corporate dinners to full venue buyouts — the space, the cuisine, and the atmosphere your guests will talk about."
-    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
     imageAlt="Private events at Louisiana Purchase North Park San Diego"
     ctas={[
       { label: 'Submit an Inquiry', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
@@ -39,9 +58,9 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
 
   <StatBar
     stats={[
-      { value: '80',        label: 'Max Capacity' },
-      { value: '40',        label: 'Private Room' },
-      { value: '50',        label: 'Patio Reception' },
+      { value: String(EVENT_CAPACITY.fullVenue),   label: 'Max Capacity' },
+      { value: String(EVENT_CAPACITY.privateRoom), label: 'Private Room' },
+      { value: String(EVENT_CAPACITY.patio),       label: 'Patio Reception' },
       { value: 'Custom',    label: 'Menus Available' },
     ]}
     dark={true}
@@ -49,7 +68,7 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
 
   <!-- ─── Why Louisiana Purchase ───────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-private-dining-san-diego-website']}
     imageAlt="Private dining room at Louisiana Purchase North Park San Diego"
     eyebrow="The Venue"
     title="A Private Event Venue"
@@ -59,9 +78,9 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
       "Our events team works with you to design a completely custom experience. Menu curation, cocktail pairings, room configuration, AV — everything handled with the same precision as our dinner service.",
     ]}
     facts={[
-      { label: 'Full Venue',    value: 'Up to 80 Guests' },
-      { label: 'Private Room',  value: 'Up to 40 Guests' },
-      { label: 'Patio',         value: 'Up to 50 Guests' },
+      { label: 'Full Venue',    value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
+      { label: 'Private Room',  value: `Up to ${EVENT_CAPACITY.privateRoom} Guests` },
+      { label: 'Patio',         value: `Up to ${EVENT_CAPACITY.patio} Guests` },
       { label: 'Location',      value: 'North Park, SD' },
     ]}
     ctas={[
@@ -133,27 +152,14 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
         id="process-heading"
       />
 
-      <ol role="list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-gold/10">
-        {[
-          { step: '01', title: 'Submit an Inquiry',     body: 'Tell us your event date, headcount, and vision. Our events team responds within 24 hours.' },
-          { step: '02', title: 'Custom Proposal',       body: 'We\'ll put together a tailored proposal — menu options, room configuration, pricing, and cocktail packages.' },
-          { step: '03', title: 'Confirm & Personalize', body: 'Finalize the agreement and refine every detail — from signature cocktail selections to dietary accommodations.' },
-          { step: '04', title: 'Your Event',            body: 'Show up and experience it. Our team handles everything from setup to service so you can be present for every moment.' },
-        ].map((item) => (
-          <li class="bg-obsidian-800 p-7 flex flex-col gap-3 reveal">
-            <span class="font-mono text-[0.625rem] text-gold/50 tracking-[0.24em]">{item.step}</span>
-            <h3 class="font-serif font-light text-parchment text-lg">{item.title}</h3>
-            <p class="font-sans font-light text-smoke text-sm leading-relaxed">{item.body}</p>
-          </li>
-        ))}
-      </ol>
+      <ChecklistItems items={PROCESS_STEPS} numbered={true} cols={4} dark={true} />
 
     </div>
   </section>
 
   <!-- ─── The Space ────────────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
     imageAlt="Group dining at Louisiana Purchase North Park San Diego"
     eyebrow="The Space"
     title="Three Distinct"
@@ -163,9 +169,9 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
       "Each space can be configured independently or combined for larger events. Our team will recommend the best configuration for your headcount and event style.",
     ]}
     facts={[
-      { label: 'Private Room',      value: 'Up to 40 seated' },
-      { label: 'Full Venue',        value: 'Up to 80 guests' },
-      { label: 'Patio Reception',   value: 'Up to 50 standing' },
+      { label: 'Private Room',      value: `Up to ${EVENT_CAPACITY.privateRoom} seated` },
+      { label: 'Full Venue',        value: `Up to ${EVENT_CAPACITY.fullVenue} guests` },
+      { label: 'Patio Reception',   value: `Up to ${EVENT_CAPACITY.patio} standing` },
       { label: 'AV & Setup',        value: 'Available' },
     ]}
     ctas={[
@@ -187,13 +193,7 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
       />
 
       <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
-        {[
-          { q: 'What is the minimum guest count for a private event?',  a: 'Minimums vary by space and date. The private dining room requires a food and beverage minimum for groups of 15 or more. Full venue buyouts have their own minimum. Contact our events team for specifics.' },
-          { q: 'Can I customize the menu for my event?',                a: 'Yes. Chef Quinnton Austin and our culinary team offer fully bespoke menu curation for private events — from passed cocktail-hour bites to multi-course Creole dinner experiences.' },
-          { q: 'Does Louisiana Purchase offer cocktail pairings?',      a: 'Our bar program specializes in custom cocktail pairings and curated open bar packages. All signature cocktails including the Praline Old Fashioned and Voo Doo Carré are available for event menus.' },
-          { q: 'How far in advance should I book?',                     a: 'We recommend inquiring at least 3–4 weeks in advance for weekday events and 6–8 weeks for weekend dates. Popular dates book quickly, especially Friday and Saturday evenings.' },
-          { q: 'Is parking available near Louisiana Purchase?',         a: 'Street parking is available on University Ave and surrounding streets in North Park. Several nearby parking lots are within a short walk of the venue at 2305 University Ave.' },
-        ].map((faq) => (
+        {FAQ_ITEMS.map((faq) => (
           <div class="py-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 reveal">
             <dt class="font-serif font-light text-parchment text-base">{faq.q}</dt>
             <dd class="font-sans font-light text-smoke leading-relaxed text-sm">{faq.a}</dd>
@@ -208,7 +208,7 @@ import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
     eyebrow="Let's Get Started"
     title="Ready to Plan Your Event?"
     subtitle="Our events team will respond within 24 hours with availability and a custom proposal."
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     ctas={[
       { label: 'Submit an Inquiry', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
       { label: 'View Event Types',  href: '#event-types', variant: 'outline' },

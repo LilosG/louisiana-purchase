@@ -10,6 +10,8 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import { VENUE_ADDRESS, VENUE_MAPS_URL, EVENT_CAPACITY } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
 ---
 
 <Layout
@@ -27,7 +29,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     title="Louisiana Purchase"
     titleItalic="A Genuine Place"
     subtitle="Not a theme bar. Not a concept. A genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood — and built to last."
-    image="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
     imageAlt="Louisiana Purchase interior — North Park San Diego"
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
@@ -40,7 +42,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     stats={[
       { value: 'Est. 2018', label: 'North Park Original' },
       { value: 'Creole',    label: 'Cuisine' },
-      { value: '80+',       label: 'Event Capacity' },
+      { value: `${EVENT_CAPACITY.fullVenue}+`, label: 'Event Capacity' },
       { value: '7 Days',    label: 'Open Weekly' },
     ]}
     dark={true}
@@ -48,7 +50,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── The Story ─────────────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     imageAlt="Louisiana Purchase at night — North Park San Diego"
     eyebrow="The Story"
     title="Where New Orleans"
@@ -61,7 +63,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       { label: 'Established', value: '2018' },
       { label: 'Neighborhood', value: 'North Park, SD' },
       { label: 'Concept',      value: 'Elevated Creole' },
-      { label: 'Address',      value: '2305 University Ave' },
+      { label: 'Address',      value: VENUE_ADDRESS.street },
     ]}
     ctas={[
       { label: 'See the Space', href: '/the-space', variant: 'gold' },
@@ -71,7 +73,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Chef Quinnton Austin ─────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-modern-creole-restaurant-website.jpg"
+    image={IMAGES['louisiana-purchase-modern-creole-restaurant-website']}
     imageAlt="Chef Quinnton Austin's Creole kitchen at Louisiana Purchase"
     eyebrow="The Chef"
     title="Chef Quinnton Austin"
@@ -95,7 +97,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── The Bar Program ──────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
     imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
     eyebrow="The Bar"
     title="An Obsessive"
@@ -124,7 +126,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       <SectionHeader
         eyebrow="Everything We Offer"
         title="The Full Experience"
-        subtitle="Louisiana Purchase is more than a dinner reservation. Here is everything you can experience at 2305 University Ave."
+        subtitle={`Louisiana Purchase is more than a dinner reservation. Here is everything you can experience at ${VENUE_ADDRESS.street}.`}
         id="offerings-heading"
       />
 
@@ -134,7 +136,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         divided={true}
         cards={[
           {
-            image:     '/images/louisiana-purchase-modern-creole-restaurant-website.jpg',
+            image:     IMAGES['louisiana-purchase-modern-creole-restaurant-website'],
             imageAlt:  'Dinner at Louisiana Purchase',
             eyebrow:   'Tue – Sun',
             title:     'Dinner',
@@ -143,7 +145,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
             linkLabel: 'View Menu',
           },
           {
-            image:     '/images/louisiana-purchase-southern-brunch-menu-north-park-website.jpg',
+            image:     IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website'],
             imageAlt:  'Weekend brunch at Louisiana Purchase',
             eyebrow:   'Sat & Sun · 12–3 PM',
             title:     'Brunch',
@@ -152,7 +154,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
             linkLabel: 'Learn More',
           },
           {
-            image:     '/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg',
+            image:     IMAGES['louisiana-purchase-craft-cocktails-san-diego-website'],
             imageAlt:  'Happy hour at Louisiana Purchase',
             eyebrow:   'Mon–Fri · 3–5 PM',
             title:     'Bayou Hour',
@@ -161,7 +163,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
             linkLabel: 'Learn More',
           },
           {
-            image:     '/images/louisiana-purchase-private-dining-san-diego-website.jpg',
+            image:     IMAGES['louisiana-purchase-private-dining-san-diego-website'],
             imageAlt:  'Private events at Louisiana Purchase',
             eyebrow:   'Up to 80 Guests',
             title:     'Private Events',
@@ -177,7 +179,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── North Park ───────────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-seafood-restaurant-san-diego-website']}
     imageAlt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
     eyebrow="The Neighborhood"
     title="North Park,"
@@ -187,13 +189,13 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       "Louisiana Purchase sits at the corner of University Ave and 23rd St, in the heart of it all. Open seven days a week.",
     ]}
     facts={[
-      { label: 'Address',      value: '2305 University Ave' },
+      { label: 'Address',      value: VENUE_ADDRESS.street },
       { label: 'Neighborhood', value: 'North Park, San Diego' },
       { label: 'Open',         value: '7 Days a Week' },
-      { label: 'Zip Code',     value: '92104' },
+      { label: 'Zip Code',     value: VENUE_ADDRESS.zip },
     ]}
     ctas={[
-      { label: 'Get Directions', href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'gold' },
+      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'gold' },
       { label: 'Contact Us',     href: '/contact', variant: 'outline' },
     ]}
     reverse={true}
@@ -204,7 +206,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     eyebrow="Come Experience It"
     title="Louisiana Purchase Awaits."
     subtitle="Open Tuesday through Sunday. Walk-ins welcome at the bar. Reservations recommended for dining."
-    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'View the Menu',   href: '/menu', variant: 'outline' },

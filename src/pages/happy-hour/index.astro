@@ -10,22 +10,33 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, BAYOU_HOUR, DISPLAY_HOURS } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
 
 const happyHourSchema = {
   '@context': 'https://schema.org',
   '@type': 'FoodEstablishment',
   name: 'Louisiana Purchase — Bayou Hour',
   description: 'Bayou Hour at Louisiana Purchase in North Park, San Diego. Discounted craft cocktails and small bites Monday through Friday, 3 PM to 5 PM.',
-  url: `${import.meta.env.PUBLIC_SITE_URL}/happy-hour`,
+  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/happy-hour`,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: '2305 University Ave',
-    addressLocality: 'San Diego',
-    addressRegion: 'CA',
-    postalCode: '92104',
-    addressCountry: 'US',
+    streetAddress: VENUE_ADDRESS.street,
+    addressLocality: VENUE_ADDRESS.city,
+    addressRegion: VENUE_ADDRESS.state,
+    postalCode: VENUE_ADDRESS.zip,
+    addressCountry: VENUE_ADDRESS.country,
   },
 };
+
+const FAQ_ITEMS = [
+  { q: 'What is Bayou Hour at Louisiana Purchase?', a: 'Bayou Hour is Louisiana Purchase\'s daily happy hour in North Park, San Diego. It runs Monday through Friday from 3 PM to 5 PM and features discounted craft cocktails, draft beer, house wine, and rotating Creole small plates.' },
+  { q: 'What days does happy hour run at Louisiana Purchase?', a: `Bayou Hour runs ${BAYOU_HOUR.days}, ${BAYOU_HOUR.window}. Louisiana Purchase is open seven days a week — ${DISPLAY_HOURS.map((h) => `${h.label} ${h.value}`).join(', ')}.` },
+  { q: 'Do I need a reservation for happy hour?', a: 'Walk-ins are always welcome during Bayou Hour. Bar and patio seating is available on a first-come basis. If you\'d prefer a reserved table, you can book through our reservations link.' },
+  { q: 'Where is Louisiana Purchase located?', a: `Louisiana Purchase is located at ${VENUE_ADDRESS.street} in ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip} — at the intersection of ${VENUE_ADDRESS.crossStreet}.` },
+  { q: 'Is there food available during happy hour?', a: 'Yes. Bayou Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.' },
+];
+
 ---
 
 <Layout
@@ -44,7 +55,7 @@ const happyHourSchema = {
     title="Bayou Hour"
     titleItalic="North Park's Finest"
     subtitle="The best hour of your workday. Discounted craft cocktails, ice-cold draft beer, and Creole bites at the bar — every Monday through Friday from 3 to 5 PM."
-    image="/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-craft-cocktails-san-diego-website']}
     imageAlt="Bayou Hour cocktails at Louisiana Purchase North Park San Diego"
     ctas={[
       { label: 'Reserve a Spot',  href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
@@ -55,8 +66,8 @@ const happyHourSchema = {
 
   <StatBar
     stats={[
-      { value: 'Mon – Fri', label: 'Days Available' },
-      { value: '3 – 5 PM',  label: 'Bayou Hour Window' },
+      { value: BAYOU_HOUR.days, label: 'Days Available' },
+      { value: BAYOU_HOUR.window,  label: 'Bayou Hour Window' },
       { value: '$6+',       label: 'Starting Price' },
       { value: 'Walk-Ins',  label: 'Always Welcome' },
     ]}
@@ -64,7 +75,7 @@ const happyHourSchema = {
   />
 
   <AlternatingRow
-    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
     imageAlt="Craft cocktails during Bayou Hour at Louisiana Purchase"
     eyebrow="The Ritual"
     title="More Than a Discount."
@@ -74,8 +85,8 @@ const happyHourSchema = {
       "Pull up a stool at the marble bar. Order a Praline Old Fashioned at a price that makes it a habit. Let the evening find you.",
     ]}
     facts={[
-      { label: 'Hours',    value: '3 PM – 5 PM' },
-      { label: 'Days',     value: 'Mon – Fri' },
+      { label: 'Hours',    value: BAYOU_HOUR.window },
+      { label: 'Days',     value: BAYOU_HOUR.days },
       { label: 'Location', value: 'Full Bar & Patio' },
       { label: 'Walk-Ins', value: 'Always Welcome' },
     ]}
@@ -114,7 +125,7 @@ const happyHourSchema = {
   </section>
 
   <AlternatingRow
-    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
     imageAlt="The bar at Louisiana Purchase North Park San Diego during happy hour"
     eyebrow="The Setting"
     title="The Bar at"
@@ -127,10 +138,10 @@ const happyHourSchema = {
       { label: 'Bar Seating',   value: 'Walk-In' },
       { label: 'Patio',         value: 'Available' },
       { label: 'Neighborhood',  value: 'North Park' },
-      { label: 'Address',       value: '2305 University Ave' },
+      { label: 'Address',       value: VENUE_ADDRESS.street },
     ]}
     ctas={[
-      { label: 'Get Directions', href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'outline' },
+      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'outline' },
     ]}
     reverse={true}
     dark={true}
@@ -145,13 +156,7 @@ const happyHourSchema = {
         id="hh-faq-heading"
       />
       <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
-        {[
-          { q: 'What is Bayou Hour at Louisiana Purchase?', a: 'Bayou Hour is Louisiana Purchase\'s daily happy hour in North Park, San Diego. It runs Monday through Friday from 3 PM to 5 PM and features discounted craft cocktails, draft beer, house wine, and rotating Creole small plates.' },
-          { q: 'What days does happy hour run at Louisiana Purchase?', a: 'Bayou Hour runs Monday through Friday, 3 PM to 5 PM. Louisiana Purchase is open seven days a week — Monday through Thursday 3–9 PM, Friday 3–10 PM, Saturday 12–10 PM, and Sunday 12–8 PM.' },
-          { q: 'Do I need a reservation for happy hour?', a: 'Walk-ins are always welcome during Bayou Hour. Bar and patio seating is available on a first-come basis. If you\'d prefer a reserved table, you can book through our reservations link.' },
-          { q: 'Where is Louisiana Purchase located?', a: 'Louisiana Purchase is located at 2305 University Ave in North Park, San Diego, CA 92104 — at the intersection of University Ave and 23rd St.' },
-          { q: 'Is there food available during happy hour?', a: 'Yes. Bayou Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.' },
-        ].map((faq) => (
+        {FAQ_ITEMS.map((faq) => (
           <div class="py-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 reveal">
             <dt class="font-serif font-light text-parchment text-base">{faq.q}</dt>
             <dd class="font-sans font-light text-smoke leading-relaxed text-sm">{faq.a}</dd>
@@ -165,7 +170,7 @@ const happyHourSchema = {
     eyebrow="Join Us"
     title="Come for the Deals. Stay for the Night."
     subtitle="Bayou Hour starts at 3 PM — but Louisiana Purchase is open until 9 or 10. Reserve a table and let the evening unfold."
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'View the Menu',   href: '/menu', variant: 'outline' },

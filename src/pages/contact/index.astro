@@ -6,6 +6,8 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CTABand from '../../components/ui/CTABand.astro';
+import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BRUNCH_HOURS, BAYOU_HOUR } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
 ---
 
 <Layout
@@ -23,7 +25,7 @@ import CTABand from '../../components/ui/CTABand.astro';
     title="Contact Us"
     titleItalic="We'd Love to Hear From You"
     subtitle="Reservations, private event inquiries, general questions — our team is here to help."
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     imageAlt="Louisiana Purchase — North Park San Diego"
     headlineId="contact-headline"
   />
@@ -106,13 +108,13 @@ import CTABand from '../../components/ui/CTABand.astro';
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Location</p>
           <h2 id="location-hours-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
-            2305 University Ave<br /><span class="italic text-gold">North Park, San Diego</span>
+            {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
           </h2>
           <p class="font-sans font-light text-smoke text-sm leading-relaxed mb-6 max-w-[40ch]">
-            Located at the intersection of University Ave and 23rd St in the heart of North Park. Street parking available on University Ave and surrounding streets.
+            Located at the intersection of {VENUE_ADDRESS.crossStreet} in the heart of {VENUE_ADDRESS.neighborhood}. Street parking available on University Ave and surrounding streets.
           </p>
           <a
-            href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104"
+            href={VENUE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]"
@@ -125,21 +127,16 @@ import CTABand from '../../components/ui/CTABand.astro';
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Hours</p>
           <dl class="flex flex-col gap-3 mb-6">
-            {[
-              { day: 'Monday – Thursday', hours: '3 PM – 9 PM' },
-              { day: 'Friday',            hours: '3 PM – 10 PM' },
-              { day: 'Saturday',          hours: '12 PM – 10 PM' },
-              { day: 'Sunday',            hours: '12 PM – 8 PM' },
-            ].map((item) => (
+            {DISPLAY_HOURS.map((item) => (
               <div class="flex justify-between gap-8 py-3 border-b border-gold/10">
-                <dt class="font-sans text-sm text-smoke/80">{item.day}</dt>
-                <dd class="font-sans text-sm text-parchment">{item.hours}</dd>
+                <dt class="font-sans text-sm text-smoke/80">{item.label}</dt>
+                <dd class="font-sans text-sm text-parchment">{item.value}</dd>
               </div>
             ))}
           </dl>
           <p class="font-sans text-[0.75rem] text-gold/70 tracking-[0.04em]">
-            Brunch: Saturday & Sunday 12–3 PM<br />
-            Bayou Hour: Monday–Friday 3–5 PM
+            {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}<br />
+            {BAYOU_HOUR.label}: {BAYOU_HOUR.days} {BAYOU_HOUR.window}
           </p>
         </div>
 
@@ -159,7 +156,7 @@ import CTABand from '../../components/ui/CTABand.astro';
       </p>
       <div class="flex justify-center gap-4">
         <a
-          href="https://www.instagram.com/louisianapurchasebar"
+          href={VENUE_SOCIAL.instagram}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
@@ -167,7 +164,7 @@ import CTABand from '../../components/ui/CTABand.astro';
           Instagram
         </a>
         <a
-          href="https://www.facebook.com/louisianapurchasebar"
+          href={VENUE_SOCIAL.facebook}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
@@ -182,10 +179,10 @@ import CTABand from '../../components/ui/CTABand.astro';
     eyebrow="Ready to Visit"
     title="We'll See You Soon."
     subtitle="Reserve your table or stop in for Bayou Hour — Louisiana Purchase is open seven days a week."
-    image="/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg"
+    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Get Directions',  href: 'https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104', external: true, variant: 'outline' },
+      { label: 'Get Directions',  href: VENUE_MAPS_URL, external: true, variant: 'outline' },
     ]}
   />
 

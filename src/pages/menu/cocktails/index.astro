@@ -1,0 +1,87 @@
+---
+// src/pages/menu/cocktails/index.astro
+// Louisiana Purchase — Cocktail Menu Page
+// Targets: "craft cocktail bar north park", "cocktail menu san diego"
+
+import Layout from '../../../layouts/Layout.astro';
+import PageHero from '../../../components/ui/PageHero.astro';
+import SectionHeader from '../../../components/ui/SectionHeader.astro';
+import StatBar from '../../../components/ui/StatBar.astro';
+import CTABand from '../../../components/ui/CTABand.astro';
+import MenuShowcase from '../../../components/ui/MenuShowcase.astro';
+import { CANONICAL_DOMAIN, BAYOU_HOUR } from '../../../data/venue';
+import { IMAGES } from '../../../assets/images';
+
+const cocktailsSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Menu',
+  name: 'Louisiana Purchase — Cocktail Menu',
+  description: "Louisiana Purchase's French Quarter-rooted craft cocktail program in North Park, San Diego.",
+  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/menu/cocktails`,
+};
+---
+
+<Layout
+  title="Cocktail Menu — Craft Bar Program | Louisiana Purchase North Park"
+  description="Louisiana Purchase's French Quarter-rooted craft cocktail program in North Park, San Diego. Praline Old Fashioneds, Voo Doo Carrés, and Bayou Swizzles — complex, ceremonial, unforgettable."
+  canonical="/menu/cocktails"
+  schema={cocktailsSchema}
+  breadcrumbs={[
+    { name: 'Home',      url: '/',              position: 1 },
+    { name: 'Menu',      url: '/menu',          position: 2 },
+    { name: 'Cocktails', url: '/menu/cocktails', position: 3 },
+  ]}
+>
+
+  <PageHero
+    eyebrow="Full Bar · Open Daily"
+    title="Cocktails"
+    titleItalic="Louisiana Purchase"
+    subtitle="A French Quarter-rooted bar program. Praline Old Fashioneds, Voo Doo Carrés, Bayou Swizzles — complex, ceremonial, unforgettable."
+    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
+    imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Bayou Hour',      href: '/happy-hour', variant: 'outline' },
+    ]}
+    headlineId="cocktails-headline"
+  />
+
+  <StatBar
+    stats={[
+      { value: 'Open Daily',       label: 'Bar Hours' },
+      { value: BAYOU_HOUR.window,  label: 'Bayou Hour' },
+      { value: '4+',               label: 'Signature Cocktails' },
+      { value: 'NOLA',             label: 'Rooted' },
+    ]}
+    dark={true}
+  />
+
+  <section aria-labelledby="cocktails-menu-heading" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        eyebrow="The Bar"
+        title="Cocktails Built for"
+        titleItalic="the French Quarter"
+        subtitle="Every cocktail is rooted in New Orleans tradition — complex, ceremonial, and built with the same precision as the kitchen."
+        id="cocktails-menu-heading"
+      />
+
+      <MenuShowcase section="cocktails" cols={4} dark={true} divided={true} />
+
+    </div>
+  </section>
+
+  <CTABand
+    eyebrow="Join Us"
+    title="Reserve a Seat at the Bar."
+    subtitle={`Bayou Hour runs ${BAYOU_HOUR.days}, ${BAYOU_HOUR.window}. The full cocktail menu is available open to close, seven days a week.`}
+    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
+    ctas={[
+      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
+      { label: 'Bayou Hour Details', href: '/happy-hour', variant: 'outline' },
+    ]}
+  />
+
+</Layout>
