@@ -7,6 +7,7 @@ import PageHero from '../../components/ui/PageHero.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BRUNCH_HOURS, BAYOU_HOUR } from '../../data/venue';
+import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import { IMAGES } from '../../assets/images';
 ---
 
@@ -69,9 +70,7 @@ import { IMAGES } from '../../assets/images';
             Planning a private dinner, corporate event, birthday, or full venue buyout? Submit an inquiry and our events team responds within 24 hours.
           </p>
           <a
-            href={import.meta.env.PUBLIC_PRIVATE_EVENTS_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`}
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
           >
             Submit Inquiry

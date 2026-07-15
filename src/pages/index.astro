@@ -8,6 +8,7 @@ import StatBar from '../components/ui/StatBar.astro';
 import CTABand from '../components/ui/CTABand.astro';
 import MenuShowcase from '../components/ui/MenuShowcase.astro';
 import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_PHONE_FALLBACK, DISPLAY_HOURS, BAYOU_HOUR, BRUNCH_HOURS, GOOGLE_RATING, EVENT_CAPACITY } from '../data/venue';
+import { PRIVATE_EVENTS_FORM_ANCHOR } from '../data/events-config';
 import { IMAGES } from '../assets/images';
 
 const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
@@ -206,7 +207,7 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
       "Birthdays, corporate dinners, rehearsal events, and full venue buyouts. Louisiana Purchase provides a backdrop your guests will actually talk about.",
     ]}
     ctas={[
-      { label: 'Inquire About Your Event', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Inquire About Your Event', href: `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
     ]}
     dark={true}
     headingId="events-h"

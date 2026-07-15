@@ -10,8 +10,10 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import ChecklistItems from '../../components/ui/ChecklistItems.astro';
+import ToastEventForm from '../../components/ui/ToastEventForm.astro';
 import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
 import { CANONICAL_DOMAIN, VENUE_ADDRESS } from '../../data/venue';
+import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import type { PrivateEventSlug } from '../../types/seo';
 import { IMAGES } from '../../assets/images';
 
@@ -106,7 +108,7 @@ const faqSchema = {
     image={IMAGES['louisiana-purchase-private-dining-san-diego-website']}
     imageAlt={`${event.title} at Louisiana Purchase North Park San Diego`}
     ctas={[
-      { label: 'Request a Proposal', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
       { label: 'View All Events',    href: '/private-events', variant: 'outline' },
     ]}
     headlineId="slug-headline"
@@ -139,7 +141,7 @@ const faqSchema = {
       { label: 'Address',    value: VENUE_ADDRESS.street },
     ]}
     ctas={[
-      { label: 'Request a Proposal', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
     ]}
     dark={true}
   />
@@ -190,9 +192,16 @@ const faqSchema = {
     subtitle="Our events team is ready to design an experience that exceeds every expectation. Inquire today to check availability."
     image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
     ctas={[
-      { label: 'Request a Proposal', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
       { label: 'View All Events',    href: '/private-events', variant: 'outline' },
     ]}
+  />
+
+  <ToastEventForm
+    eyebrow={event.eventType}
+    title="Tell Us About"
+    titleItalic={`Your ${event.eventType}`}
+    subtitle={`Share your date, headcount, and vision for your ${event.eventType.toLowerCase()} below. Our events team responds within 24 hours with availability and a custom proposal.`}
   />
 
 </Layout>

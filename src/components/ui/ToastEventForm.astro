@@ -1,0 +1,64 @@
+---
+// src/components/ui/ToastEventForm.astro
+// Louisiana Purchase — Embedded Private Event Inquiry Form (Toast)
+// Self-contained section (owns its own <section>/heading), matching the
+// CTABand pattern — pages drop this in directly rather than wrapping it.
+//
+// Toast doesn't document a responsive/auto-height embed API (checked: no
+// postMessage resize protocol, no iframe-resizer support). Height is fixed
+// per breakpoint instead, which also means zero CLS regardless of
+// loading="lazy" — the box is reserved by CSS before the iframe's content
+// loads, it doesn't grow to fit content after the fact.
+
+import SectionHeader from './SectionHeader.astro';
+import { PRIVATE_EVENTS_IFRAME_URL, PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
+
+interface Props {
+  eyebrow?:     string;
+  title?:       string;
+  titleItalic?: string;
+  subtitle?:    string;
+  dark?:        boolean;
+}
+
+const {
+  eyebrow = 'Request a Proposal',
+  title = 'Tell Us About',
+  titleItalic = 'Your Event',
+  subtitle = "Share your event date, headcount, and vision below. Our events team responds within 24 hours with availability and a custom proposal.",
+  dark = true,
+} = Astro.props;
+---
+
+<section
+  id={PRIVATE_EVENTS_FORM_ANCHOR}
+  aria-labelledby="event-inquiry-heading"
+  class:list={[dark ? 'bg-obsidian' : 'bg-velvet', 'py-20 md:py-24 scroll-mt-24']}
+>
+  <div class="max-w-[1280px] mx-auto px-6">
+
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      titleItalic={titleItalic}
+      subtitle={subtitle}
+      id="event-inquiry-heading"
+    />
+
+    <div
+      class:list={[
+        dark ? 'bg-obsidian-800' : 'bg-velvet-800',
+        'max-w-[860px] mx-auto border border-gold/10 rounded-sm overflow-hidden',
+      ]}
+      data-toast-event-form
+    >
+      <iframe
+        src={PRIVATE_EVENTS_IFRAME_URL}
+        title="Private Event Inquiry Form"
+        loading="lazy"
+        class="w-full border-0 block h-[1500px] sm:h-[1300px] md:h-[1150px] lg:h-[1000px]"
+      ></iframe>
+    </div>
+
+  </div>
+</section>

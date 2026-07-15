@@ -11,8 +11,10 @@ import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import ChecklistItems from '../../components/ui/ChecklistItems.astro';
+import ToastEventForm from '../../components/ui/ToastEventForm.astro';
 import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
 import { VENUE_ADDRESS, EVENT_CAPACITY } from '../../data/venue';
+import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import { IMAGES } from '../../assets/images';
 
 const PROCESS_STEPS = [
@@ -60,7 +62,7 @@ const faqSchema = {
     image={IMAGES['louisiana-purchase-date-night-north-park-website']}
     imageAlt="Private events at Louisiana Purchase North Park San Diego"
     ctas={[
-      { label: 'Submit an Inquiry', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Submit an Inquiry', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
       { label: 'View Event Types',  href: '#event-types', variant: 'outline' },
     ]}
     headlineId="pe-headline"
@@ -94,7 +96,7 @@ const faqSchema = {
       { label: 'Location',      value: 'North Park, SD' },
     ]}
     ctas={[
-      { label: 'Submit an Inquiry', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Submit an Inquiry', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
     ]}
     dark={true}
   />
@@ -185,7 +187,7 @@ const faqSchema = {
       { label: 'AV & Setup',        value: 'Available' },
     ]}
     ctas={[
-      { label: 'Inquire About Your Event', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Inquire About Your Event', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
     ]}
     reverse={true}
     dark={false}
@@ -220,9 +222,11 @@ const faqSchema = {
     subtitle="Our events team will respond within 24 hours with availability and a custom proposal."
     image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
     ctas={[
-      { label: 'Submit an Inquiry', href: import.meta.env.PUBLIC_PRIVATE_EVENTS_URL, external: true, variant: 'gold' },
+      { label: 'Submit an Inquiry', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
       { label: 'View Event Types',  href: '#event-types', variant: 'outline' },
     ]}
   />
+
+  <ToastEventForm />
 
 </Layout>
