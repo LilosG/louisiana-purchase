@@ -3,8 +3,11 @@
 // Louisiana Purchase — Editorial Card Grid Component
 // Matches homepage cocktail grid card treatment — solid dark cards, image + copy.
 
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface GridCard {
-  image?:     string;
+  image?:     ImageMetadata;
   imageAlt?:  string;
   eyebrow?:   string;
   title:      string;
@@ -59,14 +62,15 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
         >
           {card.image && (
             <div class="aspect-[3/4] overflow-hidden">
-              <img
+              <Image
                 src={card.image}
                 alt={card.imageAlt || card.title}
                 class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
-                width="800"
-                height="1067"
+                format="webp"
+                widths={[300, 500, 800]}
+                sizes="(min-width: 1024px) 25vw, 50vw"
               />
             </div>
           )}
@@ -101,14 +105,15 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
         <>
           {card.image && (
             <div class="aspect-[3/4] overflow-hidden">
-              <img
+              <Image
                 src={card.image}
                 alt={card.imageAlt || card.title}
                 class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
                 loading="lazy"
                 decoding="async"
-                width="800"
-                height="1067"
+                format="webp"
+                widths={[300, 500, 800]}
+                sizes="(min-width: 1024px) 25vw, 50vw"
               />
             </div>
           )}

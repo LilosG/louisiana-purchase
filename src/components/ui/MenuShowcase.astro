@@ -1,0 +1,91 @@
+---
+// src/components/ui/MenuShowcase.astro
+// Louisiana Purchase — Menu Item Grid, sourced from src/data/menu.json
+// Thin transform over FourColumnGrid so menu displays inherit the same
+// card styling as every other grid on the site rather than reinventing it.
+
+import FourColumnGrid from './FourColumnGrid.astro';
+import menuData from '../../data/menu.json';
+import { IMAGES } from '../../assets/images';
+import type { MenuData, MenuItem } from '../../types/menu';
+
+const data = menuData as MenuData;
+
+interface Props {
+  section?:      string | string[];   // menu.json section id(s), e.g. "cocktails" | "food" | "brunch"
+  category?:     string;               // optional category id within the section(s)
+  featuredOnly?: boolean;              // only items where featured === true
+  itemIds?:      string[];             // exact item ids, in this order — for hand-curated highlight grids
+  limit?:        number;               // cap the number of items rendered
+  cols?:         2 | 3 | 4;
+  dark?:         boolean;
+  divided?:      boolean;
+  showPrice?:    boolean;              // default false — price is stored in menu.json regardless
+}
+
+const {
+  section,
+  category,
+  featuredOnly = false,
+  itemIds,
+  limit,
+  cols = 4,
+  dark = true,
+  divided = true,
+  showPrice = false,
+} = Astro.props;
+
+interface ItemWithCategory {
+  item:          MenuItem;
+  categoryLabel: string;
+}
+
+const allWithCategory: ItemWithCategory[] = data.sections.flatMap((s) =>
+  s.categories.flatMap((c) => c.items.map((item) => ({ item, categoryLabel: c.label })))
+);
+
+let entries: ItemWithCategory[];
+
+if (itemIds) {
+  entries = itemIds
+    .map((id) => allWithCategory.find((entry) => entry.item.id === id))
+    .filter((entry): entry is ItemWithCategory => Boolean(entry));
+} else {
+  const sectionIds = section ? (Array.isArray(section) ? section : [section]) : undefined;
+  const matchedSections = sectionIds
+    ? data.sections.filter((s) => sectionIds.includes(s.id))
+    : data.sections;
+
+  entries = matchedSections.flatMap((s) =>
+    s.categories
+      .filter((c) => !category || c.id === category)
+      .flatMap((c) => c.items.map((item) => ({ item, categoryLabel: c.label })))
+  );
+}
+
+entries = entries.filter((entry) => entry.item.available);
+
+if (featuredOnly) {
+  entries = entries.filter((entry) => entry.item.featured);
+}
+
+if (limit) {
+  entries = entries.slice(0, limit);
+}
+
+const cards = entries.map(({ item, categoryLabel }) => ({
+  image:    item.image ? IMAGES[item.image as keyof typeof IMAGES] : undefined,
+  imageAlt: item.imageAlt || item.name,
+  eyebrow:  categoryLabel,
+  title:    item.name,
+  body:     item.description,
+  meta:     showPrice ? item.priceDisplay : undefined,
+}));
+---
+
+<FourColumnGrid
+  cols={cols}
+  dark={dark}
+  divided={divided}
+  cards={cards}
+/>
