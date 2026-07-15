@@ -9,7 +9,7 @@ import SectionHeader from '../../components/ui/SectionHeader.astro';
 import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
-import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import MenuShowcase from '../../components/ui/MenuShowcase.astro';
 import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, BRUNCH_HOURS } from '../../data/venue';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
@@ -52,8 +52,8 @@ const brunchSchema = {
     title="Weekend Brunch"
     titleItalic="in North Park"
     subtitle="North Park's most indulgent weekend ritual. Creole brunch plates, craft cocktails, and an open patio from noon. Come hungry. Stay for the afternoon."
-    image={IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website']}
-    imageAlt="Weekend brunch at Louisiana Purchase North Park San Diego"
+    image={IMAGES['louisiana-purchase-brunch-dishes-overview-north-park-website']}
+    imageAlt="Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits at Louisiana Purchase brunch"
     ctas={[
       { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'outline' },
@@ -72,7 +72,7 @@ const brunchSchema = {
   />
 
   <AlternatingRow
-    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
+    image={IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website']}
     imageAlt="Brunch at Louisiana Purchase North Park San Diego"
     eyebrow="The Experience"
     title="Not Just Brunch."
@@ -102,17 +102,7 @@ const brunchSchema = {
         subtitle="Chef Quinnton Austin's weekend brunch program — elevated Creole plates and craft cocktails built for a long, indulgent afternoon."
         id="brunch-menu-heading"
       />
-      <FourColumnGrid
-        cols={4}
-        dark={false}
-        divided={true}
-        cards={[
-          { image: IMAGES['louisiana-purchase-southern-brunch-menu-north-park-website'], imageAlt: 'Creole brunch plate at Louisiana Purchase', eyebrow: 'Kitchen',      title: 'Big Brunch Easies',   body: 'Rotating Creole brunch plates built around the season — from crawfish benedicts to fire-forward egg dishes.',        href: '/menu/brunch',    linkLabel: 'See the Menu' },
-          { image: IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website'],    imageAlt: 'Brunch cocktails at Louisiana Purchase',    eyebrow: 'Bar Program',   title: 'Brunch Cocktails',    body: 'The full bar is open at noon. Praline Old Fashioneds, Bayou Swizzles, Café Brûlot Martinis — no waiting until 5 PM.', href: '/menu/cocktails',  linkLabel: 'View Cocktails' },
-          { image: IMAGES['louisiana-purchase-craft-cocktails-san-diego-website'],       imageAlt: 'Outdoor patio at Louisiana Purchase',       eyebrow: 'The Patio',     title: 'Open Air Dining',     body: 'The lush fern-framed patio is open for brunch service. One of North Park\'s best outdoor dining spaces.' },
-          { image: IMAGES['louisiana-purchase-group-dining-san-diego-website'],          imageAlt: 'Private brunch at Louisiana Purchase',      eyebrow: 'Group Bookings', title: 'Brunch Buyouts',     body: 'Reserve the full venue or patio for a private brunch event. Custom menus and cocktail packages available.',          href: '/private-events/san-diego-brunch-private-event', linkLabel: 'Learn More' },
-        ]}
-      />
+      <MenuShowcase section="brunch" category="brunch-plates" cols={3} dark={false} divided={true} />
       <div class="text-center mt-10">
         <a href="/menu/brunch" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
           Full Brunch Menu
