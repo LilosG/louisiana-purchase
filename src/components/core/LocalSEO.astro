@@ -12,6 +12,16 @@
 // It must never be imported directly into page files.
 
 import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
+import {
+  VENUE_NAME,
+  CANONICAL_DOMAIN,
+  VENUE_ADDRESS,
+  VENUE_GEO,
+  VENUE_PHONE_FALLBACK,
+  VENUE_EMAIL_FALLBACK,
+  VENUE_SOCIAL,
+  REGULAR_HOURS,
+} from '../../data/venue';
 
 interface Props extends PageSeoProps {}
 
@@ -32,33 +42,24 @@ const {
 // platform endpoints that rotate.
 
 const VENUE: VenueSchemaConfig = {
-  name:               'Louisiana Purchase',
+  name:               VENUE_NAME,
   type:               'Restaurant',
   description:        "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
-  url:                import.meta.env.PUBLIC_SITE_URL || 'https://louisianapurchasebar.com',
-  phone:              import.meta.env.PUBLIC_VENUE_PHONE || '+16195551234',
-  email:              import.meta.env.PUBLIC_VENUE_EMAIL || 'hello@louisianapurchasebar.com',
+  url:                import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN,
+  phone:              import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK,
+  email:              import.meta.env.PUBLIC_VENUE_EMAIL || VENUE_EMAIL_FALLBACK,
   address: {
-    street:   '2305 University Ave',
-    city:     'San Diego',
-    state:    'CA',
-    zip:      '92104',
-    country:  'US',
+    street:   VENUE_ADDRESS.street,
+    city:     VENUE_ADDRESS.city,
+    state:    VENUE_ADDRESS.state,
+    zip:      VENUE_ADDRESS.zip,
+    country:  VENUE_ADDRESS.country,
   },
   geo: {
-    // North Park, San Diego — precise coordinates for local search ranking
-    latitude:  32.7474,
-    longitude: -117.1293,
+    latitude:  VENUE_GEO.latitude,
+    longitude: VENUE_GEO.longitude,
   },
-  hours: [
-    { dayOfWeek: 'Monday',    opens: '15:00', closes: '21:00' },
-    { dayOfWeek: 'Tuesday',   opens: '15:00', closes: '21:00' },
-    { dayOfWeek: 'Wednesday', opens: '15:00', closes: '21:00' },
-    { dayOfWeek: 'Thursday',  opens: '15:00', closes: '21:00' },
-    { dayOfWeek: 'Friday',    opens: '15:00', closes: '22:00' },
-    { dayOfWeek: 'Saturday',  opens: '12:00', closes: '22:00' },
-    { dayOfWeek: 'Sunday',    opens: '12:00', closes: '20:00' },
-  ],
+  hours: REGULAR_HOURS,
   cuisines: [
     'Creole',
     'Louisiana',
@@ -72,11 +73,11 @@ const VENUE: VenueSchemaConfig = {
   image:                '/og-hero.jpg',
   logo:                 '/logo.png',
   acceptsReservations:  true,
-  hasMenu:              'https://louisianapurchasebar.com/menu',
+  hasMenu:              `${CANONICAL_DOMAIN}/menu`,
 };
 
 // ─── Canonical URL Resolution ────────────────────────────────────────────────
-const siteUrl   = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || 'https://louisianapurchasebar.com';
+const siteUrl   = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || CANONICAL_DOMAIN;
 const pagePath  = Astro.url.pathname;
 const resolvedCanonical = canonical
   ? `${siteUrl}${canonical}`
@@ -136,8 +137,8 @@ const restaurantSchema: Record<string, unknown> = {
     { '@type': 'LocationFeatureSpecification', name: 'Cocktail Bar',        value: true },
   ],
   sameAs: [
-    'https://www.instagram.com/louisianapurchasebar',
-    'https://www.facebook.com/louisianapurchasebar',
+    VENUE_SOCIAL.instagram,
+    VENUE_SOCIAL.facebook,
   ],
 };
 

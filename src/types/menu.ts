@@ -6,8 +6,10 @@ export interface MenuItem {
   id:           string;
   name:         string;
   description:  string;
-  price:        number;            // Always in USD cents (e.g., 1800 = $18.00)
-  priceDisplay: string;            // Pre-formatted: "$18"
+  price?:       number;            // Always in USD cents (e.g., 1800 = $18.00). Omit if pricing is not yet confirmed.
+  priceDisplay?: string;           // Pre-formatted: "$18". Omit if pricing is not yet confirmed.
+  image?:       string;            // Key into src/assets/images IMAGES registry (filename, no extension)
+  imageAlt?:    string;
   tags:         MenuItemTag[];
   dietary:      DietaryFlag[];
   featured:     boolean;

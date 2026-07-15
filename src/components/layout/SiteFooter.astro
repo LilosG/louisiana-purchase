@@ -2,9 +2,9 @@
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
+import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BAYOU_HOUR, BRUNCH_HOURS } from '../../data/venue';
 
-const SELF_URL = 'https://louisianapurchasesd.com';
-const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
+const portfolio = GPH_NETWORK.filter((v) => v.url !== CANONICAL_DOMAIN);
 ---
 
 <footer role="contentinfo" aria-label="Site footer" class="site-footer">
@@ -27,18 +27,18 @@ const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
         </p>
         <address class="site-footer__address">
           <a
-            href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104"
+            href={VENUE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="site-footer__address-link"
           >
-            2305 University Ave<br />
-            North Park, San Diego, CA 92104
+            {VENUE_ADDRESS.street}<br />
+            {VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}, {VENUE_ADDRESS.state} {VENUE_ADDRESS.zip}
           </a>
         </address>
         <div class="site-footer__social" aria-label="Social media links">
           <a
-            href="https://www.instagram.com/louisianapurchasebar"
+            href={VENUE_SOCIAL.instagram}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Louisiana Purchase on Instagram"
@@ -47,7 +47,7 @@ const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
             Instagram
           </a>
           <a
-            href="https://www.facebook.com/louisianapurchasebar"
+            href={VENUE_SOCIAL.facebook}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Louisiana Purchase on Facebook"
@@ -83,28 +83,18 @@ const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
       <section aria-labelledby="footer-hours-heading" class="site-footer__hours-col">
         <h3 id="footer-hours-heading" class="site-footer__col-heading">Hours</h3>
         <dl class="site-footer__hours">
-          <div class="site-footer__hour-row">
-            <dt>Monday – Thursday</dt>
-            <dd>3 PM – 9 PM</dd>
-          </div>
-          <div class="site-footer__hour-row">
-            <dt>Friday</dt>
-            <dd>3 PM – 10 PM</dd>
-          </div>
-          <div class="site-footer__hour-row">
-            <dt>Saturday</dt>
-            <dd>12 PM – 10 PM</dd>
-          </div>
-          <div class="site-footer__hour-row">
-            <dt>Sunday</dt>
-            <dd>12 PM – 8 PM</dd>
-          </div>
+          {DISPLAY_HOURS.map((h) => (
+            <div class="site-footer__hour-row">
+              <dt>{h.label}</dt>
+              <dd>{h.value}</dd>
+            </div>
+          ))}
         </dl>
         <p class="site-footer__brunch-note">
-          Brunch: Sat &amp; Sun 12–3 PM
+          {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}
         </p>
         <p class="site-footer__brunch-note">
-          Bayou Hour: Mon–Fri 3–5 PM
+          {BAYOU_HOUR.label}: {BAYOU_HOUR.days} {BAYOU_HOUR.window}
         </p>
       </section>
 
@@ -183,7 +173,7 @@ const portfolio = GPH_NETWORK.filter((v) => v.url !== SELF_URL);
     <!-- Bottom bar -->
     <div class="site-footer__bottom">
       <p class="site-footer__copyright">
-        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; 2305 University Ave, San Diego, CA 92104
+        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; {VENUE_ADDRESS.street}, {VENUE_ADDRESS.city}, {VENUE_ADDRESS.state} {VENUE_ADDRESS.zip}
       </p>
       <div class="site-footer__bottom-right">
         <p class="site-footer__sub">
