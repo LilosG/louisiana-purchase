@@ -30,12 +30,22 @@ const FAQ_ITEMS = [
   { q: 'Is parking available near Louisiana Purchase?',         a: `Street parking is available on University Ave and surrounding streets in North Park. Several nearby parking lots are within a short walk of the venue at ${VENUE_ADDRESS.street}.` },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 
 <Layout
   title="Private Events & Venue Buyouts in North Park San Diego | Louisiana Purchase"
   description="Host an unforgettable private event at Louisiana Purchase in North Park, San Diego. Corporate dinners, birthday celebrations, brunch buyouts, and full venue rental for up to 80 guests."
   canonical="/private-events"
+  schema={faqSchema}
   breadcrumbs={[
     { name: 'Home',           url: '/',               position: 1 },
     { name: 'Private Events', url: '/private-events', position: 2 },

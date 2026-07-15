@@ -21,6 +21,7 @@ import {
   VENUE_EMAIL_FALLBACK,
   VENUE_SOCIAL,
   REGULAR_HOURS,
+  VENUE_DEFAULT_IMAGE,
 } from '../../data/venue';
 
 interface Props extends PageSeoProps {}
@@ -70,7 +71,7 @@ const VENUE: VenueSchemaConfig = {
     'American',
   ],
   priceRange:           '$$$',
-  image:                '/og-hero.jpg',
+  image:                VENUE_DEFAULT_IMAGE,
   logo:                 '/logo.png',
   acceptsReservations:  true,
   hasMenu:              `${CANONICAL_DOMAIN}/menu`,
@@ -86,7 +87,7 @@ const resolvedCanonical = canonical
 // ─── OG Image Resolution ─────────────────────────────────────────────────────
 const resolvedOgImage = ogImage
   ? `${siteUrl}${ogImage}`
-  : `${siteUrl}/og-default.jpg`;
+  : `${siteUrl}${VENUE_DEFAULT_IMAGE}`;
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
 const restaurantSchema: Record<string, unknown> = {
@@ -210,8 +211,9 @@ const formattedTitle = title.includes('Louisiana Purchase')
 
 <!-- ─── JSON-LD: Page-Specific Override (conditional) ───────────────── -->
 {schema && (
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify(schema, null, 0)}
-  />
+  Array.isArray(schema)
+    ? schema.map((s) => (
+        <script type="application/ld+json" set:html={JSON.stringify(s, null, 0)} />
+      ))
+    : <script type="application/ld+json" set:html={JSON.stringify(schema, null, 0)} />
 )}

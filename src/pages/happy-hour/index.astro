@@ -37,13 +37,22 @@ const FAQ_ITEMS = [
   { q: 'Is there food available during happy hour?', a: 'Yes. Bayou Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.' },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 
 <Layout
   title="Bayou Hour — Happy Hour in North Park San Diego | Louisiana Purchase"
   description="Bayou Hour at Louisiana Purchase — North Park's best happy hour. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome."
   canonical="/happy-hour"
-  schema={happyHourSchema}
+  schema={[happyHourSchema, faqSchema]}
   breadcrumbs={[
     { name: 'Home',       url: '/',           position: 1 },
     { name: 'Happy Hour', url: '/happy-hour', position: 2 },

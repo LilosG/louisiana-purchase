@@ -76,13 +76,22 @@ const INCLUDED_ITEMS = [
   { title: '24-Hour Response',          body: 'Our events team responds to all inquiries within 24 hours with availability and a custom proposal.' },
 ];
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQ_ITEMS.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: { '@type': 'Answer', text: faq.a },
+  })),
+};
 ---
 
 <Layout
   title={event.metaTitle}
   description={event.description}
   canonical={`/private-events/${event.slug}`}
-  schema={eventVenueSchema}
+  schema={[eventVenueSchema, faqSchema]}
   breadcrumbs={[
     { name: 'Home',           url: '/',               position: 1 },
     { name: 'Private Events', url: '/private-events', position: 2 },
