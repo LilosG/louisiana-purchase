@@ -18,6 +18,7 @@ import img_louisiana_purchase_drink_menu_north_park_san_diego_website from './lo
 import img_louisiana_purchase_drop_top_chicken_flock_brunch_website from './louisiana-purchase-drop-top-chicken-flock-brunch-website.jpg';
 import img_louisiana_purchase_group_dining_san_diego_website from './louisiana-purchase-group-dining-san-diego-website.jpg';
 import img_louisiana_purchase_intimate_cocktail_restaurant_website from './louisiana-purchase-intimate-cocktail-restaurant-website.jpg';
+import img_louisiana_purchase_marble_bar_north_park_website from './louisiana-purchase-marble-bar-north-park-website.jpg';
 import img_louisiana_purchase_modern_creole_restaurant_website from './louisiana-purchase-modern-creole-restaurant-website.jpg';
 import img_louisiana_purchase_north_park_restaurant_and_bar_website from './louisiana-purchase-north-park-restaurant-and-bar-website.jpg';
 import img_louisiana_purchase_patio_living_wall_north_park_website from './louisiana-purchase-patio-living-wall-north-park-website.jpg';
@@ -43,6 +44,7 @@ export const IMAGES = {
   'louisiana-purchase-drop-top-chicken-flock-brunch-website': img_louisiana_purchase_drop_top_chicken_flock_brunch_website,
   'louisiana-purchase-group-dining-san-diego-website': img_louisiana_purchase_group_dining_san_diego_website,
   'louisiana-purchase-intimate-cocktail-restaurant-website': img_louisiana_purchase_intimate_cocktail_restaurant_website,
+  'louisiana-purchase-marble-bar-north-park-website': img_louisiana_purchase_marble_bar_north_park_website,
   'louisiana-purchase-modern-creole-restaurant-website': img_louisiana_purchase_modern_creole_restaurant_website,
   'louisiana-purchase-north-park-restaurant-and-bar-website': img_louisiana_purchase_north_park_restaurant_and_bar_website,
   'louisiana-purchase-patio-living-wall-north-park-website': img_louisiana_purchase_patio_living_wall_north_park_website,
