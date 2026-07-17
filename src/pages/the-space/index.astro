@@ -10,6 +10,9 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import { VENUE_ADDRESS, VENUE_MAPS_URL, DISPLAY_HOURS, EVENT_CAPACITY } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
+import { Image } from 'astro:assets';
 ---
 
 <Layout
@@ -27,8 +30,8 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     title="The Space"
     titleItalic="A Room That Earns Its Place"
     subtitle="Every element of Louisiana Purchase was designed with intention — the geometric timber ceiling, the marble bar, the candlelit tables, the lush patio framed by hanging ferns. A room that transports you before the first drink arrives."
-    image="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
-    imageAlt="Louisiana Purchase interior — North Park San Diego"
+    image={IMAGES['louisiana-purchase-street-corner-exterior-north-park-website']}
+    imageAlt="Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego"
     ctas={[
       { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'Private Events',    href: '/private-events', variant: 'outline' },
@@ -39,7 +42,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
   <StatBar
     stats={[
       { value: 'Est. 2018', label: 'North Park Original' },
-      { value: '80+',       label: 'Event Capacity' },
+      { value: `${EVENT_CAPACITY.fullVenue}+`, label: 'Event Capacity' },
       { value: '3 Spaces',  label: 'Configurable Areas' },
       { value: 'Open Patio',label: 'Available Daily' },
     ]}
@@ -48,7 +51,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── The Dining Room ──────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-dining-room-bar-north-park-website']}
     imageAlt="Louisiana Purchase dining room — geometric timber ceiling and marble bar"
     eyebrow="The Dining Room"
     title="The Geometric Timber"
@@ -71,8 +74,8 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── The Patio ────────────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
-    imageAlt="Louisiana Purchase open patio — North Park San Diego"
+    image={IMAGES['louisiana-purchase-patio-living-wall-north-park-website']}
+    imageAlt="Louisiana Purchase open patio with living wall — North Park San Diego"
     eyebrow="The Patio"
     title="Open Air Dining"
     titleItalic="in North Park"
@@ -81,7 +84,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       "Available for dining service daily and for private event buyouts. The patio accommodates up to 50 guests for reception-style events.",
     ]}
     facts={[
-      { label: 'Capacity',    value: 'Up to 50 Guests' },
+      { label: 'Capacity',    value: `Up to ${EVENT_CAPACITY.patio} Guests` },
       { label: 'Use',         value: 'Dining & Events' },
       { label: 'Ambience',    value: 'Fern-Framed Courtyard' },
       { label: 'Availability',value: 'Open Daily' },
@@ -111,29 +114,29 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         divided={true}
         cards={[
           {
-            image:    '/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg',
-            imageAlt: 'Louisiana Purchase at night — North Park San Diego',
+            image:    IMAGES['louisiana-purchase-restaurant-exterior-pergola-north-park-website'],
+            imageAlt: 'Louisiana Purchase at night — University Ave and 23rd St, North Park',
             eyebrow:  'Exterior',
             title:    'The Entrance',
             body:     'Louisiana Purchase at night — University Ave and 23rd St, North Park.',
           },
           {
-            image:    '/images/louisiana-purchase-seafood-and-cocktails-north-park-website.jpg',
+            image:    IMAGES['louisiana-purchase-marble-bar-north-park-website'],
             imageAlt: 'Louisiana Purchase interior — marble bar and timber ceiling',
             eyebrow:  'The Bar',
             title:    'Marble Bar',
             body:     'The full marble bar running the length of the main dining room.',
           },
           {
-            image:    '/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg',
-            imageAlt: 'Intimate dining at Louisiana Purchase North Park',
+            image:    IMAGES['louisiana-purchase-dining-room-bar-north-park-website'],
+            imageAlt: 'Candlelit tables and velvet seating at Louisiana Purchase North Park',
             eyebrow:  'Dining Room',
             title:    'Candlelit Tables',
             body:     'Velvet seating and candlelit tables beneath the geometric timber ceiling.',
           },
           {
-            image:    '/images/louisiana-purchase-cocktail-bar-north-park-website.jpg',
-            imageAlt: 'Louisiana Purchase patio — North Park San Diego',
+            image:    IMAGES['louisiana-purchase-patio-living-wall-north-park-website'],
+            imageAlt: 'Louisiana Purchase patio with living wall — North Park San Diego',
             eyebrow:  'The Patio',
             title:    'Open Air Courtyard',
             body:     'The lush fern-framed patio — one of North Park\'s best outdoor dining spaces.',
@@ -146,7 +149,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Private Events Callout ───────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-private-dining-san-diego-website']}
     imageAlt="Private dining setup at Louisiana Purchase North Park San Diego"
     eyebrow="Private Events"
     title="Your Event."
@@ -156,9 +159,9 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       "Our events team will work with you on every detail from first inquiry to last call. Capacity up to 80 guests.",
     ]}
     facts={[
-      { label: 'Full Venue',   value: 'Up to 80 Guests' },
-      { label: 'Private Room', value: 'Up to 40 Guests' },
-      { label: 'Patio',        value: 'Up to 50 Guests' },
+      { label: 'Full Venue',   value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
+      { label: 'Private Room', value: `Up to ${EVENT_CAPACITY.privateRoom} Guests` },
+      { label: 'Patio',        value: `Up to ${EVENT_CAPACITY.patio} Guests` },
       { label: 'Response',     value: 'Within 24 Hours' },
     ]}
     ctas={[
@@ -176,19 +179,16 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Find Us</p>
           <h2 id="location-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">
-            2305 University Ave<br /><span class="italic text-gold">North Park, San Diego</span>
+            {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
           </h2>
           <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]">
-            Louisiana Purchase is located at the intersection of University Ave and 23rd St in the heart of North Park — San Diego's most vibrant dining and nightlife neighborhood.
+            Louisiana Purchase is located at the intersection of {VENUE_ADDRESS.crossStreet} in the heart of {VENUE_ADDRESS.neighborhood} — San Diego's most vibrant dining and nightlife neighborhood.
           </p>
 
           <dl class="flex flex-col gap-4 mb-8 pt-6 border-t border-gold/15">
             {[
-              { label: 'Address',            value: '2305 University Ave, North Park, San Diego, CA 92104' },
-              { label: 'Monday – Thursday',  value: '3 PM – 9 PM' },
-              { label: 'Friday',             value: '3 PM – 10 PM' },
-              { label: 'Saturday',           value: '12 PM – 10 PM' },
-              { label: 'Sunday',             value: '12 PM – 8 PM' },
+              { label: 'Address', value: `${VENUE_ADDRESS.street}, ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip}` },
+              ...DISPLAY_HOURS,
             ].map((item) => (
               <div class="flex justify-between gap-8">
                 <dt class="font-sans text-[0.5625rem] font-medium tracking-[0.20em] uppercase text-gold/70 pt-0.5">{item.label}</dt>
@@ -198,7 +198,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
           </dl>
 
           <div class="flex flex-wrap gap-4">
-            <a href="https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104" target="_blank" rel="noopener noreferrer"
+            <a href={VENUE_MAPS_URL} target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
               Get Directions
             </a>
@@ -210,14 +210,15 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         </div>
 
         <div class="overflow-hidden aspect-[4/3]">
-          <img
-            src="/images/louisiana-purchase-seafood-restaurant-san-diego-website.jpg"
+          <Image
+            src={IMAGES['louisiana-purchase-seafood-restaurant-san-diego-website']}
             alt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
-            width="1600"
-            height="1068"
+            format="webp"
+            widths={[480, 800, 1200, 1600]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
 
@@ -229,7 +230,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     eyebrow="Come Experience It"
     title="Louisiana Purchase Awaits."
     subtitle="Open Tuesday through Sunday. Walk-ins welcome at the bar. Reservations recommended for dining."
-    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
     ctas={[
       { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
       { label: 'Private Events',    href: '/private-events', variant: 'outline' },

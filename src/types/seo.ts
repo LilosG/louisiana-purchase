@@ -46,7 +46,7 @@ export interface PageSeoProps {
   ogImage?:       string;
   ogType?:        'website' | 'article' | 'restaurant';
   noindex?:       boolean;
-  schema?:        Record<string, unknown>;
+  schema?:        Record<string, unknown> | Record<string, unknown>[];
   breadcrumbs?:   BreadcrumbItem[];
 }
 

@@ -3,6 +3,9 @@
 // Louisiana Purchase — Full-Width CTA Band Component
 // Tailwind v4: standard utility classes only.
 
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
 interface CTAButton {
   label:     string;
   href:      string;
@@ -15,7 +18,7 @@ interface Props {
   title:     string;
   subtitle?: string;
   ctas:      CTAButton[];
-  image?:    string;
+  image?:    ImageMetadata;
   imageAlt?: string;
   dark?:     boolean;
 }
@@ -44,14 +47,15 @@ const {
 
   {image && (
     <div class="absolute inset-0 z-0" aria-hidden="true">
-      <img
+      <Image
         src={image}
         alt={imageAlt}
         class="w-full h-full object-cover object-center"
         loading="lazy"
         decoding="async"
-        width="1600"
-        height="900"
+        format="webp"
+        widths={[640, 1024, 1600, 2000]}
+        sizes="100vw"
       />
       <div class="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/80 to-obsidian/90"></div>
     </div>

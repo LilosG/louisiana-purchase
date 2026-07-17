@@ -10,6 +10,9 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import { VENUE_SOCIAL, EVENT_CAPACITY } from '../../data/venue';
+import { IMAGES } from '../../assets/images';
+import { Image } from 'astro:assets';
 ---
 
 <Layout
@@ -27,7 +30,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     title="Events &"
     titleItalic="Happenings"
     subtitle="From Mardi Gras celebrations to limited-time seasonal menus and live music nights — Louisiana Purchase brings the spirit of New Orleans to North Park year-round."
-    image="/images/louisiana-purchase-group-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
     imageAlt="Events at Louisiana Purchase North Park San Diego"
     ctas={[
       { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
@@ -48,7 +51,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── What Happens Here ────────────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-date-night-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
     imageAlt="Louisiana Purchase events and happenings North Park San Diego"
     eyebrow="The Spirit of New Orleans"
     title="Every Night Is"
@@ -64,7 +67,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       { label: 'Location',  value: 'North Park, SD' },
     ]}
     ctas={[
-      { label: 'Follow on Instagram', href: 'https://www.instagram.com/louisianapurchasebar', external: true, variant: 'gold' },
+      { label: 'Follow on Instagram', href: VENUE_SOCIAL.instagram, external: true, variant: 'gold' },
     ]}
     dark={true}
   />
@@ -87,28 +90,28 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         divided={true}
         cards={[
           {
-            image:    '/images/louisiana-purchase-intimate-cocktail-restaurant-website.jpg',
+            image:    IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website'],
             imageAlt: 'Mardi Gras at Louisiana Purchase North Park San Diego',
             eyebrow:  'Annual',
             title:    'Mardi Gras',
             body:     'Louisiana Purchase goes all-in for Mardi Gras. Special menus, cocktail features, costumes, and a room that feels like Bourbon Street for a night.',
           },
           {
-            image:    '/images/louisiana-purchase-cocktail-menu-north-park-website.jpg',
+            image:    IMAGES['louisiana-purchase-cocktail-menu-north-park-website'],
             imageAlt: 'Seasonal menu at Louisiana Purchase',
             eyebrow:  'Rotating',
             title:    'Seasonal Menus',
             body:     'Chef Quinnton Austin releases limited-time seasonal menus throughout the year — new ingredients, new preparations, the same obsessive precision.',
           },
           {
-            image:    '/images/louisiana-purchase-craft-cocktails-san-diego-website.jpg',
+            image:    IMAGES['louisiana-purchase-craft-cocktails-san-diego-website'],
             imageAlt: 'Live music at Louisiana Purchase North Park',
             eyebrow:  'Select Nights',
             title:    'Live Music',
             body:     'Jazz, soul, and blues on select evenings. The kind of music that makes Louisiana Purchase feel like the venue it was always meant to be.',
           },
           {
-            image:    '/images/louisiana-purchase-drink-menu-north-park-san-diego-website.jpg',
+            image:    IMAGES['louisiana-purchase-drink-menu-north-park-san-diego-website'],
             imageAlt: 'Cocktail features at Louisiana Purchase',
             eyebrow:  'Bar Program',
             title:    'Cocktail Features',
@@ -135,7 +138,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
           </p>
           <div class="flex flex-wrap gap-4">
             <a
-              href="https://www.instagram.com/louisianapurchasebar"
+              href={VENUE_SOCIAL.instagram}
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]"
@@ -143,7 +146,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
               Follow on Instagram
             </a>
             <a
-              href="https://www.facebook.com/louisianapurchasebar"
+              href={VENUE_SOCIAL.facebook}
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
@@ -154,14 +157,15 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
         </div>
 
         <div class="overflow-hidden aspect-[4/3]">
-          <img
-            src="/images/louisiana-purchase-north-park-restaurant-and-bar-website.jpg"
+          <Image
+            src={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
             alt="Louisiana Purchase events North Park San Diego"
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
-            width="1600"
-            height="1064"
+            format="webp"
+            widths={[480, 800, 1200, 1600]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
           />
         </div>
 
@@ -171,7 +175,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 
   <!-- ─── Private Events Callout ───────────────────────────────────────── -->
   <AlternatingRow
-    image="/images/louisiana-purchase-private-dining-san-diego-website.jpg"
+    image={IMAGES['louisiana-purchase-private-dining-san-diego-website']}
     imageAlt="Private event at Louisiana Purchase North Park San Diego"
     eyebrow="Host Your Own"
     title="Planning a Private"
@@ -181,7 +185,7 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
       "Our events team handles every detail from first inquiry to last call. Capacity up to 80 guests.",
     ]}
     facts={[
-      { label: 'Capacity',  value: 'Up to 80 Guests' },
+      { label: 'Capacity',  value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
       { label: 'Options',   value: 'Custom Menus' },
       { label: 'Response',  value: 'Within 24 Hours' },
       { label: 'Location',  value: 'North Park, SD' },
@@ -197,10 +201,10 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
     eyebrow="Don't Miss a Thing"
     title="Reserve Your Table."
     subtitle="Louisiana Purchase is open seven days a week. Walk-ins welcome at the bar."
-    image="/images/louisiana-purchase-cocktail-bar-north-park-website.jpg"
+    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
     ctas={[
       { label: 'Reserve a Table',     href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Follow on Instagram', href: 'https://www.instagram.com/louisianapurchasebar', external: true, variant: 'outline' },
+      { label: 'Follow on Instagram', href: VENUE_SOCIAL.instagram, external: true, variant: 'outline' },
     ]}
   />
 

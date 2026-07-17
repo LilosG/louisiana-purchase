@@ -1,0 +1,59 @@
+---
+// src/components/ui/ChecklistItems.astro
+// Louisiana Purchase — Shared Checklist / Step List Component
+// Divided card grid — either a bare checklist (✦ marker) or numbered steps.
+// Consolidates the "What's Included" and "The Process" patterns that were
+// previously duplicated as one-off markup on private-events pages.
+
+interface ChecklistItem {
+  title: string;
+  body:  string;
+  step?: string; // optional explicit step label (e.g. "01"); auto-numbered if omitted and numbered=true
+}
+
+interface Props {
+  items:     ChecklistItem[];
+  numbered?: boolean;         // true renders an <ol> with step numbers, false renders a <ul> with a ✦ marker
+  cols?:     2 | 3 | 4;
+  dark?:     boolean;
+}
+
+const {
+  items,
+  numbered = false,
+  cols = 3,
+  dark = true,
+} = Astro.props;
+
+const colClass = {
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+}[cols];
+
+const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
+---
+
+{numbered ? (
+  <ol role="list" class:list={['grid', colClass, 'gap-px bg-gold/10']}>
+    {items.map((item, i) => (
+      <li class:list={[cardBg, 'p-7 flex flex-col gap-3 reveal']}>
+        <span class="font-mono text-[0.625rem] text-gold/50 tracking-[0.24em]">
+          {item.step ?? String(i + 1).padStart(2, '0')}
+        </span>
+        <h3 class="font-serif font-light text-parchment text-lg">{item.title}</h3>
+        <p class="font-sans font-light text-smoke text-sm leading-relaxed">{item.body}</p>
+      </li>
+    ))}
+  </ol>
+) : (
+  <ul role="list" class:list={['grid', colClass, 'gap-px bg-gold/10']}>
+    {items.map((item) => (
+      <li class:list={[cardBg, 'p-7 flex flex-col gap-3 reveal']}>
+        <span class="text-gold text-[0.5rem]">✦</span>
+        <h3 class="font-serif font-light text-parchment text-lg">{item.title}</h3>
+        <p class="font-sans font-light text-smoke text-sm leading-relaxed">{item.body}</p>
+      </li>
+    ))}
+  </ul>
+)}

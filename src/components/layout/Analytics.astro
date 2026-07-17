@@ -4,18 +4,19 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 {GA_ID && (
   <>
     <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-    <script define:vars={{ GA_ID }}>
+    <script is:inline define:vars={{ GA_ID }}>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', GA_ID);
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA_ID);
     </script>
-    <script>
-      // Tracks clicks on embedded reservation/order/gift-card/private-event links,
-      // since GA4 can't see completions inside third-party domains (Resy, Toast, Tripleseat).
+    <script is:inline>
+      // Tracks clicks on embedded reservation/order/gift-card links,
+      // since GA4 can't see completions inside third-party domains (Resy, Toast).
+      // Orders and reservations route through Toast; Tripleseat is not used.
       // This only fires an event on click (intent), not confirmation.
       document.addEventListener('click', function (e) {
-        const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="tripleseat.com"]');
+        const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"]');
         if (!link) return;
 
         let eventName = 'external_link_click';
@@ -25,7 +26,6 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
           else if (href.includes('giftcard')) eventName = 'gift_card_click';
           else if (href.includes('toasttab.com')) eventName = 'order_click';
           else if (href.includes('catering')) eventName = 'catering_click';
-          else if (href.includes('tripleseat.com')) eventName = 'private_events_click';
         } catch (err) {}
 
         if (typeof gtag === 'function') {
@@ -35,6 +35,41 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
           });
         }
       }, { passive: true });
+    </script>
+    <script is:inline>
+      // Private event inquiries route through an embedded Toast lead-form
+      // iframe, not a link-out platform — GA4 has no visibility into the
+      // iframe's contents (cross-origin, no postMessage API from Toast),
+      // so true form-submission tracking isn't possible. These two events
+      // bracket the funnel instead: click intent, and reach (the form
+      // actually scrolled into view).
+      document.addEventListener('click', function (e) {
+        const link = e.target.closest('a[href$="#event-inquiry"]');
+        if (!link) return;
+        if (typeof gtag === 'function') {
+          gtag('event', 'private_events_cta_click', {
+            link_url: link.href,
+            page_path: window.location.pathname,
+          });
+        }
+      }, { passive: true });
+
+      if ('IntersectionObserver' in window) {
+        const forms = document.querySelectorAll('[data-toast-event-form]');
+        if (forms.length) {
+          const observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && typeof gtag === 'function') {
+                gtag('event', 'private_events_form_viewed', {
+                  page_path: window.location.pathname,
+                });
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.25 });
+          forms.forEach(function (form) { observer.observe(form); });
+        }
+      }
     </script>
   </>
 )}
