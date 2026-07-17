@@ -39,8 +39,8 @@ export const VENUE_GEO = {
 // Real values are supplied via PUBLIC_VENUE_PHONE / PUBLIC_VENUE_EMAIL env
 // vars at build time. These are placeholder fallbacks only, matching the
 // canonical domain above.
-export const VENUE_PHONE_FALLBACK = '+16195551234';
-export const VENUE_EMAIL_FALLBACK = 'hello@louisianapurchasesd.com';
+export const VENUE_PHONE_FALLBACK = '+18586836828';
+export const VENUE_EMAIL_FALLBACK = 'info@louisianapurchasesd.com';
 
 // ─── Social ───────────────────────────────────────────────────────────────
 export const VENUE_SOCIAL = {
