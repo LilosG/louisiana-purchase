@@ -10,6 +10,16 @@ interface Props {
 const { transparent = true } = Astro.props;
 const currentPath = Astro.url.pathname;
 
+const phoneRaw = import.meta.env.PUBLIC_VENUE_PHONE || '+16195551234';
+// Formats a US E.164 number (+18586836828) as (858) 683-6828 for display.
+// Falls back to the raw value for any non-US-10-digit format rather than showing nothing.
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, '').replace(/^1/, '');
+  if (digits.length !== 10) return value;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+}
+const phoneDisplay = formatPhone(phoneRaw);
+
 const navLinks = [
   { href: '/menu',           label: 'Menu' },
   { href: '/brunch',         label: 'Brunch' },
@@ -59,6 +69,13 @@ const mobileLinks = [
     </nav>
 
     <div class="site-nav__ctas">
+      <a
+        href={`tel:${phoneRaw}`}
+        class="site-nav__cta-phone"
+        aria-label={`Call Louisiana Purchase at ${phoneDisplay}`}
+      >
+        {phoneDisplay}
+      </a>
       <a
         href={import.meta.env.PUBLIC_ORDER_URL}
         target="_blank"
@@ -117,6 +134,9 @@ const mobileLinks = [
       </a>
       <a href={import.meta.env.PUBLIC_ORDER_URL} target="_blank" rel="noopener noreferrer" class="site-nav__drawer-order">
         Order Online
+      </a>
+      <a href={`tel:${phoneRaw}`} class="site-nav__drawer-phone">
+        {phoneDisplay}
       </a>
     </div>
   </nav>
@@ -246,6 +266,19 @@ const mobileLinks = [
 }
 
 .site-nav__cta-order:hover { color: var(--color-parchment); }
+
+.site-nav__cta-phone {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(242,235,224,0.55);
+  transition: color 280ms ease;
+  padding: 0.5rem;
+  white-space: nowrap;
+}
+
+.site-nav__cta-phone:hover { color: var(--color-gold); }
 
 .site-nav__cta-reserve {
   font-family: var(--font-sans);
@@ -394,6 +427,17 @@ const mobileLinks = [
 }
 
 .site-nav__drawer-order:hover { color: var(--color-parchment); }
+
+.site-nav__drawer-phone {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0.20em;
+  color: rgba(242,235,224,0.4);
+  transition: color 280ms ease;
+}
+
+.site-nav__drawer-phone:hover { color: var(--color-gold); }
 </style>
 
 <script>
