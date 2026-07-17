@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "lastUpdated": "2026-07-17",
   "sections": [
     {
@@ -128,6 +128,19 @@
               ],
               "featured": false,
               "available": true
+            },
+            {
+              "id": "acme-oysters",
+              "name": "ACME Oysters",
+              "description": "7 chargrilled Gulf oysters, garlic lemon butter, parmesan.",
+              "image": "louisiana-purchase-acme-oysters-north-park-website",
+              "imageAlt": "ACME Oysters — chargrilled Gulf oysters with garlic lemon butter and parmesan at Louisiana Purchase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
             }
           ]
         },
@@ -204,6 +217,19 @@
               "dietary": [
                 "contains-shellfish"
               ],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "dooky-chase",
+              "name": "Dooky Chase",
+              "description": "4 whole fried chicken wings, biscuit, 1 side. In honor of Mrs. Leah Chase.",
+              "image": "louisiana-purchase-dooky-chase-fried-chicken-north-park-website",
+              "imageAlt": "Dooky Chase — fried chicken wings, biscuit, and a side at Louisiana Purchase, in honor of Mrs. Leah Chase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
               "featured": true,
               "available": true
             }

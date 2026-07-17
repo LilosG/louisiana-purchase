@@ -6,6 +6,7 @@
 // is imported once here and looked up by filename (no extension) elsewhere,
 // so pages and menu.json can keep referring to images by a stable key.
 
+import img_louisiana_purchase_acme_oysters_north_park_website from './louisiana-purchase-acme-oysters-north-park-website.jpg';
 import img_louisiana_purchase_brunch_dishes_overview_north_park_website from './louisiana-purchase-brunch-dishes-overview-north-park-website.jpg';
 import img_louisiana_purchase_catfish_n_grits_brunch_north_park_website from './louisiana-purchase-catfish-n-grits-brunch-north-park-website.jpg';
 import img_louisiana_purchase_cocktail_bar_north_park_website from './louisiana-purchase-cocktail-bar-north-park-website.jpg';
@@ -15,6 +16,7 @@ import img_louisiana_purchase_date_night_north_park_website from './louisiana-pu
 import img_louisiana_purchase_dining_room_bar_north_park_website from './louisiana-purchase-dining-room-bar-north-park-website.jpg';
 import img_louisiana_purchase_dinner_north_park_san_diego_website from './louisiana-purchase-dinner-north-park-san-diego-website.jpg';
 import img_louisiana_purchase_drink_menu_north_park_san_diego_website from './louisiana-purchase-drink-menu-north-park-san-diego-website.jpg';
+import img_louisiana_purchase_dooky_chase_fried_chicken_north_park_website from './louisiana-purchase-dooky-chase-fried-chicken-north-park-website.jpg';
 import img_louisiana_purchase_drop_top_chicken_flock_brunch_website from './louisiana-purchase-drop-top-chicken-flock-brunch-website.jpg';
 import img_louisiana_purchase_gin_and_juice_cocktail_north_park_website from './louisiana-purchase-gin-and-juice-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_group_dining_san_diego_website from './louisiana-purchase-group-dining-san-diego-website.jpg';
@@ -36,6 +38,7 @@ import img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website f
 import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana-purchase-weekend-brunch-san-diego-website.jpg';
 
 export const IMAGES = {
+  'louisiana-purchase-acme-oysters-north-park-website': img_louisiana_purchase_acme_oysters_north_park_website,
   'louisiana-purchase-brunch-dishes-overview-north-park-website': img_louisiana_purchase_brunch_dishes_overview_north_park_website,
   'louisiana-purchase-catfish-n-grits-brunch-north-park-website': img_louisiana_purchase_catfish_n_grits_brunch_north_park_website,
   'louisiana-purchase-cocktail-bar-north-park-website': img_louisiana_purchase_cocktail_bar_north_park_website,
@@ -45,6 +48,7 @@ export const IMAGES = {
   'louisiana-purchase-dining-room-bar-north-park-website': img_louisiana_purchase_dining_room_bar_north_park_website,
   'louisiana-purchase-dinner-north-park-san-diego-website': img_louisiana_purchase_dinner_north_park_san_diego_website,
   'louisiana-purchase-drink-menu-north-park-san-diego-website': img_louisiana_purchase_drink_menu_north_park_san_diego_website,
+  'louisiana-purchase-dooky-chase-fried-chicken-north-park-website': img_louisiana_purchase_dooky_chase_fried_chicken_north_park_website,
   'louisiana-purchase-drop-top-chicken-flock-brunch-website': img_louisiana_purchase_drop_top_chicken_flock_brunch_website,
   'louisiana-purchase-gin-and-juice-cocktail-north-park-website': img_louisiana_purchase_gin_and_juice_cocktail_north_park_website,
   'louisiana-purchase-group-dining-san-diego-website': img_louisiana_purchase_group_dining_san_diego_website,
