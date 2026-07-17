@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "lastUpdated": "2026-07-17",
   "sections": [
     {
@@ -141,6 +141,19 @@
               "dietary": [],
               "featured": true,
               "available": true
+            },
+            {
+              "id": "lemon-pepper-catfish",
+              "name": "Lemon Pepper Catfish",
+              "description": "Whole fillet, lemon pepper crust, cornbread, 1 side, LP tartar.",
+              "image": "louisiana-purchase-lemon-pepper-catfish-north-park-website",
+              "imageAlt": "Lemon Pepper Catfish — whole fillet with lemon pepper crust at Louisiana Purchase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
             }
           ]
         },
@@ -226,6 +239,45 @@
               "description": "4 whole fried chicken wings, biscuit, 1 side. In honor of Mrs. Leah Chase.",
               "image": "louisiana-purchase-dooky-chase-fried-chicken-north-park-website",
               "imageAlt": "Dooky Chase — fried chicken wings, biscuit, and a side at Louisiana Purchase, in honor of Mrs. Leah Chase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "oxtail-plate",
+              "name": "Oxtail Plate",
+              "description": "8oz braised oxtail, smoked gouda mac, sweet potato cornbread.",
+              "image": "louisiana-purchase-oxtail-plate-north-park-website",
+              "imageAlt": "Oxtail Plate — braised oxtail with smoked gouda mac and sweet potato cornbread at Louisiana Purchase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "dragos",
+              "name": "Dragos",
+              "description": "Chicken lobster, topped with Cajun cream pasta.",
+              "image": "louisiana-purchase-dragos-lobster-pasta-north-park-website",
+              "imageAlt": "Dragos — chicken lobster topped with Cajun cream pasta at Louisiana Purchase",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "creole-shrimp-pasta",
+              "name": "Creole Shrimp Pasta",
+              "description": "Gulf shrimp, rigatoni, roasted tomato, basil cream, parmesan.",
+              "image": "louisiana-purchase-creole-shrimp-pasta-north-park-website",
+              "imageAlt": "Creole Shrimp Pasta — Gulf shrimp, rigatoni, roasted tomato, basil cream at Louisiana Purchase",
               "tags": [
                 "signature"
               ],
