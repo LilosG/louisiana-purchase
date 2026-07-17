@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
 import AlternatingRow from '../components/ui/AlternatingRow.astro';
-import FourColumnGrid from '../components/ui/FourColumnGrid.astro';
 import StatBar from '../components/ui/StatBar.astro';
 import CTABand from '../components/ui/CTABand.astro';
 import MenuShowcase from '../components/ui/MenuShowcase.astro';
@@ -116,58 +115,6 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
     reverse={true}
     dark={false}
   />
-
-  <!-- ─── FOOD GRID ──────────────────────────────────────────── -->
-  <section aria-labelledby="food-h" class="bg-velvet py-20 md:py-28">
-    <div class="max-w-[1280px] mx-auto px-6">
-
-      <SectionHeader
-        eyebrow="The Experience"
-        title="A Place Worth"
-        titleItalic="Coming Back To"
-        subtitle="From the fire-forward kitchen to the candlelit bar and lush open patio — Louisiana Purchase is built to be experienced in person."
-        id="food-h"
-      />
-
-      <FourColumnGrid
-        cols={4}
-        dark={false}
-        divided={true}
-        cards={[
-          {
-            image:    IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website'],
-            imageAlt: 'Louisiana Purchase at night — North Park San Diego',
-            eyebrow:  'Exterior',
-            title:    'The Room',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-modern-creole-restaurant-website'],
-            imageAlt: 'Elevated Creole cuisine at Louisiana Purchase',
-            eyebrow:  'The Kitchen',
-            title:    'Elevated Creole',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-cocktail-bar-north-park-website'],
-            imageAlt: 'Craft cocktails at Louisiana Purchase North Park',
-            eyebrow:  'The Bar',
-            title:    'Craft Cocktails',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-group-dining-san-diego-website'],
-            imageAlt: 'Dining at Louisiana Purchase North Park San Diego',
-            eyebrow:  'The Table',
-            title:    'Group Dining',
-          },
-        ]}
-      />
-
-      <div class="text-center mt-10">
-        <a href="/menu" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
-          Explore the Menu
-        </a>
-      </div>
-    </div>
-  </section>
 
   <!-- ─── FOOD STRIP ────────────────────────────────────────── -->
   <section aria-labelledby="dish-h" class="bg-obsidian py-20 md:py-28">
