@@ -16,7 +16,9 @@ import img_louisiana_purchase_dining_room_bar_north_park_website from './louisia
 import img_louisiana_purchase_dinner_north_park_san_diego_website from './louisiana-purchase-dinner-north-park-san-diego-website.jpg';
 import img_louisiana_purchase_drink_menu_north_park_san_diego_website from './louisiana-purchase-drink-menu-north-park-san-diego-website.jpg';
 import img_louisiana_purchase_drop_top_chicken_flock_brunch_website from './louisiana-purchase-drop-top-chicken-flock-brunch-website.jpg';
+import img_louisiana_purchase_gin_and_juice_cocktail_north_park_website from './louisiana-purchase-gin-and-juice-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_group_dining_san_diego_website from './louisiana-purchase-group-dining-san-diego-website.jpg';
+import img_louisiana_purchase_hurricane_pop_cocktail_north_park_website from './louisiana-purchase-hurricane-pop-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_intimate_cocktail_restaurant_website from './louisiana-purchase-intimate-cocktail-restaurant-website.jpg';
 import img_louisiana_purchase_marble_bar_north_park_website from './louisiana-purchase-marble-bar-north-park-website.jpg';
 import img_louisiana_purchase_modern_creole_restaurant_website from './louisiana-purchase-modern-creole-restaurant-website.jpg';
@@ -29,6 +31,8 @@ import img_louisiana_purchase_seafood_restaurant_san_diego_website from './louis
 import img_louisiana_purchase_shrimp_n_grits_brunch_north_park_website from './louisiana-purchase-shrimp-n-grits-brunch-north-park-website.jpg';
 import img_louisiana_purchase_southern_brunch_menu_north_park_website from './louisiana-purchase-southern-brunch-menu-north-park-website.jpg';
 import img_louisiana_purchase_street_corner_exterior_north_park_website from './louisiana-purchase-street-corner-exterior-north-park-website.webp';
+import img_louisiana_purchase_superbird_paloma_cocktail_north_park_website from './louisiana-purchase-superbird-paloma-cocktail-north-park-website.jpg';
+import img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website from './louisiana-purchase-watermelon-margarita-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana-purchase-weekend-brunch-san-diego-website.jpg';
 
 export const IMAGES = {
@@ -42,7 +46,9 @@ export const IMAGES = {
   'louisiana-purchase-dinner-north-park-san-diego-website': img_louisiana_purchase_dinner_north_park_san_diego_website,
   'louisiana-purchase-drink-menu-north-park-san-diego-website': img_louisiana_purchase_drink_menu_north_park_san_diego_website,
   'louisiana-purchase-drop-top-chicken-flock-brunch-website': img_louisiana_purchase_drop_top_chicken_flock_brunch_website,
+  'louisiana-purchase-gin-and-juice-cocktail-north-park-website': img_louisiana_purchase_gin_and_juice_cocktail_north_park_website,
   'louisiana-purchase-group-dining-san-diego-website': img_louisiana_purchase_group_dining_san_diego_website,
+  'louisiana-purchase-hurricane-pop-cocktail-north-park-website': img_louisiana_purchase_hurricane_pop_cocktail_north_park_website,
   'louisiana-purchase-intimate-cocktail-restaurant-website': img_louisiana_purchase_intimate_cocktail_restaurant_website,
   'louisiana-purchase-marble-bar-north-park-website': img_louisiana_purchase_marble_bar_north_park_website,
   'louisiana-purchase-modern-creole-restaurant-website': img_louisiana_purchase_modern_creole_restaurant_website,
@@ -55,6 +61,8 @@ export const IMAGES = {
   'louisiana-purchase-shrimp-n-grits-brunch-north-park-website': img_louisiana_purchase_shrimp_n_grits_brunch_north_park_website,
   'louisiana-purchase-southern-brunch-menu-north-park-website': img_louisiana_purchase_southern_brunch_menu_north_park_website,
   'louisiana-purchase-street-corner-exterior-north-park-website': img_louisiana_purchase_street_corner_exterior_north_park_website,
+  'louisiana-purchase-superbird-paloma-cocktail-north-park-website': img_louisiana_purchase_superbird_paloma_cocktail_north_park_website,
+  'louisiana-purchase-watermelon-margarita-cocktail-north-park-website': img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website,
   'louisiana-purchase-weekend-brunch-san-diego-website': img_louisiana_purchase_weekend_brunch_san_diego_website,
 } as const;
 

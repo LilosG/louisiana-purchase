@@ -1,6 +1,6 @@
 {
-  "version": "1.1.0",
-  "lastUpdated": "2026-07-15",
+  "version": "1.2.0",
+  "lastUpdated": "2026-07-17",
   "sections": [
     {
       "id": "cocktails",
@@ -14,53 +14,53 @@
           "order": 1,
           "items": [
             {
-              "id": "praline-old-fashioned",
-              "name": "Praline Old Fashioned",
-              "description": "Buffalo Trace bourbon, house-made praline syrup, Peychaud's bitters, expressed orange peel. The definitive Louisiana Purchase signature — rich, nutty, and impossibly smooth.",
-              "price": 1800,
-              "priceDisplay": "$18",
-              "image": "louisiana-purchase-intimate-cocktail-restaurant-website",
-              "imageAlt": "Praline Old Fashioned — Louisiana Purchase signature cocktail",
-              "tags": ["signature", "popular"],
+              "id": "superbird-paloma",
+              "name": "Superbird Paloma",
+              "description": "Superbird canned tequila paloma — blanco tequila, pink grapefruit, lime, a crisp effervescent pour straight from the can.",
+              "image": "louisiana-purchase-superbird-paloma-cocktail-north-park-website",
+              "imageAlt": "Superbird Tequila Paloma — Louisiana Purchase signature cocktail",
+              "tags": [
+                "signature",
+                "popular"
+              ],
               "dietary": [],
               "featured": true,
               "available": true
             },
             {
-              "id": "voo-doo-carre",
-              "name": "Voo Doo Carré",
-              "description": "Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters. A dark, brooding evolution of the Vieux Carré — complex, ceremonial, unforgettable.",
-              "price": 1900,
-              "priceDisplay": "$19",
-              "image": "louisiana-purchase-cocktail-menu-north-park-website",
-              "imageAlt": "Voo Doo Carré — Louisiana Purchase craft cocktail",
-              "tags": ["signature", "chef-selection"],
+              "id": "watermelon-margarita",
+              "name": "Watermelon Margarita",
+              "description": "Blanco tequila, fresh watermelon, lime, agave, finished with a watermelon wedge.",
+              "image": "louisiana-purchase-watermelon-margarita-cocktail-north-park-website",
+              "imageAlt": "Watermelon Margarita — Louisiana Purchase craft cocktail",
+              "tags": [
+                "signature"
+              ],
               "dietary": [],
               "featured": true,
               "available": true
             },
             {
-              "id": "bayou-swizzle",
-              "name": "Bayou Swizzle",
-              "description": "Agricole rhum, passion fruit, fresh lime, orgeat, mint, Angostura. A tropical swizzle with a sultry NOLA soul.",
-              "price": 1700,
-              "priceDisplay": "$17",
-              "image": "louisiana-purchase-craft-cocktails-san-diego-website",
-              "imageAlt": "Bayou Swizzle — craft cocktail at Louisiana Purchase",
-              "tags": ["popular"],
+              "id": "gin-and-juice",
+              "name": "Gin & Juice",
+              "description": "Butterfly pea flower gin over fresh citrus juice — a color-shifting pour that fades from violet to gold.",
+              "image": "louisiana-purchase-gin-and-juice-cocktail-north-park-website",
+              "imageAlt": "Gin & Juice — Louisiana Purchase craft cocktail",
+              "tags": [],
               "dietary": [],
               "featured": false,
               "available": true
             },
             {
-              "id": "cafe-brulot-martini",
-              "name": "Café Brûlot Martini",
-              "description": "Cold-brew spirit, house café brûlot syrup, egg white, beignet garnish.",
-              "price": 1700,
-              "priceDisplay": "$17",
-              "image": "louisiana-purchase-drink-menu-north-park-san-diego-website",
-              "imageAlt": "Café Brûlot Martini — Louisiana Purchase bar program",
-              "tags": [],
+              "id": "hurricane-pop",
+              "name": "Hurricane Pop",
+              "description": "Dark and spiced rum, passion fruit, orange, grenadine — the classic Hurricane finished with a crackling Pop Rocks garnish.",
+              "image": "louisiana-purchase-hurricane-pop-cocktail-north-park-website",
+              "imageAlt": "Hurricane Pop — Louisiana Purchase signature cocktail with Pop Rocks garnish",
+              "tags": [
+                "signature",
+                "popular"
+              ],
               "dietary": [],
               "featured": true,
               "available": true
@@ -88,8 +88,14 @@
               "priceDisplay": "$24",
               "image": "louisiana-purchase-modern-creole-restaurant-website",
               "imageAlt": "Fire-charred oysters — Louisiana Purchase raw bar",
-              "tags": ["signature", "popular", "chef-selection"],
-              "dietary": ["contains-shellfish"],
+              "tags": [
+                "signature",
+                "popular",
+                "chef-selection"
+              ],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": true,
               "available": true
             },
@@ -102,7 +108,9 @@
               "image": "louisiana-purchase-seafood-restaurant-san-diego-website",
               "imageAlt": "Gulf oysters on the half shell at Louisiana Purchase",
               "tags": [],
-              "dietary": ["contains-shellfish"],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": false,
               "available": true
             },
@@ -115,7 +123,9 @@
               "image": "louisiana-purchase-southern-brunch-menu-north-park-website",
               "imageAlt": "Fried oysters and fries — Louisiana Purchase kitchen",
               "tags": [],
-              "dietary": ["contains-shellfish"],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": false,
               "available": true
             }
@@ -135,8 +145,14 @@
               "priceDisplay": "$28",
               "image": "louisiana-purchase-group-dining-san-diego-website",
               "imageAlt": "Louisiana BBQ Shrimp at Louisiana Purchase",
-              "tags": ["signature", "popular"],
-              "dietary": ["contains-shellfish", "spicy"],
+              "tags": [
+                "signature",
+                "popular"
+              ],
+              "dietary": [
+                "contains-shellfish",
+                "spicy"
+              ],
               "featured": true,
               "available": true
             },
@@ -148,8 +164,12 @@
               "priceDisplay": "$22",
               "image": "louisiana-purchase-dinner-north-park-san-diego-website",
               "imageAlt": "Chicken and andouille gumbo — Louisiana Purchase kitchen",
-              "tags": ["chef-selection"],
-              "dietary": ["spicy"],
+              "tags": [
+                "chef-selection"
+              ],
+              "dietary": [
+                "spicy"
+              ],
               "featured": false,
               "available": true
             },
@@ -161,8 +181,12 @@
               "priceDisplay": "$42",
               "image": "louisiana-purchase-seafood-and-cocktails-north-park-website",
               "imageAlt": "Steak étouffée — Louisiana Purchase signature dish",
-              "tags": ["signature"],
-              "dietary": ["contains-shellfish"],
+              "tags": [
+                "signature"
+              ],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": true,
               "available": true
             },
@@ -174,8 +198,12 @@
               "priceDisplay": "$38",
               "image": "louisiana-purchase-private-dining-san-diego-website",
               "imageAlt": "Lobster pasta — Louisiana Purchase Creole kitchen",
-              "tags": ["chef-selection"],
-              "dietary": ["contains-shellfish"],
+              "tags": [
+                "chef-selection"
+              ],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": true,
               "available": true
             }
@@ -223,7 +251,9 @@
               "image": "louisiana-purchase-shrimp-n-grits-brunch-north-park-website",
               "imageAlt": "Shrimp N' Grits — brunch dish at Louisiana Purchase North Park",
               "tags": [],
-              "dietary": ["contains-shellfish"],
+              "dietary": [
+                "contains-shellfish"
+              ],
               "featured": false,
               "available": true
             }
