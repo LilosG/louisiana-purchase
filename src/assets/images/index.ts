@@ -9,6 +9,7 @@
 import img_louisiana_purchase_acme_oysters_north_park_website from './louisiana-purchase-acme-oysters-north-park-website.jpg';
 import img_louisiana_purchase_brunch_dishes_overview_north_park_website from './louisiana-purchase-brunch-dishes-overview-north-park-website.jpg';
 import img_louisiana_purchase_catfish_n_grits_brunch_north_park_website from './louisiana-purchase-catfish-n-grits-brunch-north-park-website.jpg';
+import img_louisiana_purchase_catfish_n_grits_brunch_spread_north_park_website from './louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website.jpg';
 import img_louisiana_purchase_cocktail_bar_north_park_website from './louisiana-purchase-cocktail-bar-north-park-website.jpg';
 import img_louisiana_purchase_cocktail_menu_north_park_website from './louisiana-purchase-cocktail-menu-north-park-website.jpg';
 import img_louisiana_purchase_craft_cocktails_san_diego_website from './louisiana-purchase-craft-cocktails-san-diego-website.jpg';
@@ -41,6 +42,7 @@ export const IMAGES = {
   'louisiana-purchase-acme-oysters-north-park-website': img_louisiana_purchase_acme_oysters_north_park_website,
   'louisiana-purchase-brunch-dishes-overview-north-park-website': img_louisiana_purchase_brunch_dishes_overview_north_park_website,
   'louisiana-purchase-catfish-n-grits-brunch-north-park-website': img_louisiana_purchase_catfish_n_grits_brunch_north_park_website,
+  'louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website': img_louisiana_purchase_catfish_n_grits_brunch_spread_north_park_website,
   'louisiana-purchase-cocktail-bar-north-park-website': img_louisiana_purchase_cocktail_bar_north_park_website,
   'louisiana-purchase-cocktail-menu-north-park-website': img_louisiana_purchase_cocktail_menu_north_park_website,
   'louisiana-purchase-craft-cocktails-san-diego-website': img_louisiana_purchase_craft_cocktails_san_diego_website,
