@@ -39,7 +39,7 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
   <StatBar
     stats={[
       { value: 'Open Daily',      label: 'Hours Today' },
-      { value: BAYOU_HOUR.days,   label: BAYOU_HOUR.label,   href: '/happy-hour' },
+      { value: BAYOU_HOUR.window, label: BAYOU_HOUR.label,   href: '/happy-hour' },
       { value: BRUNCH_HOURS.days, label: BRUNCH_HOURS.label, href: '/brunch' },
       { value: 'North Park, SD',  label: 'Location', href: VENUE_MAPS_URL, external: true },
     ]}
