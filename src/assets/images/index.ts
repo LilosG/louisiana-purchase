@@ -47,6 +47,7 @@ import img_louisiana_purchase_superbird_paloma_cocktail_north_park_website from 
 import img_louisiana_purchase_university_ave_corner_night_north_park_website from './louisiana-purchase-university-ave-corner-night-north-park-website.jpg';
 import img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website from './louisiana-purchase-watermelon-margarita-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana-purchase-weekend-brunch-san-diego-website.jpg';
+import img_louisiana_purchase_weezy_vice_cocktail_north_park_website from './louisiana-purchase-weezy-vice-cocktail-north-park-website.jpg';
 
 export const IMAGES = {
   'louisiana-purchase-acme-oysters-north-park-website': img_louisiana_purchase_acme_oysters_north_park_website,
@@ -90,6 +91,7 @@ export const IMAGES = {
   'louisiana-purchase-university-ave-corner-night-north-park-website': img_louisiana_purchase_university_ave_corner_night_north_park_website,
   'louisiana-purchase-watermelon-margarita-cocktail-north-park-website': img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website,
   'louisiana-purchase-weekend-brunch-san-diego-website': img_louisiana_purchase_weekend_brunch_san_diego_website,
+  'louisiana-purchase-weezy-vice-cocktail-north-park-website': img_louisiana_purchase_weezy_vice_cocktail_north_park_website,
 } as const;
 
 export type ImageKey = keyof typeof IMAGES;
