@@ -9,7 +9,7 @@
   "build": {
     "env": {
       "PUBLIC_SITE_URL": "https://louisianapurchasesd.com",
-      "PUBLIC_ORDER_URL": "https://louisianapurchasesd.com/order",
+      "PUBLIC_ORDER_URL": "https://order.toasttab.com/online/louisiana-purchase?utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=online-order",
       "PUBLIC_RESERVATIONS_URL": "https://toast.app/r/louisiana-purchase?toast_sg=30bdef01-f4e0-4403-b50d-2b0263b663e1&toast_ss=8536cdf3-e37d-4e6e-89e6-3446ed13063d&toast_src=website_link&utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=reservations",
       "PUBLIC_VENUE_PHONE": "+18586836828",
       "PUBLIC_VENUE_EMAIL": "info@louisianapurchasesd.com"
