@@ -1,6 +1,6 @@
 {
-  "version": "1.4.0",
-  "lastUpdated": "2026-07-17",
+  "version": "1.5.0",
+  "lastUpdated": "2026-07-18",
   "sections": [
     {
       "id": "cocktails",
@@ -60,6 +60,58 @@
               "tags": [
                 "signature",
                 "popular"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "praline-old-fashioned",
+              "name": "Praline Old Fashioned",
+              "description": "Buffalo Trace bourbon, house-made praline syrup, Peychaud's bitters, expressed orange peel. The definitive Louisiana Purchase signature — rich, nutty, and impossibly smooth.",
+              "image": "louisiana-purchase-intimate-cocktail-restaurant-website",
+              "imageAlt": "Praline Old Fashioned — signature cocktail at Louisiana Purchase North Park",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "voo-doo-carre",
+              "name": "Voo Doo Carré",
+              "description": "Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters. A dark, brooding evolution of the Vieux Carré — complex, ceremonial, unforgettable.",
+              "image": "louisiana-purchase-cocktail-menu-north-park-website",
+              "imageAlt": "Voo Doo Carré — signature cocktail at Louisiana Purchase North Park",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": true,
+              "available": true
+            },
+            {
+              "id": "bayou-swizzle",
+              "name": "Bayou Swizzle",
+              "description": "Agricole rhum, passion fruit, fresh lime, orgeat, mint, Angostura. A tropical swizzle with a sultry NOLA soul.",
+              "image": "louisiana-purchase-craft-cocktails-san-diego-website",
+              "imageAlt": "Bayou Swizzle — signature cocktail at Louisiana Purchase North Park",
+              "tags": [
+                "signature"
+              ],
+              "dietary": [],
+              "featured": false,
+              "available": true
+            },
+            {
+              "id": "cafe-brulot-martini",
+              "name": "Café Brûlot Martini",
+              "description": "Cold-brew spirit, house café brûlot syrup, egg white, beignet garnish.",
+              "image": "louisiana-purchase-drink-menu-north-park-san-diego-website",
+              "imageAlt": "Café Brûlot Martini — signature cocktail at Louisiana Purchase North Park",
+              "tags": [
+                "signature"
               ],
               "dietary": [],
               "featured": true,
