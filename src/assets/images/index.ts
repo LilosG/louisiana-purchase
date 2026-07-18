@@ -7,6 +7,7 @@
 // so pages and menu.json can keep referring to images by a stable key.
 
 import img_louisiana_purchase_acme_oysters_north_park_website from './louisiana-purchase-acme-oysters-north-park-website.jpg';
+import img_louisiana_purchase_alligator_cheesecake_north_park_website from './louisiana-purchase-alligator-cheesecake-north-park-website.jpg';
 import img_louisiana_purchase_brunch_dishes_overview_north_park_website from './louisiana-purchase-brunch-dishes-overview-north-park-website.jpg';
 import img_louisiana_purchase_brunch_patio_setting_north_park_website from './louisiana-purchase-brunch-patio-setting-north-park-website.jpg';
 import img_louisiana_purchase_brunch_table_flatlay_north_park_website from './louisiana-purchase-brunch-table-flatlay-north-park-website.jpg';
@@ -48,6 +49,7 @@ import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana
 
 export const IMAGES = {
   'louisiana-purchase-acme-oysters-north-park-website': img_louisiana_purchase_acme_oysters_north_park_website,
+  'louisiana-purchase-alligator-cheesecake-north-park-website': img_louisiana_purchase_alligator_cheesecake_north_park_website,
   'louisiana-purchase-brunch-dishes-overview-north-park-website': img_louisiana_purchase_brunch_dishes_overview_north_park_website,
   'louisiana-purchase-brunch-patio-setting-north-park-website': img_louisiana_purchase_brunch_patio_setting_north_park_website,
   'louisiana-purchase-brunch-table-flatlay-north-park-website': img_louisiana_purchase_brunch_table_flatlay_north_park_website,
