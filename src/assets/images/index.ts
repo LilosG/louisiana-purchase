@@ -33,6 +33,7 @@ import img_louisiana_purchase_modern_creole_restaurant_website from './louisiana
 import img_louisiana_purchase_north_park_restaurant_and_bar_website from './louisiana-purchase-north-park-restaurant-and-bar-website.jpg';
 import img_louisiana_purchase_oxtail_plate_north_park_website from './louisiana-purchase-oxtail-plate-north-park-website.jpg';
 import img_louisiana_purchase_patio_living_wall_north_park_website from './louisiana-purchase-patio-living-wall-north-park-website.jpg';
+import img_louisiana_purchase_private_brunch_events_north_park_website from './louisiana-purchase-private-brunch-events-north-park-website.jpg';
 import img_louisiana_purchase_private_dining_san_diego_website from './louisiana-purchase-private-dining-san-diego-website.jpg';
 import img_louisiana_purchase_restaurant_exterior_pergola_north_park_website from './louisiana-purchase-restaurant-exterior-pergola-north-park-website.jpg';
 import img_louisiana_purchase_seafood_and_cocktails_north_park_website from './louisiana-purchase-seafood-and-cocktails-north-park-website.jpg';
@@ -72,6 +73,7 @@ export const IMAGES = {
   'louisiana-purchase-north-park-restaurant-and-bar-website': img_louisiana_purchase_north_park_restaurant_and_bar_website,
   'louisiana-purchase-oxtail-plate-north-park-website': img_louisiana_purchase_oxtail_plate_north_park_website,
   'louisiana-purchase-patio-living-wall-north-park-website': img_louisiana_purchase_patio_living_wall_north_park_website,
+  'louisiana-purchase-private-brunch-events-north-park-website': img_louisiana_purchase_private_brunch_events_north_park_website,
   'louisiana-purchase-private-dining-san-diego-website': img_louisiana_purchase_private_dining_san_diego_website,
   'louisiana-purchase-restaurant-exterior-pergola-north-park-website': img_louisiana_purchase_restaurant_exterior_pergola_north_park_website,
   'louisiana-purchase-seafood-and-cocktails-north-park-website': img_louisiana_purchase_seafood_and_cocktails_north_park_website,
