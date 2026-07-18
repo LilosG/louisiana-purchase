@@ -6,7 +6,7 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CTABand from '../../components/ui/CTABand.astro';
-import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BRUNCH_HOURS, BAYOU_HOUR } from '../../data/venue';
+import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BRUNCH_HOURS, HAPPY_HOUR } from '../../data/venue';
 import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import { IMAGES } from '../../assets/images';
 ---
@@ -135,7 +135,7 @@ import { IMAGES } from '../../assets/images';
           </dl>
           <p class="font-sans text-[0.75rem] text-gold/70 tracking-[0.04em]">
             {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}<br />
-            {BAYOU_HOUR.label}: {BAYOU_HOUR.days} {BAYOU_HOUR.window}
+            {HAPPY_HOUR.label}: {HAPPY_HOUR.days} {HAPPY_HOUR.window}
           </p>
         </div>
 
@@ -177,7 +177,7 @@ import { IMAGES } from '../../assets/images';
   <CTABand
     eyebrow="Ready to Visit"
     title="We'll See You Soon."
-    subtitle="Reserve your table or stop in for Bayou Hour — Louisiana Purchase is open seven days a week."
+    subtitle="Reserve your table or stop in for Happy Hour — Louisiana Purchase is open seven days a week."
     image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },

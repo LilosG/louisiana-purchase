@@ -68,8 +68,8 @@ export const DISPLAY_HOURS: { label: string; value: string }[] = [
   { label: 'Sunday',            value: '12 PM – 8 PM' },
 ];
 
-export const BAYOU_HOUR = {
-  label:  'Bayou Hour',
+export const HAPPY_HOUR = {
+  label:  'Happy Hour',
   days:   'Monday – Friday',
   window: '3 PM – 5 PM',
   opens:  '15:00',

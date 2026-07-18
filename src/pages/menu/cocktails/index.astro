@@ -9,7 +9,7 @@ import SectionHeader from '../../../components/ui/SectionHeader.astro';
 import StatBar from '../../../components/ui/StatBar.astro';
 import CTABand from '../../../components/ui/CTABand.astro';
 import MenuShowcase from '../../../components/ui/MenuShowcase.astro';
-import { CANONICAL_DOMAIN, BAYOU_HOUR } from '../../../data/venue';
+import { CANONICAL_DOMAIN, HAPPY_HOUR } from '../../../data/venue';
 import { IMAGES } from '../../../assets/images';
 
 const cocktailsSchema = {
@@ -42,7 +42,7 @@ const cocktailsSchema = {
     imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Bayou Hour',      href: '/happy-hour', variant: 'outline' },
+      { label: 'Happy Hour',      href: '/happy-hour', variant: 'outline' },
     ]}
     headlineId="cocktails-headline"
   />
@@ -50,7 +50,7 @@ const cocktailsSchema = {
   <StatBar
     stats={[
       { value: 'Open Daily',       label: 'Bar Hours' },
-      { value: BAYOU_HOUR.window,  label: 'Bayou Hour' },
+      { value: HAPPY_HOUR.window,  label: 'Happy Hour' },
       { value: '4+',               label: 'Signature Cocktails' },
       { value: 'NOLA',             label: 'Rooted' },
     ]}
@@ -76,11 +76,11 @@ const cocktailsSchema = {
   <CTABand
     eyebrow="Join Us"
     title="Reserve a Seat at the Bar."
-    subtitle={`Bayou Hour runs ${BAYOU_HOUR.days}, ${BAYOU_HOUR.window}. The full cocktail menu is available open to close, seven days a week.`}
+    subtitle={`Happy Hour runs ${HAPPY_HOUR.days}, ${HAPPY_HOUR.window}. The full cocktail menu is available open to close, seven days a week.`}
     image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
     ctas={[
       { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Bayou Hour Details', href: '/happy-hour', variant: 'outline' },
+      { label: 'Happy Hour Details', href: '/happy-hour', variant: 'outline' },
     ]}
   />
 

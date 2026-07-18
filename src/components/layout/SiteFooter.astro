@@ -2,7 +2,7 @@
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
-import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BAYOU_HOUR, BRUNCH_HOURS } from '../../data/venue';
+import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, HAPPY_HOUR, BRUNCH_HOURS } from '../../data/venue';
 import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 
 const portfolio = GPH_NETWORK.filter((v) => v.url !== CANONICAL_DOMAIN);
@@ -103,7 +103,7 @@ const privateEventsHref = isOnPrivateEventsPage
           {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}
         </p>
         <p class="site-footer__brunch-note">
-          {BAYOU_HOUR.label}: {BAYOU_HOUR.days} {BAYOU_HOUR.window}
+          {HAPPY_HOUR.label}: {HAPPY_HOUR.days} {HAPPY_HOUR.window}
         </p>
       </section>
 
