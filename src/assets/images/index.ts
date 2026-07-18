@@ -25,6 +25,7 @@ import img_louisiana_purchase_drink_menu_north_park_san_diego_website from './lo
 import img_louisiana_purchase_drop_top_chicken_flock_brunch_website from './louisiana-purchase-drop-top-chicken-flock-brunch-website.jpg';
 import img_louisiana_purchase_gin_and_juice_cocktail_north_park_website from './louisiana-purchase-gin-and-juice-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_group_dining_san_diego_website from './louisiana-purchase-group-dining-san-diego-website.jpg';
+import img_louisiana_purchase_happy_hour_pitcher_north_park_website from './louisiana-purchase-happy-hour-pitcher-north-park-website.jpg';
 import img_louisiana_purchase_hurricane_pop_cocktail_north_park_website from './louisiana-purchase-hurricane-pop-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_intimate_cocktail_restaurant_website from './louisiana-purchase-intimate-cocktail-restaurant-website.jpg';
 import img_louisiana_purchase_lemon_pepper_catfish_north_park_website from './louisiana-purchase-lemon-pepper-catfish-north-park-website.jpg';
@@ -65,6 +66,7 @@ export const IMAGES = {
   'louisiana-purchase-drop-top-chicken-flock-brunch-website': img_louisiana_purchase_drop_top_chicken_flock_brunch_website,
   'louisiana-purchase-gin-and-juice-cocktail-north-park-website': img_louisiana_purchase_gin_and_juice_cocktail_north_park_website,
   'louisiana-purchase-group-dining-san-diego-website': img_louisiana_purchase_group_dining_san_diego_website,
+  'louisiana-purchase-happy-hour-pitcher-north-park-website': img_louisiana_purchase_happy_hour_pitcher_north_park_website,
   'louisiana-purchase-hurricane-pop-cocktail-north-park-website': img_louisiana_purchase_hurricane_pop_cocktail_north_park_website,
   'louisiana-purchase-intimate-cocktail-restaurant-website': img_louisiana_purchase_intimate_cocktail_restaurant_website,
   'louisiana-purchase-lemon-pepper-catfish-north-park-website': img_louisiana_purchase_lemon_pepper_catfish_north_park_website,
