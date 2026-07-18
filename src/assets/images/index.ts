@@ -44,6 +44,7 @@ import img_louisiana_purchase_shrimp_n_grits_brunch_north_park_website from './l
 import img_louisiana_purchase_southern_brunch_menu_north_park_website from './louisiana-purchase-southern-brunch-menu-north-park-website.jpg';
 import img_louisiana_purchase_street_corner_exterior_north_park_website from './louisiana-purchase-street-corner-exterior-north-park-website.webp';
 import img_louisiana_purchase_superbird_paloma_cocktail_north_park_website from './louisiana-purchase-superbird-paloma-cocktail-north-park-website.jpg';
+import img_louisiana_purchase_university_ave_corner_night_north_park_website from './louisiana-purchase-university-ave-corner-night-north-park-website.jpg';
 import img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website from './louisiana-purchase-watermelon-margarita-cocktail-north-park-website.jpg';
 import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana-purchase-weekend-brunch-san-diego-website.jpg';
 
@@ -86,6 +87,7 @@ export const IMAGES = {
   'louisiana-purchase-southern-brunch-menu-north-park-website': img_louisiana_purchase_southern_brunch_menu_north_park_website,
   'louisiana-purchase-street-corner-exterior-north-park-website': img_louisiana_purchase_street_corner_exterior_north_park_website,
   'louisiana-purchase-superbird-paloma-cocktail-north-park-website': img_louisiana_purchase_superbird_paloma_cocktail_north_park_website,
+  'louisiana-purchase-university-ave-corner-night-north-park-website': img_louisiana_purchase_university_ave_corner_night_north_park_website,
   'louisiana-purchase-watermelon-margarita-cocktail-north-park-website': img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website,
   'louisiana-purchase-weekend-brunch-san-diego-website': img_louisiana_purchase_weekend_brunch_san_diego_website,
 } as const;
