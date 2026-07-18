@@ -54,7 +54,7 @@ export const REGULAR_HOURS: VenueHours[] = [
   { dayOfWeek: 'Tuesday',   opens: '15:00', closes: '21:00' },
   { dayOfWeek: 'Wednesday', opens: '15:00', closes: '21:00' },
   { dayOfWeek: 'Thursday',  opens: '15:00', closes: '21:00' },
-  { dayOfWeek: 'Friday',    opens: '15:00', closes: '22:00' },
+  { dayOfWeek: 'Friday',    opens: '15:00', closes: '24:00' },
   { dayOfWeek: 'Saturday',  opens: '12:00', closes: '22:00' },
   { dayOfWeek: 'Sunday',    opens: '12:00', closes: '20:00' },
 ];
@@ -63,7 +63,7 @@ export const REGULAR_HOURS: VenueHours[] = [
 // Must be kept in sync with REGULAR_HOURS by hand if hours change.
 export const DISPLAY_HOURS: { label: string; value: string }[] = [
   { label: 'Monday – Thursday', value: '3 PM – 9 PM' },
-  { label: 'Friday',            value: '3 PM – 10 PM' },
+  { label: 'Friday',            value: '3 PM – 12 AM' },
   { label: 'Saturday',          value: '12 PM – 10 PM' },
   { label: 'Sunday',            value: '12 PM – 8 PM' },
 ];
