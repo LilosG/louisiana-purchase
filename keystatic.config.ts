@@ -66,6 +66,14 @@ function requiredImageField(namespace: string, label: string, description: strin
 
 function labelFor(key: string, path: string[]) {
   const fullPath = [...path, key].join('.');
+  if (key === 'headlineId') return '⚠️ Advanced — Headline ID';
+  if (key === 'headingId') return '⚠️ Advanced — Heading ID';
+  if (fullPath === 'menuStructure.sections.id') return '⚠️ Advanced — Menu Section ID';
+  if (fullPath === 'menuStructure.sections.categories.id') return '⚠️ Advanced — Menu Category ID';
+  if (fullPath === 'menuStructure.sections.categories.collection') return '⚠️ Advanced — Menu Collection Key';
+  if (key === 'id') return '⚠️ Advanced — Internal Identifier';
+  if (key === 'component') return '⚠️ Advanced — Page Section Type';
+  if (key === 'variant') return '⚠️ Advanced — Button Style Token';
   if (fullPath.endsWith('seo.title')) return 'Search Result Title';
   if (fullPath.endsWith('seo.description')) return 'Search Result Description';
   if (fullPath.endsWith('hero.title')) return 'Main Page Heading';
@@ -75,6 +83,15 @@ function labelFor(key: string, path: string[]) {
 function descriptionFor(key: string, path: string[], value: unknown) {
   const fullPath = [...path, key].join('.');
   const label = labelFor(key, path).toLowerCase();
+  if (key === 'headlineId') return "Technical value that connects the page hero to its heading for accessibility. Changing it can break that connection. Do not edit unless instructed.";
+  if (key === 'headingId') return "Technical value used by the website's code to identify this heading. Changing it can break section links or accessibility references. Do not edit unless instructed.";
+  if (fullPath === 'menuStructure.sections.id') return 'Technical value used to select this menu section. Changing it can make the menu section show no items. Do not edit unless instructed.';
+  if (fullPath === 'menuStructure.sections.categories.id') return 'Technical value used to select this menu category. Changing it can make the menu category show no items. Do not edit unless instructed.';
+  if (fullPath === 'menuStructure.sections.categories.collection') return 'Technical value that routes this category to its menu-item collection. Changing it can make the category show no items. Do not edit unless instructed.';
+  if (key === 'id') return "Technical value that connects this heading to the website's section markup. Changing it can break section links or accessibility labels. Do not edit unless instructed.";
+  if (key === 'component') return "Technical value that identifies this page section's component. Changing it can break how the section is organized or displayed. Do not edit unless instructed.";
+  if (key === 'variant') return "Technical style token used by the website's code. Changing it can make the button display incorrectly. Do not edit unless instructed.";
+  if (key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)) return "Technical routing token used by the website's code. Changing it can send this button to the wrong destination or leave it without a working link. Do not edit unless instructed.";
   if (fullPath.endsWith('seo.title')) return 'Title shown in search results. Keep it concise and specific.';
   if (fullPath.endsWith('seo.description')) return 'Summary shown in search results. Use one clear sentence about this page.';
   if (key === 'imageAlt') return 'Describe what is visible in the image for screen readers and search engines.';
@@ -121,7 +138,9 @@ function schemaFromSample(sample: Record<string, unknown>, namespace: string, pa
 }
 
 function fieldFromValue(key: string, value: unknown, namespace: string, path: string[]): any {
-  const label = labelFor(key, path);
+  const label = key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)
+    ? '⚠️ Advanced — Routing Token'
+    : labelFor(key, path);
   const description = descriptionFor(key, path, value);
   const nextPath = [...path, key];
 
