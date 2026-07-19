@@ -46,7 +46,7 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: faq.a },
   })),
 };
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
 ---
 
 <Layout

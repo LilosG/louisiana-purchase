@@ -14,7 +14,7 @@ import { getSingleton } from '../../../content/siteData';
 
 const page = await getSingleton('menuDinnerPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
-const resolveCtas = (ctas: any[]) => ctas.map(({ url, ...cta }) => ({
+const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(({ url, ...cta }) => ({
   ...cta,
   href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : url === 'order' ? import.meta.env.PUBLIC_ORDER_URL : cta.href,
 }));

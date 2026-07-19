@@ -15,7 +15,7 @@ interface Props {
   dark?: boolean;
 }
 
-const { stats, dark = true } = Astro.props;
+const { stats = [], dark = true } = Astro.props;
 ---
 
 <div

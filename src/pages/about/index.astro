@@ -13,7 +13,7 @@ import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import { IMAGES } from '../../assets/images';
 const pageContent = await getSingleton('about', 'about');
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
 ---
 
 <Layout {...blocks[0]}>

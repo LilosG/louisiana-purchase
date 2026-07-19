@@ -23,12 +23,12 @@ function formatPhone(value: string): string {
 }
 const phoneDisplay = formatPhone(phoneRaw);
 
-const navLinks = navigation.desktopLinks;
+const navLinks = Array.isArray(navigation.desktopLinks) ? navigation.desktopLinks : [];
 
 const mobileLinks = [
-  navigation.mobileExtraLinks.home,
+  ...(navigation.mobileExtraLinks?.home ? [navigation.mobileExtraLinks.home] : []),
   ...navLinks,
-  navigation.mobileExtraLinks.contact,
+  ...(navigation.mobileExtraLinks?.contact ? [navigation.mobileExtraLinks.contact] : []),
 ];
 ---
 

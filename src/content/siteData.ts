@@ -18,6 +18,7 @@ export function resolveContent(value: any, images: Record<string, any>, env: Rec
   if (typeof value === 'string') {
     if (value.startsWith('__IMAGE__')) return images[value.slice(9)];
     if (value.startsWith('__ENV__')) return env[value.slice(7)];
+    if (images[value]) return images[value];
     return value;
   }
   if (Array.isArray(value)) return value.map((item) => resolveContent(item, images, env));

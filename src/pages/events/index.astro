@@ -22,7 +22,7 @@ const eventCategoryCards = (await getOrderedCollection('eventCategoryCards')).ma
 const pageContent = await getSingleton('eventsIndexPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
 const VENUE_SOCIAL = venue.social;
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
 const updatesTitle = `\n${pageContent.updates.title}`;
 ---
 

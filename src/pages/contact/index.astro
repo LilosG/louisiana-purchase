@@ -14,18 +14,19 @@ const eventsConfig = await getSingleton('eventsConfig', 'config');
 const VENUE_ADDRESS = venue.address;
 const VENUE_MAPS_URL = venue.mapsUrl;
 const VENUE_SOCIAL = venue.social;
-const DISPLAY_HOURS = venue.displayHours;
+const DISPLAY_HOURS = Array.isArray(venue.displayHours) ? venue.displayHours : [];
 const BRUNCH_HOURS = venue.brunchHours;
 const HAPPY_HOUR = venue.happyHour;
 const PRIVATE_EVENTS_FORM_ANCHOR = eventsConfig.privateEventsFormAnchor;
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
-const [reservations, privateEvents, orderOnline] = pageContent.contactMethods;
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const [reservations = {}, privateEvents = {}, orderOnline = {}] = Array.isArray(pageContent.contactMethods) ? pageContent.contactMethods : [];
 const contactMethodHrefs: Record<string, string | undefined> = {
   reservations: import.meta.env.PUBLIC_RESERVATIONS_URL,
   privateEvents: `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`,
   order: import.meta.env.PUBLIC_ORDER_URL,
 };
-const locationBody = `\n${pageContent.location.bodyPrefix}${VENUE_ADDRESS.crossStreet}${pageContent.location.bodyMiddle}${VENUE_ADDRESS.neighborhood}${pageContent.location.bodySuffix}\n`;
+const location = pageContent.location ?? {};
+const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet}${location.bodyMiddle ?? ''}${VENUE_ADDRESS.neighborhood}${location.bodySuffix ?? ''}\n`;
 ---
 
 <Layout {...blocks[0]}>

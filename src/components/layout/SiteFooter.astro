@@ -71,7 +71,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
       <nav aria-labelledby="footer-explore-heading" class="site-footer__nav-col">
         <h3 id="footer-explore-heading" class="site-footer__col-heading">{footer.columnHeadings.explore}</h3>
         <ul role="list" class="site-footer__nav-list">
-          {footer.exploreLinks.map((link: any) => (
+          {(Array.isArray(footer.exploreLinks) ? footer.exploreLinks : []).map((link: any) => (
             <li>
               <a href={link.href} class="site-footer__nav-link">
                 {link.label}
@@ -85,7 +85,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
       <section aria-labelledby="footer-hours-heading" class="site-footer__hours-col">
         <h3 id="footer-hours-heading" class="site-footer__col-heading">{footer.columnHeadings.hours}</h3>
         <dl class="site-footer__hours">
-          {venue.displayHours.map((h: any) => (
+          {(Array.isArray(venue.displayHours) ? venue.displayHours : []).map((h: any) => (
             <div class="site-footer__hour-row">
               <dt>{h.label}</dt>
               <dd>{h.value}</dd>
