@@ -26,18 +26,63 @@ const humanize = (value: string) => value
   .replace(/\b\w/g, (character) => character.toUpperCase());
 
 const fieldLabels: Record<string, string> = {
-  seo: 'Search Engine Settings', hero: 'Hero Section', title: 'Title', titleItalic: 'Italic Title',
-  description: 'Description', schemaDescription: 'Structured Data Description', schemaName: 'Structured Data Name',
-  canonical: 'Canonical Path', breadcrumbs: 'Breadcrumbs', name: 'Name', url: 'Website Address', href: 'Link Destination',
+  seo: 'Search Engine Settings', hero: 'Hero Section', title: 'Title', titleItalic: 'Italicized Title Text',
+  description: 'Description', schemaDescription: 'Search Listing Description', schemaName: 'Search Listing Name',
+  schemaNamePrefix: 'Private Event Search Name Prefix', canonical: 'Preferred Page Address', canonicalBase: 'Private Event Page Address',
+  breadcrumbs: 'Page Trail', name: 'Name', url: 'Website Address', href: 'Link Destination',
   image: 'Image', ogImage: 'Social Sharing Image', defaultSocialImage: 'Default Social Sharing Image', logo: 'Logo',
   imageAlt: 'Image Description for Accessibility', eyebrow: 'Small Section Label', subtitle: 'Supporting Text',
-  body: 'Body Text', q: 'Question', a: 'Answer', order: 'Display Order', id: 'Internal Identifier',
-  component: 'Page Section Type', props: 'Section Content', blocks: 'Page Sections', label: 'Label', value: 'Displayed Value',
+  body: 'Body Text', q: 'Question', a: 'Answer', order: 'Display Order', id: 'Website Reference',
+  component: 'Page Section Layout', props: 'Section Content', blocks: 'Page Sections', label: 'Label', value: 'Displayed Value',
   ctas: 'Calls to Action', stats: 'Venue Statistics', facts: 'Venue Facts', sections: 'Menu Sections', categories: 'Menu Categories',
   items: 'Items', available: 'Available', featured: 'Featured', dietary: 'Dietary Notes', tags: 'Tags', price: 'Price',
   priceDisplay: 'Displayed Price', multiline: 'Long Text', faqs: 'Frequently Asked Questions', amenities: 'Amenities',
   cuisines: 'Cuisines', keywords: 'Search Keywords', opens: 'Opening Time', closes: 'Closing Time', dayOfWeek: 'Day of Week',
-  external: 'Open as External Link', reverse: 'Reverse Layout', dark: 'Use Dark Theme', slug: 'Page URL',
+  external: 'Open in a New Tab', reverse: 'Place Image on the Opposite Side', dark: 'Use Dark Background', slug: 'Page URL',
+  acceptsReservations: 'Accepts Reservations', address: 'Address', addressLabel: 'Address Link Text', ariaLabels: 'Accessibility Labels',
+  ariaLabelPrefix: 'Event Link Introduction', ariaLabelSuffix: 'Event Link Ending', author: 'Business Name for Search Results',
+  benefits: 'Private Brunch Benefits', bodyMiddle: 'Location Text — Middle', bodyPrefix: 'Location Text — Beginning', bodySuffix: 'Location Text — Ending',
+  bottom: 'Bottom Line', bottomCuisine: 'Cuisine Line', brunchHours: 'Brunch Hours',
+  capacity: 'Capacity Label', cards: 'Cards', city: 'City', cocktails: 'Cocktails Menu Link', collection: 'Menu Item Source',
+  cols: 'Number of Columns', columnHeadings: 'Footer Column Headings', contact: 'Contact Link', contactMethods: 'Contact Options',
+  copyrightVenue: 'Copyright Business Name', country: 'Country', creditLabel: 'Website Credit Text', creditUrl: 'Website Credit Link',
+  crossStreet: 'Cross Street', cta: 'Call to Action', ctaLabel: 'Button Text', ctaLabels: 'Button Labels',
+  currency: 'Accepted Currency', days: 'Days', desktopLinks: 'Desktop Navigation Links',
+  dinner: 'Dinner Menu Link', directionsLabel: 'Directions Link Text', displayHours: 'Displayed Hours', divided: 'Show Divider Lines',
+  domain: 'Website Domain', emailFallback: 'Contact Email Address', eventCapacity: 'Private Event Capacities',
+  eventCardLabels: 'Private Event Card Labels', experience: 'Private Event Experience Section', experienceImage: 'Experience Image',
+  explore: 'Explore Column Heading', exploreLinks: 'Footer Explore Links', facebook: 'Facebook Link', facebookLabel: 'Facebook Link Text',
+  faqHeader: 'FAQ Section Heading', footer: 'Footer Label', form: 'Inquiry Form Section', fullVenue: 'Full Venue Capacity',
+  geo: 'Map Location', geoPlacename: 'City Name for Local Search', geoRegion: 'State and Country for Local Search',
+  giftCards: 'Gift Cards Link', googleRating: 'Google Rating', happyHour: 'Happy Hour Details', header: 'Header Label',
+  headingId: 'Section Heading Reference', headlineId: 'Hero Heading Reference', heroCtas: 'Hero Buttons', home: 'Home Link',
+  homeAriaLabel: 'Home Link Description', hours: 'Hours Column Heading', hoursEyebrow: 'Hours Section Label',
+  includedHeader: 'Included Items Section Heading', includedItems: 'Included Items', instagram: 'Instagram Link', instagramLabel: 'Instagram Link Text',
+  lastUpdated: 'Menu Last Updated Date', latitude: 'Latitude', learnMore: 'Learn More Link Text', linkLabel: 'Link Text',
+  listMarker: 'List Marker', location: 'Location Section', longitude: 'Longitude', mainNavigation: 'Main Navigation Description',
+  mapsUrl: 'Google Maps Link', menuHeader: 'Menu Heading', menuLink: 'Menu Button', menuLinks: 'Menu Links',
+  menuStructure: 'Menu Page Sections', meta: 'Supporting Detail', mobileExtraLinks: 'Additional Mobile Menu Links',
+  mobileNavigation: 'Mobile Navigation Description', navigationMenu: 'Navigation Menu Description',
+  neighborhood: 'Neighborhood', networkLabel: 'Restaurant Group Text', ogType: 'Social Sharing Page Type',
+  openMenu: 'Open Menu Button Description', orderOnline: 'Order Online Button Text', patio: 'Patio Capacity',
+  paymentAccepted: 'Accepted Payment Methods', phoneFallback: 'Phone Number', position: 'Page Trail Order',
+  priceRange: 'Price Range', pricing: 'Pricing Label', privateBrunch: 'Private Brunch Section',
+  privateEventHighlights: 'Private Event Highlights', privateEvents: 'Private Events Link',
+  privateEventsFormAnchor: 'Private Event Form Location', privateEventsIframeUrl: 'Private Event Form Web Address',
+  privateRoom: 'Private Room Capacity', regularHours: 'Regular Hours', reservationLinks: 'Reservation Links',
+  reservations: 'Reservations Column Heading', reservationsLabel: 'Reservations Link Text', reserve: 'Reserve Button Text',
+  reserveNow: 'Reserve Now Link', reserveTable: 'Reserve a Table Link', social: 'Social Section', socialLabels: 'Social Media Labels',
+  state: 'State', street: 'Street Address', tagline: 'Tagline', titleSuffix: 'Search Result Title Ending', top: 'Top Line',
+  type: 'Business Type', updates: 'Event Updates Section', variant: 'Button Style', version: 'Menu Version',
+  window: 'Displayed Time Range', wordmark: 'Wordmark Text', zip: 'ZIP Code',
+};
+
+const arrayItemLabels: Record<string, string> = {
+  amenities: 'Amenity', benefits: 'Benefit', blocks: 'Page Section', body: 'Paragraph', breadcrumbs: 'Page Trail Item',
+  cards: 'Card', categories: 'Menu Category', contactMethods: 'Contact Option', ctas: 'Button', cuisines: 'Cuisine',
+  days: 'Day', desktopLinks: 'Navigation Link', displayHours: 'Hours Entry', exploreLinks: 'Footer Link', facts: 'Venue Fact',
+  faqs: 'Frequently Asked Question', heroCtas: 'Hero Button', includedItems: 'Included Item', privateEventHighlights: 'Highlight',
+  regularHours: 'Hours Entry', sections: 'Menu Section', stats: 'Statistic',
 };
 
 const multilineKeys = new Set(['description', 'schemaDescription', 'subtitle', 'body', 'a', 'tagline']);
@@ -66,43 +111,45 @@ function requiredImageField(namespace: string, label: string, description: strin
 
 function labelFor(key: string, path: string[]) {
   const fullPath = [...path, key].join('.');
-  if (key === 'headlineId') return '⚠️ Advanced — Headline ID';
-  if (key === 'headingId') return '⚠️ Advanced — Heading ID';
-  if (fullPath === 'menuStructure.sections.id') return '⚠️ Advanced — Menu Section ID';
-  if (fullPath === 'menuStructure.sections.categories.id') return '⚠️ Advanced — Menu Category ID';
-  if (fullPath === 'menuStructure.sections.categories.collection') return '⚠️ Advanced — Menu Collection Key';
-  if (key === 'id') return '⚠️ Advanced — Internal Identifier';
-  if (key === 'component') return '⚠️ Advanced — Page Section Type';
-  if (key === 'variant') return '⚠️ Advanced — Button Style Token';
+  if (key === 'headlineId') return '⚠️ Advanced — Hero Heading Reference';
+  if (key === 'headingId') return '⚠️ Advanced — Section Heading Reference';
+  if (fullPath === 'menuStructure.sections.id') return '⚠️ Advanced — Menu Section Reference';
+  if (fullPath === 'menuStructure.sections.categories.id') return '⚠️ Advanced — Menu Category Reference';
+  if (fullPath === 'menuStructure.sections.categories.collection') return '⚠️ Advanced — Menu Item Source';
+  if (key === 'id') return '⚠️ Advanced — Website Reference';
+  if (key === 'component') return '⚠️ Advanced — Page Section Layout';
+  if (key === 'variant') return '⚠️ Advanced — Button Style';
   if (fullPath.endsWith('seo.title')) return 'Search Result Title';
   if (fullPath.endsWith('seo.description')) return 'Search Result Description';
   if (fullPath.endsWith('hero.title')) return 'Main Page Heading';
   return fieldLabels[key] ?? humanize(key);
 }
 
-function descriptionFor(key: string, path: string[], value: unknown) {
+function descriptionFor(key: string, path: string[], value: unknown, namespace: string) {
   const fullPath = [...path, key].join('.');
   const label = labelFor(key, path).toLowerCase();
-  if (key === 'headlineId') return "Technical value that connects the page hero to its heading for accessibility. Changing it can break that connection. Do not edit unless instructed.";
-  if (key === 'headingId') return "Technical value used by the website's code to identify this heading. Changing it can break section links or accessibility references. Do not edit unless instructed.";
-  if (fullPath === 'menuStructure.sections.id') return 'Technical value used to select this menu section. Changing it can make the menu section show no items. Do not edit unless instructed.';
-  if (fullPath === 'menuStructure.sections.categories.id') return 'Technical value used to select this menu category. Changing it can make the menu category show no items. Do not edit unless instructed.';
-  if (fullPath === 'menuStructure.sections.categories.collection') return 'Technical value that routes this category to its menu-item collection. Changing it can make the category show no items. Do not edit unless instructed.';
-  if (key === 'id') return "Technical value that connects this heading to the website's section markup. Changing it can break section links or accessibility labels. Do not edit unless instructed.";
-  if (key === 'component') return "Technical value that identifies this page section's component. Changing it can break how the section is organized or displayed. Do not edit unless instructed.";
-  if (key === 'variant') return "Technical style token used by the website's code. Changing it can make the button display incorrectly. Do not edit unless instructed.";
-  if (key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)) return "Technical routing token used by the website's code. Changing it can send this button to the wrong destination or leave it without a working link. Do not edit unless instructed.";
+  if (namespace === 'privateEventsSlugTemplate' && path.length === 0) {
+    return `Shared ${label} used across every private event page. Each event's title, description, capacity, and pricing are managed in Private Event Types.`;
+  }
+  if (key === 'headlineId') return 'Connects the hero heading to accessibility features. Leave unchanged unless your website team asks you to edit it.';
+  if (key === 'headingId') return 'Connects this heading to section links and accessibility features. Leave unchanged unless your website team asks you to edit it.';
+  if (fullPath === 'menuStructure.sections.id') return 'Connects this section to the correct menu content. Leave unchanged unless your website team asks you to edit it.';
+  if (fullPath === 'menuStructure.sections.categories.id') return 'Connects this category to the correct menu content. Leave unchanged unless your website team asks you to edit it.';
+  if (fullPath === 'menuStructure.sections.categories.collection') return 'Chooses which menu items appear in this category. Leave unchanged unless your website team asks you to edit it.';
+  if (key === 'id') return 'Connects this content to the correct place on the website. Leave unchanged unless your website team asks you to edit it.';
+  if (key === 'component') return 'Chooses the layout used for this page section. Leave unchanged unless your website team asks you to edit it.';
+  if (key === 'variant') return 'Chooses the appearance of this button. Leave unchanged unless your website team asks you to edit it.';
+  if (key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)) return 'Chooses the saved destination for this button. Leave unchanged unless your website team asks you to edit it.';
   if (fullPath.endsWith('seo.title')) return 'Title shown in search results. Keep it concise and specific.';
   if (fullPath.endsWith('seo.description')) return 'Summary shown in search results. Use one clear sentence about this page.';
   if (key === 'imageAlt') return 'Describe what is visible in the image for screen readers and search engines.';
-  if (key === 'id') return 'Stable internal identifier used by the website. Change only when coordinating a code update.';
   if (key === 'order') return 'Controls display order. Lower numbers appear first.';
   if (key === 'href') return 'Enter an internal path such as /contact or a complete external web address.';
   if (key.toLowerCase().includes('url')) return `Enter the complete web address used for the ${label}.`;
   if (Array.isArray(value)) return `Add, edit, remove, or reorder the ${label}.`;
   if (typeof value === 'object' && value !== null) return `Edit the ${label} used on the website.`;
   if (typeof value === 'boolean') return `Controls whether the ${label} setting is enabled.`;
-  if (typeof value === 'number') return `Enter the numeric value used for the ${label}.`;
+  if (typeof value === 'number') return `Enter the number used for the ${label}.`;
   return `Edit the ${label} shown on the website.`;
 }
 
@@ -139,9 +186,9 @@ function schemaFromSample(sample: Record<string, unknown>, namespace: string, pa
 
 function fieldFromValue(key: string, value: unknown, namespace: string, path: string[]): any {
   const label = key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)
-    ? '⚠️ Advanced — Routing Token'
+    ? '⚠️ Advanced — Button Destination Setting'
     : labelFor(key, path);
-  const description = descriptionFor(key, path, value);
+  const description = descriptionFor(key, path, value, namespace);
   const nextPath = [...path, key];
 
   if (isImageValue(key, value)) {
@@ -150,7 +197,7 @@ function fieldFromValue(key: string, value: unknown, namespace: string, path: st
   if (Array.isArray(value)) {
     const objects = value.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object' && !Array.isArray(item));
     const sampleItem = objects.length ? mergeObjects(objects) : value[0];
-    const singular = humanize(key.replace(/s$/, ''));
+    const singular = arrayItemLabels[key] ?? fieldLabels[key.replace(/s$/, '')] ?? humanize(key.replace(/s$/, ''));
     const element = sampleItem && typeof sampleItem === 'object'
       ? fields.object(schemaFromSample(sampleItem as Record<string, unknown>, namespace, nextPath), {
           label: singular,
@@ -193,7 +240,7 @@ const optionalText = (label: string, description: string, multiline = false) => 
   label, description, multiline,
 });
 const orderField = fields.number({ label: 'Display Order', description: 'Controls display order. Lower numbers appear first.' });
-const idField = fields.text({ label: 'Internal Identifier', description: 'Stable identifier used by the website. Change only with a coordinated code update.', validation: { isRequired: true } });
+const idField = fields.text({ label: '⚠️ Advanced — Website Reference', description: 'Connects this content to the correct place on the website. Leave unchanged unless your website team asks you to edit it.', validation: { isRequired: true } });
 const tagsField = fields.array(requiredText('Tag', 'Enter one short search or display tag.'), {
   label: 'Tags', description: 'Add, edit, remove, or reorder the tags.', itemLabel: (props) => props.value || 'Tag',
 });
@@ -216,7 +263,7 @@ function menuCollection(label: string, directory: string) {
       featured: fields.checkbox({ label: 'Featured', description: 'Turn on to feature this item in highlighted menu areas.', defaultValue: false }),
       dietary: fields.array(requiredText('Dietary Note', 'Enter one dietary note or abbreviation.'), { label: 'Dietary Notes', description: 'Add dietary notes for this item.', itemLabel: (props) => props.value || 'Dietary Note' }),
       tags: tagsField,
-      price: fields.number({ label: 'Price', description: 'Optional numeric price used for structured menu data.' }),
+      price: fields.number({ label: 'Price', description: 'Optional price used in search results and other menu listings.' }),
       priceDisplay: optionalText('Displayed Price', 'Optional formatted price shown to guests, such as $18.'),
     },
   });
@@ -260,33 +307,34 @@ export default config({
         createElement('text', { x: 16, y: 21, textAnchor: 'middle', fontFamily: 'Georgia, serif', fontSize: 15, fontWeight: 700, fill: colorScheme === 'dark' ? '#24140f' : '#d6aa62' }, 'LP')),
     },
     navigation: {
-      Website: ['home', 'about', 'brunchPage', 'contactPage', 'eventsIndexPage', 'happyHourPage', 'menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'menuBrunchPage', 'privateEventsIndexPage', 'privateEventsSlugTemplate', 'theSpacePage'],
-      Menu: ['cocktailsMenu', 'kitchenRawFire', 'kitchenPlates', 'brunchMenuItems'],
-      Events: ['eventCategoryCards', 'privateEventTypes', 'privateEventsProcessSteps'],
-      FAQs: ['brunchFaqs', 'happyHourFaqs', 'privateEventsFaqs'],
-      Space: ['spaceGalleryCards'],
+      Website: ['home', 'about', 'contactPage'],
+      Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'menuBrunchPage', 'cocktailsMenu', 'kitchenRawFire', 'kitchenPlates', 'brunchMenuItems'],
+      Events: ['eventsIndexPage', 'eventCategoryCards'],
+      'Private Events': ['privateEventsIndexPage', 'privateEventsSlugTemplate', 'privateEventTypes', 'privateEventsProcessSteps', 'privateEventsFaqs'],
+      'Brunch & Happy Hour': ['brunchPage', 'brunchFaqs', 'happyHourPage', 'happyHourFaqs'],
+      'The Space': ['theSpacePage', 'spaceGalleryCards'],
       'Site Settings': ['venueSettings', 'eventsConfig', 'navigation', 'footer', 'localSeo'],
     },
   },
   singletons: {
     venueSettings: jsonSingleton('Venue / Business Data', 'venueSettings', 'settings', venueSettingsData),
-    eventsConfig: jsonSingleton('Events Config', 'eventsConfig', 'config', eventsConfigData),
+    eventsConfig: jsonSingleton('Private Event Form Settings', 'eventsConfig', 'config', eventsConfigData),
     navigation: jsonSingleton('Navigation', 'navigation', 'navigation', navigationData),
     footer: jsonSingleton('Footer', 'footer', 'footer', footerData),
-    localSeo: jsonSingleton('Local SEO', 'localSeo', 'localSeo', localSeoData),
+    localSeo: jsonSingleton('Local Search Settings', 'localSeo', 'localSeo', localSeoData),
     home: jsonSingleton('Home', 'home', 'home', homeData),
     about: jsonSingleton('About', 'about', 'about', aboutData),
-    brunchPage: jsonSingleton('Brunch Page', 'brunchPage', 'page', brunchPageData),
-    contactPage: jsonSingleton('Contact Page', 'contactPage', 'page', contactPageData),
-    eventsIndexPage: jsonSingleton('Events Index Page', 'eventsIndexPage', 'page', eventsIndexPageData),
-    happyHourPage: jsonSingleton('Happy Hour Page', 'happyHourPage', 'page', happyHourPageData),
-    menuIndexPage: jsonSingleton('Menu Index Page', 'menuIndexPage', 'page', menuIndexPageData),
-    menuDinnerPage: jsonSingleton('Menu Dinner Page', 'menuDinnerPage', 'page', menuDinnerPageData),
-    menuCocktailsPage: jsonSingleton('Menu Cocktails Page', 'menuCocktailsPage', 'page', menuCocktailsPageData),
-    menuBrunchPage: jsonSingleton('Menu Brunch Page', 'menuBrunchPage', 'page', menuBrunchPageData),
-    privateEventsIndexPage: jsonSingleton('Private Events Index Page', 'privateEventsIndexPage', 'page', privateEventsIndexPageData),
-    privateEventsSlugTemplate: jsonSingleton('Private Event Slug Template', 'privateEventsSlugTemplate', 'template', privateEventsSlugTemplateData),
-    theSpacePage: jsonSingleton('The Space Page', 'theSpacePage', 'page', theSpacePageData),
+    brunchPage: jsonSingleton('Brunch', 'brunchPage', 'page', brunchPageData),
+    contactPage: jsonSingleton('Contact', 'contactPage', 'page', contactPageData),
+    eventsIndexPage: jsonSingleton('Events', 'eventsIndexPage', 'page', eventsIndexPageData),
+    happyHourPage: jsonSingleton('Happy Hour', 'happyHourPage', 'page', happyHourPageData),
+    menuIndexPage: jsonSingleton('Menu Overview', 'menuIndexPage', 'page', menuIndexPageData),
+    menuDinnerPage: jsonSingleton('Dinner Menu Page', 'menuDinnerPage', 'page', menuDinnerPageData),
+    menuCocktailsPage: jsonSingleton('Cocktails Menu Page', 'menuCocktailsPage', 'page', menuCocktailsPageData),
+    menuBrunchPage: jsonSingleton('Brunch Menu Page', 'menuBrunchPage', 'page', menuBrunchPageData),
+    privateEventsIndexPage: jsonSingleton('Private Events', 'privateEventsIndexPage', 'page', privateEventsIndexPageData),
+    privateEventsSlugTemplate: jsonSingleton('Private Events — Shared Content', 'privateEventsSlugTemplate', 'template', privateEventsSlugTemplateData),
+    theSpacePage: jsonSingleton('The Space', 'theSpacePage', 'page', theSpacePageData),
   },
   collections: {
     cocktailsMenu: menuCollection('Cocktails Menu', 'cocktailsMenu'),
@@ -298,7 +346,7 @@ export default config({
       schema: {
         title: fields.slug({ name: { label: 'Event Page Title', description: 'Meaningful title shown in the CMS and on the event page.', validation: { isRequired: true } } }),
         id: idField,
-        slug: requiredText('Page URL', 'URL segment used for this private event page.'),
+        slug: requiredText('Page URL', 'Last part of this page’s web address. Change only before the page is published.'),
         eventType: requiredText('Event Type', 'Plain-English event type used throughout the page.'),
         description: requiredText('Description', 'Summary of this private event offering.', true),
         capacity: requiredText('Guest Capacity', 'Guest capacity displayed for this event type.'),
