@@ -1,0 +1,16 @@
+{
+  "id": "gulf-oysters-raw",
+  "order": 1,
+  "name": "Gulf Oysters on the Half Shell",
+  "description": "Freshly shucked Gulf oysters, Creole mignonette, house hot sauce, fresh horseradish. Market selection rotates daily.",
+  "price": 2200,
+  "priceDisplay": "$22",
+  "image": "louisiana-purchase-seafood-restaurant-san-diego-website",
+  "imageAlt": "Gulf oysters on the half shell at Louisiana Purchase",
+  "tags": [],
+  "dietary": [
+    "contains-shellfish"
+  ],
+  "featured": false,
+  "available": true
+}

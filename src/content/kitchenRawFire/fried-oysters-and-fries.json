@@ -1,0 +1,16 @@
+{
+  "id": "fried-oysters-and-fries",
+  "order": 2,
+  "name": "Fried Oysters & Fries",
+  "description": "Crispy fried Gulf oysters, seasoned fries, house remoulade.",
+  "price": 2600,
+  "priceDisplay": "$26",
+  "image": "louisiana-purchase-southern-brunch-menu-north-park-website",
+  "imageAlt": "Fried oysters and fries — Louisiana Purchase kitchen",
+  "tags": [],
+  "dietary": [
+    "contains-shellfish"
+  ],
+  "featured": false,
+  "available": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "louisiana-shrimp",
+  "order": 0,
+  "name": "Louisiana BBQ Shrimp",
+  "description": "Head-on Gulf shrimp, Worcestershire butter sauce, cracked black pepper, rosemary, toasted French bread. A NOLA institution, rendered with obsessive care.",
+  "price": 2800,
+  "priceDisplay": "$28",
+  "image": "louisiana-purchase-group-dining-san-diego-website",
+  "imageAlt": "Louisiana BBQ Shrimp at Louisiana Purchase",
+  "tags": [
+    "signature",
+    "popular"
+  ],
+  "dietary": [
+    "contains-shellfish",
+    "spicy"
+  ],
+  "featured": true,
+  "available": true
+}

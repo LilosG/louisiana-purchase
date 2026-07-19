@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/brunch/index.astro
 // Louisiana Purchase — Brunch Hub Page
 // Slug: /brunch — permanent URL
@@ -10,15 +11,22 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import MenuShowcase from '../../components/ui/MenuShowcase.astro';
-import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, BRUNCH_HOURS } from '../../data/venue';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
+import { getOrderedCollection } from '../../content/siteData';
+
+const brunchFaqs = await getOrderedCollection('brunchFaqs');
+const pageContent = await getSingleton('brunchPage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const CANONICAL_DOMAIN = venue.domain;
+const VENUE_ADDRESS = venue.address;
+const BRUNCH_HOURS = venue.brunchHours;
 
 const brunchSchema = {
   '@context': 'https://schema.org',
   '@type': 'FoodEstablishment',
-  name: 'Louisiana Purchase — Weekend Brunch',
-  description: 'Weekend brunch at Louisiana Purchase in North Park, San Diego. Creole brunch plates, craft cocktails, and an open patio every Saturday and Sunday from 12 PM to 3 PM.',
+  name: pageContent.seo.schemaName,
+  description: pageContent.seo.schemaDescription,
   url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/brunch`,
   servesCuisine: ['Creole', 'Southern American', 'New Orleans'],
   address: {
@@ -34,132 +42,56 @@ const brunchSchema = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday',   opens: BRUNCH_HOURS.opens, closes: BRUNCH_HOURS.closes },
   ],
 };
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const privateBrunchTitle = `\n${pageContent.privateBrunch.title}`;
 ---
 
 <Layout
-  title="Weekend Brunch in North Park San Diego | Louisiana Purchase"
-  description="Weekend brunch at Louisiana Purchase — North Park's most indulgent Saturday and Sunday ritual. Creole brunch plates, craft cocktails, and an open patio from 12 PM. Reserve your table."
-  canonical="/brunch"
+  title={pageContent.seo.title}
+  description={pageContent.seo.description}
+  canonical={pageContent.seo.canonical}
   schema={brunchSchema}
-  breadcrumbs={[
-    { name: 'Home',   url: '/',       position: 1 },
-    { name: 'Brunch', url: '/brunch', position: 2 },
-  ]}
+  breadcrumbs={pageContent.seo.breadcrumbs}
 >
 
-  <PageHero
-    eyebrow="Saturday & Sunday · 12 PM – 3 PM"
-    title="Weekend Brunch"
-    titleItalic="in North Park"
-    subtitle="North Park's most indulgent weekend ritual. Creole brunch plates, craft cocktails, and an open patio from noon. Come hungry. Stay for the afternoon."
-    image={IMAGES['louisiana-purchase-brunch-dishes-overview-north-park-website']}
-    imageAlt="Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits at Louisiana Purchase brunch"
-    ctas={[
-      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'outline' },
-    ]}
-    headlineId="brunch-headline"
-  />
+  <PageHero {...blocks[0]} />
 
-  <StatBar
-    stats={[
-      { value: BRUNCH_HOURS.days,  label: 'Days Available' },
-      { value: '12 – 3 PM',  label: 'Brunch Service' },
-      { value: 'Walk-Ins',   label: 'Welcome' },
-      { value: 'Full Patio', label: 'Open' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[1]} />
 
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website']}
-    imageAlt="Brunch at Louisiana Purchase North Park San Diego"
-    eyebrow="The Experience"
-    title="Not Just Brunch."
-    titleItalic="An Afternoon Event."
-    body={[
-      "Louisiana Purchase brunch isn't a quick eggs-and-toast affair. It's a full New Orleans-inspired afternoon — Creole plates built for lingering, craft cocktails poured with the same care as dinner service, and a patio that makes San Diego feel like the French Quarter.",
-      "Every Saturday and Sunday from noon. The kind of brunch you plan your weekend around.",
-    ]}
-    facts={[
-      { label: 'Service',    value: BRUNCH_HOURS.window },
-      { label: 'Days',       value: BRUNCH_HOURS.days },
-      { label: 'Cuisine',    value: 'Elevated Creole' },
-      { label: 'Patio',      value: 'Open & Available' },
-    ]}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[2]} />
 
   <section aria-labelledby="brunch-menu-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
-      <SectionHeader
-        eyebrow="The Menu"
-        title="Creole Brunch"
-        titleItalic="Plates & Cocktails"
-        subtitle="Chef Quinnton Austin's weekend brunch program — elevated Creole plates and craft cocktails built for a long, indulgent afternoon."
-        id="brunch-menu-heading"
-      />
+      <SectionHeader {...blocks[3]} />
       <MenuShowcase section="brunch" category="brunch-plates" cols={3} dark={false} divided={true} />
       <div class="text-center mt-10">
-        <a href="/menu/brunch" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
-          Full Brunch Menu
-        </a>
+        <a href={pageContent.menuLink.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]" set:text={`\n${pageContent.menuLink.label}\n`}></a>
       </div>
     </div>
   </section>
 
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-brunch-patio-setting-north-park-website']}
-    imageAlt="Family enjoying weekend brunch at Louisiana Purchase North Park San Diego"
-    eyebrow="The Setting"
-    title="North Park's"
-    titleItalic="Best Brunch Spot"
-    body={[
-      "Louisiana Purchase sits at the corner of University Ave and 23rd St in the heart of North Park — San Diego's most vibrant dining neighborhood. On weekends, the patio fills early and the bar program runs at full power from the moment doors open.",
-      "Walk-ins are welcome but tables go fast. Reserve ahead for guaranteed seating on the patio or at the bar.",
-    ]}
-    facts={[
-      { label: 'Address',      value: VENUE_ADDRESS.street },
-      { label: 'Neighborhood', value: 'North Park, SD' },
-      { label: 'Parking',      value: 'Street & Nearby Lots' },
-      { label: 'Reservations', value: 'Highly Recommended' },
-    ]}
-    ctas={[
-      { label: 'Reserve Now',    href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'outline' },
-    ]}
-    reverse={true}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[4]} />
 
   <section aria-labelledby="private-brunch-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Group Bookings</p>
-          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">
-            Private Brunch<br /><span class="italic text-gold">Events in North Park</span>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.privateBrunch.eyebrow}></p>
+          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{privateBrunchTitle}<br /><span class="italic text-gold" set:text={pageContent.privateBrunch.titleItalic}></span>
           </h2>
-          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]">
-            Reserve the full venue or patio exclusively for your group. Birthday brunches, baby showers, corporate team events, and milestone celebrations — Louisiana Purchase handles the food, the drinks, and the atmosphere.
-          </p>
+          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]" set:text={`\n${pageContent.privateBrunch.body}\n`}></p>
           <ul role="list" class="flex flex-col gap-2.5 mb-8">
-            {['Full venue & patio buyouts', 'Custom Creole brunch menus', 'Dedicated bar & cocktail packages', 'Up to 80 guests', 'Dedicated events coordinator'].map((item) => (
+            {pageContent.privateBrunch.benefits.map((item: string) => (
               <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
-                <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">✦</span>
+                <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">{pageContent.privateBrunch.listMarker}</span>
                 {item}
               </li>
             ))}
           </ul>
-          <a href="/private-events/san-diego-brunch-private-event" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
-            Inquire About a Private Brunch
-          </a>
+          <a href={pageContent.privateBrunch.cta.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.privateBrunch.cta.label}\n`}></a>
         </div>
         <div class="overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px]">
-          <Image src={IMAGES['louisiana-purchase-private-brunch-events-north-park-website']} alt="Fried chicken and waffles brunch spread at a private event at Louisiana Purchase North Park" class="w-full h-full object-cover object-center" loading="lazy" decoding="async" format="webp" widths={[480, 800, 1200, 1600]} sizes="(min-width: 1024px) 50vw, 100vw" />
+          <Image src={IMAGES[pageContent.privateBrunch.image as keyof typeof IMAGES]} alt={pageContent.privateBrunch.imageAlt} class="w-full h-full object-cover object-center" loading="lazy" decoding="async" format="webp" widths={[480, 800, 1200, 1600]} sizes="(min-width: 1024px) 50vw, 100vw" />
         </div>
       </div>
     </div>
@@ -167,21 +99,9 @@ const brunchSchema = {
 
   <section aria-labelledby="brunch-faq-heading" class="bg-obsidian py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
-      <SectionHeader
-        eyebrow="Need to Know"
-        title="Brunch FAQ"
-        subtitle="Everything you need to know about weekend brunch at Louisiana Purchase in North Park, San Diego."
-        id="brunch-faq-heading"
-      />
+      <SectionHeader {...blocks[5]} />
       <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
-        {[
-          { q: 'What days does Louisiana Purchase serve brunch?',        a: 'Brunch is served every Saturday and Sunday from 12 PM to 3 PM. The full bar and kitchen are open for the full service window.' },
-          { q: 'Do I need a reservation for brunch?',                   a: 'Walk-ins are welcome but reservations are strongly recommended, especially on Saturdays. Tables fill quickly on weekend mornings. Reserve online through our reservations link.' },
-          { q: 'What kind of food is served at brunch?',                a: 'Louisiana Purchase serves elevated Creole brunch plates inspired by New Orleans weekend dining. Expect rotating seasonal dishes, fire-forward preparations, and Chef Quinnton Austin\'s signature Creole kitchen approach.' },
-          { q: 'Are cocktails available at brunch?',                    a: 'Yes. The full bar is open from noon including all signature cocktails — Superbird Palomas, Watermelon Margaritas, Hurricane Pops, and more.' },
-          { q: 'Can I book a private brunch at Louisiana Purchase?',    a: 'Yes. Louisiana Purchase offers full venue and patio buyouts for private brunch events — birthday celebrations, baby showers, corporate gatherings, and more.' },
-          { q: 'Where is Louisiana Purchase located?',                  a: `Louisiana Purchase is located at ${VENUE_ADDRESS.street} in ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip} — at the corner of ${VENUE_ADDRESS.crossStreet}.` },
-        ].map((faq) => (
+        {brunchFaqs.map((faq) => (
           <div class="py-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 reveal">
             <dt class="font-serif font-light text-parchment text-base">{faq.q}</dt>
             <dd class="font-sans font-light text-smoke leading-relaxed text-sm">{faq.a}</dd>
@@ -191,15 +111,6 @@ const brunchSchema = {
     </div>
   </section>
 
-  <CTABand
-    eyebrow="Join Us This Weekend"
-    title="Brunch at Louisiana Purchase."
-    subtitle="Saturday and Sunday from noon. Reserve your table before it fills up."
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    ctas={[
-      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[6]} />
 
 </Layout>

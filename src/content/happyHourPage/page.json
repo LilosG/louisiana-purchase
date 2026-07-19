@@ -1,0 +1,231 @@
+{
+  "menuLink": { "label": "View Full Menu", "href": "/menu" },
+  "seo": {
+    "title": "Happy Hour in North Park San Diego | Louisiana Purchase",
+    "description": "Louisiana Purchase's Happy Hour — North Park's best happy hour deals. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome.",
+    "canonical": "/happy-hour",
+    "schemaName": "Louisiana Purchase — Happy Hour",
+    "schemaDescription": "Happy Hour at Louisiana Purchase in North Park, San Diego. Discounted craft cocktails and small bites Monday through Friday, 3 PM to 5 PM.",
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "url": "/",
+        "position": 1
+      },
+      {
+        "name": "Happy Hour",
+        "url": "/happy-hour",
+        "position": 2
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "component": "PageHero",
+      "props": {
+        "eyebrow": "Monday – Friday · 3 PM – 5 PM",
+        "title": "Happy Hour",
+        "titleItalic": "North Park's Finest",
+        "subtitle": "The best hour of your workday. Discounted craft cocktails, ice-cold draft beer, and Creole bites at the bar — every Monday through Friday from 3 to 5 PM.",
+        "image": "__IMAGE__louisiana-purchase-craft-cocktails-san-diego-website",
+        "imageAlt": "Happy Hour cocktails at Louisiana Purchase North Park San Diego",
+        "ctas": [
+          {
+            "label": "Reserve a Spot",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "View Full Menu",
+            "href": "/menu",
+            "variant": "outline"
+          }
+        ],
+        "headlineId": "hh-headline"
+      }
+    },
+    {
+      "component": "StatBar",
+      "props": {
+        "stats": [
+          {
+            "value": "Monday – Friday",
+            "label": "Days Available"
+          },
+          {
+            "value": "3 PM – 5 PM",
+            "label": "Happy Hour Window"
+          },
+          {
+            "value": "$6+",
+            "label": "Starting Price"
+          },
+          {
+            "value": "Walk-Ins",
+            "label": "Always Welcome"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-happy-hour-pitcher-north-park-website",
+        "imageAlt": "Louisiana Purchase Happy Hour cocktail pitcher at the bar in North Park",
+        "eyebrow": "The Ritual",
+        "title": "More Than a Discount.",
+        "titleItalic": "A Daily Ceremony.",
+        "body": [
+          "Happy Hour isn't just a price break — it's the best time to experience Louisiana Purchase the way it was meant to be enjoyed. The bar is alive, the pours are generous, and the energy of North Park at the end of a workday fills the room.",
+          "Pull up a stool at the marble bar. Order a Praline Old Fashioned at a price that makes it a habit. Let the evening find you."
+        ],
+        "facts": [
+          {
+            "label": "Hours",
+            "value": "3 PM – 5 PM"
+          },
+          {
+            "label": "Days",
+            "value": "Monday – Friday"
+          },
+          {
+            "label": "Location",
+            "value": "Full Bar & Patio"
+          },
+          {
+            "label": "Walk-Ins",
+            "value": "Always Welcome"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "The Deals",
+        "title": "Happy Hour Menu",
+        "titleItalic": "What's On Offer",
+        "subtitle": "A curated selection of discounted cocktails, beer, wine, and Creole bites — available at the bar and patio every weekday afternoon.",
+        "id": "hh-menu-heading"
+      }
+    },
+    {
+      "component": "FourColumnGrid",
+      "props": {
+        "cols": 4,
+        "dark": false,
+        "divided": true,
+        "cards": [
+          {
+            "eyebrow": "Cocktails",
+            "title": "Well Cocktails",
+            "body": "House spirits, fresh-squeezed mixers, bartender's choice of Louisiana-inspired build.",
+            "meta": "From $9"
+          },
+          {
+            "eyebrow": "Beer",
+            "title": "Draft Beer",
+            "body": "Rotating local and domestic draft selections. Cold, clean, and always poured right.",
+            "meta": "From $6"
+          },
+          {
+            "eyebrow": "Wine",
+            "title": "House Wine",
+            "body": "Red, white, and sparkling by the glass. Curated to complement the Creole kitchen.",
+            "meta": "From $8"
+          },
+          {
+            "eyebrow": "Bites",
+            "title": "Happy Hour Bites",
+            "body": "A rotating selection of small plates from Chef Quinnton Austin's kitchen — built for the bar.",
+            "meta": "From $10"
+          }
+        ]
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-cocktail-bar-north-park-website",
+        "imageAlt": "The bar at Louisiana Purchase North Park San Diego during happy hour",
+        "eyebrow": "The Setting",
+        "title": "The Bar at",
+        "titleItalic": "Louisiana Purchase",
+        "body": [
+          "The marble bar at Louisiana Purchase is the heart of the room. During Happy Hour, it's where regulars settle in, where strangers become familiar, and where North Park's best cocktail program is most accessible.",
+          "Outdoor seating on the lush fern-framed patio is also available — a rare find in a neighborhood where good outdoor space is earned."
+        ],
+        "facts": [
+          {
+            "label": "Bar Seating",
+            "value": "Walk-In"
+          },
+          {
+            "label": "Patio",
+            "value": "Available"
+          },
+          {
+            "label": "Neighborhood",
+            "value": "North Park"
+          },
+          {
+            "label": "Address",
+            "value": "2305 University Ave"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Get Directions",
+            "href": "https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104",
+            "external": true,
+            "variant": "outline"
+          }
+        ],
+        "reverse": true,
+        "dark": true
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "Need to Know",
+        "title": "Happy Hour FAQ",
+        "subtitle": "Everything you need to know about Happy Hour at Louisiana Purchase in North Park, San Diego.",
+        "id": "hh-faq-heading"
+      }
+    },
+    {
+      "component": "CTABand",
+      "props": {
+        "eyebrow": "Join Us",
+        "title": "Come for the Deals. Stay for the Night.",
+        "subtitle": "Happy Hour starts at 3 PM — but Louisiana Purchase is open until 9 or 10. Reserve a table and let the evening unfold.",
+        "image": "__IMAGE__louisiana-purchase-north-park-restaurant-and-bar-website",
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "View the Menu",
+            "href": "/menu",
+            "variant": "outline"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -2,21 +2,25 @@
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
-import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, HAPPY_HOUR, BRUNCH_HOURS } from '../../data/venue';
-import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
+import { getSingleton } from '../../content/siteData';
 
-const portfolio = GPH_NETWORK.filter((v) => v.url !== CANONICAL_DOMAIN);
+const venue = await getSingleton('venueSettings', 'settings');
+const eventsConfig = await getSingleton('eventsConfig', 'config');
+const footer = await getSingleton('footer', 'footer');
+
+const portfolio = GPH_NETWORK.filter((v) => v.url !== venue.domain);
 
 // Pages under /private-events/ embed the inquiry form directly and already
 // have the #event-inquiry anchor on the page; everywhere else needs to
 // navigate to /private-events first.
 const isOnPrivateEventsPage = Astro.url.pathname.startsWith('/private-events');
 const privateEventsHref = isOnPrivateEventsPage
-  ? `#${PRIVATE_EVENTS_FORM_ANCHOR}`
-  : `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`;
+  ? `#${eventsConfig.privateEventsFormAnchor}`
+  : `/private-events#${eventsConfig.privateEventsFormAnchor}`;
+const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city} &nbsp;&middot;&nbsp; ${footer.bottomCuisine.replace('&', '&amp;')}\n`;
 ---
 
-<footer role="contentinfo" aria-label="Site footer" class="site-footer">
+<footer role="contentinfo" aria-label={footer.ariaLabels.footer} class="site-footer">
 
   <div class="site-footer__rule" aria-hidden="true"></div>
 
@@ -27,58 +31,47 @@ const privateEventsHref = isOnPrivateEventsPage
 
       <!-- Brand column -->
       <div class="site-footer__brand-col">
-        <a href="/" class="site-footer__wordmark" aria-label="Louisiana Purchase homepage">
-          <span class="site-footer__wordmark-top">Louisiana</span>
-          <span class="site-footer__wordmark-bottom">Purchase</span>
+        <a href="/" class="site-footer__wordmark" aria-label={footer.wordmark.homeAriaLabel}>
+          <span class="site-footer__wordmark-top">{footer.wordmark.top}</span>
+          <span class="site-footer__wordmark-bottom">{footer.wordmark.bottom}</span>
         </a>
-        <p class="site-footer__tagline">
-          Elevated Creole cuisine and craft cocktails in the heart of North Park, San Diego.
-        </p>
+        <p class="site-footer__tagline" set:text={`\n${footer.tagline}\n`}></p>
         <address class="site-footer__address">
           <a
-            href={VENUE_MAPS_URL}
+            href={venue.mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             class="site-footer__address-link"
           >
-            {VENUE_ADDRESS.street}<br />
-            {VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}, {VENUE_ADDRESS.state} {VENUE_ADDRESS.zip}
+            {venue.address.street}<br />
+            {venue.address.neighborhood}, {venue.address.city}, {venue.address.state} {venue.address.zip}
           </a>
         </address>
-        <div class="site-footer__social" aria-label="Social media links">
+        <div class="site-footer__social" aria-label={footer.ariaLabels.social}>
           <a
-            href={VENUE_SOCIAL.instagram}
+            href={venue.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Louisiana Purchase on Instagram"
+            aria-label={footer.ariaLabels.instagram}
             class="site-footer__social-link"
-          >
-            Instagram
-          </a>
+            set:text={`\n${footer.socialLabels.instagram}\n`}
+          ></a>
           <a
-            href={VENUE_SOCIAL.facebook}
+            href={venue.social.facebook}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Louisiana Purchase on Facebook"
+            aria-label={footer.ariaLabels.facebook}
             class="site-footer__social-link"
-          >
-            Facebook
-          </a>
+            set:text={`\n${footer.socialLabels.facebook}\n`}
+          ></a>
         </div>
       </div>
 
       <!-- Explore column -->
       <nav aria-labelledby="footer-explore-heading" class="site-footer__nav-col">
-        <h3 id="footer-explore-heading" class="site-footer__col-heading">Explore</h3>
+        <h3 id="footer-explore-heading" class="site-footer__col-heading">{footer.columnHeadings.explore}</h3>
         <ul role="list" class="site-footer__nav-list">
-          {[
-            { href: '/menu',           label: 'Menu' },
-            { href: '/brunch',         label: 'Brunch' },
-            { href: '/happy-hour',     label: 'Happy Hour' },
-            { href: '/private-events', label: 'Private Events' },
-            { href: '/about',          label: 'About' },
-            { href: '/contact',        label: 'Contact' },
-          ].map((link) => (
+          {footer.exploreLinks.map((link: any) => (
             <li>
               <a href={link.href} class="site-footer__nav-link">
                 {link.label}
@@ -90,9 +83,9 @@ const privateEventsHref = isOnPrivateEventsPage
 
       <!-- Hours column -->
       <section aria-labelledby="footer-hours-heading" class="site-footer__hours-col">
-        <h3 id="footer-hours-heading" class="site-footer__col-heading">Hours</h3>
+        <h3 id="footer-hours-heading" class="site-footer__col-heading">{footer.columnHeadings.hours}</h3>
         <dl class="site-footer__hours">
-          {DISPLAY_HOURS.map((h) => (
+          {venue.displayHours.map((h: any) => (
             <div class="site-footer__hour-row">
               <dt>{h.label}</dt>
               <dd>{h.value}</dd>
@@ -100,16 +93,16 @@ const privateEventsHref = isOnPrivateEventsPage
           ))}
         </dl>
         <p class="site-footer__brunch-note">
-          {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} <span class="site-footer__nowrap">{BRUNCH_HOURS.window}</span>
+          {venue.brunchHours.label}: {venue.brunchHours.days} <span class="site-footer__nowrap">{venue.brunchHours.window}</span>
         </p>
         <p class="site-footer__brunch-note">
-          {HAPPY_HOUR.label}: {HAPPY_HOUR.days} <span class="site-footer__nowrap">{HAPPY_HOUR.window}</span>
+          {venue.happyHour.label}: {venue.happyHour.days} <span class="site-footer__nowrap">{venue.happyHour.window}</span>
         </p>
       </section>
 
       <!-- Reserve column -->
       <section aria-labelledby="footer-reserve-heading" class="site-footer__reserve-col">
-        <h3 id="footer-reserve-heading" class="site-footer__col-heading">Reservations</h3>
+        <h3 id="footer-reserve-heading" class="site-footer__col-heading">{footer.columnHeadings.reservations}</h3>
         <ul role="list" class="site-footer__nav-list">
           <li>
             <a
@@ -117,9 +110,8 @@ const privateEventsHref = isOnPrivateEventsPage
               target="_blank"
               rel="noopener noreferrer"
               class="site-footer__nav-link"
-            >
-              Reserve a Table
-            </a>
+              set:text={`\n${footer.reservationLinks.reserveTable}\n`}
+            ></a>
           </li>
           <li>
             <a
@@ -127,9 +119,8 @@ const privateEventsHref = isOnPrivateEventsPage
               target="_blank"
               rel="noopener noreferrer"
               class="site-footer__nav-link"
-            >
-              Order Online
-            </a>
+              set:text={`\n${footer.reservationLinks.orderOnline}\n`}
+            ></a>
           </li>
           <li>
             <a
@@ -137,17 +128,15 @@ const privateEventsHref = isOnPrivateEventsPage
               target="_blank"
               rel="noopener noreferrer"
               class="site-footer__nav-link"
-            >
-              Gift Cards
-            </a>
+              set:text={`\n${footer.reservationLinks.giftCards}\n`}
+            ></a>
           </li>
           <li>
             <a
               href={privateEventsHref}
               class="site-footer__nav-link"
-            >
-              Private Events
-            </a>
+              set:text={`\n${footer.reservationLinks.privateEvents}\n`}
+            ></a>
           </li>
         </ul>
         <a
@@ -155,19 +144,16 @@ const privateEventsHref = isOnPrivateEventsPage
           target="_blank"
           rel="noopener noreferrer"
           class="site-footer__reserve-btn"
-          aria-label="Reserve a table at Louisiana Purchase"
-        >
-          Reserve Now
-        </a>
+          aria-label={footer.ariaLabels.reserve}
+          set:text={`\n${footer.reservationLinks.reserveNow}\n`}
+        ></a>
       </section>
 
     </div>
 
     <!-- GPH Network -->
     <div class="site-footer__network">
-      <a href={GRIND_AND_PROSPER_URL} target="_blank" rel="noopener noreferrer" class="site-footer__network-label">
-        Grind &amp; Prosper Hospitality
-      </a>
+      <a href={GRIND_AND_PROSPER_URL} target="_blank" rel="noopener noreferrer" class="site-footer__network-label" set:text={`\n${footer.networkLabel}\n`}></a>
       <div class="site-footer__network-links">
         {portfolio.map((v) => (
           <a href={v.url} target="_blank" rel="noopener noreferrer" class="site-footer__network-link">
@@ -180,15 +166,11 @@ const privateEventsHref = isOnPrivateEventsPage
     <!-- Bottom bar -->
     <div class="site-footer__bottom">
       <p class="site-footer__copyright">
-        &copy; {new Date().getFullYear()} Louisiana Purchase &bull; {VENUE_ADDRESS.street}, {VENUE_ADDRESS.city}, {VENUE_ADDRESS.state} {VENUE_ADDRESS.zip}
+        &copy; {new Date().getFullYear()} {footer.copyrightVenue} &bull; {venue.address.street}, {venue.address.city}, {venue.address.state} {venue.address.zip}
       </p>
       <div class="site-footer__bottom-right">
-        <p class="site-footer__sub">
-          North Park, San Diego &nbsp;&middot;&nbsp; Creole Dining &amp; Craft Cocktails
-        </p>
-        <a href="https://lilosgrowth.com" target="_blank" rel="noopener noreferrer" class="site-footer__lilos-credit">
-          Website by Lilos Growth
-        </a>
+        <p class="site-footer__sub" set:html={bottomDescription}></p>
+        <a href={footer.creditUrl} target="_blank" rel="noopener noreferrer" class="site-footer__lilos-credit" set:text={`\n${footer.creditLabel}\n`}></a>
       </div>
     </div>
 

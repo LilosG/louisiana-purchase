@@ -1,0 +1,14 @@
+{
+  "id": "shrimp-n-grits",
+  "order": 2,
+  "name": "Shrimp N' Grits",
+  "description": "Fried shrimp, creole sauce, smoked gouda grits, bacon n' green onion.",
+  "image": "louisiana-purchase-shrimp-n-grits-brunch-north-park-website",
+  "imageAlt": "Shrimp N' Grits — brunch dish at Louisiana Purchase North Park",
+  "tags": [],
+  "dietary": [
+    "contains-shellfish"
+  ],
+  "featured": false,
+  "available": true
+}

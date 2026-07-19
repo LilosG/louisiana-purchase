@@ -1,0 +1,14 @@
+{
+  "id": "cafe-brulot-martini",
+  "order": 7,
+  "name": "Café Brûlot Martini",
+  "description": "Cold-brew spirit, house café brûlot syrup, egg white, beignet garnish.",
+  "image": "louisiana-purchase-drink-menu-north-park-san-diego-website",
+  "imageAlt": "Café Brûlot Martini — signature cocktail at Louisiana Purchase North Park",
+  "tags": [
+    "signature"
+  ],
+  "dietary": [],
+  "featured": true,
+  "available": true
+}

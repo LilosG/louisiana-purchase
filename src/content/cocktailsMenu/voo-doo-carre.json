@@ -1,0 +1,14 @@
+{
+  "id": "voo-doo-carre",
+  "order": 5,
+  "name": "Voo Doo Carré",
+  "description": "Rye whiskey, cognac, sweet vermouth, Bénédictine, house Creole bitters. A dark, brooding evolution of the Vieux Carré — complex, ceremonial, unforgettable.",
+  "image": "louisiana-purchase-cocktail-menu-north-park-website",
+  "imageAlt": "Voo Doo Carré — signature cocktail at Louisiana Purchase North Park",
+  "tags": [
+    "signature"
+  ],
+  "dietary": [],
+  "featured": true,
+  "available": true
+}

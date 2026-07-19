@@ -1,0 +1,18 @@
+{
+  "id": "lobster-pasta",
+  "order": 3,
+  "name": "Lobster Pasta",
+  "description": "Half-shell lobster, Creole cream sauce, toasted breadcrumb.",
+  "price": 3800,
+  "priceDisplay": "$38",
+  "image": "louisiana-purchase-private-dining-san-diego-website",
+  "imageAlt": "Lobster pasta — Louisiana Purchase Creole kitchen",
+  "tags": [
+    "chef-selection"
+  ],
+  "dietary": [
+    "contains-shellfish"
+  ],
+  "featured": true,
+  "available": true
+}

@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../content/siteData';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
@@ -6,127 +7,44 @@ import AlternatingRow from '../components/ui/AlternatingRow.astro';
 import StatBar from '../components/ui/StatBar.astro';
 import CTABand from '../components/ui/CTABand.astro';
 import MenuShowcase from '../components/ui/MenuShowcase.astro';
-import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_PHONE_FALLBACK, DISPLAY_HOURS, HAPPY_HOUR, BRUNCH_HOURS, GOOGLE_RATING, EVENT_CAPACITY } from '../data/venue';
-import { PRIVATE_EVENTS_FORM_ANCHOR } from '../data/events-config';
 import { IMAGES } from '../assets/images';
 
-const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
+const pageContent = await getSingleton('home', 'home');
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
 ---
 
-<Layout
-  title="Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego"
-  description="An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Monday–Sunday."
-  ogImage="/og-image.jpg"
-  ogType="website"
->
+<Layout {...blocks[0]}>
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->
-  <PageHero
-    eyebrow="North Park, San Diego"
-    title="Louisiana"
-    titleItalic="Purchase"
-    subtitle="Elevated Creole cuisine & complex craft cocktails. Chef Quinnton Austin's fire-forward Louisiana kitchen."
-    image={IMAGES['louisiana-purchase-restaurant-exterior-pergola-north-park-website']}
-    imageAlt="Louisiana Purchase exterior at twilight — patio and pergola, North Park, San Diego"
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
-    ]}
-    headlineId="hero-headline"
-  />
+  <PageHero {...blocks[1]} />
 
-  <StatBar
-    stats={[
-      { value: 'Open Daily',      label: 'Hours Today' },
-      { value: HAPPY_HOUR.window, label: HAPPY_HOUR.label,   href: '/happy-hour' },
-      { value: BRUNCH_HOURS.days, label: BRUNCH_HOURS.label, href: '/brunch' },
-      { value: 'North Park, SD',  label: 'Location', href: VENUE_MAPS_URL, external: true },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[2]} />
 
   <!-- ─── ABOUT ────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
-    imageAlt="Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating"
-    eyebrow="North Park, San Diego · Est. 2018"
-    title="Where New Orleans Found"
-    titleItalic="Its Way to North Park"
-    body={[
-      "Louisiana Purchase is not a theme bar. It is a place — a genuine piece of New Orleans culture transplanted into San Diego's most vibrant neighborhood. The geometric timber ceiling, the candlelit bar, the patio framed by hanging ferns: every element earns its place.",
-      "Chef Quinnton Austin's kitchen is a love letter to Louisiana. Fire-charred oysters. Slow-built gumbo. Elevated Creole plates that honor the tradition without being imprisoned by it. The cocktail program demands reverence, not speed.",
-    ]}
-    facts={[
-      { label: 'Cuisine',        value: 'Elevated Creole' },
-      { label: 'Location',       value: 'North Park, SD' },
-      { label: 'Brunch',         value: BRUNCH_HOURS.days },
-      { label: 'Private Events', value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
-    ]}
-    ctas={[
-      { label: 'See the Menu',    href: '/menu', variant: 'gold' },
-      { label: 'Reserve a Table →', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'text' },
-    ]}
-    dark={true}
-    headingId="about-h"
-  />
+  <AlternatingRow {...blocks[3]} />
 
   <!-- ─── COCKTAILS ─────────────────────────────────────────── -->
   <section aria-labelledby="cocktails-h" class="bg-obsidian py-20 md:py-28">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="Craft Program"
-        title="Cocktails Built for"
-        titleItalic="the French Quarter Soul"
-        subtitle="An obsessive bar program rooted in New Orleans tradition — complex, ceremonial, and utterly precise."
-        id="cocktails-h"
-      />
+      <SectionHeader {...blocks[4]} />
 
       <MenuShowcase itemIds={['superbird-paloma', 'watermelon-margarita', 'gin-and-juice', 'hurricane-pop']} cols={4} dark={true} divided={true} />
 
       <div class="text-center mt-10">
-        <a href="/menu/cocktails" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
-          Full Cocktail Menu
-        </a>
+        <a href={pageContent.menuLinks.cocktails.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.menuLinks.cocktails.label}\n`}></a>
       </div>
     </div>
   </section>
 
   <!-- ─── BRUNCH ────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website']}
-    imageAlt="Weekend brunch — Louisiana Purchase North Park San Diego"
-    eyebrow={`${BRUNCH_HOURS.days} · ${BRUNCH_HOURS.window}`}
-    title="Weekend Brunch"
-    titleItalic="in North Park"
-    body={[
-      "San Diego's most indulgent weekend ritual. Creole brunch plates and craft cocktails from noon. The patio, the music, the afternoon light through the pergola — come hungry. Stay late.",
-    ]}
-    facts={[
-      { label: 'Days',     value: BRUNCH_HOURS.days },
-      { label: 'Service',  value: BRUNCH_HOURS.window },
-      { label: 'Patio',    value: 'Open' },
-      { label: 'Walk-Ins', value: 'Welcome' },
-    ]}
-    ctas={[
-      { label: 'Reserve for Brunch',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'See the Brunch Menu',  href: '/brunch', variant: 'outline' },
-    ]}
-    reverse={true}
-    dark={false}
-  />
+  <AlternatingRow {...blocks[5]} />
 
   <!-- ─── FOOD STRIP ────────────────────────────────────────── -->
   <section aria-labelledby="dish-h" class="bg-obsidian py-20 md:py-28">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="The Kitchen"
-        title="Food Worth"
-        titleItalic="Staying For"
-        subtitle="Chef Quinnton Austin's elevated Creole program — fire-forward, deeply rooted, obsessively precise."
-        id="dish-h"
-      />
+      <SectionHeader {...blocks[6]} />
 
       <MenuShowcase
         itemIds={['oxtail-plate', 'dragos', 'creole-shrimp-pasta', 'lemon-pepper-catfish']}
@@ -136,33 +54,17 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
       />
 
       <div class="text-center mt-10">
-        <a href="/menu/dinner" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
-          Full Food Menu
-        </a>
+        <a href={pageContent.menuLinks.dinner.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.menuLinks.dinner.label}\n`}></a>
       </div>
     </div>
   </section>
 
   <!-- ─── PRIVATE EVENTS ────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    imageAlt="Private dining atmosphere at Louisiana Purchase North Park San Diego"
-    eyebrow="Group Bookings"
-    title="Private Events"
-    titleItalic="in North Park"
-    body={[
-      "Birthdays, corporate dinners, rehearsal events, and full venue buyouts. Louisiana Purchase provides a backdrop your guests will actually talk about.",
-    ]}
-    ctas={[
-      { label: 'Inquire About Your Event', href: `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
-    ]}
-    dark={true}
-    headingId="events-h"
-  >
+  <AlternatingRow {...blocks[7]}>
     <ul role="list" class="flex flex-col gap-2.5 mt-2 mb-8">
-      {['Corporate Dinners & Executive Events', 'Birthday & Milestone Celebrations', 'Rehearsal Dinners', 'Full Venue & Patio Buyouts', 'Brunch Buyouts'].map((item) => (
+      {pageContent.privateEventHighlights.map((item: string) => (
         <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
-          <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">✦</span>
+          <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">{pageContent.listMarker}</span>
           {item}
         </li>
       ))}
@@ -170,44 +72,10 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
   </AlternatingRow>
 
   <!-- ─── FIND US ────────────────────────────────────────────── -->
-  <StatBar
-    stats={[
-      { value: `${GOOGLE_RATING}★`,             label: 'Google Rating' },
-      { value: `${EVENT_CAPACITY.fullVenue}+`,  label: 'Event Capacity' },
-      { value: '20+',                           label: 'Craft Cocktails' },
-      { value: '7 Days',                        label: 'Open Weekly' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[8]} />
 
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-seafood-restaurant-san-diego-website']}
-    imageAlt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
-    eyebrow={`${VENUE_ADDRESS.neighborhood} · ${VENUE_ADDRESS.city}`}
-    title={VENUE_ADDRESS.street}
-    titleItalic={VENUE_ADDRESS.crossStreet}
-    body={[
-      `${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip}`,
-    ]}
-    facts={DISPLAY_HOURS}
-    ctas={[
-      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'gold' },
-      { label: phone,            href: `tel:${phone}`, variant: 'text' },
-    ]}
-    reverse={true}
-    dark={false}
-    headingId="findus-h"
-  />
+  <AlternatingRow {...blocks[9]} />
 
-  <CTABand
-    eyebrow="Come Experience It"
-    title="Louisiana Purchase Awaits."
-    subtitle="Open daily. Walk-ins welcome at the bar. Reservations recommended for dining."
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[10]} />
 
 </Layout>

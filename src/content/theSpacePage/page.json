@@ -1,0 +1,244 @@
+{
+  "location": {
+    "eyebrow": "Find Us",
+    "bodyPrefix": "Louisiana Purchase is located at the intersection of ",
+    "bodyMiddle": " in the heart of ",
+    "bodySuffix": " — San Diego's most vibrant dining and nightlife neighborhood.",
+    "addressLabel": "Address",
+    "directionsLabel": "Get Directions",
+    "reservationsLabel": "Reserve a Table",
+    "image": "louisiana-purchase-seafood-restaurant-san-diego-website",
+    "imageAlt": "Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
+  },
+  "blocks": [
+    {
+      "component": "Layout",
+      "props": {
+        "title": "The Space — Louisiana Purchase Venue & Interior | North Park San Diego",
+        "description": "Step inside Louisiana Purchase — a French Quarter-inspired dining room in North Park, San Diego. Geometric timber ceiling, marble bar, candlelit tables, and a lush open patio. Available for private events up to 80 guests.",
+        "canonical": "/the-space",
+        "breadcrumbs": [
+          {
+            "name": "Home",
+            "url": "/",
+            "position": 1
+          },
+          {
+            "name": "The Space",
+            "url": "/the-space",
+            "position": 2
+          }
+        ]
+      }
+    },
+    {
+      "component": "PageHero",
+      "props": {
+        "eyebrow": "North Park, San Diego",
+        "title": "The Space",
+        "titleItalic": "A Room That Earns Its Place",
+        "subtitle": "Every element of Louisiana Purchase was designed with intention — the geometric timber ceiling, the marble bar, the candlelit tables, the lush patio framed by hanging ferns. A room that transports you before the first drink arrives.",
+        "image": "__IMAGE__louisiana-purchase-street-corner-exterior-north-park-website",
+        "imageAlt": "Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego",
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "Private Events",
+            "href": "/private-events",
+            "variant": "outline"
+          }
+        ],
+        "headlineId": "space-headline"
+      }
+    },
+    {
+      "component": "StatBar",
+      "props": {
+        "stats": [
+          {
+            "value": "Est. 2018",
+            "label": "North Park Original"
+          },
+          {
+            "value": "80+",
+            "label": "Event Capacity"
+          },
+          {
+            "value": "3 Spaces",
+            "label": "Configurable Areas"
+          },
+          {
+            "value": "Open Patio",
+            "label": "Available Daily"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-dining-room-bar-north-park-website",
+        "imageAlt": "Louisiana Purchase dining room — geometric timber ceiling and marble bar",
+        "eyebrow": "The Dining Room",
+        "title": "The Geometric Timber",
+        "titleItalic": "Ceiling & Marble Bar",
+        "body": [
+          "The main dining room at Louisiana Purchase is anchored by a striking geometric timber ceiling — a modern architectural element that references the craftsmanship of New Orleans without replicating it. Below it, a full marble bar runs the length of the room.",
+          "Candlelit tables, velvet seating, and warm amber lighting create the atmosphere of a French Quarter establishment that has aged into itself. Every seat in the room has a view of something worth looking at."
+        ],
+        "facts": [
+          {
+            "label": "Seating",
+            "value": "Full Dining Room"
+          },
+          {
+            "label": "Bar",
+            "value": "Full Marble Bar"
+          },
+          {
+            "label": "Lighting",
+            "value": "Candlelit"
+          },
+          {
+            "label": "Aesthetic",
+            "value": "French Quarter Modern"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-patio-living-wall-north-park-website",
+        "imageAlt": "Louisiana Purchase open patio with living wall — North Park San Diego",
+        "eyebrow": "The Patio",
+        "title": "Open Air Dining",
+        "titleItalic": "in North Park",
+        "body": [
+          "The patio at Louisiana Purchase is one of North Park's most coveted outdoor dining spaces. Framed by hanging ferns and overhead lighting, it captures the feeling of a private courtyard in the French Quarter — open to the San Diego evening but sheltered from it.",
+          "Available for dining service daily and for private event buyouts. The patio accommodates up to 50 guests for reception-style events."
+        ],
+        "facts": [
+          {
+            "label": "Capacity",
+            "value": "Up to 50 Guests"
+          },
+          {
+            "label": "Use",
+            "value": "Dining & Events"
+          },
+          {
+            "label": "Ambience",
+            "value": "Fern-Framed Courtyard"
+          },
+          {
+            "label": "Availability",
+            "value": "Open Daily"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Reserve the Patio",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "Private Buyouts",
+            "href": "/private-events",
+            "variant": "outline"
+          }
+        ],
+        "reverse": true,
+        "dark": false
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "Inside Louisiana Purchase",
+        "title": "The Venue in Detail",
+        "subtitle": "A closer look at the spaces, textures, and atmosphere that define Louisiana Purchase in North Park, San Diego.",
+        "id": "gallery-heading"
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-university-ave-corner-night-north-park-website",
+        "imageAlt": "Louisiana Purchase exterior patio at night, corner of Louisiana St and University Ave, North Park San Diego",
+        "eyebrow": "Private Events",
+        "title": "Your Event.",
+        "titleItalic": "Our Space.",
+        "body": [
+          "Louisiana Purchase is available for private events of all types — corporate dinners, birthday celebrations, rehearsal dinners, and full venue buyouts. The space is yours entirely, staffed and provisioned to the same standard as our regular service.",
+          "Our events team will work with you on every detail from first inquiry to last call. Capacity up to 80 guests."
+        ],
+        "facts": [
+          {
+            "label": "Full Venue",
+            "value": "Up to 80 Guests"
+          },
+          {
+            "label": "Private Room",
+            "value": "Up to 40 Guests"
+          },
+          {
+            "label": "Patio",
+            "value": "Up to 50 Guests"
+          },
+          {
+            "label": "Response",
+            "value": "Within 24 Hours"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Inquire About Your Event",
+            "href": "/private-events",
+            "variant": "gold"
+          }
+        ],
+        "reverse": true,
+        "dark": true
+      }
+    },
+    {
+      "component": "CTABand",
+      "props": {
+        "eyebrow": "Come Experience It",
+        "title": "Louisiana Purchase Awaits.",
+        "subtitle": "Open daily. Walk-ins welcome at the bar. Reservations recommended for dining.",
+        "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "Private Events",
+            "href": "/private-events",
+            "variant": "outline"
+          }
+        ]
+      }
+    }
+  ]
+}

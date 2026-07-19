@@ -1,0 +1,33 @@
+{
+  "name": "Louisiana Purchase",
+  "domain": "https://louisianapurchasesd.com",
+  "address": { "street": "2305 University Ave", "neighborhood": "North Park", "city": "San Diego", "state": "CA", "zip": "92104", "country": "US", "crossStreet": "University Ave & 23rd St" },
+  "mapsUrl": "https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104",
+  "geo": { "latitude": 32.7474, "longitude": -117.1293 },
+  "phoneFallback": "+18586836828",
+  "emailFallback": "info@louisianapurchasesd.com",
+  "social": { "instagram": "https://www.instagram.com/louisianapurchasebar", "facebook": "https://www.facebook.com/louisianapurchasebar" },
+  "regularHours": [
+    { "dayOfWeek": "Monday", "opens": "15:00", "closes": "21:00" },
+    { "dayOfWeek": "Tuesday", "opens": "15:00", "closes": "21:00" },
+    { "dayOfWeek": "Wednesday", "opens": "15:00", "closes": "21:00" },
+    { "dayOfWeek": "Thursday", "opens": "15:00", "closes": "21:00" },
+    { "dayOfWeek": "Friday", "opens": "12:00", "closes": "24:00" },
+    { "dayOfWeek": "Saturday", "opens": "12:00", "closes": "22:00" },
+    { "dayOfWeek": "Sunday", "opens": "12:00", "closes": "20:00" }
+  ],
+  "displayHours": [
+    { "label": "Monday", "value": "3 PM – 9 PM" },
+    { "label": "Tuesday", "value": "3 PM – 9 PM" },
+    { "label": "Wednesday", "value": "3 PM – 9 PM" },
+    { "label": "Thursday", "value": "3 PM – 9 PM" },
+    { "label": "Friday", "value": "12 PM – 12 AM" },
+    { "label": "Saturday", "value": "12 PM – 10 PM" },
+    { "label": "Sunday", "value": "12 PM – 8 PM" }
+  ],
+  "happyHour": { "label": "Happy Hour", "days": "Monday – Friday", "window": "3 PM – 5 PM", "opens": "15:00", "closes": "17:00" },
+  "brunchHours": { "label": "Brunch", "days": "Saturday & Sunday", "window": "12 PM – 3 PM", "opens": "12:00", "closes": "15:00" },
+  "googleRating": "4.6",
+  "eventCapacity": { "fullVenue": 80, "privateRoom": 40, "patio": 50 },
+  "defaultSocialImage": "/og-image.jpg"
+}

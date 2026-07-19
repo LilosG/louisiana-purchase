@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/menu/index.astro
 // Louisiana Purchase — Menu Hub Page
 // Hub page linking to /menu/dinner, /menu/cocktails, /menu/brunch
@@ -13,177 +14,43 @@ import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import MenuShowcase from '../../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../../assets/images';
+const pageContent = await getSingleton('menuIndexPage', 'page');
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
 ---
 
-<Layout
-  title="Menu — Creole Dining & Craft Cocktails | Louisiana Purchase North Park"
-  description="Explore the full Louisiana Purchase menu — elevated Creole dinner plates, an obsessive craft cocktail program, and weekend brunch. Chef Quinnton Austin's fire-forward Louisiana kitchen in North Park, San Diego."
-  canonical="/menu"
-  breadcrumbs={[
-    { name: 'Home', url: '/',      position: 1 },
-    { name: 'Menu', url: '/menu',  position: 2 },
-  ]}
->
+<Layout {...blocks[0]}>
 
   <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
-  <PageHero
-    eyebrow="The Kitchen & Bar"
-    title="The Menu"
-    titleItalic="Louisiana Purchase"
-    subtitle="Chef Quinnton Austin's fire-forward Creole kitchen, an obsessive craft cocktail program, and a weekend brunch worth planning your Saturday around."
-    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
-    imageAlt="Louisiana Purchase menu — North Park San Diego"
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Order Online',    href: import.meta.env.PUBLIC_ORDER_URL, external: true, variant: 'outline' },
-    ]}
-    headlineId="menu-headline"
-  />
+  <PageHero {...blocks[1]} />
 
   <!-- ─── Stat Bar ──────────────────────────────────────────────────────── -->
-  <StatBar
-    stats={[
-      { value: '20+',       label: 'Craft Cocktails' },
-      { value: 'Creole',    label: 'Cuisine' },
-      { value: 'Welcome',   label: 'Walk-Ins' },
-      { value: '7 Days',    label: 'Open Weekly' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[2]} />
 
   <!-- ─── Menu Sections Hub ────────────────────────────────────────────── -->
   <section aria-labelledby="menu-sections-heading" class="bg-obsidian py-20 md:py-28">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="Explore the Menu"
-        title="Three Programs."
-        titleItalic="One Kitchen."
-        subtitle="Dinner, cocktails, and weekend brunch — each built with the same obsessive care. Explore each program below."
-        id="menu-sections-heading"
-      />
+      <SectionHeader {...blocks[3]} />
 
-      <FourColumnGrid
-        cols={3}
-        dark={true}
-        divided={true}
-        cards={[
-          {
-            image:     IMAGES['louisiana-purchase-modern-creole-restaurant-website'],
-            imageAlt:  'Dinner at Louisiana Purchase North Park San Diego',
-            eyebrow:   'Open Daily',
-            title:     'Dinner',
-            body:      'Fire-charred oysters, Louisiana BBQ shrimp, slow-built gumbo, and elevated Creole plates from Chef Quinnton Austin\'s kitchen.',
-            href:      '/menu/dinner',
-            linkLabel: 'View Dinner Menu',
-          },
-          {
-            image:     IMAGES['louisiana-purchase-gin-and-juice-cocktail-north-park-website'],
-            imageAlt:  'Gin & Juice craft cocktail at Louisiana Purchase North Park',
-            eyebrow:   'Full Bar · Open Daily',
-            title:     'Cocktails',
-            body:      'A French Quarter-rooted bar program. Superbird Palomas, Watermelon Margaritas, Hurricane Pops — bold, playful, unforgettable.',
-            href:      '/menu/cocktails',
-            linkLabel: 'View Cocktail Menu',
-          },
-          {
-            image:     IMAGES['louisiana-purchase-brunch-table-flatlay-north-park-website'],
-            imageAlt:  'Weekend brunch spread at Louisiana Purchase North Park',
-            eyebrow:   'Sat & Sun · 12 – 3 PM',
-            title:     'Brunch',
-            body:      'North Park\'s most indulgent weekend ritual. Creole brunch plates, craft cocktails from noon, and an open patio built for lingering.',
-            href:      '/menu/brunch',
-            linkLabel: 'View Brunch Menu',
-          },
-        ]}
-      />
+      <FourColumnGrid {...blocks[4]} />
 
     </div>
   </section>
 
   <!-- ─── Dinner Highlight ─────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
-    imageAlt="Fire-charred oysters and Creole plates at Louisiana Purchase"
-    eyebrow="The Kitchen"
-    title="Chef Quinnton Austin's"
-    titleItalic="Creole Kitchen"
-    body={[
-      "Every plate at Louisiana Purchase is a deliberate act. Chef Quinnton Austin's culinary program is built on the traditions of Louisiana cooking — fire, patience, and obsessive precision. Fire-charred oysters. Slow-built dark roux gumbo. Gulf shrimp in Worcestershire butter.",
-      "The menu changes with the season but the commitment never does. This is elevated Creole dining done with complete sincerity.",
-    ]}
-    facts={[
-      { label: 'Cuisine',   value: 'Elevated Creole' },
-      { label: 'Service',   value: 'Open Daily' },
-      { label: 'Kitchen',   value: 'From 12 PM' },
-      { label: 'Signature', value: 'Fire-Charred Oysters' },
-    ]}
-    ctas={[
-      { label: 'View Dinner Menu', href: '/menu/dinner', variant: 'gold' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[5]} />
 
   <!-- ─── Cocktails Highlight ──────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-drink-menu-north-park-san-diego-website']}
-    imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
-    eyebrow="The Bar Program"
-    title="Cocktails Built for"
-    titleItalic="the French Quarter"
-    body={[
-      "The bar program at Louisiana Purchase is not an afterthought. Every cocktail is rooted in New Orleans tradition — complex, ceremonial, and built with the same precision as the kitchen. The Praline Old Fashioned alone is worth the visit.",
-      "Happy Hour runs Monday through Friday from 3 to 5 PM. The full cocktail menu is available from open to close, seven days a week.",
-    ]}
-    facts={[
-      { label: 'Signature',  value: 'Praline Old Fashioned' },
-      { label: 'Bar Hours',  value: 'Open Daily' },
-      { label: 'Happy Hour', value: 'Mon–Fri 3–5 PM' },
-      { label: 'Selection',  value: '20+ Cocktails' },
-    ]}
-    ctas={[
-      { label: 'View Cocktail Menu', href: '/menu/cocktails', variant: 'gold' },
-      { label: 'Happy Hour Details', href: '/happy-hour', variant: 'outline' },
-    ]}
-    reverse={true}
-    dark={false}
-  />
+  <AlternatingRow {...blocks[6]} />
 
   <!-- ─── Brunch Highlight ─────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-seafood-and-cocktails-north-park-website']}
-    imageAlt="Weekend brunch at Louisiana Purchase North Park San Diego"
-    eyebrow="Weekend Brunch"
-    title="Saturday & Sunday"
-    titleItalic="From Noon"
-    body={[
-      "The brunch program at Louisiana Purchase is its own institution. Creole plates inspired by New Orleans weekend dining, craft cocktails from noon, and a patio that turns a Saturday afternoon into an event.",
-      "Brunch runs every Saturday and Sunday from 12 PM to 3 PM. Reservations are strongly recommended.",
-    ]}
-    facts={[
-      { label: 'Days',     value: 'Sat & Sun' },
-      { label: 'Service',  value: '12 PM – 3 PM' },
-      { label: 'Patio',    value: 'Open' },
-      { label: 'Walk-Ins', value: 'Welcome' },
-    ]}
-    ctas={[
-      { label: 'View Brunch Menu',   href: '/menu/brunch', variant: 'gold' },
-      { label: 'Reserve for Brunch', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'outline' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[7]} />
 
   <!-- ─── Featured Items ───────────────────────────────────────────────── -->
   <section aria-labelledby="featured-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="Must Order"
-        title="Signature Dishes"
-        titleItalic="& Cocktails"
-        subtitle="The plates and drinks that define Louisiana Purchase. Start here."
-        id="featured-heading"
-      />
+      <SectionHeader {...blocks[8]} />
 
       <MenuShowcase
         itemIds={['superbird-paloma', 'watermelon-margarita', 'dooky-chase', 'acme-oysters']}
@@ -196,15 +63,6 @@ import { IMAGES } from '../../assets/images';
   </section>
 
   <!-- ─── CTA Band ──────────────────────────────────────────────────────── -->
-  <CTABand
-    eyebrow="Ready to Dine"
-    title="Reserve Your Table."
-    subtitle="Louisiana Purchase is open daily. Walk-ins welcome at the bar."
-    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Order Online',    href: import.meta.env.PUBLIC_ORDER_URL, external: true, variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[9]} />
 
 </Layout>

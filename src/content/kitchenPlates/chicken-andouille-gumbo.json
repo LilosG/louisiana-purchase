@@ -1,0 +1,18 @@
+{
+  "id": "chicken-andouille-gumbo",
+  "order": 1,
+  "name": "Chicken & Andouille Gumbo",
+  "description": "Dark roux gumbo, free-range chicken, smoked andouille, okra, holy trinity, steamed white rice. Slow-built over three hours.",
+  "price": 2200,
+  "priceDisplay": "$22",
+  "image": "louisiana-purchase-dinner-north-park-san-diego-website",
+  "imageAlt": "Chicken and andouille gumbo — Louisiana Purchase kitchen",
+  "tags": [
+    "chef-selection"
+  ],
+  "dietary": [
+    "spicy"
+  ],
+  "featured": false,
+  "available": true
+}

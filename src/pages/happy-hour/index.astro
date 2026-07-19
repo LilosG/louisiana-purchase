@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/happy-hour/index.astro
 // Louisiana Purchase — Happy Hour Hub Page
 // Slug: /happy-hour — permanent, rebrand-proof URL
@@ -10,14 +11,19 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
-import { CANONICAL_DOMAIN, VENUE_ADDRESS, VENUE_MAPS_URL, HAPPY_HOUR, DISPLAY_HOURS } from '../../data/venue';
 import { IMAGES } from '../../assets/images';
+import { getOrderedCollection } from '../../content/siteData';
+
+const pageContent = await getSingleton('happyHourPage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const CANONICAL_DOMAIN = venue.domain;
+const VENUE_ADDRESS = venue.address;
 
 const happyHourSchema = {
   '@context': 'https://schema.org',
   '@type': 'FoodEstablishment',
-  name: 'Louisiana Purchase — Happy Hour',
-  description: 'Happy Hour at Louisiana Purchase in North Park, San Diego. Discounted craft cocktails and small bites Monday through Friday, 3 PM to 5 PM.',
+  name: pageContent.seo.schemaName,
+  description: pageContent.seo.schemaDescription,
   url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/happy-hour`,
   address: {
     '@type': 'PostalAddress',
@@ -29,13 +35,7 @@ const happyHourSchema = {
   },
 };
 
-const FAQ_ITEMS = [
-  { q: 'What is Happy Hour at Louisiana Purchase?', a: 'Happy Hour at Louisiana Purchase runs Monday through Friday from 3 PM to 5 PM in North Park, San Diego, featuring discounted craft cocktails, draft beer, house wine, and rotating Creole small plates.' },
-  { q: 'What days does happy hour run at Louisiana Purchase?', a: `Happy Hour runs ${HAPPY_HOUR.days}, ${HAPPY_HOUR.window}. Louisiana Purchase is open seven days a week — ${DISPLAY_HOURS.map((h) => `${h.label} ${h.value}`).join(', ')}.` },
-  { q: 'Do I need a reservation for happy hour?', a: 'Walk-ins are always welcome during Happy Hour. Bar and patio seating is available on a first-come basis. If you\'d prefer a reserved table, you can book through our reservations link.' },
-  { q: 'Where is Louisiana Purchase located?', a: `Louisiana Purchase is located at ${VENUE_ADDRESS.street} in ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip} — at the intersection of ${VENUE_ADDRESS.crossStreet}.` },
-  { q: 'Is there food available during happy hour?', a: 'Yes. Happy Hour Bites are available during the happy hour window — a rotating selection of small plates from Chef Quinnton Austin\'s Creole kitchen, priced from $10.' },
-];
+const FAQ_ITEMS = await getOrderedCollection('happyHourFaqs');
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -46,124 +46,38 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: faq.a },
   })),
 };
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
 ---
 
 <Layout
-  title="Happy Hour in North Park San Diego | Louisiana Purchase"
-  description="Louisiana Purchase's Happy Hour — North Park's best happy hour deals. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome."
-  canonical="/happy-hour"
+  title={pageContent.seo.title}
+  description={pageContent.seo.description}
+  canonical={pageContent.seo.canonical}
   schema={[happyHourSchema, faqSchema]}
-  breadcrumbs={[
-    { name: 'Home',       url: '/',           position: 1 },
-    { name: 'Happy Hour', url: '/happy-hour', position: 2 },
-  ]}
+  breadcrumbs={pageContent.seo.breadcrumbs}
 >
 
-  <PageHero
-    eyebrow="Monday – Friday · 3 PM – 5 PM"
-    title="Happy Hour"
-    titleItalic="North Park's Finest"
-    subtitle="The best hour of your workday. Discounted craft cocktails, ice-cold draft beer, and Creole bites at the bar — every Monday through Friday from 3 to 5 PM."
-    image={IMAGES['louisiana-purchase-craft-cocktails-san-diego-website']}
-    imageAlt="Happy Hour cocktails at Louisiana Purchase North Park San Diego"
-    ctas={[
-      { label: 'Reserve a Spot',  href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View Full Menu',  href: '/menu', variant: 'outline' },
-    ]}
-    headlineId="hh-headline"
-  />
+  <PageHero {...blocks[0]} />
 
-  <StatBar
-    stats={[
-      { value: HAPPY_HOUR.days, label: 'Days Available' },
-      { value: HAPPY_HOUR.window,  label: 'Happy Hour Window' },
-      { value: '$6+',       label: 'Starting Price' },
-      { value: 'Walk-Ins',  label: 'Always Welcome' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[1]} />
 
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-happy-hour-pitcher-north-park-website']}
-    imageAlt="Louisiana Purchase Happy Hour cocktail pitcher at the bar in North Park"
-    eyebrow="The Ritual"
-    title="More Than a Discount."
-    titleItalic="A Daily Ceremony."
-    body={[
-      "Happy Hour isn't just a price break — it's the best time to experience Louisiana Purchase the way it was meant to be enjoyed. The bar is alive, the pours are generous, and the energy of North Park at the end of a workday fills the room.",
-      "Pull up a stool at the marble bar. Order a Praline Old Fashioned at a price that makes it a habit. Let the evening find you.",
-    ]}
-    facts={[
-      { label: 'Hours',    value: HAPPY_HOUR.window },
-      { label: 'Days',     value: HAPPY_HOUR.days },
-      { label: 'Location', value: 'Full Bar & Patio' },
-      { label: 'Walk-Ins', value: 'Always Welcome' },
-    ]}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[2]} />
 
   <section aria-labelledby="hh-menu-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
-      <SectionHeader
-        eyebrow="The Deals"
-        title="Happy Hour Menu"
-        titleItalic="What's On Offer"
-        subtitle="A curated selection of discounted cocktails, beer, wine, and Creole bites — available at the bar and patio every weekday afternoon."
-        id="hh-menu-heading"
-      />
-      <FourColumnGrid
-        cols={4}
-        dark={false}
-        divided={true}
-        cards={[
-          { eyebrow: 'Cocktails', title: 'Well Cocktails',   body: 'House spirits, fresh-squeezed mixers, bartender\'s choice of Louisiana-inspired build.', meta: 'From $9' },
-          { eyebrow: 'Beer',      title: 'Draft Beer',        body: 'Rotating local and domestic draft selections. Cold, clean, and always poured right.',       meta: 'From $6' },
-          { eyebrow: 'Wine',      title: 'House Wine',        body: 'Red, white, and sparkling by the glass. Curated to complement the Creole kitchen.',           meta: 'From $8' },
-          { eyebrow: 'Bites',     title: 'Happy Hour Bites',  body: 'A rotating selection of small plates from Chef Quinnton Austin\'s kitchen — built for the bar.', meta: 'From $10' },
-        ]}
-      />
+      <SectionHeader {...blocks[3]} />
+      <FourColumnGrid {...blocks[4]} />
       <div class="text-center mt-10">
-        <a href="/menu" class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
-          View Full Menu
-        </a>
+        <a href={pageContent.menuLink.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]" set:text={`\n${pageContent.menuLink.label}\n`}></a>
       </div>
     </div>
   </section>
 
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
-    imageAlt="The bar at Louisiana Purchase North Park San Diego during happy hour"
-    eyebrow="The Setting"
-    title="The Bar at"
-    titleItalic="Louisiana Purchase"
-    body={[
-      "The marble bar at Louisiana Purchase is the heart of the room. During Happy Hour, it's where regulars settle in, where strangers become familiar, and where North Park's best cocktail program is most accessible.",
-      "Outdoor seating on the lush fern-framed patio is also available — a rare find in a neighborhood where good outdoor space is earned.",
-    ]}
-    facts={[
-      { label: 'Bar Seating',   value: 'Walk-In' },
-      { label: 'Patio',         value: 'Available' },
-      { label: 'Neighborhood',  value: 'North Park' },
-      { label: 'Address',       value: VENUE_ADDRESS.street },
-    ]}
-    ctas={[
-      { label: 'Get Directions', href: VENUE_MAPS_URL, external: true, variant: 'outline' },
-    ]}
-    reverse={true}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[5]} />
 
   <section aria-labelledby="hh-faq-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
-      <SectionHeader
-        eyebrow="Need to Know"
-        title="Happy Hour FAQ"
-        subtitle="Everything you need to know about Happy Hour at Louisiana Purchase in North Park, San Diego."
-        id="hh-faq-heading"
-      />
+      <SectionHeader {...blocks[6]} />
       <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
         {FAQ_ITEMS.map((faq) => (
           <div class="py-5 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-12 reveal">
@@ -175,15 +89,6 @@ const faqSchema = {
     </div>
   </section>
 
-  <CTABand
-    eyebrow="Join Us"
-    title="Come for the Deals. Stay for the Night."
-    subtitle="Happy Hour starts at 3 PM — but Louisiana Purchase is open until 9 or 10. Reserve a table and let the evening unfold."
-    image={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'View the Menu',   href: '/menu', variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[7]} />
 
 </Layout>

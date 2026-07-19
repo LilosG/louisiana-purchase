@@ -1,0 +1,211 @@
+{
+  "eventCardLabels": {
+    "capacity": "Capacity",
+    "pricing": "Pricing",
+    "learnMore": "Learn More →",
+    "ariaLabelPrefix": "Learn more about",
+    "ariaLabelSuffix": "at Louisiana Purchase"
+  },
+  "seo": {
+    "title": "Private Events & Venue Buyouts in North Park San Diego | Louisiana Purchase",
+    "description": "Host an unforgettable private event at Louisiana Purchase in North Park, San Diego. Corporate dinners, birthday celebrations, brunch buyouts, and full venue rental for up to 80 guests.",
+    "canonical": "/private-events",
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "url": "/",
+        "position": 1
+      },
+      {
+        "name": "Private Events",
+        "url": "/private-events",
+        "position": 2
+      }
+    ]
+  },
+  "blocks": [
+    {
+      "component": "PageHero",
+      "props": {
+        "eyebrow": "Group Bookings & Venue Buyouts",
+        "title": "Private Events",
+        "titleItalic": "Worth Remembering",
+        "subtitle": "Louisiana Purchase offers an unparalleled private dining and event experience in North Park, San Diego. From intimate corporate dinners to full venue buyouts — the space, the cuisine, and the atmosphere your guests will talk about.",
+        "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
+        "imageAlt": "Private events at Louisiana Purchase North Park San Diego",
+        "ctas": [
+          {
+            "label": "Submit an Inquiry",
+            "href": "#event-inquiry",
+            "variant": "gold"
+          },
+          {
+            "label": "View Event Types",
+            "href": "#event-types",
+            "variant": "outline"
+          }
+        ],
+        "headlineId": "pe-headline"
+      }
+    },
+    {
+      "component": "StatBar",
+      "props": {
+        "stats": [
+          {
+            "value": "80",
+            "label": "Max Capacity"
+          },
+          {
+            "value": "40",
+            "label": "Private Room"
+          },
+          {
+            "value": "50",
+            "label": "Patio Reception"
+          },
+          {
+            "value": "Custom",
+            "label": "Menus Available"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-patio-living-wall-north-park-website",
+        "imageAlt": "Louisiana Purchase patio with living wall and tree — North Park San Diego",
+        "eyebrow": "The Venue",
+        "title": "A Private Event Venue",
+        "titleItalic": "Like No Other in North Park",
+        "body": [
+          "Louisiana Purchase isn't a banquet hall. It's a genuine hospitality experience — the geometric timber ceiling, the candlelit bar, the lush open patio. Every element of the space was designed for atmosphere, not capacity.",
+          "Our events team works with you to design a completely custom experience. Menu curation, cocktail pairings, room configuration, AV — everything handled with the same precision as our dinner service."
+        ],
+        "facts": [
+          {
+            "label": "Full Venue",
+            "value": "Up to 80 Guests"
+          },
+          {
+            "label": "Private Room",
+            "value": "Up to 40 Guests"
+          },
+          {
+            "label": "Patio",
+            "value": "Up to 50 Guests"
+          },
+          {
+            "label": "Location",
+            "value": "North Park, SD"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Submit an Inquiry",
+            "href": "#event-inquiry",
+            "variant": "gold"
+          }
+        ],
+        "dark": true
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "Browse by Event Type",
+        "title": "Every Occasion,",
+        "titleItalic": "Elevated",
+        "subtitle": "From intimate corporate dinners to full venue buyouts — Louisiana Purchase handles events of every scale with the same level of care.",
+        "id": "event-types-heading"
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "How It Works",
+        "title": "From First Inquiry",
+        "titleItalic": "to Your Event",
+        "subtitle": "Our events team handles every detail from first contact to last call.",
+        "id": "process-heading"
+      }
+    },
+    {
+      "component": "AlternatingRow",
+      "props": {
+        "image": "__IMAGE__louisiana-purchase-group-dining-san-diego-website",
+        "imageAlt": "Group dining at Louisiana Purchase North Park San Diego",
+        "eyebrow": "The Space",
+        "title": "Three Distinct",
+        "titleItalic": "Event Spaces",
+        "body": [
+          "Louisiana Purchase offers three configurable spaces — the intimate private dining room for seated dinners up to 40, the full restaurant buyout for groups up to 80, and the lush open patio for cocktail receptions and standing events.",
+          "Each space can be configured independently or combined for larger events. Our team will recommend the best configuration for your headcount and event style."
+        ],
+        "facts": [
+          {
+            "label": "Private Room",
+            "value": "Up to 40 seated"
+          },
+          {
+            "label": "Full Venue",
+            "value": "Up to 80 guests"
+          },
+          {
+            "label": "Patio Reception",
+            "value": "Up to 50 standing"
+          },
+          {
+            "label": "AV & Setup",
+            "value": "Available"
+          }
+        ],
+        "ctas": [
+          {
+            "label": "Inquire About Your Event",
+            "href": "#event-inquiry",
+            "variant": "gold"
+          }
+        ],
+        "reverse": true,
+        "dark": false
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "Common Questions",
+        "title": "Private Events FAQ",
+        "subtitle": "Everything you need to know about hosting a private event at Louisiana Purchase in North Park, San Diego.",
+        "id": "pe-faq-heading"
+      }
+    },
+    {
+      "component": "CTABand",
+      "props": {
+        "eyebrow": "Let's Get Started",
+        "title": "Ready to Plan Your Event?",
+        "subtitle": "Our events team will respond within 24 hours with availability and a custom proposal.",
+        "image": "__IMAGE__louisiana-purchase-north-park-restaurant-and-bar-website",
+        "ctas": [
+          {
+            "label": "Submit an Inquiry",
+            "href": "#event-inquiry",
+            "variant": "gold"
+          },
+          {
+            "label": "View Event Types",
+            "href": "#event-types",
+            "variant": "outline"
+          }
+        ]
+      }
+    },
+    {
+      "component": "ToastEventForm",
+      "props": {}
+    }
+  ]
+}

@@ -4,11 +4,11 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 
-import { CANONICAL_DOMAIN } from './src/data/venue.ts';
+import venueSettings from './src/content/venueSettings/settings.json' with { type: 'json' };
 
 // https://astro.build/config
 export default defineConfig({
-  site: CANONICAL_DOMAIN,
+  site: venueSettings.domain,
   trailingSlash: 'never',
   integrations: [sitemap()],
   vite: {
