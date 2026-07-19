@@ -12,17 +12,10 @@
 // It must never be imported directly into page files.
 
 import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
-import {
-  VENUE_NAME,
-  CANONICAL_DOMAIN,
-  VENUE_ADDRESS,
-  VENUE_GEO,
-  VENUE_PHONE_FALLBACK,
-  VENUE_EMAIL_FALLBACK,
-  VENUE_SOCIAL,
-  REGULAR_HOURS,
-  VENUE_DEFAULT_IMAGE,
-} from '../../data/venue';
+import { getSingleton } from '../../content/siteData';
+
+const venueSettings = await getSingleton('venueSettings', 'settings');
+const seoContent = await getSingleton('localSeo', 'localSeo');
 
 interface Props extends PageSeoProps {}
 
@@ -43,42 +36,34 @@ const {
 // platform endpoints that rotate.
 
 const VENUE: VenueSchemaConfig = {
-  name:               VENUE_NAME,
-  type:               'Restaurant',
-  description:        "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
-  url:                import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN,
-  phone:              import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK,
-  email:              import.meta.env.PUBLIC_VENUE_EMAIL || VENUE_EMAIL_FALLBACK,
+  name:               venueSettings.name,
+  type:               seoContent.type,
+  description:        seoContent.description,
+  url:                import.meta.env.PUBLIC_SITE_URL || venueSettings.domain,
+  phone:              import.meta.env.PUBLIC_VENUE_PHONE || venueSettings.phoneFallback,
+  email:              import.meta.env.PUBLIC_VENUE_EMAIL || venueSettings.emailFallback,
   address: {
-    street:   VENUE_ADDRESS.street,
-    city:     VENUE_ADDRESS.city,
-    state:    VENUE_ADDRESS.state,
-    zip:      VENUE_ADDRESS.zip,
-    country:  VENUE_ADDRESS.country,
+    street:   venueSettings.address.street,
+    city:     venueSettings.address.city,
+    state:    venueSettings.address.state,
+    zip:      venueSettings.address.zip,
+    country:  venueSettings.address.country,
   },
   geo: {
-    latitude:  VENUE_GEO.latitude,
-    longitude: VENUE_GEO.longitude,
+    latitude:  venueSettings.geo.latitude,
+    longitude: venueSettings.geo.longitude,
   },
-  hours: REGULAR_HOURS,
-  cuisines: [
-    'Creole',
-    'Louisiana',
-    'Southern American',
-    'New Orleans',
-    'Cajun',
-    'Cocktail Bar',
-    'American',
-  ],
-  priceRange:           '$$$',
-  image:                VENUE_DEFAULT_IMAGE,
-  logo:                 '/logo.png',
-  acceptsReservations:  true,
-  hasMenu:              `${CANONICAL_DOMAIN}/menu`,
+  hours: venueSettings.regularHours,
+  cuisines: seoContent.cuisines,
+  priceRange:           seoContent.priceRange,
+  image:                venueSettings.defaultSocialImage,
+  logo:                 seoContent.logo,
+  acceptsReservations:  seoContent.acceptsReservations,
+  hasMenu:              `${venueSettings.domain}/menu`,
 };
 
 // ─── Canonical URL Resolution ────────────────────────────────────────────────
-const siteUrl   = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || CANONICAL_DOMAIN;
+const siteUrl   = import.meta.env.PUBLIC_SITE_URL?.replace(/\/$/, '') || venueSettings.domain;
 const pagePath  = Astro.url.pathname;
 const resolvedCanonical = canonical
   ? `${siteUrl}${canonical}`
@@ -87,7 +72,7 @@ const resolvedCanonical = canonical
 // ─── OG Image Resolution ─────────────────────────────────────────────────────
 const resolvedOgImage = ogImage
   ? `${siteUrl}${ogImage}`
-  : `${siteUrl}${VENUE_DEFAULT_IMAGE}`;
+  : `${siteUrl}${venueSettings.defaultSocialImage}`;
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
 const restaurantSchema: Record<string, unknown> = {
@@ -126,20 +111,12 @@ const restaurantSchema: Record<string, unknown> = {
   servesCuisine:        VENUE.cuisines,
   hasMenu:              VENUE.hasMenu,
   acceptsReservations:  VENUE.acceptsReservations,
-  currenciesAccepted:   'USD',
-  paymentAccepted:      'Cash, Credit Card',
-  amenityFeature: [
-    { '@type': 'LocationFeatureSpecification', name: 'Full Bar',            value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Outdoor Seating',     value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Private Dining Room', value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Live Jazz',           value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Weekend Brunch',      value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Reservations',        value: true },
-    { '@type': 'LocationFeatureSpecification', name: 'Cocktail Bar',        value: true },
-  ],
+  currenciesAccepted:   seoContent.currency,
+  paymentAccepted:      seoContent.paymentAccepted,
+  amenityFeature: seoContent.amenities.map((name: string) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
   sameAs: [
-    VENUE_SOCIAL.instagram,
-    VENUE_SOCIAL.facebook,
+    venueSettings.social.instagram,
+    venueSettings.social.facebook,
   ],
 };
 
@@ -156,7 +133,7 @@ const buildBreadcrumbSchema = (items: BreadcrumbItem[]): Record<string, unknown>
 });
 
 // ─── Page Title Formatting ────────────────────────────────────────────────────
-const BRAND_SUFFIX = 'Louisiana Purchase | North Park, San Diego';
+const BRAND_SUFFIX = seoContent.titleSuffix;
 const formattedTitle = title.includes('Louisiana Purchase')
   ? title
   : `${title} — ${BRAND_SUFFIX}`;
@@ -165,7 +142,7 @@ const formattedTitle = title.includes('Louisiana Purchase')
 <!-- ─── Primary Meta Tags ─────────────────────────────────────────────── -->
 <title>{formattedTitle}</title>
 <meta name="description" content={description} />
-<meta name="author"      content="Louisiana Purchase" />
+<meta name="author"      content={seoContent.author} />
 <link rel="canonical"    href={resolvedCanonical} />
 
 {noindex
@@ -193,8 +170,8 @@ const formattedTitle = title.includes('Louisiana Purchase')
 <meta name="twitter:image:alt"   content={`${VENUE.name} — ${VENUE.address.city}`} />
 
 <!-- ─── Geo & Local Business Meta ──────────────────────────────────── -->
-<meta name="geo.region"      content="US-CA" />
-<meta name="geo.placename"   content="San Diego, California" />
+<meta name="geo.region"      content={seoContent.geoRegion} />
+<meta name="geo.placename"   content={seoContent.geoPlacename} />
 <meta name="geo.position"    content={`${VENUE.geo.latitude};${VENUE.geo.longitude}`} />
 <meta name="ICBM"            content={`${VENUE.geo.latitude}, ${VENUE.geo.longitude}`} />
 

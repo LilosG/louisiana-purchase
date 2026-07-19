@@ -1,0 +1,14 @@
+{
+  "id": "lemon-pepper-catfish",
+  "order": 4,
+  "name": "Lemon Pepper Catfish",
+  "description": "Whole fillet, lemon pepper crust, cornbread, 1 side, LP tartar.",
+  "image": "louisiana-purchase-lemon-pepper-catfish-north-park-website",
+  "imageAlt": "Lemon Pepper Catfish — whole fillet with lemon pepper crust at Louisiana Purchase",
+  "tags": [
+    "signature"
+  ],
+  "dietary": [],
+  "featured": true,
+  "available": true
+}

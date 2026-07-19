@@ -1,0 +1,15 @@
+{
+  "id": "superbird-paloma",
+  "order": 0,
+  "name": "Superbird Paloma",
+  "description": "Superbird canned tequila paloma — blanco tequila, pink grapefruit, lime, a crisp effervescent pour straight from the can.",
+  "image": "louisiana-purchase-superbird-paloma-cocktail-north-park-website",
+  "imageAlt": "Superbird Tequila Paloma — Louisiana Purchase signature cocktail",
+  "tags": [
+    "signature",
+    "popular"
+  ],
+  "dietary": [],
+  "featured": true,
+  "available": true
+}

@@ -1,0 +1,15 @@
+{
+  "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
+  "type": "Restaurant",
+  "cuisines": ["Creole", "Louisiana", "Southern American", "New Orleans", "Cajun", "Cocktail Bar", "American"],
+  "priceRange": "$$$",
+  "logo": "/logo.png",
+  "acceptsReservations": true,
+  "currency": "USD",
+  "paymentAccepted": "Cash, Credit Card",
+  "amenities": ["Full Bar", "Outdoor Seating", "Private Dining Room", "Live Jazz", "Weekend Brunch", "Reservations", "Cocktail Bar"],
+  "titleSuffix": "Louisiana Purchase | North Park, San Diego",
+  "author": "Louisiana Purchase",
+  "geoRegion": "US-CA",
+  "geoPlacename": "San Diego, California"
+}

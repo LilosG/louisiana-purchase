@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/the-space/index.astro
 // Louisiana Purchase — The Space / Venue Lookbook Page
 // Targets: "north park restaurant interior", "restaurant venue san diego", "louisiana purchase venue"
@@ -10,166 +11,53 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
-import { VENUE_ADDRESS, VENUE_MAPS_URL, DISPLAY_HOURS, EVENT_CAPACITY } from '../../data/venue';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
+import { getOrderedCollection } from '../../content/siteData';
+
+const spaceGalleryCards = (await getOrderedCollection('spaceGalleryCards')).map((card) => ({
+  ...card,
+  image: IMAGES[card.image as keyof typeof IMAGES],
+}));
+const pageContent = await getSingleton('theSpacePage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const VENUE_ADDRESS = venue.address;
+const VENUE_MAPS_URL = venue.mapsUrl;
+const DISPLAY_HOURS = venue.displayHours;
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const locationBody = `\n${pageContent.location.bodyPrefix}${VENUE_ADDRESS.crossStreet.replace('&', '&amp;')}${pageContent.location.bodyMiddle}${VENUE_ADDRESS.neighborhood}${pageContent.location.bodySuffix}\n`;
 ---
 
-<Layout
-  title="The Space — Louisiana Purchase Venue & Interior | North Park San Diego"
-  description="Step inside Louisiana Purchase — a French Quarter-inspired dining room in North Park, San Diego. Geometric timber ceiling, marble bar, candlelit tables, and a lush open patio. Available for private events up to 80 guests."
-  canonical="/the-space"
-  breadcrumbs={[
-    { name: 'Home',      url: '/',          position: 1 },
-    { name: 'The Space', url: '/the-space', position: 2 },
-  ]}
->
+<Layout {...blocks[0]}>
 
-  <PageHero
-    eyebrow="North Park, San Diego"
-    title="The Space"
-    titleItalic="A Room That Earns Its Place"
-    subtitle="Every element of Louisiana Purchase was designed with intention — the geometric timber ceiling, the marble bar, the candlelit tables, the lush patio framed by hanging ferns. A room that transports you before the first drink arrives."
-    image={IMAGES['louisiana-purchase-street-corner-exterior-north-park-website']}
-    imageAlt="Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego"
-    ctas={[
-      { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Private Events',    href: '/private-events', variant: 'outline' },
-    ]}
-    headlineId="space-headline"
-  />
+  <PageHero {...blocks[1]} />
 
-  <StatBar
-    stats={[
-      { value: 'Est. 2018', label: 'North Park Original' },
-      { value: `${EVENT_CAPACITY.fullVenue}+`, label: 'Event Capacity' },
-      { value: '3 Spaces',  label: 'Configurable Areas' },
-      { value: 'Open Patio',label: 'Available Daily' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[2]} />
 
   <!-- ─── The Dining Room ──────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-dining-room-bar-north-park-website']}
-    imageAlt="Louisiana Purchase dining room — geometric timber ceiling and marble bar"
-    eyebrow="The Dining Room"
-    title="The Geometric Timber"
-    titleItalic="Ceiling & Marble Bar"
-    body={[
-      "The main dining room at Louisiana Purchase is anchored by a striking geometric timber ceiling — a modern architectural element that references the craftsmanship of New Orleans without replicating it. Below it, a full marble bar runs the length of the room.",
-      "Candlelit tables, velvet seating, and warm amber lighting create the atmosphere of a French Quarter establishment that has aged into itself. Every seat in the room has a view of something worth looking at.",
-    ]}
-    facts={[
-      { label: 'Seating',    value: 'Full Dining Room' },
-      { label: 'Bar',        value: 'Full Marble Bar' },
-      { label: 'Lighting',   value: 'Candlelit' },
-      { label: 'Aesthetic',  value: 'French Quarter Modern' },
-    ]}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[3]} />
 
   <!-- ─── The Patio ────────────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-patio-living-wall-north-park-website']}
-    imageAlt="Louisiana Purchase open patio with living wall — North Park San Diego"
-    eyebrow="The Patio"
-    title="Open Air Dining"
-    titleItalic="in North Park"
-    body={[
-      "The patio at Louisiana Purchase is one of North Park's most coveted outdoor dining spaces. Framed by hanging ferns and overhead lighting, it captures the feeling of a private courtyard in the French Quarter — open to the San Diego evening but sheltered from it.",
-      "Available for dining service daily and for private event buyouts. The patio accommodates up to 50 guests for reception-style events.",
-    ]}
-    facts={[
-      { label: 'Capacity',    value: `Up to ${EVENT_CAPACITY.patio} Guests` },
-      { label: 'Use',         value: 'Dining & Events' },
-      { label: 'Ambience',    value: 'Fern-Framed Courtyard' },
-      { label: 'Availability',value: 'Open Daily' },
-    ]}
-    ctas={[
-      { label: 'Reserve the Patio', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Private Buyouts',   href: '/private-events', variant: 'outline' },
-    ]}
-    reverse={true}
-    dark={false}
-  />
+  <AlternatingRow {...blocks[4]} />
 
   <!-- ─── Photo Gallery Grid ───────────────────────────────────────────── -->
   <section aria-labelledby="gallery-heading" class="bg-obsidian py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="Inside Louisiana Purchase"
-        title="The Venue in Detail"
-        subtitle="A closer look at the spaces, textures, and atmosphere that define Louisiana Purchase in North Park, San Diego."
-        id="gallery-heading"
-      />
+      <SectionHeader {...blocks[5]} />
 
       <FourColumnGrid
         cols={4}
         dark={true}
         divided={true}
-        cards={[
-          {
-            image:    IMAGES['louisiana-purchase-restaurant-exterior-pergola-north-park-website'],
-            imageAlt: 'Louisiana Purchase at night — University Ave and 23rd St, North Park',
-            eyebrow:  'Exterior',
-            title:    'The Entrance',
-            body:     'Louisiana Purchase at night — University Ave and 23rd St, North Park.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-marble-bar-north-park-website'],
-            imageAlt: 'Louisiana Purchase interior — marble bar and timber ceiling',
-            eyebrow:  'The Bar',
-            title:    'Marble Bar',
-            body:     'The full marble bar running the length of the main dining room.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-dining-room-bar-north-park-website'],
-            imageAlt: 'Candlelit tables and velvet seating at Louisiana Purchase North Park',
-            eyebrow:  'Dining Room',
-            title:    'Candlelit Tables',
-            body:     'Velvet seating and candlelit tables beneath the geometric timber ceiling.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-patio-living-wall-north-park-website'],
-            imageAlt: 'Louisiana Purchase patio with living wall — North Park San Diego',
-            eyebrow:  'The Patio',
-            title:    'Open Air Courtyard',
-            body:     'The lush fern-framed patio — one of North Park\'s best outdoor dining spaces.',
-          },
-        ]}
+        cards={spaceGalleryCards}
       />
 
     </div>
   </section>
 
   <!-- ─── Private Events Callout ───────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-university-ave-corner-night-north-park-website']}
-    imageAlt="Louisiana Purchase exterior patio at night, corner of Louisiana St and University Ave, North Park San Diego"
-    eyebrow="Private Events"
-    title="Your Event."
-    titleItalic="Our Space."
-    body={[
-      "Louisiana Purchase is available for private events of all types — corporate dinners, birthday celebrations, rehearsal dinners, and full venue buyouts. The space is yours entirely, staffed and provisioned to the same standard as our regular service.",
-      "Our events team will work with you on every detail from first inquiry to last call. Capacity up to 80 guests.",
-    ]}
-    facts={[
-      { label: 'Full Venue',   value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
-      { label: 'Private Room', value: `Up to ${EVENT_CAPACITY.privateRoom} Guests` },
-      { label: 'Patio',        value: `Up to ${EVENT_CAPACITY.patio} Guests` },
-      { label: 'Response',     value: 'Within 24 Hours' },
-    ]}
-    ctas={[
-      { label: 'Inquire About Your Event', href: '/private-events', variant: 'gold' },
-    ]}
-    reverse={true}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[6]} />
 
   <!-- ─── Location ─────────────────────────────────────────────────────── -->
   <section aria-labelledby="location-heading" class="bg-velvet py-20 md:py-24">
@@ -177,19 +65,17 @@ import { Image } from 'astro:assets';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Find Us</p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.location.eyebrow}></p>
           <h2 id="location-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">
             {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
           </h2>
-          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]">
-            Louisiana Purchase is located at the intersection of {VENUE_ADDRESS.crossStreet} in the heart of {VENUE_ADDRESS.neighborhood} — San Diego's most vibrant dining and nightlife neighborhood.
-          </p>
+          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]" set:html={locationBody}></p>
 
           <dl class="flex flex-col gap-4 mb-8 pt-6 border-t border-gold/15">
             {[
-              { label: 'Address', value: `${VENUE_ADDRESS.street}, ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip}` },
+              { label: pageContent.location.addressLabel, value: `${VENUE_ADDRESS.street}, ${VENUE_ADDRESS.neighborhood}, ${VENUE_ADDRESS.city}, ${VENUE_ADDRESS.state} ${VENUE_ADDRESS.zip}` },
               ...DISPLAY_HOURS,
-            ].map((item) => (
+            ].map((item: { label: string; value: string }) => (
               <div class="flex justify-between gap-8">
                 <dt class="font-sans text-[0.5625rem] font-medium tracking-[0.20em] uppercase text-gold/70 pt-0.5 whitespace-nowrap">{item.label}</dt>
                 <dd class="font-sans text-sm text-parchment text-right whitespace-nowrap">{item.value}</dd>
@@ -199,20 +85,16 @@ import { Image } from 'astro:assets';
 
           <div class="flex flex-wrap gap-4">
             <a href={VENUE_MAPS_URL} target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]">
-              Get Directions
-            </a>
+               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.location.directionsLabel}\n`}></a>
             <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
-              Reserve a Table
-            </a>
+               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]" set:text={`\n${pageContent.location.reservationsLabel}\n`}></a>
           </div>
         </div>
 
         <div class="overflow-hidden aspect-[4/3]">
           <Image
-            src={IMAGES['louisiana-purchase-seafood-restaurant-san-diego-website']}
-            alt="Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
+            src={IMAGES[pageContent.location.image as keyof typeof IMAGES]}
+            alt={pageContent.location.imageAlt}
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
@@ -226,15 +108,6 @@ import { Image } from 'astro:assets';
     </div>
   </section>
 
-  <CTABand
-    eyebrow="Come Experience It"
-    title="Louisiana Purchase Awaits."
-    subtitle="Open daily. Walk-ins welcome at the bar. Reservations recommended for dining."
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    ctas={[
-      { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Private Events',    href: '/private-events', variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[7]} />
 
 </Layout>

@@ -1,0 +1,14 @@
+{
+  "id": "acme-oysters",
+  "order": 3,
+  "name": "ACME Oysters",
+  "description": "7 chargrilled Gulf oysters, garlic lemon butter, parmesan.",
+  "image": "louisiana-purchase-acme-oysters-north-park-website",
+  "imageAlt": "ACME Oysters — chargrilled Gulf oysters with garlic lemon butter and parmesan at Louisiana Purchase",
+  "tags": [
+    "signature"
+  ],
+  "dietary": [],
+  "featured": true,
+  "available": true
+}

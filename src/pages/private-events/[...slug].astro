@@ -11,13 +11,13 @@ import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import ChecklistItems from '../../components/ui/ChecklistItems.astro';
 import ToastEventForm from '../../components/ui/ToastEventForm.astro';
-import { PRIVATE_EVENT_SLUGS } from '../../data/private-events';
-import { CANONICAL_DOMAIN, VENUE_ADDRESS } from '../../data/venue';
-import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import type { PrivateEventSlug } from '../../types/seo';
 import { IMAGES } from '../../assets/images';
+import { getOrderedCollection } from '../../content/siteData';
+import { getSingleton } from '../../content/siteData';
 
 export async function getStaticPaths() {
+  const PRIVATE_EVENT_SLUGS = await getOrderedCollection('privateEventTypes');
   return PRIVATE_EVENT_SLUGS.map((event: PrivateEventSlug) => ({
     params: { slug: event.slug },
     props:  { event },
@@ -28,14 +28,24 @@ interface Props {
   event: PrivateEventSlug;
 }
 
-const { event } = Astro.props;
+const { event } = Astro.props as Props;
+const template = await getSingleton('privateEventsSlugTemplate', 'template');
+const venue = await getSingleton('venueSettings', 'settings');
+const CANONICAL_DOMAIN = venue.domain;
+const VENUE_ADDRESS = venue.address;
+const fill = (value: any): any => {
+  if (typeof value === 'string') return value.replaceAll('{{eventTypeLower}}', event.eventType.toLowerCase()).replaceAll('{{eventType}}', event.eventType).replaceAll('{{capacity}}', event.capacity).replaceAll('{{title}}', event.title);
+  if (Array.isArray(value)) return value.map(fill);
+  if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, fill(item)]));
+  return value;
+};
 
 const eventVenueSchema: Record<string, unknown> = {
   '@context':  'https://schema.org',
   '@type':     'EventVenue',
-  name:        `Louisiana Purchase — ${event.title}`,
+  name:        `${template.seo.schemaNamePrefix}${event.title}`,
   description: event.description,
-  url:         `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/private-events/${event.slug}`,
+  url:         `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}${template.seo.canonicalBase}${event.slug}`,
   address: {
     '@type':          'PostalAddress',
     streetAddress:    VENUE_ADDRESS.street,
@@ -46,37 +56,9 @@ const eventVenueSchema: Record<string, unknown> = {
   },
 };
 
-const FAQ_ITEMS = [
-  {
-    q: `How do I book a ${event.eventType.toLowerCase()} at Louisiana Purchase?`,
-    a: `Submit an inquiry through our private events portal. Our events team responds within 24 hours to discuss availability, menu options, and pricing for your ${event.eventType.toLowerCase()} in North Park, San Diego.`,
-  },
-  {
-    q: `What is the guest capacity for a ${event.eventType.toLowerCase()}?`,
-    a: `We accommodate ${event.capacity}. Specific minimums and configurations vary by space and date. Contact our events team for a custom quote.`,
-  },
-  {
-    q: 'Can I customize the menu for my event?',
-    a: 'Yes. Chef Quinnton Austin and our culinary team offer fully bespoke menu curation — from passed cocktail-hour bites to multi-course Creole dinner experiences.',
-  },
-  {
-    q: 'Does Louisiana Purchase offer cocktail pairings?',
-    a: 'Our bar program specializes in custom cocktail pairings and curated open bar packages. Signature cocktails including the Praline Old Fashioned and Voo Doo Carré are available for all events.',
-  },
-  {
-    q: 'How far in advance should I book?',
-    a: 'We recommend inquiring at least 3–4 weeks ahead for weekday events and 6–8 weeks for weekend dates. Popular dates fill quickly.',
-  },
-];
+const FAQ_ITEMS = fill(template.faqs) as Array<{ q: string; a: string }>;
 
-const INCLUDED_ITEMS = [
-  { title: 'Custom Menu Curation',     body: 'Chef Quinnton Austin\'s team builds a bespoke menu for your event — from passed bites to multi-course Creole dinners.' },
-  { title: 'Cocktail Pairings',         body: 'Full bar service with curated cocktail pairings and open bar packages. All signature cocktails available.' },
-  { title: 'Dedicated Event Staff',     body: 'A dedicated events coordinator and full front-of-house team for the duration of your event.' },
-  { title: 'Room Configuration',        body: 'Flexible space setup tailored to your headcount and event style — seated dinner, cocktail reception, or hybrid.' },
-  { title: 'AV & Presentation Support', body: 'Basic AV setup available for presentations, slideshows, and background music. Inquire for full details.' },
-  { title: '24-Hour Response',          body: 'Our events team responds to all inquiries within 24 hours with availability and a custom proposal.' },
-];
+const INCLUDED_ITEMS = template.includedItems;
 
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -92,11 +74,10 @@ const faqSchema = {
 <Layout
   title={event.metaTitle}
   description={event.description}
-  canonical={`/private-events/${event.slug}`}
+  canonical={`${template.seo.canonicalBase}${event.slug}`}
   schema={[eventVenueSchema, faqSchema]}
   breadcrumbs={[
-    { name: 'Home',           url: '/',               position: 1 },
-    { name: 'Private Events', url: '/private-events', position: 2 },
+    ...template.seo.breadcrumbs,
     { name: event.title,      url: `/private-events/${event.slug}`, position: 3 },
   ]}
 >
@@ -105,44 +86,21 @@ const faqSchema = {
     eyebrow={event.eventType}
     title={event.title}
     subtitle={event.description}
-    image={IMAGES['louisiana-purchase-private-dining-san-diego-website']}
-    imageAlt={`${event.title} at Louisiana Purchase North Park San Diego`}
-    ctas={[
-      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
-      { label: 'View All Events',    href: '/private-events', variant: 'outline' },
-    ]}
-    headlineId="slug-headline"
+    image={IMAGES[template.hero.image as keyof typeof IMAGES]}
+    imageAlt={fill(template.hero.imageAlt)}
+    ctas={template.heroCtas}
+    headlineId={template.hero.headlineId}
   />
 
   <StatBar
-    stats={[
-      { value: event.capacity,  label: 'Guest Capacity' },
-      { value: event.eventType, label: 'Event Type' },
-      { value: 'Custom',        label: 'Menu Options' },
-      { value: '24hr',          label: 'Response Time' },
-    ]}
+    stats={fill(template.stats)}
     dark={true}
   />
 
   <AlternatingRow
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    imageAlt={`${event.eventType} venue at Louisiana Purchase North Park San Diego`}
-    eyebrow="The Experience"
-    title="Louisiana Purchase"
-    titleItalic="Sets the Scene"
-    body={[
-      `Louisiana Purchase provides the perfect backdrop for your ${event.eventType.toLowerCase()}. The geometric timber ceiling, the candlelit bar, and the lush open patio create an atmosphere that elevates every occasion.`,
-      "Our events team works with you on every detail — from custom menu curation to cocktail pairings and room configuration. Every event is handled with the same precision as our dinner service.",
-    ]}
-    facts={[
-      { label: 'Capacity',   value: event.capacity },
-      { label: 'Event Type', value: event.eventType },
-      { label: 'Location',   value: 'North Park, San Diego' },
-      { label: 'Address',    value: VENUE_ADDRESS.street },
-    ]}
-    ctas={[
-      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
-    ]}
+    image={IMAGES[template.experienceImage.image as keyof typeof IMAGES]}
+    imageAlt={fill(template.experienceImage.imageAlt)}
+    {...fill(template.experience)}
     dark={true}
   />
 
@@ -151,11 +109,7 @@ const faqSchema = {
     <div class="max-w-[1280px] mx-auto px-6">
 
       <SectionHeader
-        eyebrow="What's Included"
-        title="Everything You Need"
-        titleItalic="for a Perfect Event"
-        subtitle={`Everything Louisiana Purchase provides for your ${event.eventType.toLowerCase()} — from first inquiry to last call.`}
-        id="included-heading"
+        {...fill(template.includedHeader)}
       />
 
       <ChecklistItems items={INCLUDED_ITEMS} cols={3} dark={false} />
@@ -168,10 +122,7 @@ const faqSchema = {
     <div class="max-w-[1280px] mx-auto px-6">
 
       <SectionHeader
-        eyebrow="Common Questions"
-        title={`${event.eventType} FAQ`}
-        subtitle={`Everything you need to know about booking a ${event.eventType.toLowerCase()} at Louisiana Purchase in North Park, San Diego.`}
-        id="slug-faq-heading"
+        {...fill(template.faqHeader)}
       />
 
       <dl class="divide-y divide-gold/10 max-w-[80ch] mx-auto">
@@ -187,21 +138,12 @@ const faqSchema = {
   </section>
 
   <CTABand
-    eyebrow="Let's Build Your Experience"
-    title={`Book Your ${event.eventType}.`}
-    subtitle="Our events team is ready to design an experience that exceeds every expectation. Inquire today to check availability."
-    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
-    ctas={[
-      { label: 'Request a Proposal', href: `#${PRIVATE_EVENTS_FORM_ANCHOR}`, variant: 'gold' },
-      { label: 'View All Events',    href: '/private-events', variant: 'outline' },
-    ]}
+    {...fill(template.cta)}
+    image={IMAGES[template.cta.image as keyof typeof IMAGES]}
   />
 
   <ToastEventForm
-    eyebrow={event.eventType}
-    title="Tell Us About"
-    titleItalic={`Your ${event.eventType}`}
-    subtitle={`Share your date, headcount, and vision for your ${event.eventType.toLowerCase()} below. Our events team responds within 24 hours with availability and a custom proposal.`}
+    {...fill(template.form)}
   />
 
 </Layout>

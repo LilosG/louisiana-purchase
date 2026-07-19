@@ -1,0 +1,18 @@
+{
+  "id": "steak-etouffee",
+  "order": 2,
+  "name": "Steak Étouffée",
+  "description": "Fire-seared ribeye, crawfish étouffée, roasted garlic.",
+  "price": 4200,
+  "priceDisplay": "$42",
+  "image": "louisiana-purchase-seafood-and-cocktails-north-park-website",
+  "imageAlt": "Steak étouffée — Louisiana Purchase signature dish",
+  "tags": [
+    "signature"
+  ],
+  "dietary": [
+    "contains-shellfish"
+  ],
+  "featured": true,
+  "available": true
+}

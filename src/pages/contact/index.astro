@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/contact/index.astro
 // Louisiana Purchase — Contact Page
 
@@ -6,92 +7,77 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CTABand from '../../components/ui/CTABand.astro';
-import { VENUE_ADDRESS, VENUE_MAPS_URL, VENUE_SOCIAL, DISPLAY_HOURS, BRUNCH_HOURS, HAPPY_HOUR } from '../../data/venue';
-import { PRIVATE_EVENTS_FORM_ANCHOR } from '../../data/events-config';
 import { IMAGES } from '../../assets/images';
+const pageContent = await getSingleton('contactPage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const eventsConfig = await getSingleton('eventsConfig', 'config');
+const VENUE_ADDRESS = venue.address;
+const VENUE_MAPS_URL = venue.mapsUrl;
+const VENUE_SOCIAL = venue.social;
+const DISPLAY_HOURS = venue.displayHours;
+const BRUNCH_HOURS = venue.brunchHours;
+const HAPPY_HOUR = venue.happyHour;
+const PRIVATE_EVENTS_FORM_ANCHOR = eventsConfig.privateEventsFormAnchor;
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const [reservations, privateEvents, orderOnline] = pageContent.contactMethods;
+const contactMethodHrefs: Record<string, string | undefined> = {
+  reservations: import.meta.env.PUBLIC_RESERVATIONS_URL,
+  privateEvents: `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`,
+  order: import.meta.env.PUBLIC_ORDER_URL,
+};
+const locationBody = `\n${pageContent.location.bodyPrefix}${VENUE_ADDRESS.crossStreet}${pageContent.location.bodyMiddle}${VENUE_ADDRESS.neighborhood}${pageContent.location.bodySuffix}\n`;
 ---
 
-<Layout
-  title="Contact Louisiana Purchase | North Park San Diego"
-  description="Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave."
-  canonical="/contact"
-  breadcrumbs={[
-    { name: 'Home',    url: '/',        position: 1 },
-    { name: 'Contact', url: '/contact', position: 2 },
-  ]}
->
+<Layout {...blocks[0]}>
 
-  <PageHero
-    eyebrow="Get in Touch"
-    title="Contact Us"
-    titleItalic="We'd Love to Hear From You"
-    subtitle="Reservations, private event inquiries, general questions — our team is here to help."
-    image={IMAGES['louisiana-purchase-street-corner-exterior-north-park-website']}
-    imageAlt="Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego"
-    headlineId="contact-headline"
-  />
+  <PageHero {...blocks[1]} />
 
   <!-- ─── Contact Grid ─────────────────────────────────────────────────── -->
   <section aria-labelledby="contact-methods-heading" class="bg-obsidian py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="How to Reach Us"
-        title="Contact"
-        titleItalic="Louisiana Purchase"
-        subtitle="Choose the best way to connect with us below."
-        id="contact-methods-heading"
-      />
+      <SectionHeader {...blocks[2]} />
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-gold/10">
 
         <!-- Reservations -->
         <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Reservations</p>
-          <h3 class="font-serif font-light text-parchment text-xl">Reserve a Table</h3>
-          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
-            Book your table online through our reservations system. Available for all dining services — dinner, brunch, and bar seating.
-          </p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold" set:text={reservations.eyebrow}></p>
+          <h3 class="font-serif font-light text-parchment text-xl" set:text={reservations.title}></h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1" set:text={`\n${reservations.body}\n`}></p>
           <a
-            href={import.meta.env.PUBLIC_RESERVATIONS_URL}
+            href={contactMethodHrefs[reservations.url]}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
-          >
-            Book Now
-          </a>
+            set:text={`\n${reservations.ctaLabel}\n`}
+          ></a>
         </div>
 
         <!-- Private Events -->
         <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Private Events</p>
-          <h3 class="font-serif font-light text-parchment text-xl">Event Inquiries</h3>
-          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
-            Planning a private dinner, corporate event, birthday, or full venue buyout? Submit an inquiry and our events team responds within 24 hours.
-          </p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold" set:text={privateEvents.eyebrow}></p>
+          <h3 class="font-serif font-light text-parchment text-xl" set:text={privateEvents.title}></h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1" set:text={`\n${privateEvents.body}\n`}></p>
           <a
-            href={`/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`}
+            href={contactMethodHrefs[privateEvents.url]}
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
-          >
-            Submit Inquiry
-          </a>
+            set:text={`\n${privateEvents.ctaLabel}\n`}
+          ></a>
         </div>
 
         <!-- Order Online -->
         <div class="bg-obsidian-800 p-8 flex flex-col gap-4 reveal">
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold">Order Online</p>
-          <h3 class="font-serif font-light text-parchment text-xl">Takeout & Delivery</h3>
-          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1">
-            Order Louisiana Purchase for takeout or delivery. The full menu is available online through our ordering system.
-          </p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold" set:text={orderOnline.eyebrow}></p>
+          <h3 class="font-serif font-light text-parchment text-xl" set:html={orderOnline.title}></h3>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed flex-1" set:text={`\n${orderOnline.body}\n`}></p>
           <a
-            href={import.meta.env.PUBLIC_ORDER_URL}
+            href={contactMethodHrefs[orderOnline.url]}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms] mt-auto"
-          >
-            Order Now
-          </a>
+            set:text={`\n${orderOnline.ctaLabel}\n`}
+          ></a>
         </div>
 
       </div>
@@ -105,28 +91,25 @@ import { IMAGES } from '../../assets/images';
 
         <!-- Address & Directions -->
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Location</p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.location.eyebrow}></p>
           <h2 id="location-hours-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
             {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
           </h2>
-          <p class="font-sans font-light text-smoke text-sm leading-relaxed mb-6 max-w-[40ch]">
-            Located at the intersection of {VENUE_ADDRESS.crossStreet} in the heart of {VENUE_ADDRESS.neighborhood}. Street parking available on University Ave and surrounding streets.
-          </p>
+          <p class="font-sans font-light text-smoke text-sm leading-relaxed mb-6 max-w-[40ch]" set:text={locationBody}></p>
           <a
             href={VENUE_MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]"
-          >
-            Get Directions
-          </a>
+            set:text={`\n${pageContent.location.ctaLabel}\n`}
+          ></a>
         </div>
 
         <!-- Hours -->
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Hours</p>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.location.hoursEyebrow}></p>
           <dl class="flex flex-col gap-3 mb-6">
-            {DISPLAY_HOURS.map((item) => (
+            {DISPLAY_HOURS.map((item: { label: string; value: string }) => (
               <div class="flex justify-between gap-8 py-3 border-b border-gold/10">
                 <dt class="font-sans text-sm text-smoke/80 whitespace-nowrap">{item.label}</dt>
                 <dd class="font-sans text-sm text-parchment whitespace-nowrap">{item.value}</dd>
@@ -146,43 +129,28 @@ import { IMAGES } from '../../assets/images';
   <!-- ─── Social ───────────────────────────────────────────────────────── -->
   <section aria-labelledby="social-heading" class="bg-obsidian py-16 md:py-20">
     <div class="max-w-[1280px] mx-auto px-6 text-center">
-      <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-4">Follow Along</p>
-      <h2 id="social-heading" class="font-serif font-light text-parchment tracking-[-0.02em] mb-6" style="font-size: clamp(1.5rem, 3vw, 2.25rem);">
-        @LouisianaPurchaseBar
-      </h2>
-      <p class="font-sans font-light text-smoke text-sm leading-relaxed max-w-[44ch] mx-auto mb-8">
-        Follow us on Instagram and Facebook for daily specials, event announcements, and a behind-the-scenes look at the kitchen and bar.
-      </p>
+      <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-4" set:text={pageContent.social.eyebrow}></p>
+      <h2 id="social-heading" class="font-serif font-light text-parchment tracking-[-0.02em] mb-6" style="font-size: clamp(1.5rem, 3vw, 2.25rem);" set:text={`\n${pageContent.social.title}\n`}></h2>
+      <p class="font-sans font-light text-smoke text-sm leading-relaxed max-w-[44ch] mx-auto mb-8" set:text={`\n${pageContent.social.body}\n`}></p>
       <div class="flex justify-center gap-4">
         <a
           href={VENUE_SOCIAL.instagram}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
-        >
-          Instagram
-        </a>
+          set:text={`\n${pageContent.social.instagramLabel}\n`}
+        ></a>
         <a
           href={VENUE_SOCIAL.facebook}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
-        >
-          Facebook
-        </a>
+          set:text={`\n${pageContent.social.facebookLabel}\n`}
+        ></a>
       </div>
     </div>
   </section>
 
-  <CTABand
-    eyebrow="Ready to Visit"
-    title="We'll See You Soon."
-    subtitle="Reserve your table or stop in for Happy Hour — Louisiana Purchase is open seven days a week."
-    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Get Directions',  href: VENUE_MAPS_URL, external: true, variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[3]} />
 
 </Layout>

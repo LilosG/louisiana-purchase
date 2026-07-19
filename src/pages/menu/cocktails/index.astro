@@ -9,51 +9,38 @@ import SectionHeader from '../../../components/ui/SectionHeader.astro';
 import StatBar from '../../../components/ui/StatBar.astro';
 import CTABand from '../../../components/ui/CTABand.astro';
 import MenuShowcase from '../../../components/ui/MenuShowcase.astro';
-import { CANONICAL_DOMAIN, HAPPY_HOUR } from '../../../data/venue';
 import { IMAGES } from '../../../assets/images';
+import { getSingleton } from '../../../content/siteData';
+
+const page = await getSingleton('menuCocktailsPage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const resolveCtas = (ctas: any[]) => ctas.map(({ url, ...cta }) => ({ ...cta, href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : cta.href }));
 
 const cocktailsSchema = {
   '@context': 'https://schema.org',
   '@type': 'Menu',
-  name: 'Louisiana Purchase — Cocktail Menu',
-  description: "Louisiana Purchase's French Quarter-rooted craft cocktail program in North Park, San Diego.",
-  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/menu/cocktails`,
+  name: page.seo.schemaName,
+  description: page.seo.schemaDescription,
+  url: `${import.meta.env.PUBLIC_SITE_URL || venue.domain}/menu/cocktails`,
 };
 ---
 
 <Layout
-  title="Cocktail Menu — Craft Bar Program | Louisiana Purchase North Park"
-  description="Louisiana Purchase's French Quarter-rooted craft cocktail program in North Park, San Diego. Superbird Palomas, Watermelon Margaritas, and Hurricane Pops — bold, playful, unforgettable."
-  canonical="/menu/cocktails"
+  title={page.seo.title}
+  description={page.seo.description}
+  canonical={page.seo.canonical}
   schema={cocktailsSchema}
-  breadcrumbs={[
-    { name: 'Home',      url: '/',              position: 1 },
-    { name: 'Menu',      url: '/menu',          position: 2 },
-    { name: 'Cocktails', url: '/menu/cocktails', position: 3 },
-  ]}
+  breadcrumbs={page.seo.breadcrumbs}
 >
 
   <PageHero
-    eyebrow="Full Bar · Open Daily"
-    title="Cocktails"
-    titleItalic="Louisiana Purchase"
-    subtitle="A French Quarter-rooted bar program. Superbird Palomas, Watermelon Margaritas, Hurricane Pops — bold, playful, unforgettable."
-    image={IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website']}
-    imageAlt="Craft cocktails at Louisiana Purchase North Park San Diego"
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Happy Hour',      href: '/happy-hour', variant: 'outline' },
-    ]}
-    headlineId="cocktails-headline"
+    {...page.hero}
+    image={IMAGES[page.hero.image as keyof typeof IMAGES]}
+    ctas={resolveCtas(page.hero.ctas)}
   />
 
   <StatBar
-    stats={[
-      { value: 'Open Daily',       label: 'Bar Hours' },
-      { value: HAPPY_HOUR.window,  label: 'Happy Hour' },
-      { value: '4+',               label: 'Signature Cocktails' },
-      { value: 'NOLA',             label: 'Rooted' },
-    ]}
+    stats={page.stats}
     dark={true}
   />
 
@@ -61,11 +48,7 @@ const cocktailsSchema = {
     <div class="max-w-[1280px] mx-auto px-6">
 
       <SectionHeader
-        eyebrow="The Bar"
-        title="Cocktails Built for"
-        titleItalic="the French Quarter"
-        subtitle="Every cocktail is rooted in New Orleans tradition — complex, ceremonial, and built with the same precision as the kitchen."
-        id="cocktails-menu-heading"
+        {...page.menuHeader}
       />
 
       <MenuShowcase section="cocktails" cols={4} dark={true} divided={true} />
@@ -74,14 +57,9 @@ const cocktailsSchema = {
   </section>
 
   <CTABand
-    eyebrow="Join Us"
-    title="Reserve a Seat at the Bar."
-    subtitle={`Happy Hour runs ${HAPPY_HOUR.days}, ${HAPPY_HOUR.window}. The full cocktail menu is available open to close, seven days a week.`}
-    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
-    ctas={[
-      { label: 'Reserve a Table', href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Happy Hour Details', href: '/happy-hour', variant: 'outline' },
-    ]}
+    {...page.cta}
+    image={IMAGES[page.cta.image as keyof typeof IMAGES]}
+    ctas={resolveCtas(page.cta.ctas)}
   />
 
 </Layout>

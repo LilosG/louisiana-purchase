@@ -1,0 +1,113 @@
+{
+  "contactMethods": [
+    {
+      "eyebrow": "Reservations",
+      "title": "Reserve a Table",
+      "body": "Book your table online through our reservations system. Available for all dining services — dinner, brunch, and bar seating.",
+      "ctaLabel": "Book Now",
+      "url": "reservations",
+      "external": true,
+      "variant": "gold"
+    },
+    {
+      "eyebrow": "Private Events",
+      "title": "Event Inquiries",
+      "body": "Planning a private dinner, corporate event, birthday, or full venue buyout? Submit an inquiry and our events team responds within 24 hours.",
+      "ctaLabel": "Submit Inquiry",
+      "url": "privateEvents",
+      "external": false,
+      "variant": "gold"
+    },
+    {
+      "eyebrow": "Order Online",
+      "title": "Takeout & Delivery",
+      "body": "Order Louisiana Purchase for takeout or delivery. The full menu is available online through our ordering system.",
+      "ctaLabel": "Order Now",
+      "url": "order",
+      "external": true,
+      "variant": "outline"
+    }
+  ],
+  "location": {
+    "eyebrow": "Location",
+    "bodyPrefix": "Located at the intersection of ",
+    "bodyMiddle": " in the heart of ",
+    "bodySuffix": ". Street parking available on University Ave and surrounding streets.",
+    "ctaLabel": "Get Directions",
+    "hoursEyebrow": "Hours"
+  },
+  "social": {
+    "eyebrow": "Follow Along",
+    "title": "@LouisianaPurchaseBar",
+    "body": "Follow us on Instagram and Facebook for daily specials, event announcements, and a behind-the-scenes look at the kitchen and bar.",
+    "instagramLabel": "Instagram",
+    "facebookLabel": "Facebook"
+  },
+  "blocks": [
+    {
+      "component": "Layout",
+      "props": {
+        "title": "Contact Louisiana Purchase | North Park San Diego",
+        "description": "Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave.",
+        "canonical": "/contact",
+        "breadcrumbs": [
+          {
+            "name": "Home",
+            "url": "/",
+            "position": 1
+          },
+          {
+            "name": "Contact",
+            "url": "/contact",
+            "position": 2
+          }
+        ]
+      }
+    },
+    {
+      "component": "PageHero",
+      "props": {
+        "eyebrow": "Get in Touch",
+        "title": "Contact Us",
+        "titleItalic": "We'd Love to Hear From You",
+        "subtitle": "Reservations, private event inquiries, general questions — our team is here to help.",
+        "image": "__IMAGE__louisiana-purchase-street-corner-exterior-north-park-website",
+        "imageAlt": "Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego",
+        "headlineId": "contact-headline"
+      }
+    },
+    {
+      "component": "SectionHeader",
+      "props": {
+        "eyebrow": "How to Reach Us",
+        "title": "Contact",
+        "titleItalic": "Louisiana Purchase",
+        "subtitle": "Choose the best way to connect with us below.",
+        "id": "contact-methods-heading"
+      }
+    },
+    {
+      "component": "CTABand",
+      "props": {
+        "eyebrow": "Ready to Visit",
+        "title": "We'll See You Soon.",
+        "subtitle": "Reserve your table or stop in for Happy Hour — Louisiana Purchase is open seven days a week.",
+        "image": "__IMAGE__louisiana-purchase-intimate-cocktail-restaurant-website",
+        "ctas": [
+          {
+            "label": "Reserve a Table",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "gold"
+          },
+          {
+            "label": "Get Directions",
+            "href": "https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104",
+            "external": true,
+            "variant": "outline"
+          }
+        ]
+      }
+    }
+  ]
+}

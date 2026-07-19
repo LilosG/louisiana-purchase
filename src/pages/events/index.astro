@@ -1,4 +1,5 @@
 ---
+import { getSingleton, resolveContent } from '../../content/siteData';
 // src/pages/events/index.astro
 // Louisiana Purchase — Events & Happenings Hub Page
 // Targets: "events north park san diego", "mardi gras san diego", "live music north park"
@@ -10,114 +11,41 @@ import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
-import { VENUE_SOCIAL, EVENT_CAPACITY } from '../../data/venue';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
+import { getOrderedCollection } from '../../content/siteData';
+
+const eventCategoryCards = (await getOrderedCollection('eventCategoryCards')).map((card) => ({
+  ...card,
+  image: IMAGES[card.image as keyof typeof IMAGES],
+}));
+const pageContent = await getSingleton('eventsIndexPage', 'page');
+const venue = await getSingleton('venueSettings', 'settings');
+const VENUE_SOCIAL = venue.social;
+const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const updatesTitle = `\n${pageContent.updates.title}`;
 ---
 
-<Layout
-  title="Events & Happenings at Louisiana Purchase | North Park San Diego"
-  description="Events, special occasions, and happenings at Louisiana Purchase in North Park, San Diego. Mardi Gras celebrations, seasonal menus, live music, and limited-time experiences at San Diego's premier Creole dining destination."
-  canonical="/events"
-  breadcrumbs={[
-    { name: 'Home',   url: '/',       position: 1 },
-    { name: 'Events', url: '/events', position: 2 },
-  ]}
->
+<Layout {...blocks[0]}>
 
-  <PageHero
-    eyebrow="What's Happening"
-    title="Events &"
-    titleItalic="Happenings"
-    subtitle="From Mardi Gras celebrations to limited-time seasonal menus and live music nights — Louisiana Purchase brings the spirit of New Orleans to North Park year-round."
-    image={IMAGES['louisiana-purchase-group-dining-san-diego-website']}
-    imageAlt="Events at Louisiana Purchase North Park San Diego"
-    ctas={[
-      { label: 'Reserve a Table',   href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Private Events',    href: '/private-events', variant: 'outline' },
-    ]}
-    headlineId="events-headline"
-  />
+  <PageHero {...blocks[1]} />
 
-  <StatBar
-    stats={[
-      { value: 'Year-Round',  label: 'Programming' },
-      { value: 'Seasonal',    label: 'Limited Menus' },
-      { value: 'Live Music',  label: 'Select Nights' },
-      { value: 'NOLA Spirit', label: 'Always' },
-    ]}
-    dark={true}
-  />
+  <StatBar {...blocks[2]} />
 
   <!-- ─── What Happens Here ────────────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-date-night-north-park-website']}
-    imageAlt="Louisiana Purchase events and happenings North Park San Diego"
-    eyebrow="The Spirit of New Orleans"
-    title="Every Night Is"
-    titleItalic="An Event Here"
-    body={[
-      "Louisiana Purchase doesn't need a special occasion to feel like one. But when the calendar calls for it — Mardi Gras, King's Day, a new seasonal menu launch, a local jazz ensemble on a Friday night — this room becomes something extraordinary.",
-      "Follow us on Instagram for the latest event announcements, or check back here for upcoming happenings and limited-time experiences.",
-    ]}
-    facts={[
-      { label: 'Annual',    value: 'Mardi Gras' },
-      { label: 'Seasonal',  value: 'Limited Menus' },
-      { label: 'Music',     value: 'Select Nights' },
-      { label: 'Location',  value: 'North Park, SD' },
-    ]}
-    ctas={[
-      { label: 'Follow on Instagram', href: VENUE_SOCIAL.instagram, external: true, variant: 'gold' },
-    ]}
-    dark={true}
-  />
+  <AlternatingRow {...blocks[3]} />
 
   <!-- ─── Event Types ──────────────────────────────────────────────────── -->
   <section aria-labelledby="event-types-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
 
-      <SectionHeader
-        eyebrow="What to Expect"
-        title="Types of Events"
-        titleItalic="at Louisiana Purchase"
-        subtitle="Year-round programming inspired by New Orleans culture and the rhythms of North Park."
-        id="event-types-heading"
-      />
+      <SectionHeader {...blocks[4]} />
 
       <FourColumnGrid
         cols={4}
         dark={false}
         divided={true}
-        cards={[
-          {
-            image:    IMAGES['louisiana-purchase-intimate-cocktail-restaurant-website'],
-            imageAlt: 'Mardi Gras at Louisiana Purchase North Park San Diego',
-            eyebrow:  'Annual',
-            title:    'Mardi Gras',
-            body:     'Louisiana Purchase goes all-in for Mardi Gras. Special menus, cocktail features, costumes, and a room that feels like Bourbon Street for a night.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-cocktail-menu-north-park-website'],
-            imageAlt: 'Seasonal menu at Louisiana Purchase',
-            eyebrow:  'Rotating',
-            title:    'Seasonal Menus',
-            body:     'Chef Quinnton Austin releases limited-time seasonal menus throughout the year — new ingredients, new preparations, the same obsessive precision.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-craft-cocktails-san-diego-website'],
-            imageAlt: 'Live music at Louisiana Purchase North Park',
-            eyebrow:  'Select Nights',
-            title:    'Live Music',
-            body:     'Jazz, soul, and blues on select evenings. The kind of music that makes Louisiana Purchase feel like the venue it was always meant to be.',
-          },
-          {
-            image:    IMAGES['louisiana-purchase-drink-menu-north-park-san-diego-website'],
-            imageAlt: 'Cocktail features at Louisiana Purchase',
-            eyebrow:  'Bar Program',
-            title:    'Cocktail Features',
-            body:     'Limited-run cocktail features tied to the season, a new spirit partnership, or a moment worth celebrating. Always worth ordering.',
-          },
-        ]}
+        cards={eventCategoryCards}
       />
 
     </div>
@@ -129,37 +57,32 @@ import { Image } from 'astro:assets';
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">Stay Updated</p>
-          <h2 id="updates-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">
-            Be the First<br /><span class="italic text-gold">to Know</span>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.updates.eyebrow}></p>
+          <h2 id="updates-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{updatesTitle}<br /><span class="italic text-gold" set:text={pageContent.updates.titleItalic}></span>
           </h2>
-          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]">
-            Louisiana Purchase announces events, seasonal menu launches, and special happenings on Instagram first. Follow us to stay in the loop on everything happening at North Park's premier Creole dining destination.
-          </p>
+          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]" set:html={`\n${pageContent.updates.body}\n`}></p>
           <div class="flex flex-wrap gap-4">
             <a
               href={VENUE_SOCIAL.instagram}
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]"
-            >
-              Follow on Instagram
-            </a>
+              set:text={`\n${pageContent.updates.instagramLabel}\n`}
+            ></a>
             <a
               href={VENUE_SOCIAL.facebook}
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]"
-            >
-              Follow on Facebook
-            </a>
+              set:text={`\n${pageContent.updates.facebookLabel}\n`}
+            ></a>
           </div>
         </div>
 
         <div class="overflow-hidden aspect-[4/3]">
           <Image
-            src={IMAGES['louisiana-purchase-north-park-restaurant-and-bar-website']}
-            alt="Louisiana Purchase events North Park San Diego"
+            src={IMAGES[pageContent.updates.image as keyof typeof IMAGES]}
+            alt={pageContent.updates.imageAlt}
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
@@ -174,38 +97,8 @@ import { Image } from 'astro:assets';
   </section>
 
   <!-- ─── Private Events Callout ───────────────────────────────────────── -->
-  <AlternatingRow
-    image={IMAGES['louisiana-purchase-alligator-cheesecake-north-park-website']}
-    imageAlt="Alligator cheesecake at a private event at Louisiana Purchase North Park San Diego"
-    eyebrow="Host Your Own"
-    title="Planning a Private"
-    titleItalic="Event or Celebration?"
-    body={[
-      "Louisiana Purchase is available for private events of all kinds — birthday celebrations, corporate dinners, rehearsal events, and full venue buyouts. The same space that hosts Mardi Gras can be yours exclusively.",
-      "Our events team handles every detail from first inquiry to last call. Capacity up to 80 guests.",
-    ]}
-    facts={[
-      { label: 'Capacity',  value: `Up to ${EVENT_CAPACITY.fullVenue} Guests` },
-      { label: 'Options',   value: 'Custom Menus' },
-      { label: 'Response',  value: 'Within 24 Hours' },
-      { label: 'Location',  value: 'North Park, SD' },
-    ]}
-    ctas={[
-      { label: 'Inquire About Your Event', href: '/private-events', variant: 'gold' },
-    ]}
-    reverse={true}
-    dark={false}
-  />
+  <AlternatingRow {...blocks[5]} />
 
-  <CTABand
-    eyebrow="Don't Miss a Thing"
-    title="Reserve Your Table."
-    subtitle="Louisiana Purchase is open seven days a week. Walk-ins welcome at the bar."
-    image={IMAGES['louisiana-purchase-cocktail-bar-north-park-website']}
-    ctas={[
-      { label: 'Reserve a Table',     href: import.meta.env.PUBLIC_RESERVATIONS_URL, external: true, variant: 'gold' },
-      { label: 'Follow on Instagram', href: VENUE_SOCIAL.instagram, external: true, variant: 'outline' },
-    ]}
-  />
+  <CTABand {...blocks[6]} />
 
 </Layout>
