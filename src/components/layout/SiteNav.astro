@@ -3,6 +3,8 @@
 // Louisiana Purchase — Site Navigation
 // Desktop nav shows at 1280px+. Contact in footer only.
 
+import { VENUE_PHONE_FALLBACK } from '../../data/venue';
+
 interface Props {
   transparent?: boolean;
 }
@@ -10,7 +12,7 @@ interface Props {
 const { transparent = true } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-const phoneRaw = import.meta.env.PUBLIC_VENUE_PHONE || '+16195551234';
+const phoneRaw = import.meta.env.PUBLIC_VENUE_PHONE || VENUE_PHONE_FALLBACK;
 // Formats a US E.164 number (+18586836828) as (858) 683-6828 for display.
 // Falls back to the raw value for any non-US-10-digit format rather than showing nothing.
 function formatPhone(value: string): string {
