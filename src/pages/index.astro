@@ -10,7 +10,7 @@ import MenuShowcase from '../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../assets/images';
 
 const pageContent = await getSingleton('home', 'home');
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
 ---
 
 <Layout {...blocks[0]}>
@@ -62,7 +62,7 @@ const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props
   <!-- ─── PRIVATE EVENTS ────────────────────────────────────── -->
   <AlternatingRow {...blocks[7]}>
     <ul role="list" class="flex flex-col gap-2.5 mt-2 mb-8">
-      {pageContent.privateEventHighlights.map((item: string) => (
+      {(Array.isArray(pageContent.privateEventHighlights) ? pageContent.privateEventHighlights : []).map((item: string) => (
         <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
           <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">{pageContent.listMarker}</span>
           {item}

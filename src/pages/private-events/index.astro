@@ -29,7 +29,7 @@ const faqSchema = {
   })),
 };
 const pageContent = await getSingleton('privateEventsIndexPage', 'page');
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
 ---
 
 <Layout

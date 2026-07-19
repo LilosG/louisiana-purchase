@@ -6,6 +6,8 @@
 // is imported once here and looked up by filename (no extension) elsewhere,
 // so pages and menu.json can keep referring to images by a stable key.
 
+import type { ImageMetadata } from 'astro';
+
 import img_louisiana_purchase_acme_oysters_north_park_website from './louisiana-purchase-acme-oysters-north-park-website.jpg';
 import img_louisiana_purchase_alligator_cheesecake_north_park_website from './louisiana-purchase-alligator-cheesecake-north-park-website.jpg';
 import img_louisiana_purchase_brunch_dishes_overview_north_park_website from './louisiana-purchase-brunch-dishes-overview-north-park-website.jpg';
@@ -49,7 +51,7 @@ import img_louisiana_purchase_watermelon_margarita_cocktail_north_park_website f
 import img_louisiana_purchase_weekend_brunch_san_diego_website from './louisiana-purchase-weekend-brunch-san-diego-website.jpg';
 import img_louisiana_purchase_weezy_vice_cocktail_north_park_website from './louisiana-purchase-weezy-vice-cocktail-north-park-website.jpg';
 
-export const IMAGES = {
+const LEGACY_IMAGES = {
   'louisiana-purchase-acme-oysters-north-park-website': img_louisiana_purchase_acme_oysters_north_park_website,
   'louisiana-purchase-alligator-cheesecake-north-park-website': img_louisiana_purchase_alligator_cheesecake_north_park_website,
   'louisiana-purchase-brunch-dishes-overview-north-park-website': img_louisiana_purchase_brunch_dishes_overview_north_park_website,
@@ -93,5 +95,18 @@ export const IMAGES = {
   'louisiana-purchase-weekend-brunch-san-diego-website': img_louisiana_purchase_weekend_brunch_san_diego_website,
   'louisiana-purchase-weezy-vice-cocktail-north-park-website': img_louisiana_purchase_weezy_vice_cocktail_north_park_website,
 } as const;
+
+// Keystatic stores new uploads below a field-specific cms/ namespace. The
+// recursive registry lets those new paths work without hand-editing imports,
+// while LEGACY_IMAGES preserves every existing extension-free content key.
+const cmsModules = import.meta.glob<{ default: ImageMetadata }>('./cms/**/*.{jpg,jpeg,png,webp,avif}', { eager: true });
+const CMS_IMAGES = Object.fromEntries(
+  Object.entries(cmsModules).map(([path, module]) => [path.replace(/^\.\//, ''), module.default]),
+) as Record<string, ImageMetadata>;
+
+export const IMAGES: Record<string, ImageMetadata> = {
+  ...LEGACY_IMAGES,
+  ...CMS_IMAGES,
+};
 
 export type ImageKey = keyof typeof IMAGES;

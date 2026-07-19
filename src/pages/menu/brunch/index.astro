@@ -14,7 +14,7 @@ import { getSingleton } from '../../../content/siteData';
 
 const page = await getSingleton('menuBrunchPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
-const resolveCtas = (ctas: any[]) => ctas.map(({ url, ...cta }) => ({ ...cta, href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : cta.href }));
+const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(({ url, ...cta }) => ({ ...cta, href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : cta.href }));
 
 const brunchMenuSchema = {
   '@context': 'https://schema.org',

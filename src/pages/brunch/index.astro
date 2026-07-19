@@ -42,8 +42,9 @@ const brunchSchema = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday',   opens: BRUNCH_HOURS.opens, closes: BRUNCH_HOURS.closes },
   ],
 };
-const blocks = pageContent.blocks.map((block: any) => resolveContent(block.props, IMAGES, import.meta.env));
-const privateBrunchTitle = `\n${pageContent.privateBrunch.title}`;
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const privateBrunch = pageContent.privateBrunch;
+const privateBrunchTitle = privateBrunch?.title ? `\n${privateBrunch.title}` : '';
 ---
 
 <Layout
@@ -72,30 +73,30 @@ const privateBrunchTitle = `\n${pageContent.privateBrunch.title}`;
 
   <AlternatingRow {...blocks[4]} />
 
-  <section aria-labelledby="private-brunch-heading" class="bg-velvet py-20 md:py-24">
+  {privateBrunch && <section aria-labelledby="private-brunch-heading" class="bg-velvet py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
-          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.privateBrunch.eyebrow}></p>
-          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{privateBrunchTitle}<br /><span class="italic text-gold" set:text={pageContent.privateBrunch.titleItalic}></span>
+          <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={privateBrunch.eyebrow}></p>
+          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{privateBrunchTitle}<br /><span class="italic text-gold" set:text={privateBrunch.titleItalic}></span>
           </h2>
-          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]" set:text={`\n${pageContent.privateBrunch.body}\n`}></p>
+          <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]" set:text={`\n${privateBrunch.body ?? ''}\n`}></p>
           <ul role="list" class="flex flex-col gap-2.5 mb-8">
-            {pageContent.privateBrunch.benefits.map((item: string) => (
+            {(Array.isArray(privateBrunch.benefits) ? privateBrunch.benefits : []).map((item: string) => (
               <li class="flex items-start gap-3 font-sans text-sm text-parchment/70">
-                <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">{pageContent.privateBrunch.listMarker}</span>
+                <span class="text-gold text-[0.5rem] mt-1.5 shrink-0">{privateBrunch.listMarker}</span>
                 {item}
               </li>
             ))}
           </ul>
-          <a href={pageContent.privateBrunch.cta.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.privateBrunch.cta.label}\n`}></a>
+          {privateBrunch.cta && <a href={privateBrunch.cta.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${privateBrunch.cta.label ?? ''}\n`}></a>}
         </div>
         <div class="overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-[480px]">
-          <Image src={IMAGES[pageContent.privateBrunch.image as keyof typeof IMAGES]} alt={pageContent.privateBrunch.imageAlt} class="w-full h-full object-cover object-center" loading="lazy" decoding="async" format="webp" widths={[480, 800, 1200, 1600]} sizes="(min-width: 1024px) 50vw, 100vw" />
+          {privateBrunch.image && <Image src={IMAGES[privateBrunch.image as keyof typeof IMAGES]} alt={privateBrunch.imageAlt ?? ''} class="w-full h-full object-cover object-center" loading="lazy" decoding="async" format="webp" widths={[480, 800, 1200, 1600]} sizes="(min-width: 1024px) 50vw, 100vw" />}
         </div>
       </div>
     </div>
-  </section>
+  </section>}
 
   <section aria-labelledby="brunch-faq-heading" class="bg-obsidian py-20 md:py-24">
     <div class="max-w-[1280px] mx-auto px-6">

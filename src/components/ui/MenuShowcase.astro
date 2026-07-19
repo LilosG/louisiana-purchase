@@ -17,13 +17,14 @@ const [cocktails, rawFire, plates, brunch] = await Promise.all([
 ]);
 const menuPage = await getSingleton('menuIndexPage', 'page');
 const itemCollections: Record<string, MenuItem[]> = { cocktails, rawFire, plates, brunch };
+const menuSections = Array.isArray(menuPage.menuStructure?.sections) ? menuPage.menuStructure.sections : [];
 const data = {
-  ...menuPage.menuStructure,
-  sections: menuPage.menuStructure.sections.map((section: any) => ({
+  ...(menuPage.menuStructure ?? {}),
+  sections: menuSections.map((section: any) => ({
     ...section,
-    categories: section.categories.map((category: any) => ({
+    categories: (Array.isArray(section.categories) ? section.categories : []).map((category: any) => ({
       ...category,
-      items: itemCollections[category.collection],
+      items: itemCollections[category.collection] ?? [],
     })),
   })),
 } as MenuData;
