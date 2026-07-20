@@ -87,6 +87,7 @@ const arrayItemLabels: Record<string, string> = {
 
 const multilineKeys = new Set(['description', 'schemaDescription', 'subtitle', 'body', 'a', 'tagline']);
 const imageFieldPaths = new Set<string>();
+const optionalGeneratedFieldPaths = new Set<string>();
 
 /**
  * The only image-field constructor in this config. The namespace is required,
@@ -199,6 +200,60 @@ function schemaFromSample(sample: Record<string, unknown>, namespace: string, pa
   return Object.fromEntries(Object.entries(sample).map(([key, value]) => [key, fieldFromValue(key, value, namespace, path)]));
 }
 
+function markOptionalGeneratedFields(samples: Record<string, unknown>[], namespace: string, path: string[]) {
+  const keys = new Set(samples.flatMap((sample) => Object.keys(sample)));
+  for (const key of keys) {
+    const values = samples.map((sample) => sample[key]);
+    const nextPath = [...path, key];
+    if (values.some((value) => value === undefined || value === null || value === '')) {
+      optionalGeneratedFieldPaths.add([namespace, ...nextPath].join('/'));
+    }
+
+    const objects = values.filter(
+      (value): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value),
+    );
+    if (objects.length) markOptionalGeneratedFields(objects, namespace, nextPath);
+
+    const arrayItems = values
+      .filter(Array.isArray)
+      .flat()
+      .filter((value): value is Record<string, unknown> => Boolean(value) && typeof value === 'object' && !Array.isArray(value));
+    if (arrayItems.length) markOptionalGeneratedFields(arrayItems, namespace, nextPath);
+  }
+}
+
+type PageBlockSample = { component: string; props: Record<string, unknown> };
+
+function pageBlockFromStoredValue(value: Record<string, unknown>): PageBlockSample | undefined {
+  const component = value.component ?? value.discriminant;
+  const props = value.props ?? value.value;
+  if (typeof component !== 'string' || !props || typeof props !== 'object' || Array.isArray(props)) return undefined;
+  return { component, props: props as Record<string, unknown> };
+}
+
+function pageBlocksField(blocks: PageBlockSample[], namespace: string, path: string[], label: string, description: string) {
+  const propsByComponent = new Map<string, Record<string, unknown>[]>();
+  for (const block of blocks) {
+    const samples = propsByComponent.get(block.component) ?? [];
+    samples.push(block.props);
+    propsByComponent.set(block.component, samples);
+  }
+
+  return fields.blocks(Object.fromEntries(
+    [...propsByComponent].map(([component, samples]) => {
+      const componentPath = [...path, component];
+      markOptionalGeneratedFields(samples, namespace, componentPath);
+      return [component, {
+        label: humanize(component),
+        schema: fields.object(schemaFromSample(mergeObjects(samples), namespace, componentPath), {
+          label: `${humanize(component)} Content`,
+          description: `Edit the fields used only by the ${humanize(component)} page section.`,
+        }),
+      }];
+    }),
+  ), { label, description });
+}
+
 function fieldFromValue(key: string, value: unknown, namespace: string, path: string[]): any {
   const label = key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)
     ? '⚠️ Advanced — Button Destination Setting'
@@ -207,10 +262,17 @@ function fieldFromValue(key: string, value: unknown, namespace: string, path: st
   const nextPath = [...path, key];
 
   if (isImageValue(key, value)) {
-    return requiredImageField([namespace, ...nextPath].join('/'), label, description);
+    const fieldNamespace = [namespace, ...nextPath].join('/');
+    return optionalGeneratedFieldPaths.has(fieldNamespace)
+      ? optionalImageField(fieldNamespace, label, description)
+      : requiredImageField(fieldNamespace, label, description);
   }
   if (Array.isArray(value)) {
     const objects = value.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object' && !Array.isArray(item));
+    const pageBlocks = key === 'blocks' ? objects.map(pageBlockFromStoredValue) : [];
+    if (pageBlocks.length === value.length && pageBlocks.every((block): block is PageBlockSample => Boolean(block))) {
+      return pageBlocksField(pageBlocks, namespace, nextPath, label, description);
+    }
     const sampleItem = objects.length ? mergeObjects(objects) : value[0];
     const singular = arrayItemLabels[key] ?? fieldLabels[key.replace(/s$/, '')] ?? humanize(key.replace(/s$/, ''));
     const element = sampleItem && typeof sampleItem === 'object'
@@ -232,7 +294,8 @@ function fieldFromValue(key: string, value: unknown, namespace: string, path: st
   }
   if (typeof value === 'number') return fields.number({ label, description });
   if (typeof value === 'boolean') return fields.checkbox({ label, description, defaultValue: value });
-  const isOptionalText = namespace === 'theSpacePage' && nextPath.join('.') === 'location.bodyMiddle';
+  const isOptionalText = optionalGeneratedFieldPaths.has([namespace, ...nextPath].join('/')) ||
+    (namespace === 'theSpacePage' && nextPath.join('.') === 'location.bodyMiddle');
   return fields.text({
     label,
     description,
@@ -247,7 +310,6 @@ const jsonSingleton = (label: string, directory: string, filename: string, sampl
   format: { data: 'json' },
   schema: schemaFromSample(sample, directory),
 });
-
 const requiredText = (label: string, description: string, multiline = false) => fields.text({
   label, description, multiline, validation: { isRequired: true },
 });

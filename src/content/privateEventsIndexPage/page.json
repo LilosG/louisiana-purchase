@@ -25,8 +25,8 @@
   },
   "blocks": [
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "Group Bookings & Venue Buyouts",
         "title": "Private Events",
         "titleItalic": "Worth Remembering",
@@ -49,8 +49,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "80",
@@ -73,8 +73,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-patio-living-wall-north-park-website",
         "imageAlt": "Louisiana Purchase patio with living wall and tree — North Park San Diego",
         "eyebrow": "The Venue",
@@ -113,8 +113,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Browse by Event Type",
         "title": "Every Occasion,",
         "titleItalic": "Elevated",
@@ -123,8 +123,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "How It Works",
         "title": "From First Inquiry",
         "titleItalic": "to Your Event",
@@ -133,8 +133,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-group-dining-san-diego-website",
         "imageAlt": "Group dining at Louisiana Purchase North Park San Diego",
         "eyebrow": "The Space",
@@ -174,8 +174,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Common Questions",
         "title": "Private Events FAQ",
         "subtitle": "Everything you need to know about hosting a private event at Louisiana Purchase in North Park, San Diego.",
@@ -183,8 +183,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Let's Get Started",
         "title": "Ready to Plan Your Event?",
         "subtitle": "Our events team will respond within 24 hours with availability and a custom proposal.",
@@ -204,8 +204,8 @@
       }
     },
     {
-      "component": "ToastEventForm",
-      "props": {}
+      "discriminant": "ToastEventForm",
+      "value": {}
     }
   ]
 }

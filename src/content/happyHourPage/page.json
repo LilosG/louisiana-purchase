@@ -21,8 +21,8 @@
   },
   "blocks": [
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "Monday – Friday · 3 PM – 5 PM",
         "title": "Happy Hour",
         "titleItalic": "North Park's Finest",
@@ -46,8 +46,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "Monday – Friday",
@@ -70,8 +70,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-happy-hour-pitcher-north-park-website",
         "imageAlt": "Louisiana Purchase Happy Hour cocktail pitcher at the bar in North Park",
         "eyebrow": "The Ritual",
@@ -111,8 +111,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "The Deals",
         "title": "Happy Hour Menu",
         "titleItalic": "What's On Offer",
@@ -121,8 +121,8 @@
       }
     },
     {
-      "component": "FourColumnGrid",
-      "props": {
+      "discriminant": "FourColumnGrid",
+      "value": {
         "cols": 4,
         "dark": false,
         "divided": true,
@@ -155,8 +155,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-cocktail-bar-north-park-website",
         "imageAlt": "The bar at Louisiana Purchase North Park San Diego during happy hour",
         "eyebrow": "The Setting",
@@ -197,8 +197,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Need to Know",
         "title": "Happy Hour FAQ",
         "subtitle": "Everything you need to know about Happy Hour at Louisiana Purchase in North Park, San Diego.",
@@ -206,8 +206,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Join Us",
         "title": "Come for the Deals. Stay for the Night.",
         "subtitle": "Happy Hour starts at 3 PM — but Louisiana Purchase is open until 9 or 10. Reserve a table and let the evening unfold.",

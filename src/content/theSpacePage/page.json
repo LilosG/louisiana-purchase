@@ -12,8 +12,8 @@
   },
   "blocks": [
     {
-      "component": "Layout",
-      "props": {
+      "discriminant": "Layout",
+      "value": {
         "title": "The Space — Louisiana Purchase Venue & Interior | North Park San Diego",
         "description": "Step inside Louisiana Purchase — a French Quarter-inspired dining room in North Park, San Diego. Geometric timber ceiling, marble bar, candlelit tables, and a lush open patio. Available for private events up to 80 guests.",
         "canonical": "/the-space",
@@ -32,8 +32,8 @@
       }
     },
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "North Park, San Diego",
         "title": "The Space",
         "titleItalic": "A Room That Earns Its Place",
@@ -57,8 +57,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "Est. 2018",
@@ -81,8 +81,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-dining-room-bar-north-park-website",
         "imageAlt": "Louisiana Purchase dining room — geometric timber ceiling and marble bar",
         "eyebrow": "The Dining Room",
@@ -122,8 +122,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-patio-living-wall-north-park-website",
         "imageAlt": "Louisiana Purchase open patio with living wall — North Park San Diego",
         "eyebrow": "The Patio",
@@ -169,8 +169,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Inside Louisiana Purchase",
         "title": "The Venue in Detail",
         "subtitle": "A closer look at the spaces, textures, and atmosphere that define Louisiana Purchase in North Park, San Diego.",
@@ -178,8 +178,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-university-ave-corner-night-north-park-website",
         "imageAlt": "Louisiana Purchase exterior patio at night, corner of Louisiana St and University Ave, North Park San Diego",
         "eyebrow": "Private Events",
@@ -219,8 +219,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Come Experience It",
         "title": "Louisiana Purchase Awaits.",
         "subtitle": "Open daily. Walk-ins welcome at the bar. Reservations recommended for dining.",

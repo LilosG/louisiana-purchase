@@ -45,8 +45,8 @@
   },
   "blocks": [
     {
-      "component": "Layout",
-      "props": {
+      "discriminant": "Layout",
+      "value": {
         "title": "Contact Louisiana Purchase | North Park San Diego",
         "description": "Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave.",
         "canonical": "/contact",
@@ -65,8 +65,8 @@
       }
     },
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "Get in Touch",
         "title": "Contact Us",
         "titleItalic": "We'd Love to Hear From You",
@@ -77,8 +77,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "How to Reach Us",
         "title": "Contact",
         "titleItalic": "Louisiana Purchase",
@@ -87,8 +87,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Ready to Visit",
         "title": "We'll See You Soon.",
         "subtitle": "Reserve your table or stop in for Happy Hour — Louisiana Purchase is open seven days a week.",

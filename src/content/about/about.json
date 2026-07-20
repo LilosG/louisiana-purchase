@@ -1,8 +1,8 @@
 {
   "blocks": [
     {
-      "component": "Layout",
-      "props": {
+      "discriminant": "Layout",
+      "value": {
         "title": "About Louisiana Purchase — Creole Dining in North Park San Diego",
         "description": "Louisiana Purchase is a French Quarter-inspired Creole dining destination in North Park, San Diego. Chef Quinnton Austin's fire-forward Louisiana kitchen, an obsessive craft cocktail program, and a room worth lingering in. Est. 2018.",
         "canonical": "/about",
@@ -21,8 +21,8 @@
       }
     },
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "North Park, San Diego · Est. 2018",
         "title": "Louisiana Purchase",
         "titleItalic": "A Genuine Place",
@@ -46,8 +46,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "Est. 2018",
@@ -70,8 +70,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-north-park-restaurant-and-bar-website",
         "imageAlt": "Louisiana Purchase at night — North Park San Diego",
         "eyebrow": "The Story",
@@ -110,8 +110,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-modern-creole-restaurant-website",
         "imageAlt": "Chef Quinnton Austin's Creole kitchen at Louisiana Purchase",
         "eyebrow": "The Chef",
@@ -151,8 +151,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-weezy-vice-cocktail-north-park-website",
         "imageAlt": "Weezy Vice cocktail at Louisiana Purchase North Park San Diego",
         "eyebrow": "The Bar",
@@ -196,8 +196,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Everything We Offer",
         "title": "The Full Experience",
         "subtitle": "Louisiana Purchase is more than a dinner reservation. Here is everything you can experience at 2305 University Ave.",
@@ -205,8 +205,8 @@
       }
     },
     {
-      "component": "FourColumnGrid",
-      "props": {
+      "discriminant": "FourColumnGrid",
+      "value": {
         "cols": 4,
         "dark": false,
         "divided": true,
@@ -251,8 +251,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-seafood-restaurant-san-diego-website",
         "imageAlt": "Louisiana Purchase exterior — 2305 University Ave North Park San Diego",
         "eyebrow": "The Neighborhood",
@@ -298,8 +298,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Come Experience It",
         "title": "Louisiana Purchase Awaits.",
         "subtitle": "Open daily. Walk-ins welcome at the bar. Reservations recommended for dining.",
