@@ -11,8 +11,8 @@
   },
   "blocks": [
     {
-      "component": "Layout",
-      "props": {
+      "discriminant": "Layout",
+      "value": {
         "title": "Events & Happenings at Louisiana Purchase | North Park San Diego",
         "description": "Events, special occasions, and happenings at Louisiana Purchase in North Park, San Diego. Mardi Gras celebrations, seasonal menus, live music, and limited-time experiences at San Diego's premier Creole dining destination.",
         "canonical": "/events",
@@ -31,8 +31,8 @@
       }
     },
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "What's Happening",
         "title": "Events &",
         "titleItalic": "Happenings",
@@ -56,8 +56,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "Year-Round",
@@ -80,8 +80,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "imageAlt": "Louisiana Purchase events and happenings North Park San Diego",
         "eyebrow": "The Spirit of New Orleans",
@@ -121,8 +121,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "What to Expect",
         "title": "Types of Events",
         "titleItalic": "at Louisiana Purchase",
@@ -131,8 +131,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-alligator-cheesecake-north-park-website",
         "imageAlt": "Alligator cheesecake at a private event at Louisiana Purchase North Park San Diego",
         "eyebrow": "Host Your Own",
@@ -172,8 +172,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Don't Miss a Thing",
         "title": "Reserve Your Table.",
         "subtitle": "Louisiana Purchase is open seven days a week. Walk-ins welcome at the bar.",

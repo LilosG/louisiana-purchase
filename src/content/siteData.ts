@@ -4,7 +4,15 @@ export async function getSingleton(collection: any, id: string): Promise<any> {
   const entries: any[] = await getCollection(collection as any) as any[];
   const entry: any = entries.find((item: any) => item.id === id) ?? entries[0];
   if (!entry) throw new Error(`Missing content singleton: ${collection}/${id}`);
-  return entry.data;
+  const data = entry.data;
+  if (!Array.isArray(data.blocks)) return data;
+  return {
+    ...data,
+    blocks: data.blocks.map((block: any) => ({
+      component: block.discriminant,
+      props: block.value,
+    })),
+  };
 }
 
 export async function getOrderedCollection(collection: any): Promise<any[]> {

@@ -13,8 +13,8 @@
   "listMarker": "✦",
   "blocks": [
     {
-      "component": "Layout",
-      "props": {
+      "discriminant": "Layout",
+      "value": {
         "title": "Louisiana Purchase — Creole Dining & Craft Cocktails | North Park, San Diego",
         "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Fire-charred oysters, Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana kitchen. Open Monday–Sunday.",
         "ogImage": "/og-image.jpg",
@@ -22,8 +22,8 @@
       }
     },
     {
-      "component": "PageHero",
-      "props": {
+      "discriminant": "PageHero",
+      "value": {
         "eyebrow": "North Park, San Diego",
         "title": "Louisiana",
         "titleItalic": "Purchase",
@@ -47,8 +47,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "Open Daily",
@@ -75,8 +75,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-seafood-and-cocktails-north-park-website",
         "imageAlt": "Louisiana Purchase interior — geometric timber ceiling, marble bar, velvet seating",
         "eyebrow": "North Park, San Diego · Est. 2018",
@@ -122,8 +122,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "Craft Program",
         "title": "Cocktails Built for",
         "titleItalic": "the French Quarter Soul",
@@ -132,8 +132,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website",
         "imageAlt": "Weekend brunch — Louisiana Purchase North Park San Diego",
         "eyebrow": "Saturday & Sunday · 12 PM – 3 PM",
@@ -178,8 +178,8 @@
       }
     },
     {
-      "component": "SectionHeader",
-      "props": {
+      "discriminant": "SectionHeader",
+      "value": {
         "eyebrow": "The Kitchen",
         "title": "Food Worth",
         "titleItalic": "Staying For",
@@ -188,8 +188,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "imageAlt": "Private dining atmosphere at Louisiana Purchase North Park San Diego",
         "eyebrow": "Group Bookings",
@@ -210,8 +210,8 @@
       }
     },
     {
-      "component": "StatBar",
-      "props": {
+      "discriminant": "StatBar",
+      "value": {
         "stats": [
           {
             "value": "4.6★",
@@ -234,8 +234,8 @@
       }
     },
     {
-      "component": "AlternatingRow",
-      "props": {
+      "discriminant": "AlternatingRow",
+      "value": {
         "image": "__IMAGE__louisiana-purchase-seafood-restaurant-san-diego-website",
         "imageAlt": "Louisiana Purchase exterior — 2305 University Ave North Park San Diego",
         "eyebrow": "North Park · San Diego",
@@ -293,8 +293,8 @@
       }
     },
     {
-      "component": "CTABand",
-      "props": {
+      "discriminant": "CTABand",
+      "value": {
         "eyebrow": "Come Experience It",
         "title": "Louisiana Purchase Awaits.",
         "subtitle": "Open daily. Walk-ins welcome at the bar. Reservations recommended for dining.",
