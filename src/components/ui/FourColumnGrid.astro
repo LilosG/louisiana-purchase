@@ -8,6 +8,7 @@ import type { ImageMetadata } from 'astro';
 
 interface GridCard {
   image?:     ImageMetadata;
+  imageFallback?: boolean;
   imageAlt?:  string;
   eyebrow?:   string;
   title:      string;
@@ -60,7 +61,7 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
           class="flex flex-col h-full"
           aria-label={card.title}
         >
-          {card.image && (
+          {card.image ? (
             <div class="aspect-[3/4] overflow-hidden">
               <Image
                 src={card.image}
@@ -72,6 +73,13 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
                 widths={[300, 500, 800]}
                 sizes="(min-width: 1024px) 25vw, 50vw"
               />
+            </div>
+          ) : card.imageFallback && (
+            <div
+              class="aspect-[3/4] grid place-items-center overflow-hidden bg-[radial-gradient(circle_at_50%_38%,rgba(214,170,98,0.12),transparent_58%)]"
+              aria-hidden="true"
+            >
+              <span class="grid h-14 w-14 place-items-center rounded-full border border-gold/25 font-serif text-lg text-gold/60">LP</span>
             </div>
           )}
           <div class="flex flex-col flex-1 gap-2 p-6 md:p-7">
@@ -103,7 +111,7 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
         </a>
       ) : (
         <>
-          {card.image && (
+          {card.image ? (
             <div class="aspect-[3/4] overflow-hidden">
               <Image
                 src={card.image}
@@ -115,6 +123,13 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
                 widths={[300, 500, 800]}
                 sizes="(min-width: 1024px) 25vw, 50vw"
               />
+            </div>
+          ) : card.imageFallback && (
+            <div
+              class="aspect-[3/4] grid place-items-center overflow-hidden bg-[radial-gradient(circle_at_50%_38%,rgba(214,170,98,0.12),transparent_58%)]"
+              aria-hidden="true"
+            >
+              <span class="grid h-14 w-14 place-items-center rounded-full border border-gold/25 font-serif text-lg text-gold/60">LP</span>
             </div>
           )}
           <div class="flex flex-col flex-1 gap-2 p-6 md:p-7">

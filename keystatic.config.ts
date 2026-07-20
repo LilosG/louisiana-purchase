@@ -109,6 +109,21 @@ function requiredImageField(namespace: string, label: string, description: strin
   });
 }
 
+function optionalImageField(namespace: string, label: string, description: string) {
+  if (!namespace) throw new Error('Every image field requires an explicit namespace.');
+  const directory = `src/assets/images/cms/${namespace}`;
+  const publicPath = `cms/${namespace}/`;
+  const collisionKey = `${directory}|${publicPath}`;
+  if (imageFieldPaths.has(collisionKey)) throw new Error(`Image field storage collision: ${collisionKey}`);
+  imageFieldPaths.add(collisionKey);
+  return fields.image({
+    label,
+    description,
+    directory,
+    publicPath,
+  });
+}
+
 function labelFor(key: string, path: string[]) {
   const fullPath = [...path, key].join('.');
   if (key === 'headlineId') return '⚠️ Advanced — Hero Heading Reference';
@@ -256,7 +271,7 @@ function menuCollection(label: string, directory: string) {
       name: fields.slug({ name: { label: 'Dish or Drink Name', description: 'Name shown on the menu.', validation: { isRequired: true } } }),
       id: idField,
       description: requiredText('Description', 'Describe the dish or drink as it appears on the menu.', true),
-      image: requiredImageField(`${directory}/image`, 'Item Photo', 'Required photo shown with this menu item.'),
+      image: optionalImageField(`${directory}/image`, 'Item Photo', 'Optional photo shown with this menu item.'),
       imageAlt: requiredText('Image Description for Accessibility', 'Describe what is visible in the photo for screen readers and search engines.'),
       order: orderField,
       available: fields.checkbox({ label: 'Available', description: 'Turn on to make this item available for menu displays.', defaultValue: true }),
