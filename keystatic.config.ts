@@ -88,41 +88,121 @@ const arrayItemLabels: Record<string, string> = {
 const multilineKeys = new Set(['description', 'schemaDescription', 'subtitle', 'body', 'a', 'tagline']);
 const imageFieldPaths = new Set<string>();
 const optionalGeneratedFieldPaths = new Set<string>();
+const legacyImageTokenPrefix = '__IMAGE__';
+const legacyWebpImageKeys = new Set([
+  'louisiana-purchase-street-corner-exterior-north-park-website',
+]);
+
+function legacyImageFilename(value: unknown) {
+  if (typeof value !== 'string') return undefined;
+  const publicFilename = value.match(/^\/([^/]+\.(?:avif|jpe?g|png|webp))$/i)?.[1];
+  if (publicFilename) return publicFilename;
+  const key = value.startsWith(legacyImageTokenPrefix)
+    ? value.slice(legacyImageTokenPrefix.length)
+    : /^[a-z0-9-]+$/.test(value)
+      ? value
+      : undefined;
+  if (!key) return undefined;
+  return `${key}.${legacyWebpImageKeys.has(key) ? 'webp' : 'jpg'}`;
+}
+
+/**
+ * Legacy singleton content stores __IMAGE__ tokens, extension-free registry
+ * keys, and a few root-public paths. Keystatic needs the real asset filename
+ * to load and validate an image field, so bridge those values to the existing
+ * files. On a later CMS save, Keystatic writes the same bytes into the field's
+ * normal cms/ namespace and stores its standard path.
+ */
+function bridgeLegacyImageValue(
+  field: ReturnType<typeof fields.image>,
+  namespace: string,
+  publicPath: string,
+  storedValue: unknown,
+) {
+  if (!legacyImageFilename(storedValue)) return field;
+
+  const filename = field.filename;
+  const parse = field.parse;
+  const serialize = field.serialize;
+  const storedPrefix = (slug: string | undefined) =>
+    `${publicPath.replace(/\/*$/, '')}/${slug === undefined ? '' : `${slug}/`}`;
+  const assetPrefix = (slug: string | undefined) => storedPrefix(slug).replace(/^\/+/, '');
+
+  return {
+    ...field,
+    filename(
+      value: Parameters<typeof filename>[0],
+      args: Parameters<typeof filename>[1],
+    ) {
+      const legacyFilename = legacyImageFilename(value);
+      if (legacyFilename) return legacyFilename;
+      const prefix = storedPrefix(args.slug);
+      if (typeof value === 'string' && value.startsWith(prefix)) return value.replace(/^\/+/, '');
+      return filename(value, args);
+    },
+    parse(
+      value: Parameters<typeof parse>[0],
+      args: Parameters<typeof parse>[1],
+    ) {
+      const legacyFilename = legacyImageFilename(value);
+      if (legacyFilename) return parse(`${storedPrefix(args.slug)}${legacyFilename}`, args);
+      return parse(value, args);
+    },
+    serialize(
+      value: Parameters<typeof serialize>[0],
+      args: Parameters<typeof serialize>[1],
+    ) {
+      const result = serialize(value, args);
+      if (!result.asset) return result;
+      return {
+        ...result,
+        asset: {
+          ...result.asset,
+          filename: `${assetPrefix(args.slug)}${result.asset.filename}`,
+        },
+      };
+    },
+  };
+}
 
 /**
  * The only image-field constructor in this config. The namespace is required,
  * has no default, and is registered before use so duplicate storage paths fail
  * immediately while the config is loading.
  */
-function requiredImageField(namespace: string, label: string, description: string) {
+function requiredImageField(namespace: string, label: string, description: string, storedValue?: unknown) {
   if (!namespace) throw new Error('Every image field requires an explicit namespace.');
-  const directory = `src/assets/images/cms/${namespace}`;
-  const publicPath = `cms/${namespace}/`;
+  const isLegacyImage = Boolean(legacyImageFilename(storedValue));
+  const isLegacyPublicImage = typeof storedValue === 'string' && storedValue.startsWith('/');
+  const directory = isLegacyPublicImage ? 'public' : isLegacyImage ? 'src/assets/images' : `src/assets/images/cms/${namespace}`;
+  const publicPath = isLegacyPublicImage ? `/cms/${namespace}/` : `cms/${namespace}/`;
   const collisionKey = `${directory}|${publicPath}`;
   if (imageFieldPaths.has(collisionKey)) throw new Error(`Image field storage collision: ${collisionKey}`);
   imageFieldPaths.add(collisionKey);
-  return fields.image({
+  return bridgeLegacyImageValue(fields.image({
     label,
     description,
     directory,
     publicPath,
     validation: { isRequired: true },
-  });
+  }), namespace, publicPath, storedValue);
 }
 
-function optionalImageField(namespace: string, label: string, description: string) {
+function optionalImageField(namespace: string, label: string, description: string, storedValue?: unknown) {
   if (!namespace) throw new Error('Every image field requires an explicit namespace.');
-  const directory = `src/assets/images/cms/${namespace}`;
-  const publicPath = `cms/${namespace}/`;
+  const isLegacyImage = Boolean(legacyImageFilename(storedValue));
+  const isLegacyPublicImage = typeof storedValue === 'string' && storedValue.startsWith('/');
+  const directory = isLegacyPublicImage ? 'public' : isLegacyImage ? 'src/assets/images' : `src/assets/images/cms/${namespace}`;
+  const publicPath = isLegacyPublicImage ? `/cms/${namespace}/` : `cms/${namespace}/`;
   const collisionKey = `${directory}|${publicPath}`;
   if (imageFieldPaths.has(collisionKey)) throw new Error(`Image field storage collision: ${collisionKey}`);
   imageFieldPaths.add(collisionKey);
-  return fields.image({
+  return bridgeLegacyImageValue(fields.image({
     label,
     description,
     directory,
     publicPath,
-  });
+  }), namespace, publicPath, storedValue);
 }
 
 function labelFor(key: string, path: string[]) {
@@ -264,8 +344,8 @@ function fieldFromValue(key: string, value: unknown, namespace: string, path: st
   if (isImageValue(key, value)) {
     const fieldNamespace = [namespace, ...nextPath].join('/');
     return optionalGeneratedFieldPaths.has(fieldNamespace)
-      ? optionalImageField(fieldNamespace, label, description)
-      : requiredImageField(fieldNamespace, label, description);
+      ? optionalImageField(fieldNamespace, label, description, value)
+      : requiredImageField(fieldNamespace, label, description, value);
   }
   if (Array.isArray(value)) {
     const objects = value.filter((item): item is Record<string, unknown> => Boolean(item) && typeof item === 'object' && !Array.isArray(item));
