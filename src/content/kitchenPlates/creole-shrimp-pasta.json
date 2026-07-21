@@ -1,0 +1,14 @@
+{
+  "name": "Creole Shrimp Pasta",
+  "id": "creole-shrimp-pasta",
+  "description": "gulf shrimp · roasted tomato basil cream · parm",
+  "image": "cms/kitchenPlates/image/creole-shrimp-pasta/image.jpg",
+  "imageAlt": "gulf shrimp · roasted tomato basil cream · parm",
+  "order": 7,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 2800,
+  "priceDisplay": "28.00"
+}
