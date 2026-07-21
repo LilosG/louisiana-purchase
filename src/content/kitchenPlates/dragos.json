@@ -1,0 +1,14 @@
+{
+  "name": "Dragos",
+  "id": "dragos",
+  "description": "2 fried lobster tails · linguine · cajun cream sauce · charred lemon",
+  "image": "cms/kitchenPlates/image/dragos/image.jpg",
+  "imageAlt": "2 fried lobster tails · linguine · cajun cream sauce · charred lemon",
+  "order": 1,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 4800,
+  "priceDisplay": "48.00"
+}
