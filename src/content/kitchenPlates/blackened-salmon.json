@@ -1,0 +1,13 @@
+{
+  "name": "Blackened Salmon",
+  "id": "blackened-salmon",
+  "description": "8oz salmon · herb rice · cajun butter",
+  "image": "cms/kitchenPlates/image/blackened-salmon/image.jpg",
+  "imageAlt": "8oz salmon · herb rice · cajun butter",
+  "order": 6,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 3000
+}
