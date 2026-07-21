@@ -115,12 +115,9 @@ function legacyImageFilename(value: unknown) {
  */
 function bridgeLegacyImageValue(
   field: ReturnType<typeof fields.image>,
-  namespace: string,
   publicPath: string,
-  storedValue: unknown,
+  usesSharedAssetRoot: boolean,
 ) {
-  if (!legacyImageFilename(storedValue)) return field;
-
   const filename = field.filename;
   const parse = field.parse;
   const serialize = field.serialize;
@@ -137,7 +134,7 @@ function bridgeLegacyImageValue(
       const legacyFilename = legacyImageFilename(value);
       if (legacyFilename) return legacyFilename;
       const prefix = storedPrefix(args.slug);
-      if (typeof value === 'string' && value.startsWith(prefix)) return value.replace(/^\/+/, '');
+      if (usesSharedAssetRoot && typeof value === 'string' && value.startsWith(prefix)) return value.replace(/^\/+/, '');
       return filename(value, args);
     },
     parse(
@@ -153,7 +150,7 @@ function bridgeLegacyImageValue(
       args: Parameters<typeof serialize>[1],
     ) {
       const result = serialize(value, args);
-      if (!result.asset) return result;
+      if (!result.asset || !usesSharedAssetRoot) return result;
       return {
         ...result,
         asset: {
@@ -172,9 +169,13 @@ function bridgeLegacyImageValue(
  */
 function requiredImageField(namespace: string, label: string, description: string, storedValue?: unknown) {
   if (!namespace) throw new Error('Every image field requires an explicit namespace.');
-  const isLegacyImage = Boolean(legacyImageFilename(storedValue));
   const isLegacyPublicImage = typeof storedValue === 'string' && storedValue.startsWith('/');
-  const directory = isLegacyPublicImage ? 'public' : isLegacyImage ? 'src/assets/images' : `src/assets/images/cms/${namespace}`;
+  const usesSharedAssetRoot = storedValue !== undefined;
+  const directory = isLegacyPublicImage
+    ? 'public'
+    : usesSharedAssetRoot
+      ? 'src/assets/images'
+      : `src/assets/images/cms/${namespace}`;
   const publicPath = isLegacyPublicImage ? `/cms/${namespace}/` : `cms/${namespace}/`;
   const collisionKey = `${directory}|${publicPath}`;
   if (imageFieldPaths.has(collisionKey)) throw new Error(`Image field storage collision: ${collisionKey}`);
@@ -185,14 +186,18 @@ function requiredImageField(namespace: string, label: string, description: strin
     directory,
     publicPath,
     validation: { isRequired: true },
-  }), namespace, publicPath, storedValue);
+  }), publicPath, usesSharedAssetRoot);
 }
 
 function optionalImageField(namespace: string, label: string, description: string, storedValue?: unknown) {
   if (!namespace) throw new Error('Every image field requires an explicit namespace.');
-  const isLegacyImage = Boolean(legacyImageFilename(storedValue));
   const isLegacyPublicImage = typeof storedValue === 'string' && storedValue.startsWith('/');
-  const directory = isLegacyPublicImage ? 'public' : isLegacyImage ? 'src/assets/images' : `src/assets/images/cms/${namespace}`;
+  const usesSharedAssetRoot = storedValue !== undefined;
+  const directory = isLegacyPublicImage
+    ? 'public'
+    : usesSharedAssetRoot
+      ? 'src/assets/images'
+      : `src/assets/images/cms/${namespace}`;
   const publicPath = isLegacyPublicImage ? `/cms/${namespace}/` : `cms/${namespace}/`;
   const collisionKey = `${directory}|${publicPath}`;
   if (imageFieldPaths.has(collisionKey)) throw new Error(`Image field storage collision: ${collisionKey}`);
@@ -202,7 +207,7 @@ function optionalImageField(namespace: string, label: string, description: strin
     description,
     directory,
     publicPath,
-  }), namespace, publicPath, storedValue);
+  }), publicPath, usesSharedAssetRoot);
 }
 
 function labelFor(key: string, path: string[]) {
