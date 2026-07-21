@@ -1,0 +1,13 @@
+{
+  "name": "Catfish Etouffee",
+  "id": "catfish-etouffee",
+  "description": "blackened or fried · crawfish etouffee · creole rice",
+  "imageAlt": "blackened or fried · crawfish etouffee · creole rice",
+  "order": 6,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 3000,
+  "priceDisplay": "30.00"
+}
