@@ -1,0 +1,16 @@
+{
+  "name": "Acme Oysters",
+  "id": "acme-oysters",
+  "description": "chargrilled gulf oysters, garlic lemon butter, parmesan",
+  "image": "cms/kitchenPlates/image/acme-oysters/image.jpg",
+  "imageAlt": "chargrilled gulf oysters, garlic lemon butter, parmesan",
+  "order": 9,
+  "available": true,
+  "featured": false,
+  "dietary": [
+    "shell-fish"
+  ],
+  "tags": [],
+  "price": 2600,
+  "priceDisplay": "26.00"
+}
