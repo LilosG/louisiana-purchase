@@ -1,0 +1,14 @@
+{
+  "name": "Uptown Seafood Gumbo",
+  "id": "uptown-seafood-gumbo",
+  "description": "jumbo shrimp · crawfish · andouille · dark roux · okra · rice",
+  "image": "cms/kitchenPlates/image/uptown-seafood-gumbo/image.jpg",
+  "imageAlt": "jumbo shrimp · crawfish · andouille · dark roux · okra · rice",
+  "order": 3,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 3500,
+  "priceDisplay": "35.00"
+}
