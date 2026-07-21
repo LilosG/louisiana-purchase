@@ -2,6 +2,7 @@
   "name": "Catfish Etouffee",
   "id": "catfish-etouffee",
   "description": "blackened or fried · crawfish etouffee · creole rice",
+  "image": "cms/kitchenPlates/image/catfish-etouffee/image.jpg",
   "imageAlt": "blackened or fried · crawfish etouffee · creole rice",
   "order": 5,
   "available": true,
