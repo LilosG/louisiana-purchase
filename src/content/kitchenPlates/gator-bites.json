@@ -1,0 +1,14 @@
+{
+  "name": "Gator Bites",
+  "id": "gator-bites",
+  "description": "6oz fried alligator · cajun fries · honey mustard crystal sauce",
+  "image": "cms/kitchenPlates/image/gator-bites/image.jpg",
+  "imageAlt": "6oz fried alligator · cajun fries · honey mustard crystal sauce",
+  "order": 4,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 3200,
+  "priceDisplay": "32.00"
+}
