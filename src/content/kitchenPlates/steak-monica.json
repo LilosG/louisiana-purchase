@@ -1,0 +1,14 @@
+{
+  "name": "Steak Monica",
+  "id": "steak-monica",
+  "description": "14oz ribeye · crawfish cream sauce · grated parmesan",
+  "image": "cms/kitchenPlates/image/steak-monica/image.jpg",
+  "imageAlt": "14oz ribeye · crawfish cream sauce · grated parmesan",
+  "order": 2,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 5000,
+  "priceDisplay": "50.00"
+}
