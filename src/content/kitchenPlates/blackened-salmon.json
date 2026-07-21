@@ -9,5 +9,6 @@
   "featured": false,
   "dietary": [],
   "tags": [],
-  "price": 3000
+  "price": 3000,
+  "priceDisplay": "30.00"
 }
