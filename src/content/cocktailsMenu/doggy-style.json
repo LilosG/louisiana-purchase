@@ -1,0 +1,13 @@
+{
+  "name": "Doggy Style",
+  "id": "doggy-style",
+  "description": "frozen cocktail, half and half, gin and juice, weezy vice",
+  "imageAlt": "frozen cocktail",
+  "order": 11,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1300,
+  "priceDisplay": "13.00"
+}
