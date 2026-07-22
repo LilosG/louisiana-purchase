@@ -1,0 +1,14 @@
+{
+  "name": "Tenders",
+  "id": "tenders",
+  "description": "choice of sauce · cajun fries (parm fries +3)",
+  "image": "cms/kitchenRawFire/image/tenders/image.jpg",
+  "imageAlt": "chicken tenders · cajun fries ",
+  "order": 7,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1700,
+  "priceDisplay": "17.00"
+}
