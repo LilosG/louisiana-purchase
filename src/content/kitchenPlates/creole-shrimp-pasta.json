@@ -1,14 +1,14 @@
 {
-  "id": "creole-shrimp-pasta",
-  "order": 7,
   "name": "Creole Shrimp Pasta",
-  "description": "Gulf shrimp, rigatoni, roasted tomato, basil cream, parmesan.",
-  "image": "cms/kitchenPlates/image/creole-shrimp-pasta/louisiana-purchase-creole-shrimp-pasta-north-park-website.jpg",
-  "imageAlt": "Creole Shrimp Pasta — Gulf shrimp, rigatoni, roasted tomato, basil cream at Louisiana Purchase",
-  "tags": [
-    "signature"
-  ],
+  "id": "creole-shrimp-pasta",
+  "description": "gulf shrimp · roasted tomato basil cream · parm",
+  "image": "cms/kitchenPlates/image/creole-shrimp-pasta/image.jpg",
+  "imageAlt": "gulf shrimp · roasted tomato basil cream · parm",
+  "order": 7,
+  "available": true,
+  "featured": false,
   "dietary": [],
-  "featured": true,
-  "available": true
+  "tags": [],
+  "price": 2800,
+  "priceDisplay": "28.00"
 }

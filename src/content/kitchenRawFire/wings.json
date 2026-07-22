@@ -1,0 +1,14 @@
+{
+  "name": "Wings",
+  "id": "wings",
+  "description": "10 - 15 - drums and flats · choice of sauce · fries\n7 SAUCES · PICK YOURS · TRY A DIFFERENT ONE NEXT TIME\nLEMON PEPPER · LP WET · COGNAC BBQ · CRAWFISH PARM · LP HOTS · CAJUN SPICE · GHOST",
+  "image": "cms/kitchenRawFire/image/wings/image.jpg",
+  "imageAlt": "WINGS,  LEMON PEPPER · LP WET · COGNAC BBQ · CRAWFISH PARM · LP HOTS · CAJUN SPICE · GHOST",
+  "order": 8,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 2300,
+  "priceDisplay": "23.00"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Catfish and Chips",
+  "id": "catfish-and-chips",
+  "description": "4oz catfish · cajun fries · hot honey · LP tartar",
+  "image": "cms/kitchenRawFire/image/catfish-and-chips/image.jpg",
+  "imageAlt": "4oz catfish · cajun fries · hot honey",
+  "order": 4,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1800,
+  "priceDisplay": "18.00"
+}

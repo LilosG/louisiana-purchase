@@ -1,14 +1,14 @@
 {
-  "id": "lemon-pepper-catfish",
-  "order": 4,
   "name": "Lemon Pepper Catfish",
-  "description": "Whole fillet, lemon pepper crust, cornbread, 1 side, LP tartar.",
-  "image": "cms/kitchenRawFire/image/lemon-pepper-catfish/louisiana-purchase-lemon-pepper-catfish-north-park-website.jpg",
-  "imageAlt": "Lemon Pepper Catfish — whole fillet with lemon pepper crust at Louisiana Purchase",
-  "tags": [
-    "signature"
-  ],
-  "dietary": [],
+  "id": "lemon-pepper-catfish",
+  "description": "whole fillet · lemon pepper crust · cornbread · 1 side · LP tartar",
+  "image": "cms/kitchenRawFire/image/lemon-pepper-catfish/image.jpg",
+  "imageAlt": "whole fillet catfish · lemon pepper crust · cornbread · tartar",
+  "order": 1,
+  "available": true,
   "featured": true,
-  "available": true
+  "dietary": [],
+  "tags": [],
+  "price": 3600,
+  "priceDisplay": "36.00"
 }

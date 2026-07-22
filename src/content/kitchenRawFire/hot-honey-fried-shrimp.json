@@ -1,0 +1,14 @@
+{
+  "name": "Hot Honey Fried Shrimp",
+  "id": "hot-honey-fried-shrimp",
+  "description": "5 jumbo shrimp · cajun fries · hot honey · tartar",
+  "image": "cms/kitchenRawFire/image/hot-honey-fried-shrimp/image.jpg",
+  "imageAlt": "5 jumbo shrimp · cajun fries · hot honey · tartar",
+  "order": 3,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1900,
+  "priceDisplay": "19.00"
+}

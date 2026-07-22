@@ -1,0 +1,14 @@
+{
+  "name": "Alligator Cheesecake",
+  "id": "alligator-cheesecake",
+  "description": "savory · alligator · andouille · gouda · crawfish cream",
+  "image": "cms/kitchenPlates/image/alligator-cheesecake/image.jpg",
+  "imageAlt": "savory alligator  andouille  gouda  crawfish cream",
+  "order": 10,
+  "available": true,
+  "featured": true,
+  "dietary": [],
+  "tags": [],
+  "price": 2400,
+  "priceDisplay": "24.00"
+}

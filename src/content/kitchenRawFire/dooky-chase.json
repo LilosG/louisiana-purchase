@@ -1,0 +1,14 @@
+{
+  "name": "Dooky Chase",
+  "id": "dooky-chase",
+  "description": "4 whole wings · biscuit · 1 side — homage to leah chase",
+  "image": "cms/kitchenRawFire/image/dooky-chase/image.jpg",
+  "imageAlt": "4 whole wings · biscuit · 1 side — homage to leah chase",
+  "order": 5,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 2900,
+  "priceDisplay": "29.00"
+}

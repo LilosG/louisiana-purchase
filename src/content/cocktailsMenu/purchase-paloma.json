@@ -1,0 +1,13 @@
+{
+  "name": "Purchase Paloma",
+  "id": "purchase-paloma",
+  "description": "Altos plata • cantaloupe • lime • grapefruit radler • black lava sea salt rim",
+  "imageAlt": "Purcahse Paloma— signature cocktail at Louisiana Purchase North Park",
+  "order": 6,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [
+    "signature"
+  ]
+}

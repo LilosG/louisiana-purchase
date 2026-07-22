@@ -1,0 +1,14 @@
+{
+  "name": "Chopped Tender Fries",
+  "id": "chopped-tender-fries",
+  "description": "3 tenders · fries · cheddar · LP sauce · green onion",
+  "image": "cms/kitchenRawFire/image/chopped-tender-fries/image.jpg",
+  "imageAlt": "3 tenders · fries · cheddar · LP sauce · green onion",
+  "order": 6,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1500,
+  "priceDisplay": "15.00"
+}

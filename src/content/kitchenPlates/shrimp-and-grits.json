@@ -1,0 +1,14 @@
+{
+  "name": "Shrimp and Grits",
+  "id": "shrimp-and-grits",
+  "description": "gulf shrimp · crawfish cream · creole grits · bacon · green onion",
+  "image": "cms/kitchenPlates/image/shrimp-and-grits/image.jpg",
+  "imageAlt": "gulf shrimp · crawfish cream · creole grits · bacon · green onion",
+  "order": 8,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 2600,
+  "priceDisplay": "26.00"
+}
