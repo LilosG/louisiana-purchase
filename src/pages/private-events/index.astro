@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/private-events/index.astro
 // Louisiana Purchase — Private Events Hub Page
 // Full rebuild using shared components and Tailwind v4 classes.
@@ -29,7 +29,8 @@ const faqSchema = {
   })),
 };
 const pageContent = await getSingleton('privateEventsIndexPage', 'page');
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const venue = await getSingleton('venueSettings', 'settings');
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
 
 <Layout

@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/events/index.astro
 // Louisiana Purchase — Events & Happenings Hub Page
 // Targets: "events north park san diego", "mardi gras san diego", "live music north park"
@@ -22,7 +22,7 @@ const eventCategoryCards = (await getOrderedCollection('eventCategoryCards')).ma
 const pageContent = await getSingleton('eventsIndexPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
 const VENUE_SOCIAL = venue.social;
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const updatesTitle = `\n${pageContent.updates.title}`;
 ---
 

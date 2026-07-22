@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/contact/index.astro
 // Louisiana Purchase — Contact Page
 
@@ -18,7 +18,7 @@ const DISPLAY_HOURS = Array.isArray(venue.displayHours) ? venue.displayHours : [
 const BRUNCH_HOURS = venue.brunchHours;
 const HAPPY_HOUR = venue.happyHour;
 const PRIVATE_EVENTS_FORM_ANCHOR = eventsConfig.privateEventsFormAnchor;
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const [reservations = {}, privateEvents = {}, orderOnline = {}] = Array.isArray(pageContent.contactMethods) ? pageContent.contactMethods : [];
 const contactMethodHrefs: Record<string, string | undefined> = {
   reservations: import.meta.env.PUBLIC_RESERVATIONS_URL,

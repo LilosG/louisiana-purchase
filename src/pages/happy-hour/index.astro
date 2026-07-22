@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/happy-hour/index.astro
 // Louisiana Purchase — Happy Hour Hub Page
 // Slug: /happy-hour — permanent, rebrand-proof URL
@@ -46,7 +46,7 @@ const faqSchema = {
     acceptedAnswer: { '@type': 'Answer', text: faq.a },
   })),
 };
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
 
 <Layout

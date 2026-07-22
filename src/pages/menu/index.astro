@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/menu/index.astro
 // Louisiana Purchase — Menu Hub Page
 // Hub page linking to /menu/dinner, /menu/cocktails, /menu/brunch
@@ -15,7 +15,8 @@ import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import MenuShowcase from '../../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../../assets/images';
 const pageContent = await getSingleton('menuIndexPage', 'page');
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const venue = await getSingleton('venueSettings', 'settings');
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
 
 <Layout {...blocks[0]}>

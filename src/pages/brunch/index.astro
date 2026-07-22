@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../../content/siteData';
 // src/pages/brunch/index.astro
 // Louisiana Purchase — Brunch Hub Page
 // Slug: /brunch — permanent URL
@@ -42,7 +42,7 @@ const brunchSchema = {
     { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday',   opens: BRUNCH_HOURS.opens, closes: BRUNCH_HOURS.closes },
   ],
 };
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const privateBrunch = pageContent.privateBrunch;
 const privateBrunchTitle = privateBrunch?.title ? `\n${privateBrunch.title}` : '';
 ---

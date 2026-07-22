@@ -6,6 +6,8 @@
   "geo": { "latitude": 32.7474, "longitude": -117.1293 },
   "phoneFallback": "+18586836828",
   "emailFallback": "info@louisianapurchasesd.com",
+  "reservationsUrl": "https://toast.app/r/louisiana-purchase?toast_sg=30bdef01-f4e0-4403-b50d-2b0263b663e1&toast_ss=8536cdf3-e37d-4e6e-89e6-3446ed13063d&toast_src=website_link&utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=reservations",
+  "orderUrl": "https://order.toasttab.com/online/louisiana-purchase?utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=online-order",
   "social": { "instagram": "https://www.instagram.com/louisianapurchasebar", "facebook": "https://www.facebook.com/louisianapurchasebar" },
   "regularHours": [
     { "dayOfWeek": "Monday", "opens": "15:00", "closes": "21:00" },

@@ -33,3 +33,11 @@ export function resolveContent(value: any, images: Record<string, any>, env: Rec
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, resolveContent(item, images, env)]));
   return value;
 }
+
+export function buildEnv(venue: any, env: Record<string, any>): Record<string, any> {
+  return {
+    ...env,
+    PUBLIC_RESERVATIONS_URL: venue?.reservationsUrl || env.PUBLIC_RESERVATIONS_URL,
+    PUBLIC_ORDER_URL: venue?.orderUrl || env.PUBLIC_ORDER_URL,
+  };
+}

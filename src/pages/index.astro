@@ -1,5 +1,5 @@
 ---
-import { getSingleton, resolveContent } from '../content/siteData';
+import { getSingleton, resolveContent, buildEnv } from '../content/siteData';
 import Layout from '../layouts/Layout.astro';
 import PageHero from '../components/ui/PageHero.astro';
 import SectionHeader from '../components/ui/SectionHeader.astro';
@@ -10,7 +10,8 @@ import MenuShowcase from '../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../assets/images';
 
 const pageContent = await getSingleton('home', 'home');
-const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, import.meta.env));
+const venue = await getSingleton('venueSettings', 'settings');
+const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
 
 <Layout {...blocks[0]}>
