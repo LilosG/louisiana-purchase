@@ -1,0 +1,12 @@
+{
+  "name": "Kool Aid Man",
+  "id": "kool-aid-man",
+  "description": "cherry - grape - or blue raspberry - tequila or vodka - lime - lemon-lime starry",
+  "image": "cms/cocktailsMenu/image/kool-aid-man/image.jpg",
+  "imageAlt": "Kool Aid Cocktail",
+  "order": 8,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": []
+}
