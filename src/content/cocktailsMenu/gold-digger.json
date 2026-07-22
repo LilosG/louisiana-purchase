@@ -2,6 +2,7 @@
   "name": "Gold Digger",
   "id": "gold-digger",
   "description": "5 mimosas •pineapple -orange •cranberry •guava\n",
+  "image": "cms/cocktailsMenu/image/gold-digger/image.jpg",
   "imageAlt": "5 mimosas •pineapple -orange •cranberry •guava ",
   "order": 7,
   "available": true,
