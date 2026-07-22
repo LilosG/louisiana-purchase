@@ -6,7 +6,7 @@
   "imageAlt": "Kool Aid Cocktail",
   "order": 8,
   "available": true,
-  "featured": false,
+  "featured": true,
   "dietary": [],
   "tags": []
 }
