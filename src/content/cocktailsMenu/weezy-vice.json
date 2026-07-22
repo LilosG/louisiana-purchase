@@ -1,0 +1,14 @@
+{
+  "name": "Weezy Vice",
+  "id": "weezy-vice",
+  "description": "frozen cockail, altos plata, watermelon, citrus, agave",
+  "image": "cms/cocktailsMenu/image/weezy-vice/image.jpg",
+  "imageAlt": "frozen cockail, altos plata, watermelon, citrus, agave",
+  "order": 10,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1300,
+  "priceDisplay": "13.00"
+}
