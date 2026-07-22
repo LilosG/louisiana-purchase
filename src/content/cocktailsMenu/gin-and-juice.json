@@ -1,0 +1,13 @@
+{
+  "name": "Gin and Juice",
+  "id": "gin-and-juice",
+  "description": "frozen cocktail, gin, apple, pineapple, lemon",
+  "imageAlt": "frozen cocktail, gin, apple, pineapple, lemon",
+  "order": 9,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 1300,
+  "priceDisplay": "13.00"
+}
