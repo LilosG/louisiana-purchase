@@ -1,0 +1,14 @@
+{
+  "name": "Combo Basket",
+  "id": "combo-basket",
+  "description": "1⁄2 catfish fillet · 5 shrimp · cajun fries · hot honey · LP tartar",
+  "image": "cms/kitchenRawFire/image/combo-basket/image.jpg",
+  "imageAlt": "catfish fillet · 5 shrimp · cajun fries · hot honey · tartar",
+  "order": 2,
+  "available": true,
+  "featured": false,
+  "dietary": [],
+  "tags": [],
+  "price": 2800,
+  "priceDisplay": "28.00"
+}
