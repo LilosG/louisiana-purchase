@@ -5,7 +5,7 @@
   "imageAlt": "frozen cocktail",
   "order": 11,
   "available": true,
-  "featured": false,
+  "featured": true,
   "dietary": [],
   "tags": [],
   "price": 1300,
