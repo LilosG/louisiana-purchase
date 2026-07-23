@@ -30,7 +30,7 @@ const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map
 
       <SectionHeader {...blocks[4]} />
 
-      <MenuShowcase itemIds={['superbird-paloma', 'watermelon-margarita', 'gin-and-juice', 'hurricane-pop']} cols={4} dark={true} divided={true} />
+      <MenuShowcase section="cocktails" featuredOnly={true} limit={4} cols={4} dark={true} divided={true} />
 
       <div class="text-center mt-10">
         <a href={pageContent.menuLinks.cocktails.href} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.menuLinks.cocktails.label}\n`}></a>
@@ -48,7 +48,7 @@ const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map
       <SectionHeader {...blocks[6]} />
 
       <MenuShowcase
-        itemIds={['oxtail-plate', 'dragos', 'creole-shrimp-pasta', 'lemon-pepper-catfish']}
+        itemIds={['dragos', 'creole-shrimp-pasta', 'lemon-pepper-catfish', 'steak-monica']}
         cols={4}
         dark={true}
         divided={true}
