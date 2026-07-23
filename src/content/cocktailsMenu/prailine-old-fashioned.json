@@ -4,9 +4,9 @@
   "description": "bourbon-praline•creole biters",
   "image": "cms/cocktailsMenu/image/prailine-old-fashioned/image.jpg",
   "imageAlt": "bourbon-praline•creole biters — Louisiana Purchase craft cocktail",
-  "order": 2,
+  "order": 1,
   "available": true,
-  "featured": false,
+  "featured": true,
   "dietary": [],
   "tags": []
 }
