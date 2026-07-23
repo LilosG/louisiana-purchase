@@ -1,16 +1,62 @@
 {
-  "wordmark": { "top": "Louisiana", "bottom": "Purchase", "homeAriaLabel": "Louisiana Purchase homepage" },
+  "wordmark": {
+    "top": "Louisiana",
+    "bottom": "Purchase",
+    "homeAriaLabel": "Louisiana Purchase homepage"
+  },
   "tagline": "Elevated Creole cuisine and craft cocktails in the heart of North Park, San Diego.",
-  "socialLabels": { "instagram": "Instagram", "facebook": "Facebook" },
-  "columnHeadings": { "explore": "Explore", "hours": "Hours", "reservations": "Reservations" },
+  "socialLabels": {
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "columnHeadings": {
+    "explore": "Explore",
+    "hours": "Hours",
+    "reservations": "Reservations"
+  },
   "exploreLinks": [
-    { "href": "/menu", "label": "Menu" }, { "href": "/brunch", "label": "Brunch" }, { "href": "/happy-hour", "label": "Happy Hour" }, { "href": "/private-events", "label": "Private Events" }, { "href": "/about", "label": "About" }, { "href": "/contact", "label": "Contact" }
+    {
+      "href": "/menu",
+      "label": "Menu"
+    },
+    {
+      "href": "/brunch",
+      "label": "Brunch"
+    },
+    {
+      "href": "/happy-hour",
+      "label": "Happy Hour"
+    },
+    {
+      "href": "/private-events",
+      "label": "Private Events"
+    },
+    {
+      "href": "/about",
+      "label": "About"
+    },
+    {
+      "href": "/contact",
+      "label": "Contact"
+    }
   ],
-  "reservationLinks": { "reserveTable": "Reserve a Table", "orderOnline": "Order Online", "giftCards": "Gift Cards", "privateEvents": "Private Events", "reserveNow": "Reserve Now" },
+  "reservationLinks": {
+    "reserveTable": "Reserve on OpenTable",
+    "orderOnline": "Order Online",
+    "giftCards": "Gift Cards",
+    "privateEvents": "Private Events",
+    "reserveNow": "Reserve on OpenTable"
+  },
   "networkLabel": "Grind & Prosper Hospitality",
   "copyrightVenue": "Louisiana Purchase",
   "bottomCuisine": "Creole Dining & Craft Cocktails",
   "creditLabel": "Website by Lilos Growth",
   "creditUrl": "https://lilosgrowth.com",
-  "ariaLabels": { "footer": "Site footer", "social": "Social media links", "instagram": "Louisiana Purchase on Instagram", "facebook": "Louisiana Purchase on Facebook", "reserve": "Reserve a table at Louisiana Purchase" }
+  "ariaLabels": {
+    "footer": "Site footer",
+    "social": "Social media links",
+    "instagram": "Louisiana Purchase on Instagram",
+    "facebook": "Louisiana Purchase on Facebook",
+    "reserve": "Reserve a table at Louisiana Purchase"
+  }
 }

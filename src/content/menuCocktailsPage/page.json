@@ -32,7 +32,7 @@
     "imageAlt": "Craft cocktails at Louisiana Purchase North Park San Diego",
     "ctas": [
       {
-        "label": "Reserve a Table",
+        "label": "Reserve on OpenTable",
         "url": "reservations",
         "external": true,
         "variant": "gold"
@@ -83,7 +83,7 @@
     "image": "louisiana-purchase-cocktail-bar-north-park-website",
     "ctas": [
       {
-        "label": "Reserve a Table",
+        "label": "Reserve on OpenTable",
         "url": "reservations",
         "external": true,
         "variant": "gold"

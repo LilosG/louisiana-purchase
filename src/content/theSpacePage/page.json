@@ -6,7 +6,7 @@
     "bodySuffix": " — San Diego's most vibrant dining and nightlife neighborhood.",
     "addressLabel": "Address",
     "directionsLabel": "Get Directions",
-    "reservationsLabel": "Reserve a Table",
+    "reservationsLabel": "Reserve on OpenTable",
     "image": "louisiana-purchase-seafood-restaurant-san-diego-website",
     "imageAlt": "Louisiana Purchase exterior — 2305 University Ave North Park San Diego"
   },
@@ -42,7 +42,7 @@
         "imageAlt": "Louisiana Purchase at the corner of University Ave and Louisiana St — North Park San Diego",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -118,7 +118,7 @@
         ],
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -165,7 +165,7 @@
         ],
         "ctas": [
           {
-            "label": "Reserve the Patio",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -245,7 +245,7 @@
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"

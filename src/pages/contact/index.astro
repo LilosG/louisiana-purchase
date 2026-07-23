@@ -21,7 +21,8 @@ const PRIVATE_EVENTS_FORM_ANCHOR = eventsConfig.privateEventsFormAnchor;
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const [reservations = {}, privateEvents = {}, orderOnline = {}] = Array.isArray(pageContent.contactMethods) ? pageContent.contactMethods : [];
 const contactMethodHrefs: Record<string, string | undefined> = {
-  reservations: import.meta.env.PUBLIC_RESERVATIONS_URL,
+  reservations: venue?.reservationsUrl || import.meta.env.PUBLIC_RESERVATIONS_URL,
+  reservationsToast: venue?.reservationsUrlSecondary || import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST,
   privateEvents: `/private-events#${PRIVATE_EVENTS_FORM_ANCHOR}`,
   order: import.meta.env.PUBLIC_ORDER_URL,
 };
@@ -53,6 +54,14 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet}
             class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-6 py-3 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms] mt-auto"
             set:text={`\n${reservations.ctaLabel}\n`}
           ></a>
+          <a
+            href={contactMethodHrefs.reservationsToast}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center font-sans text-[0.5625rem] font-medium tracking-[0.2em] uppercase text-gold/60 hover:text-gold transition-colors duration-[280ms]"
+          >
+            Reserve via Toast
+          </a>
         </div>
 
         <!-- Private Events -->

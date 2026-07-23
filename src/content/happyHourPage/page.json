@@ -34,7 +34,7 @@
         "imageAlt": "Happy Hour cocktails at Louisiana Purchase North Park San Diego",
         "ctas": [
           {
-            "label": "Reserve a Spot",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -110,7 +110,7 @@
         ],
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -229,7 +229,7 @@
         "image": "__IMAGE__louisiana-purchase-north-park-restaurant-and-bar-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"

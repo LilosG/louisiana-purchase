@@ -32,7 +32,7 @@
     "imageAlt": "Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits at Louisiana Purchase brunch",
     "ctas": [
       {
-        "label": "Reserve for Brunch",
+        "label": "Reserve on OpenTable",
         "url": "reservations",
         "external": true,
         "variant": "gold"
@@ -83,7 +83,7 @@
     "image": "louisiana-purchase-weekend-brunch-san-diego-website",
     "ctas": [
       {
-        "label": "Reserve for Brunch",
+        "label": "Reserve on OpenTable",
         "url": "reservations",
         "external": true,
         "variant": "gold"

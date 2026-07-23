@@ -4,7 +4,7 @@
       "eyebrow": "Reservations",
       "title": "Reserve a Table",
       "body": "Book your table online through our reservations system. Available for all dining services — dinner, brunch, and bar seating.",
-      "ctaLabel": "Book Now",
+      "ctaLabel": "Reserve on OpenTable",
       "url": "reservations",
       "external": true,
       "variant": "gold"
@@ -95,7 +95,7 @@
         "image": "__IMAGE__louisiana-purchase-intimate-cocktail-restaurant-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"

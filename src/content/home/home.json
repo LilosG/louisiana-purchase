@@ -38,7 +38,7 @@
         "imageAlt": "Louisiana Purchase exterior at twilight — patio and pergola, North Park, San Diego",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -123,7 +123,7 @@
             "variant": "gold"
           },
           {
-            "label": "Reserve a Table →",
+            "label": "Reserve on OpenTable →",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "text"
@@ -180,7 +180,7 @@
         ],
         "ctas": [
           {
-            "label": "Reserve for Brunch",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
@@ -325,7 +325,7 @@
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
