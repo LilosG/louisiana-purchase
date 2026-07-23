@@ -10,7 +10,7 @@ interface CTAButton {
   label:     string;
   href:      string;
   external?: boolean;
-  variant:   'gold' | 'outline';
+  variant:   'gold' | 'outline' | 'text';
 }
 
 interface Props {
@@ -94,6 +94,7 @@ const {
             {
               'px-10 py-4 bg-gold text-obsidian hover:bg-gold-200':                           cta.variant === 'gold',
               'px-10 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5': cta.variant === 'outline',
+              'text-gold hover:text-gold-200':                                                cta.variant === 'text',
             }
           ]}
         >

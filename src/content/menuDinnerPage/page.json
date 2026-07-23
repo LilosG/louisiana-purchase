@@ -1,7 +1,106 @@
 {
-  "seo":{"title":"Dinner Menu — Elevated Creole Kitchen | Louisiana Purchase North Park","description":"Chef Quinnton Austin's elevated Creole dinner menu at Louisiana Purchase in North Park, San Diego. Fire-charred oysters, Louisiana BBQ shrimp, and slow-built gumbo, served daily.","canonical":"/menu/dinner","schemaName":"Louisiana Purchase — Dinner Menu","schemaDescription":"Chef Quinnton Austin's elevated Creole dinner menu at Louisiana Purchase in North Park, San Diego.","breadcrumbs":[{"name":"Home","url":"/","position":1},{"name":"Menu","url":"/menu","position":2},{"name":"Dinner","url":"/menu/dinner","position":3}]},
-  "hero":{"eyebrow":"Open Daily","title":"Dinner","titleItalic":"Louisiana Purchase","subtitle":"Chef Quinnton Austin's fire-forward Creole kitchen — fire-charred oysters, slow-built gumbo, and elevated Louisiana plates built for sharing.","image":"louisiana-purchase-modern-creole-restaurant-website","imageAlt":"Dinner at Louisiana Purchase North Park San Diego","ctas":[{"label":"Reserve a Table","url":"reservations","external":true,"variant":"gold"},{"label":"Order Online","url":"order","external":true,"variant":"outline"}],"headlineId":"dinner-headline"},
-  "stats":[{"value":"Daily","label":"Dinner Service"},{"value":"Creole","label":"Cuisine"},{"value":"Fire-Charred Oysters","label":"Signature"},{"value":"12 PM","label":"Earliest Open"}],
-  "menuHeader":{"eyebrow":"The Menu","title":"Raw, Fire,","titleItalic":"& Elevated Plates","subtitle":"Chef Quinnton Austin's dinner program — fire-charred, slow-built, and obsessively precise.","id":"dinner-menu-heading"},
-  "cta":{"eyebrow":"Ready to Dine","title":"Reserve Your Table.","subtitle":"Louisiana Purchase is open daily at 2305 University Ave. Walk-ins welcome at the bar.","image":"louisiana-purchase-dinner-north-park-san-diego-website","ctas":[{"label":"Reserve a Table","url":"reservations","external":true,"variant":"gold"},{"label":"Order Online","url":"order","external":true,"variant":"outline"}]}
+  "seo": {
+    "title": "Dinner Menu — Elevated Creole Kitchen | Louisiana Purchase North Park",
+    "description": "Chef Quinnton Austin's elevated Creole dinner menu at Louisiana Purchase in North Park, San Diego. Fire-charred oysters, Louisiana BBQ shrimp, and slow-built gumbo, served daily.",
+    "canonical": "/menu/dinner",
+    "schemaName": "Louisiana Purchase — Dinner Menu",
+    "schemaDescription": "Chef Quinnton Austin's elevated Creole dinner menu at Louisiana Purchase in North Park, San Diego.",
+    "breadcrumbs": [
+      {
+        "name": "Home",
+        "url": "/",
+        "position": 1
+      },
+      {
+        "name": "Menu",
+        "url": "/menu",
+        "position": 2
+      },
+      {
+        "name": "Dinner",
+        "url": "/menu/dinner",
+        "position": 3
+      }
+    ]
+  },
+  "hero": {
+    "eyebrow": "Open Daily",
+    "title": "Dinner",
+    "titleItalic": "Louisiana Purchase",
+    "subtitle": "Chef Quinnton Austin's fire-forward Creole kitchen — fire-charred oysters, slow-built gumbo, and elevated Louisiana plates built for sharing.",
+    "image": "louisiana-purchase-modern-creole-restaurant-website",
+    "imageAlt": "Dinner at Louisiana Purchase North Park San Diego",
+    "ctas": [
+      {
+        "label": "Reserve a Table",
+        "url": "reservations",
+        "external": true,
+        "variant": "gold"
+      },
+      {
+        "label": "Reserve via Toast",
+        "url": "reservations-toast",
+        "external": true,
+        "variant": "text"
+      },
+      {
+        "label": "Order Online",
+        "url": "order",
+        "external": true,
+        "variant": "outline"
+      }
+    ],
+    "headlineId": "dinner-headline"
+  },
+  "stats": [
+    {
+      "value": "Daily",
+      "label": "Dinner Service"
+    },
+    {
+      "value": "Creole",
+      "label": "Cuisine"
+    },
+    {
+      "value": "Fire-Charred Oysters",
+      "label": "Signature"
+    },
+    {
+      "value": "12 PM",
+      "label": "Earliest Open"
+    }
+  ],
+  "menuHeader": {
+    "eyebrow": "The Menu",
+    "title": "Raw, Fire,",
+    "titleItalic": "& Elevated Plates",
+    "subtitle": "Chef Quinnton Austin's dinner program — fire-charred, slow-built, and obsessively precise.",
+    "id": "dinner-menu-heading"
+  },
+  "cta": {
+    "eyebrow": "Ready to Dine",
+    "title": "Reserve Your Table.",
+    "subtitle": "Louisiana Purchase is open daily at 2305 University Ave. Walk-ins welcome at the bar.",
+    "image": "louisiana-purchase-dinner-north-park-san-diego-website",
+    "ctas": [
+      {
+        "label": "Reserve a Table",
+        "url": "reservations",
+        "external": true,
+        "variant": "gold"
+      },
+      {
+        "label": "Reserve via Toast",
+        "url": "reservations-toast",
+        "external": true,
+        "variant": "text"
+      },
+      {
+        "label": "Order Online",
+        "url": "order",
+        "external": true,
+        "variant": "outline"
+      }
+    ]
+  }
 }

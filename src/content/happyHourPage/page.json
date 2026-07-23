@@ -1,5 +1,8 @@
 {
-  "menuLink": { "label": "View Full Menu", "href": "/menu" },
+  "menuLink": {
+    "label": "View Full Menu",
+    "href": "/menu"
+  },
   "seo": {
     "title": "Happy Hour in North Park San Diego | Louisiana Purchase",
     "description": "Louisiana Purchase's Happy Hour — North Park's best happy hour deals. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome.",
@@ -35,6 +38,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View Full Menu",
@@ -105,6 +114,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           }
         ],
         "dark": true
@@ -218,6 +233,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",

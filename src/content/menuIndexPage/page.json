@@ -92,6 +92,12 @@
             "variant": "gold"
           },
           {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
+          },
+          {
             "label": "Order Online",
             "href": "__ENV__PUBLIC_ORDER_URL",
             "external": true,
@@ -304,6 +310,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "variant": "outline",
             "external": true
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           }
         ],
         "dark": true,
@@ -333,6 +345,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "Order Online",

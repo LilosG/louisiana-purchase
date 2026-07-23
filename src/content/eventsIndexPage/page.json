@@ -47,6 +47,12 @@
             "variant": "gold"
           },
           {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
+          },
+          {
             "label": "Private Events",
             "href": "/private-events",
             "variant": "outline"
@@ -184,6 +190,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "Follow on Instagram",

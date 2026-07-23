@@ -101,6 +101,12 @@
             "variant": "gold"
           },
           {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
+          },
+          {
             "label": "Get Directions",
             "href": "https://maps.google.com/?q=2305+University+Ave+San+Diego+CA+92104",
             "external": true,

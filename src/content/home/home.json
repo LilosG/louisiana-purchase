@@ -1,7 +1,13 @@
 {
   "menuLinks": {
-    "cocktails": { "label": "Full Cocktail Menu", "href": "/menu/cocktails" },
-    "dinner": { "label": "Full Food Menu", "href": "/menu/dinner" }
+    "cocktails": {
+      "label": "Full Cocktail Menu",
+      "href": "/menu/cocktails"
+    },
+    "dinner": {
+      "label": "Full Food Menu",
+      "href": "/menu/dinner"
+    }
   },
   "privateEventHighlights": [
     "Corporate Dinners & Executive Events",
@@ -36,6 +42,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",
@@ -115,6 +127,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "text"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           }
         ],
         "dark": true,
@@ -166,6 +184,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "See the Brunch Menu",
@@ -305,6 +329,12 @@
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",
