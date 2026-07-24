@@ -115,16 +115,6 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
           </li>
           <li>
             <a
-              href={import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="site-footer__nav-link site-footer__nav-link--secondary"
-            >
-              Reserve via Toast
-            </a>
-          </li>
-          <li>
-            <a
               href={import.meta.env.PUBLIC_ORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
@@ -157,14 +147,6 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
           aria-label={footer.ariaLabels.reserve}
           set:text={`\n${footer.reservationLinks.reserveNow}\n`}
         ></a>
-        <a
-          href={import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="site-footer__reserve-btn-secondary"
-        >
-          Reserve via Toast
-        </a>
       </section>
 
     </div>
@@ -330,11 +312,6 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 
 .site-footer__nav-link:hover { color: var(--color-parchment); }
 
-.site-footer__nav-link--secondary {
-  font-size: 0.75rem;
-  opacity: 0.65;
-}
-
 /* Hours */
 .site-footer__hours {
   display: flex;
@@ -396,31 +373,6 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 }
 
 .site-footer__reserve-btn:hover { background: var(--color-gold-light); }
-
-/* Temporary: small secondary reservation button (Toast), while the client
-   verifies the new OpenTable system before removing Toast entirely. */
-.site-footer__reserve-btn-secondary {
-  display: inline-flex;
-  margin-top: 0.625rem;
-  margin-left: 0.75rem;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 1px solid rgba(201,168,76,0.3);
-  color: rgba(201,168,76,0.65);
-  font-family: var(--font-sans);
-  font-size: 0.5rem;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  transition: color 280ms ease, border-color 280ms ease;
-  white-space: nowrap;
-}
-
-.site-footer__reserve-btn-secondary:hover {
-  color: var(--color-gold);
-  border-color: rgba(201,168,76,0.55);
-}
 
 /* Bottom */
 .site-footer__bottom {
