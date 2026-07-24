@@ -87,8 +87,10 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet.
           <div class="flex flex-wrap gap-4">
             <a href={VENUE_MAPS_URL} target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 bg-gold text-obsidian hover:bg-gold-200 transition-all duration-[280ms]" set:text={`\n${pageContent.location.directionsLabel}\n`}></a>
-            <a href={import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
+            <a href={venue?.reservationsUrl || import.meta.env.PUBLIC_RESERVATIONS_URL} target="_blank" rel="noopener noreferrer"
                class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]" set:text={`\n${pageContent.location.reservationsLabel}\n`}></a>
+            <a href={venue?.reservationsUrlSecondary || import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST} target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center justify-center font-sans text-[0.5625rem] font-medium tracking-[0.2em] uppercase text-gold/60 hover:text-gold transition-colors duration-[280ms]">Reserve via Toast</a>
           </div>
         </div>
 

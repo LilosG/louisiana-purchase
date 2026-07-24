@@ -1,5 +1,8 @@
 {
-  "menuLink": { "label": "Full Brunch Menu", "href": "/menu/brunch" },
+  "menuLink": {
+    "label": "Full Brunch Menu",
+    "href": "/menu/brunch"
+  },
   "privateBrunch": {
     "eyebrow": "Group Bookings",
     "title": "Private Brunch",
@@ -13,7 +16,10 @@
       "Dedicated events coordinator"
     ],
     "listMarker": "✦",
-    "cta": { "label": "Inquire About a Private Brunch", "href": "/private-events/san-diego-brunch-private-event" },
+    "cta": {
+      "label": "Inquire About a Private Brunch",
+      "href": "/private-events/san-diego-brunch-private-event"
+    },
     "image": "louisiana-purchase-private-brunch-events-north-park-website",
     "imageAlt": "Fried chicken and waffles brunch spread at a private event at Louisiana Purchase North Park"
   },
@@ -48,10 +54,16 @@
         "imageAlt": "Drop Top Chicken Flock, Catfish N' Grits, and Shrimp N' Grits at Louisiana Purchase brunch",
         "ctas": [
           {
-            "label": "Reserve for Brunch",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View Brunch Menu",
@@ -118,10 +130,16 @@
         ],
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           }
         ],
         "dark": true
@@ -169,10 +187,16 @@
         ],
         "ctas": [
           {
-            "label": "Reserve Now",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "Get Directions",
@@ -203,10 +227,16 @@
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "ctas": [
           {
-            "label": "Reserve for Brunch",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View Brunch Menu",

@@ -6,7 +6,8 @@
 
 interface ImportMetaEnv {
   // ─── Transactional Platform Links ─────────────────────────────────
-  readonly PUBLIC_RESERVATIONS_URL:     string;   // OpenTable / Resy reservation link
+  readonly PUBLIC_RESERVATIONS_URL:     string;   // Primary reservation link (OpenTable)
+  readonly PUBLIC_RESERVATIONS_URL_TOAST: string; // Secondary/legacy reservation link (Toast) — temporary dual-button period
   readonly PUBLIC_ORDER_URL:            string;   // Toast Tab online ordering link
   readonly PUBLIC_GIFT_CARD_URL:        string;   // Gift card purchase portal
 

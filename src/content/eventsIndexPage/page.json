@@ -41,10 +41,16 @@
         "imageAlt": "Events at Louisiana Purchase North Park San Diego",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "Private Events",
@@ -180,10 +186,16 @@
         "image": "__IMAGE__louisiana-purchase-cocktail-bar-north-park-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "Follow on Instagram",

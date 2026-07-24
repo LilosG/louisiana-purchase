@@ -31,10 +31,16 @@
         "imageAlt": "Louisiana Purchase interior — North Park San Diego",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",
@@ -306,10 +312,16 @@
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",
@@ -321,4 +333,3 @@
     }
   ]
 }
-

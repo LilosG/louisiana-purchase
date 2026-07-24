@@ -16,7 +16,10 @@ const page = await getSingleton('menuDinnerPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
 const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(({ url, ...cta }) => ({
   ...cta,
-  href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : url === 'order' ? import.meta.env.PUBLIC_ORDER_URL : cta.href,
+  href: url === 'reservations' ? (venue?.reservationsUrl || import.meta.env.PUBLIC_RESERVATIONS_URL)
+      : url === 'reservations-toast' ? (venue?.reservationsUrlSecondary || import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST)
+      : url === 'order' ? (venue?.orderUrl || import.meta.env.PUBLIC_ORDER_URL)
+      : cta.href,
 }));
 
 const dinnerSchema = {

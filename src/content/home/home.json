@@ -1,7 +1,13 @@
 {
   "menuLinks": {
-    "cocktails": { "label": "Full Cocktail Menu", "href": "/menu/cocktails" },
-    "dinner": { "label": "Full Food Menu", "href": "/menu/dinner" }
+    "cocktails": {
+      "label": "Full Cocktail Menu",
+      "href": "/menu/cocktails"
+    },
+    "dinner": {
+      "label": "Full Food Menu",
+      "href": "/menu/dinner"
+    }
   },
   "privateEventHighlights": [
     "Corporate Dinners & Executive Events",
@@ -32,10 +38,16 @@
         "imageAlt": "Louisiana Purchase exterior at twilight — patio and pergola, North Park, San Diego",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",
@@ -111,8 +123,14 @@
             "variant": "gold"
           },
           {
-            "label": "Reserve a Table →",
+            "label": "Reserve on OpenTable →",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
+            "external": true,
+            "variant": "text"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
             "external": true,
             "variant": "text"
           }
@@ -162,10 +180,16 @@
         ],
         "ctas": [
           {
-            "label": "Reserve for Brunch",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "See the Brunch Menu",
@@ -301,10 +325,16 @@
         "image": "__IMAGE__louisiana-purchase-date-night-north-park-website",
         "ctas": [
           {
-            "label": "Reserve a Table",
+            "label": "Reserve on OpenTable",
             "href": "__ENV__PUBLIC_RESERVATIONS_URL",
             "external": true,
             "variant": "gold"
+          },
+          {
+            "label": "Reserve via Toast",
+            "href": "__ENV__PUBLIC_RESERVATIONS_URL_TOAST",
+            "external": true,
+            "variant": "text"
           },
           {
             "label": "View the Menu",

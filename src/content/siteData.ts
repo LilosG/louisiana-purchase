@@ -38,6 +38,7 @@ export function buildEnv(venue: any, env: Record<string, any>): Record<string, a
   return {
     ...env,
     PUBLIC_RESERVATIONS_URL: venue?.reservationsUrl || env.PUBLIC_RESERVATIONS_URL,
+    PUBLIC_RESERVATIONS_URL_TOAST: venue?.reservationsUrlSecondary || env.PUBLIC_RESERVATIONS_URL_TOAST,
     PUBLIC_ORDER_URL: venue?.orderUrl || env.PUBLIC_ORDER_URL,
   };
 }

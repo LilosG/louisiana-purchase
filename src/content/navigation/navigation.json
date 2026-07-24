@@ -5,6 +5,6 @@
   ],
   "mobileExtraLinks": { "home": { "href": "/", "label": "Home" }, "contact": { "href": "/contact", "label": "Contact" } },
   "phoneFallback": "+18586836828",
-  "ctaLabels": { "order": "Order", "reserve": "Reserve", "reserveTable": "Reserve a Table", "orderOnline": "Order Online" },
+  "ctaLabels": { "order": "Order", "reserve": "Reserve on OpenTable", "reserveTable": "Reserve on OpenTable", "orderOnline": "Order Online" },
   "ariaLabels": { "header": "Site header", "mainNavigation": "Main navigation", "openMenu": "Open navigation menu", "navigationMenu": "Navigation menu", "mobileNavigation": "Mobile navigation", "order": "Order online from Louisiana Purchase", "reserve": "Reserve a table at Louisiana Purchase" }
 }

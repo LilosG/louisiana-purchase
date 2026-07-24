@@ -14,7 +14,12 @@ import { getSingleton } from '../../../content/siteData';
 
 const page = await getSingleton('menuCocktailsPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
-const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(({ url, ...cta }) => ({ ...cta, href: url === 'reservations' ? import.meta.env.PUBLIC_RESERVATIONS_URL : cta.href }));
+const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(({ url, ...cta }) => ({
+  ...cta,
+  href: url === 'reservations' ? (venue?.reservationsUrl || import.meta.env.PUBLIC_RESERVATIONS_URL)
+      : url === 'reservations-toast' ? (venue?.reservationsUrlSecondary || import.meta.env.PUBLIC_RESERVATIONS_URL_TOAST)
+      : cta.href,
+}));
 
 const cocktailsSchema = {
   '@context': 'https://schema.org',
