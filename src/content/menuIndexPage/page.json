@@ -23,18 +23,32 @@
         "subtitle": "Chef Quinnton Austin's elevated Creole culinary program — fire-forward, deeply rooted, and utterly precise.",
         "categories": [
           {
-            "id": "raw-fire",
-            "label": "Raw & Fire - 2",
-            "description": "Oysters and charred preparations from the open kitchen.",
+            "id": "oxtail-kingdom",
+            "label": "Oxtail Kingdom",
+            "description": "We run oxtail in SD.",
             "order": 1,
-            "collection": "rawFire"
+            "collection": "oxtailKingdom"
           },
           {
-            "id": "plates",
-            "label": "Plates",
-            "description": "Elevated Creole plates built for sharing and lingering.",
+            "id": "creole-soul-bangers",
+            "label": "Creole Soul Bangers",
+            "description": "Chef Q's full vision. The heavy hitters.",
             "order": 2,
-            "collection": "plates"
+            "collection": "creoleSoulBangers"
+          },
+          {
+            "id": "gulf",
+            "label": "Gulf",
+            "description": "Gulf shrimp. Whole catfish fillets.",
+            "order": 3,
+            "collection": "gulf"
+          },
+          {
+            "id": "fry-house",
+            "label": "Fry House",
+            "description": "Brined. Breaded. Fried to order.",
+            "order": 4,
+            "collection": "fryHouse"
           }
         ]
       },
@@ -343,5 +357,7 @@
         ]
       }
     }
-  ]
+  ],
+  "lastUpdated": "2026-07-23",
+  "version": "1.6.0"
 }

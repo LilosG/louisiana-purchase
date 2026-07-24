@@ -1,0 +1,14 @@
+{
+  "name": "Oxtail Plate",
+  "id": "oxtail-plate",
+  "description": "8oz braised oxtail · smoked gouda mac · sweet potato cornbread",
+  "image": null,
+  "imageAlt": "8oz braised oxtail with smoked gouda mac and sweet potato cornbread at Louisiana Purchase",
+  "order": 1,
+  "available": true,
+  "featured": true,
+  "dietary": [],
+  "tags": [],
+  "price": 2900,
+  "priceDisplay": "29.00"
+}

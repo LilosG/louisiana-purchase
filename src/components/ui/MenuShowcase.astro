@@ -9,14 +9,16 @@ import { IMAGES } from '../../assets/images';
 import type { MenuData, MenuItem } from '../../types/menu';
 import { getOrderedCollection, getSingleton } from '../../content/siteData';
 
-const [cocktails, rawFire, plates, brunch] = await Promise.all([
+const [cocktails, oxtailKingdom, creoleSoulBangers, gulf, fryHouse, brunch] = await Promise.all([
   getOrderedCollection('cocktailsMenu'),
-  getOrderedCollection('kitchenRawFire'),
-  getOrderedCollection('kitchenPlates'),
+  getOrderedCollection('kitchenOxtailKingdom'),
+  getOrderedCollection('kitchenCreoleSoulBangers'),
+  getOrderedCollection('kitchenGulf'),
+  getOrderedCollection('kitchenFryHouse'),
   getOrderedCollection('brunchMenuItems'),
 ]);
 const menuPage = await getSingleton('menuIndexPage', 'page');
-const itemCollections: Record<string, MenuItem[]> = { cocktails, rawFire, plates, brunch };
+const itemCollections: Record<string, MenuItem[]> = { cocktails, oxtailKingdom, creoleSoulBangers, gulf, fryHouse, brunch };
 const menuSections = Array.isArray(menuPage.menuStructure?.sections) ? menuPage.menuStructure.sections : [];
 const data = {
   ...(menuPage.menuStructure ?? {}),

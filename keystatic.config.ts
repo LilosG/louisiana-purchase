@@ -470,7 +470,7 @@ export default config({
     },
     navigation: {
       Website: ['home', 'about', 'contactPage'],
-      Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'menuBrunchPage', 'cocktailsMenu', 'kitchenRawFire', 'kitchenPlates', 'brunchMenuItems'],
+      Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'menuBrunchPage', 'cocktailsMenu', 'kitchenOxtailKingdom', 'kitchenCreoleSoulBangers', 'kitchenGulf', 'kitchenFryHouse', 'brunchMenuItems'],
       Events: ['eventsIndexPage', 'eventCategoryCards'],
       'Private Events': ['privateEventsIndexPage', 'privateEventsSlugTemplate', 'privateEventTypes', 'privateEventsProcessSteps', 'privateEventsFaqs'],
       'Brunch & Happy Hour': ['brunchPage', 'brunchFaqs', 'happyHourPage', 'happyHourFaqs'],
@@ -500,8 +500,10 @@ export default config({
   },
   collections: {
     cocktailsMenu: menuCollection('Cocktails Menu', 'cocktailsMenu'),
-    kitchenRawFire: menuCollection('Kitchen Raw & Fire', 'kitchenRawFire'),
-    kitchenPlates: menuCollection('Kitchen Plates', 'kitchenPlates'),
+    kitchenOxtailKingdom: menuCollection('Kitchen — Oxtail Kingdom', 'kitchenOxtailKingdom'),
+    kitchenCreoleSoulBangers: menuCollection('Kitchen — Creole Soul Bangers', 'kitchenCreoleSoulBangers'),
+    kitchenGulf: menuCollection('Kitchen — Gulf', 'kitchenGulf'),
+    kitchenFryHouse: menuCollection('Kitchen — Fry House', 'kitchenFryHouse'),
     brunchMenuItems: menuCollection('Brunch Menu Items', 'brunchMenuItems'),
     privateEventTypes: collection({
       label: 'Private Event Types', path: 'src/content/privateEventTypes/*', slugField: 'title', format: { data: 'json' }, columns: ['title', 'eventType', 'order'],
