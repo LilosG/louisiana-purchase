@@ -14,6 +14,7 @@ import img_louisiana_purchase_brunch_patio_setting_north_park_website from './lo
 import img_louisiana_purchase_brunch_table_flatlay_north_park_website from './cms/menuIndexPage/blocks/FourColumnGrid/cards/image/blocks/4/value/cards/2/image.jpg';
 import img_louisiana_purchase_catfish_n_grits_brunch_spread_north_park_website from './louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website.jpg';
 import img_louisiana_purchase_cocktail_bar_north_park_website from './cms/menuIndexPage/blocks/CTABand/image/blocks/9/value/image.jpg';
+import img_louisiana_purchase_cocktails_trio_patio_north_park_website from './louisiana-purchase-cocktails-trio-patio-north-park-website.jpg';
 import img_louisiana_purchase_craft_cocktails_san_diego_website from './louisiana-purchase-craft-cocktails-san-diego-website.jpg';
 import img_louisiana_purchase_date_night_north_park_website from './louisiana-purchase-date-night-north-park-website.jpg';
 import img_louisiana_purchase_dining_room_bar_north_park_website from './louisiana-purchase-dining-room-bar-north-park-website.jpg';
@@ -43,6 +44,7 @@ const LEGACY_IMAGES = {
   'louisiana-purchase-brunch-table-flatlay-north-park-website': img_louisiana_purchase_brunch_table_flatlay_north_park_website,
   'louisiana-purchase-catfish-n-grits-brunch-spread-north-park-website': img_louisiana_purchase_catfish_n_grits_brunch_spread_north_park_website,
   'louisiana-purchase-cocktail-bar-north-park-website': img_louisiana_purchase_cocktail_bar_north_park_website,
+  'louisiana-purchase-cocktails-trio-patio-north-park-website': img_louisiana_purchase_cocktails_trio_patio_north_park_website,
   'louisiana-purchase-craft-cocktails-san-diego-website': img_louisiana_purchase_craft_cocktails_san_diego_website,
   'louisiana-purchase-date-night-north-park-website': img_louisiana_purchase_date_night_north_park_website,
   'louisiana-purchase-dining-room-bar-north-park-website': img_louisiana_purchase_dining_room_bar_north_park_website,
