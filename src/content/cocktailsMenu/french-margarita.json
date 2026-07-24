@@ -2,6 +2,7 @@
   "name": "French Margarita",
   "id": "french-margarita",
   "description": "Martel cognac • curaçao - lemon - lime • agave",
+  "image": "cms/cocktailsMenu/image/french-margarita/image.jpg",
   "imageAlt": "Martel cognac • curaçao - lemon - lime • agave  — Louisiana Purchase signature cocktail with Pop Rocks garnish",
   "order": 2,
   "available": true,

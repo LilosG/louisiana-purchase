@@ -2,6 +2,7 @@
   "name": "7PM Friday",
   "id": "7-pm-friday",
   "description": "Martel cognac • strawberry - lemon - mint • soda",
+  "image": "cms/cocktailsMenu/image/7-pm-friday/image.jpg",
   "imageAlt": "Praline Old Fashioned — signature cocktail at Louisiana Purchase North Park",
   "order": 3,
   "available": true,

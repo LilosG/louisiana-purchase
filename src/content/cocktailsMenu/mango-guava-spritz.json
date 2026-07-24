@@ -2,6 +2,7 @@
   "name": "Mango Guava Spritz",
   "id": "mango-guava-spritz",
   "description": "mango absolut •orange vodka •guava nectar •lemon •orange biters •soda •cava",
+  "image": "cms/cocktailsMenu/image/mango-guava-spritz/image.jpg",
   "imageAlt": "Voo Doo Carré — signature cocktail at Louisiana Purchase North Park",
   "order": 5,
   "available": true,
