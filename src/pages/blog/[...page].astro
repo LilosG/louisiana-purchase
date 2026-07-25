@@ -1,0 +1,103 @@
+---
+// src/pages/blog/[...page].astro
+// Louisiana Purchase — Blog Index (paginated)
+// Astro's rest-param pagination convention: page 1 renders at /blog,
+// subsequent pages render at /blog/2, /blog/3, etc.
+
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import { IMAGES } from '../../assets/images';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const allPosts = await getCollection('blog');
+  const sorted = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(sorted, { pageSize: 9 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+
+const CANONICAL = page.currentPage === 1 ? '/blog' : `/blog/${page.currentPage}`;
+---
+
+<Layout
+  title="Blog"
+  description="Dining guides, cocktail features, and North Park stories from Louisiana Purchase — a French Quarter-rooted restaurant and bar in North Park, San Diego."
+  canonical={CANONICAL}
+  breadcrumbs={[
+    { name: 'Home', url: '/', position: 1 },
+    { name: 'Blog', url: '/blog', position: 2 },
+  ]}
+>
+
+  <section aria-labelledby="blog-index-headline" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        id="blog-index-headline"
+        eyebrow="Stories &amp; Guides"
+        title="From the"
+        titleItalic="French Quarter"
+        subtitle="Dining guides, cocktail features, and North Park stories from Louisiana Purchase."
+      />
+
+      {page.data.length === 0 ? (
+        <p class="text-center font-sans font-light text-smoke py-12">
+          New posts are on the way — check back soon.
+        </p>
+      ) : (
+        <ul role="list" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-14">
+          {page.data.map((post) => {
+            const image = post.data.image ? IMAGES[post.data.image as keyof typeof IMAGES] : undefined;
+            return (
+              <li class="reveal">
+                <a href={`/blog/${post.id}`} class="group block h-full flex flex-col">
+                  {image && (
+                    <div class="aspect-[4/3] overflow-hidden mb-5">
+                      <img
+                        src={image.src}
+                        width={image.width}
+                        height={image.height}
+                        alt={post.data.imageAlt || post.data.title}
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
+                      />
+                    </div>
+                  )}
+                  <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-2">
+                    {post.data.category} &middot; {post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                  <h2 class="font-serif font-light text-parchment leading-snug text-xl group-hover:text-gold transition-colors duration-[280ms] mb-2">
+                    {post.data.title}
+                  </h2>
+                  <p class="font-sans font-light text-smoke leading-relaxed text-sm flex-1">
+                    {post.data.description}
+                  </p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+      {(page.url.prev || page.url.next) && (
+        <nav aria-label="Blog pagination" class="flex justify-center gap-4 mt-16">
+          {page.url.prev && (
+            <a href={page.url.prev} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
+              ← Newer Posts
+            </a>
+          )}
+          {page.url.next && (
+            <a href={page.url.next} class="inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm px-8 py-4 border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 transition-all duration-[280ms]">
+              Older Posts →
+            </a>
+          )}
+        </nav>
+      )}
+
+    </div>
+  </section>
+
+</Layout>

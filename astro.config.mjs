@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
 import vercel from '@astrojs/vercel';
+import mdx from '@astrojs/mdx';
 
 import venueSettings from './src/content/venueSettings/settings.json' with { type: 'json' };
 
@@ -13,7 +14,7 @@ import venueSettings from './src/content/venueSettings/settings.json' with { typ
 export default defineConfig({
   site: venueSettings.domain,
   trailingSlash: 'never',
-  integrations: [sitemap(), keystatic(), react()],
+  integrations: [sitemap(), keystatic(), react(), mdx()],
   adapter: vercel(),
   vite: {
     plugins: [tailwindcss()]

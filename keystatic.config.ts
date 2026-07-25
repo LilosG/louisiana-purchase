@@ -475,6 +475,7 @@ export default config({
       'Private Events': ['privateEventsIndexPage', 'privateEventsSlugTemplate', 'privateEventTypes', 'privateEventsProcessSteps', 'privateEventsFaqs'],
       'Brunch & Happy Hour': ['brunchPage', 'brunchFaqs', 'happyHourPage', 'happyHourFaqs'],
       'The Space': ['theSpacePage', 'spaceGalleryCards'],
+      Blog: ['blog'],
       'Site Settings': ['venueSettings', 'eventsConfig', 'navigation', 'footer', 'localSeo'],
     },
   },
@@ -499,6 +500,54 @@ export default config({
     theSpacePage: jsonSingleton('The Space', 'theSpacePage', 'page', theSpacePageData),
   },
   collections: {
+    blog: collection({
+      label: 'Blog Posts',
+      path: 'src/content/blog/*',
+      slugField: 'title',
+      format: { contentField: 'content' },
+      columns: ['title', 'date', 'category'],
+      schema: {
+        title: fields.slug({ name: { label: 'Title', description: 'Editorial title of the post. Also becomes the page URL — change the URL only before the post is published.', validation: { isRequired: true } } }),
+        seoTitle: optionalText('SEO Title', 'Overrides the browser tab title and search result title. Aim for about 60 characters. Leave blank to use the Title above.'),
+        description: requiredText('Meta Description', 'Shown in search results and social shares. Aim for 150–160 characters.', true),
+        date: fields.date({ label: 'Publish Date', validation: { isRequired: true } }),
+        updatedDate: fields.date({ label: 'Last Updated (optional)', description: 'Only set this if the post was meaningfully revised after publishing.' }),
+        category: fields.select({
+          label: 'Category',
+          description: 'Which section of the blog this post belongs to.',
+          options: [
+            { label: 'Events', value: 'Events' },
+            { label: 'Private Events', value: 'Private Events' },
+            { label: 'North Park Guide', value: 'North Park Guide' },
+            { label: 'Cocktails', value: 'Cocktails' },
+            { label: 'Brunch', value: 'Brunch' },
+            { label: 'Dinner', value: 'Dinner' },
+          ],
+          defaultValue: 'North Park Guide',
+          validation: { isRequired: true },
+        }),
+        image: optionalImageField('blog/image', 'Hero Image', 'Optional photo shown at the top of the post, on the blog index, and in social link previews.'),
+        imageAlt: optionalText('Image Description for Accessibility', 'Describe what is visible in the photo for screen readers and search engines.'),
+        tags: fields.array(requiredText('Tag', 'Enter one short tag.'), {
+          label: 'Tags', description: 'Optional tags for internal organization and future filtering.', itemLabel: (props) => props.value || 'Tag',
+        }),
+        faqs: fields.array(
+          fields.object({
+            q: requiredText('Question', 'A question this post directly answers.'),
+            a: requiredText('Answer', 'The direct answer to the question, in plain language.', true),
+          }),
+          {
+            label: 'FAQ Section (optional)',
+            description: 'If you add questions here, they render as an FAQ section at the end of the post and generate FAQ search markup (FAQPage schema) for Google and AI assistants. Leave empty to skip.',
+            itemLabel: (props) => props.fields.q.value || 'Question',
+          },
+        ),
+        content: fields.mdx({
+          label: 'Body Content',
+          description: 'The main article body. Supports headings (use ## for section headings), bold/italic, bullet and numbered lists, and links — including links to other pages on this site, e.g. [see the menu](/menu).',
+        }),
+      },
+    }),
     cocktailsMenu: menuCollection('Cocktails Menu', 'cocktailsMenu'),
     kitchenOxtailKingdom: menuCollection('Kitchen — Oxtail Kingdom', 'kitchenOxtailKingdom'),
     kitchenCreoleSoulBangers: menuCollection('Kitchen — Creole Soul Bangers', 'kitchenCreoleSoulBangers'),

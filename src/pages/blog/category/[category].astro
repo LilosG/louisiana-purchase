@@ -1,0 +1,106 @@
+---
+// src/pages/blog/category/[category].astro
+// Louisiana Purchase — Blog Posts Filtered by Category
+
+import { getCollection } from 'astro:content';
+import Layout from '../../../layouts/Layout.astro';
+import SectionHeader from '../../../components/ui/SectionHeader.astro';
+import { IMAGES } from '../../../assets/images';
+import { BLOG_CATEGORIES } from '../../../content.config';
+
+export async function getStaticPaths() {
+  return BLOG_CATEGORIES.map((category) => ({
+    params: { category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') },
+    props: { category },
+  }));
+}
+
+function slugifyCategory(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+interface Props {
+  category: (typeof BLOG_CATEGORIES)[number];
+}
+
+const { category } = Astro.props as Props;
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter((post) => post.data.category === category)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categorySlug = slugifyCategory(category);
+---
+
+<Layout
+  title={`${category} — Blog`}
+  description={`${category} guides and stories from Louisiana Purchase in North Park, San Diego.`}
+  canonical={`/blog/category/${categorySlug}`}
+  breadcrumbs={[
+    { name: 'Home', url: '/', position: 1 },
+    { name: 'Blog', url: '/blog', position: 2 },
+    { name: category, url: `/blog/category/${categorySlug}`, position: 3 },
+  ]}
+>
+
+  <section aria-labelledby="blog-category-headline" class="bg-obsidian py-20 md:py-28">
+    <div class="max-w-[1280px] mx-auto px-6">
+
+      <SectionHeader
+        id="blog-category-headline"
+        eyebrow="Blog"
+        title={category}
+        subtitle={`Guides and stories tagged ${category}.`}
+      />
+
+      <p class="text-center mb-10">
+        <a href="/blog" class="font-sans text-[0.6875rem] tracking-[0.16em] uppercase text-gold hover:text-gold-200 transition-colors duration-[280ms]">
+          ← All Posts
+        </a>
+      </p>
+
+      {posts.length === 0 ? (
+        <p class="text-center font-sans font-light text-smoke py-12">
+          No posts in this category yet — check back soon.
+        </p>
+      ) : (
+        <ul role="list" class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
+          {posts.map((post) => {
+            const image = post.data.image ? IMAGES[post.data.image as keyof typeof IMAGES] : undefined;
+            return (
+              <li class="reveal">
+                <a href={`/blog/${post.id}`} class="group block h-full flex flex-col">
+                  {image && (
+                    <div class="aspect-[4/3] overflow-hidden mb-5">
+                      <img
+                        src={image.src}
+                        width={image.width}
+                        height={image.height}
+                        alt={post.data.imageAlt || post.data.title}
+                        loading="lazy"
+                        decoding="async"
+                        class="w-full h-full object-cover object-center transition-transform duration-[700ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] group-hover:scale-[1.05]"
+                      />
+                    </div>
+                  )}
+                  <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-2">
+                    {post.data.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </p>
+                  <h2 class="font-serif font-light text-parchment leading-snug text-xl group-hover:text-gold transition-colors duration-[280ms] mb-2">
+                    {post.data.title}
+                  </h2>
+                  <p class="font-sans font-light text-smoke leading-relaxed text-sm flex-1">
+                    {post.data.description}
+                  </p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+
+    </div>
+  </section>
+
+</Layout>
