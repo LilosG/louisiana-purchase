@@ -16,7 +16,6 @@ const VENUE_MAPS_URL = venue.mapsUrl;
 const VENUE_SOCIAL = venue.social;
 const DISPLAY_HOURS = Array.isArray(venue.displayHours) ? venue.displayHours : [];
 const BRUNCH_HOURS = venue.brunchHours;
-const HAPPY_HOUR = venue.happyHour;
 const PRIVATE_EVENTS_FORM_ANCHOR = eventsConfig.privateEventsFormAnchor;
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const [reservations = {}, privateEvents = {}, orderOnline = {}] = Array.isArray(pageContent.contactMethods) ? pageContent.contactMethods : [];
@@ -119,8 +118,7 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet}
             ))}
           </dl>
           <p class="font-sans text-[0.75rem] text-gold/70 tracking-[0.04em]">
-            {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}<br />
-            {HAPPY_HOUR.label}: {HAPPY_HOUR.days} {HAPPY_HOUR.window}
+            {BRUNCH_HOURS.label}: {BRUNCH_HOURS.days} {BRUNCH_HOURS.window}
           </p>
         </div>
 
