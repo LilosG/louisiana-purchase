@@ -2,83 +2,103 @@
 const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 ---
 {GA_ID && (
-  <>
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
-    <script is:inline define:vars={{ GA_ID }}>
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
-      window.gtag('js', new Date());
-      window.gtag('config', GA_ID);
-    </script>
-    <script is:inline>
-      // Tracks clicks on embedded reservation/order/gift-card links,
-      // since GA4 can't see completions inside third-party domains
-      // (OpenTable, Toast, Resy). This only fires an event on click
-      // (intent), not confirmation.
-      //
-      // Reservations are mid-migration from Toast to OpenTable: both
-      // buttons are live site-wide so the client can compare real click
-      // volume before removing the Toast link entirely. reservation_system
-      // distinguishes which one was clicked.
-      document.addEventListener('click', function (e) {
-        const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"]');
-        if (!link) return;
+  <script is:inline define:vars={{ GA_ID }}>
+    (function () {
+      var STORAGE_KEY = 'lilos-consent-v1';
+      var MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
 
-        let eventName = 'external_link_click';
-        let reservationSystem = null;
+      function readStoredConsent() {
         try {
-          const href = link.href.toLowerCase();
-          if (href.includes('opentable.com')) { eventName = 'reservation_click'; reservationSystem = 'opentable'; }
-          else if (href.includes('toast.app')) { eventName = 'reservation_click'; reservationSystem = 'toast_legacy'; }
-          else if (href.includes('resy.com')) { eventName = 'reservation_click'; reservationSystem = 'resy'; }
-          else if (href.includes('giftcard')) eventName = 'gift_card_click';
-          else if (href.includes('toasttab.com')) eventName = 'order_click';
-          else if (href.includes('catering')) eventName = 'catering_click';
-        } catch (err) {}
-
-        if (typeof gtag === 'function') {
-          gtag('event', eventName, {
-            link_url: link.href,
-            page_path: window.location.pathname,
-            ...(reservationSystem ? { reservation_system: reservationSystem } : {}),
-          });
-        }
-      }, { passive: true });
-    </script>
-    <script is:inline>
-      // Private event inquiries route through an embedded Toast lead-form
-      // iframe, not a link-out platform — GA4 has no visibility into the
-      // iframe's contents (cross-origin, no postMessage API from Toast),
-      // so true form-submission tracking isn't possible. These two events
-      // bracket the funnel instead: click intent, and reach (the form
-      // actually scrolled into view).
-      document.addEventListener('click', function (e) {
-        const link = e.target.closest('a[href$="#event-inquiry"]');
-        if (!link) return;
-        if (typeof gtag === 'function') {
-          gtag('event', 'private_events_cta_click', {
-            link_url: link.href,
-            page_path: window.location.pathname,
-          });
-        }
-      }, { passive: true });
-
-      if ('IntersectionObserver' in window) {
-        const forms = document.querySelectorAll('[data-toast-event-form]');
-        if (forms.length) {
-          const observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting && typeof gtag === 'function') {
-                gtag('event', 'private_events_form_viewed', {
-                  page_path: window.location.pathname,
-                });
-                observer.unobserve(entry.target);
-              }
-            });
-          }, { threshold: 0.25 });
-          forms.forEach(function (form) { observer.observe(form); });
+          var raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return null;
+          var parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed.ts !== 'number') return null;
+          if (Date.now() - parsed.ts > MAX_AGE_MS) return null;
+          return parsed;
+        } catch (e) {
+          return null;
         }
       }
-    </script>
-  </>
+
+      function initAnalytics() {
+        if (window.__lilosGA4Loaded) return;
+        window.__lilosGA4Loaded = true;
+
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
+        document.head.appendChild(s);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID);
+
+        // Reservation/order click-tracking across the Toast->OpenTable
+        // migration — unchanged from prior implementation.
+        document.addEventListener('click', function (e) {
+          const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"]');
+          if (!link) return;
+
+          let eventName = 'external_link_click';
+          let reservationSystem = null;
+          try {
+            const href = link.href.toLowerCase();
+            if (href.includes('opentable.com')) { eventName = 'reservation_click'; reservationSystem = 'opentable'; }
+            else if (href.includes('toast.app')) { eventName = 'reservation_click'; reservationSystem = 'toast_legacy'; }
+            else if (href.includes('resy.com')) { eventName = 'reservation_click'; reservationSystem = 'resy'; }
+            else if (href.includes('giftcard')) eventName = 'gift_card_click';
+            else if (href.includes('toasttab.com')) eventName = 'order_click';
+            else if (href.includes('catering')) eventName = 'catering_click';
+          } catch (err) {}
+
+          if (typeof gtag === 'function') {
+            gtag('event', eventName, {
+              link_url: link.href,
+              page_path: window.location.pathname,
+              ...(reservationSystem ? { reservation_system: reservationSystem } : {}),
+            });
+          }
+        }, { passive: true });
+
+        // Private event inquiry funnel tracking — unchanged from prior
+        // implementation. Click intent + form-in-view (form itself is a
+        // cross-origin Toast iframe GA4 can't see into directly).
+        document.addEventListener('click', function (e) {
+          const link = e.target.closest('a[href$="#event-inquiry"]');
+          if (!link) return;
+          if (typeof gtag === 'function') {
+            gtag('event', 'private_events_cta_click', {
+              link_url: link.href,
+              page_path: window.location.pathname,
+            });
+          }
+        }, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+          const forms = document.querySelectorAll('[data-toast-event-form]');
+          if (forms.length) {
+            const observer = new IntersectionObserver(function (entries) {
+              entries.forEach(function (entry) {
+                if (entry.isIntersecting && typeof gtag === 'function') {
+                  gtag('event', 'private_events_form_viewed', {
+                    page_path: window.location.pathname,
+                  });
+                  observer.unobserve(entry.target);
+                }
+              });
+            }, { threshold: 0.25 });
+            forms.forEach(function (form) { observer.observe(form); });
+          }
+        }
+      }
+
+      var stored = readStoredConsent();
+      if (stored && stored.analytics) {
+        initAnalytics();
+      }
+
+      window.addEventListener('lilos-consent-accepted', initAnalytics);
+    })();
+  </script>
 )}

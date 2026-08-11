@@ -6,6 +6,7 @@ import SiteNav from '../components/layout/SiteNav.astro';
 import SiteFooter from '../components/layout/SiteFooter.astro';
 import LocalSEO from '../components/core/LocalSEO.astro';
 import Analytics from '../components/layout/Analytics.astro';
+import ConsentBanner from '../components/layout/ConsentBanner.astro';
 import type { PageSeoProps } from '../types/seo';
 
 import '../styles/global.css';
@@ -60,6 +61,8 @@ const { transparentNav = true, ...seoProps } = Astro.props;
     </main>
 
     <SiteFooter />
+
+    <ConsentBanner siteName="Louisiana Purchase" />
 
   </body>
 </html>
