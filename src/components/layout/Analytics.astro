@@ -4,46 +4,72 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 {GA_ID && (
   <script is:inline define:vars={{ GA_ID }}>
     (function () {
-      var STORAGE_KEY = 'lilos-consent-v1';
-      var MAX_AGE_MS = 365 * 24 * 60 * 60 * 1000;
+      var NEW_KEY = 'lilos-privacy-v1';
+      var OLD_KEY = 'lilos-consent-v1';
 
-      function readStoredConsent() {
+      function readPrivacyRecord() {
         try {
-          var raw = localStorage.getItem(STORAGE_KEY);
+          var raw = localStorage.getItem(NEW_KEY);
           if (!raw) return null;
           var parsed = JSON.parse(raw);
           if (!parsed || typeof parsed.ts !== 'number') return null;
-          if (Date.now() - parsed.ts > MAX_AGE_MS) return null;
           return parsed;
         } catch (e) {
           return null;
         }
       }
 
+      function writePrivacyRecord(optOut) {
+        try {
+          localStorage.setItem(NEW_KEY, JSON.stringify({ optOut: !!optOut, ts: Date.now() }));
+        } catch (e) {}
+      }
+
+      function migrate() {
+        if (localStorage.getItem(NEW_KEY)) return;
+        try {
+          var raw = localStorage.getItem(OLD_KEY);
+          if (!raw) return;
+          var old = JSON.parse(raw);
+          if (old && old.analytics === false) {
+            localStorage.setItem(NEW_KEY, JSON.stringify({ optOut: true, ts: old.ts || Date.now() }));
+          }
+        } catch (e) {}
+      }
+
       function initAnalytics() {
         if (window.__lilosGA4Loaded) return;
         window.__lilosGA4Loaded = true;
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+
+        window.gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'granted'
+        });
+
+        window.gtag('js', new Date());
+        window.gtag('config', GA_ID, {
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
 
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA_ID);
         document.head.appendChild(s);
 
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { window.dataLayer.push(arguments); };
-        window.gtag('js', new Date());
-        window.gtag('config', GA_ID);
-
-        // Reservation/order click-tracking across the Toast->OpenTable
-        // migration — unchanged from prior implementation.
         document.addEventListener('click', function (e) {
-          const link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"]');
+          var link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"]');
           if (!link) return;
 
-          let eventName = 'external_link_click';
-          let reservationSystem = null;
+          var eventName = 'external_link_click';
+          var reservationSystem = null;
           try {
-            const href = link.href.toLowerCase();
+            var href = link.href.toLowerCase();
             if (href.includes('opentable.com')) { eventName = 'reservation_click'; reservationSystem = 'opentable'; }
             else if (href.includes('toast.app')) { eventName = 'reservation_click'; reservationSystem = 'toast_legacy'; }
             else if (href.includes('resy.com')) { eventName = 'reservation_click'; reservationSystem = 'resy'; }
@@ -61,11 +87,8 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
           }
         }, { passive: true });
 
-        // Private event inquiry funnel tracking — unchanged from prior
-        // implementation. Click intent + form-in-view (form itself is a
-        // cross-origin Toast iframe GA4 can't see into directly).
         document.addEventListener('click', function (e) {
-          const link = e.target.closest('a[href$="#event-inquiry"]');
+          var link = e.target.closest('a[href$="#event-inquiry"]');
           if (!link) return;
           if (typeof gtag === 'function') {
             gtag('event', 'private_events_cta_click', {
@@ -76,9 +99,9 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         }, { passive: true });
 
         if ('IntersectionObserver' in window) {
-          const forms = document.querySelectorAll('[data-toast-event-form]');
+          var forms = document.querySelectorAll('[data-toast-event-form]');
           if (forms.length) {
-            const observer = new IntersectionObserver(function (entries) {
+            var observer = new IntersectionObserver(function (entries) {
               entries.forEach(function (entry) {
                 if (entry.isIntersecting && typeof gtag === 'function') {
                   gtag('event', 'private_events_form_viewed', {
@@ -93,12 +116,28 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         }
       }
 
-      var stored = readStoredConsent();
-      if (stored && stored.analytics) {
-        initAnalytics();
-      }
+      window.lilosPrivacy = {
+        isOptedOut: function () {
+          var rec = readPrivacyRecord();
+          return !!(rec && rec.optOut);
+        },
+        optOut: function () {
+          writePrivacyRecord(true);
+          window['ga-disable-' + GA_ID] = true;
+        },
+        optIn: function () {
+          writePrivacyRecord(false);
+        },
+      };
 
-      window.addEventListener('lilos-consent-accepted', initAnalytics);
+      migrate();
+
+      if (navigator.globalPrivacyControl === true) return;
+
+      var record = readPrivacyRecord();
+      if (record && record.optOut) return;
+
+      initAnalytics();
     })();
   </script>
 )}

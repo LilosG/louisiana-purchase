@@ -9,6 +9,17 @@
 
 @import "tailwindcss";
 
+/* Self-hosted fonts (replaces Google Fonts CDN) */
+@import "@fontsource-variable/cormorant-garamond/wght.css";
+@import "@fontsource-variable/cormorant-garamond/wght-italic.css";
+@import "@fontsource/cormorant-sc/300.css";
+@import "@fontsource/cormorant-sc/400.css";
+@import "@fontsource/cormorant-sc/500.css";
+@import "@fontsource-variable/dm-sans/wght.css";
+@import "@fontsource-variable/dm-sans/wght-italic.css";
+@import "@fontsource/dm-mono/300.css";
+@import "@fontsource/dm-mono/400.css";
+
 /* ─── Brand Token System (@theme) ────────────────────────────────────────── */
 /* Tailwind v4: all custom tokens defined here become utility classes.        */
 
@@ -65,9 +76,9 @@
   --color-smoke-dark:        #7A746F;
 
   /* ── Typography ─────────────────────────────────────────────────────── */
-  --font-serif:              'Cormorant Garamond', Cormorant, Didot, Georgia, serif;
-  --font-display:            'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
-  --font-sans:               'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif:              'Cormorant Garamond Variable', Cormorant, Didot, Georgia, serif;
+  --font-display:            'Cormorant SC', 'Cormorant Garamond Variable', Georgia, serif;
+  --font-sans:               'DM Sans Variable', 'Helvetica Neue', Arial, sans-serif;
   --font-mono:               'DM Mono', 'JetBrains Mono', Menlo, monospace;
 
   --text-2xs:                0.625rem;
@@ -212,9 +223,9 @@
     --color-smoke:       #9C9490;
     --color-velvet:      #1C1419;
 
-    --font-serif:        'Cormorant Garamond', Cormorant, Didot, Georgia, serif;
-    --font-display:      'Cormorant SC', 'Cormorant Garamond', Georgia, serif;
-    --font-sans:         'DM Sans', 'Helvetica Neue', Arial, sans-serif;
+    --font-serif:        'Cormorant Garamond Variable', Cormorant, Didot, Georgia, serif;
+    --font-display:      'Cormorant SC', 'Cormorant Garamond Variable', Georgia, serif;
+    --font-sans:         'DM Sans Variable', 'Helvetica Neue', Arial, sans-serif;
     --font-mono:         'DM Mono', 'JetBrains Mono', Menlo, monospace;
 
     --ease-luxury:       cubic-bezier(0.25, 0.1, 0.25, 1.0);

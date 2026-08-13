@@ -1,58 +1,20 @@
 ---
-// src/components/ConsentBanner.astro
-//
-// LILOs Growth shared consent banner. Blocks GA4 until the visitor accepts,
-// honors Global Privacy Control (GPC) automatically, and stores the choice
-// in localStorage. Zero dependencies, no third-party service, no recurring cost.
-//
-// USAGE — drop into BaseLayout.astro, inside <body>, once per site:
-//
-//   ---
-//   import ConsentBanner from '../components/ConsentBanner.astro';
-//   ---
-//   <ConsentBanner ga4Id="G-XXXXXXXXXX" siteName="Wheyland Electric" />
-//
-// The component owns GA4 loading entirely. Do NOT also paste Google's
-// gtag.js snippet elsewhere in the site — this component is the only
-// place GA4 should be initialized.
-
 interface Props {
-  /**
-   * GA4 Measurement ID, e.g. "G-ABC1234567" — OPTIONAL.
-   * Only pass this if the site has no separate Analytics.astro component
-   * of its own. If omitted, this banner does NOT load GA4 itself — it only
-   * manages consent state and dispatches a 'lilos-consent-accepted' event
-   * on window, which the site's own Analytics.astro should listen for
-   * before initializing anything. This is the GPH pattern: each site's
-   * Analytics.astro already owns its own click-tracking logic, so consent
-   * management and GA4 loading are kept separate rather than duplicated.
-   */
-  ga4Id?: string;
-  /** Used in the banner copy, e.g. "Wheyland Electric" */
   siteName: string;
-  /** Path to the privacy policy page */
-  privacyPolicyUrl?: string;
-  /** How many days a stored consent choice is valid before re-asking */
-  consentDays?: number;
 }
-
-const {
-  ga4Id = '',
-  siteName,
-  privacyPolicyUrl = '/privacy',
-  consentDays = 365,
-} = Astro.props;
+const { siteName } = Astro.props;
 ---
 
-<div id="lilos-consent-banner" class="lilos-consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+<div id="lilos-consent-banner" class="lilos-consent-banner" role="region" aria-label="Privacy notice" hidden>
   <div class="lilos-consent-inner">
     <p class="lilos-consent-text">
-      {siteName} uses Google Analytics to understand site traffic. We only load it if you agree.
-      No data is shared with advertisers. See our <a href={privacyPolicyUrl}>Privacy Policy</a> for details.
+      We use Google Analytics to measure site traffic. We do not sell or share your personal information.
+      You can opt out at any time.
     </p>
     <div class="lilos-consent-actions">
-      <button type="button" id="lilos-consent-reject" class="lilos-btn lilos-btn-secondary">Reject</button>
-      <button type="button" id="lilos-consent-accept" class="lilos-btn lilos-btn-primary">Accept</button>
+      <button type="button" id="lilos-consent-optout" class="lilos-btn lilos-btn-secondary">Opt out</button>
+      <a href="/privacy" class="lilos-btn lilos-btn-secondary">Privacy Policy</a>
+      <button type="button" id="lilos-consent-gotit" class="lilos-btn lilos-btn-primary">Got it</button>
     </div>
   </div>
 </div>
@@ -95,16 +57,11 @@ const {
     color: var(--consent-text, #f4f4f5);
   }
 
-  .lilos-consent-text a {
-    color: var(--consent-accent, #7dd3fc);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
   .lilos-consent-actions {
     display: flex;
     gap: 0.625rem;
     flex-shrink: 0;
+    align-items: center;
   }
 
   .lilos-btn {
@@ -115,6 +72,9 @@ const {
     border: 1px solid transparent;
     cursor: pointer;
     transition: opacity 0.15s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
   }
 
   .lilos-btn:hover {
@@ -148,66 +108,17 @@ const {
   }
 </style>
 
-<script is:inline define:vars={{ ga4Id, consentDays }}>
+<script is:inline>
   (function () {
-    var STORAGE_KEY = 'lilos-consent-v1';
-    var maxAgeMs = consentDays * 24 * 60 * 60 * 1000;
+    var KEY = 'lilos-privacy-v1';
 
-    function readStoredConsent() {
+    function readRecord() {
       try {
-        var raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return null;
-        var parsed = JSON.parse(raw);
-        if (!parsed || typeof parsed.ts !== 'number') return null;
-        if (Date.now() - parsed.ts > maxAgeMs) return null; // expired, re-ask
-        return parsed;
+        var raw = localStorage.getItem(KEY);
+        return raw ? JSON.parse(raw) : null;
       } catch (e) {
         return null;
       }
-    }
-
-    function storeConsent(analytics) {
-      var record = { analytics: !!analytics, ts: Date.now() };
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(record));
-      } catch (e) {
-        /* localStorage unavailable — consent still applied for this session */
-      }
-      return record;
-    }
-
-    function loadGA4Directly() {
-      // Only used when this banner is the sole owner of GA4 (no site-specific
-      // Analytics.astro exists). GPH sites don't use this path — see applyConsent.
-      if (!ga4Id || window.__lilosGA4Loaded) return;
-      window.__lilosGA4Loaded = true;
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        window.dataLayer.push(arguments);
-      }
-      window.gtag = gtag;
-      gtag('js', new Date());
-      gtag('config', ga4Id);
-
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(ga4Id);
-      document.head.appendChild(script);
-    }
-
-    function applyConsent(analytics) {
-      if (!analytics) return;
-      // Always dispatch — a site's own Analytics.astro listens for this
-      // and owns its own GA4 init + click-tracking (the GPH pattern).
-      window.dispatchEvent(new Event('lilos-consent-accepted'));
-      // Fallback for sites with no separate Analytics.astro of their own.
-      loadGA4Directly();
-    }
-
-    function showBanner() {
-      var el = document.getElementById('lilos-consent-banner');
-      if (el) el.hidden = false;
     }
 
     function hideBanner() {
@@ -215,62 +126,31 @@ const {
       if (el) el.hidden = true;
     }
 
-    function hasGPC() {
-      return (
-        navigator.globalPrivacyControl === true ||
-        (window.doNotTrack === '1') ||
-        (navigator.doNotTrack === '1')
-      );
-    }
-
     function init() {
-      var stored = readStoredConsent();
+      if (navigator.globalPrivacyControl === true) return;
+      if (readRecord() !== null) return;
 
-      if (stored) {
-        applyConsent(stored.analytics);
-        return; // choice already made and still valid — no banner
-      }
+      var el = document.getElementById('lilos-consent-banner');
+      if (el) el.hidden = false;
 
-      if (hasGPC()) {
-        // Honor the signal automatically: store a denial, no banner needed.
-        storeConsent(false);
-        return;
-      }
-
-      showBanner();
-
-      var acceptBtn = document.getElementById('lilos-consent-accept');
-      var rejectBtn = document.getElementById('lilos-consent-reject');
-
-      if (acceptBtn) {
-        acceptBtn.addEventListener('click', function () {
-          storeConsent(true);
-          applyConsent(true);
+      var gotit = document.getElementById('lilos-consent-gotit');
+      if (gotit) {
+        gotit.addEventListener('click', function () {
+          try { localStorage.setItem(KEY, JSON.stringify({ optOut: false, ts: Date.now() })); } catch (e) {}
           hideBanner();
         });
       }
 
-      if (rejectBtn) {
-        rejectBtn.addEventListener('click', function () {
-          storeConsent(false);
-          applyConsent(false);
+      var optout = document.getElementById('lilos-consent-optout');
+      if (optout) {
+        optout.addEventListener('click', function () {
+          if (window.lilosPrivacy && typeof window.lilosPrivacy.optOut === 'function') {
+            window.lilosPrivacy.optOut();
+          }
           hideBanner();
         });
       }
     }
-
-    // Expose a small runtime API so a footer "Privacy Choices" link
-    // can let visitors change their mind later.
-    window.lilosConsent = {
-      get: readStoredConsent,
-      reset: function () {
-        try {
-          localStorage.removeItem(STORAGE_KEY);
-        } catch (e) {}
-        window.__lilosGA4Loaded = false;
-        showBanner();
-      },
-    };
 
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', init);

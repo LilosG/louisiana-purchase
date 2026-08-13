@@ -1,0 +1,318 @@
+---
+// src/pages/privacy.astro
+// Louisiana Purchase — Privacy Policy
+
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Privacy Policy | Louisiana Purchase"
+  description="How Louisiana Purchase collects, uses, and protects your information."
+  transparentNav={false}
+>
+  <div class="privacy-page">
+    <div class="privacy-page__inner">
+
+      <header class="privacy-page__header">
+        <p class="privacy-page__eyebrow">Louisiana Purchase</p>
+        <h1 class="privacy-page__title">Privacy Policy</h1>
+        <p class="privacy-page__meta">Effective date: June 1, 2025 &nbsp;&middot;&nbsp; Last updated: June 1, 2025</p>
+      </header>
+
+      <div class="privacy-page__body">
+
+        <section>
+          <h2>Notice at Collection</h2>
+          <p>
+            When you visit this website, we automatically collect certain information about your visit. This section
+            describes what we collect, why, and your choices.
+          </p>
+
+          <h3>What we collect</h3>
+          <p>
+            We collect internet and network activity information, including: pages you viewed on this site,
+            the website that referred you here, your approximate location derived from your IP address, and your
+            device and browser type. We also collect online identifiers such as cookie IDs assigned by Google
+            Analytics.
+          </p>
+
+          <h3>Why we collect it</h3>
+          <p>
+            We use this information solely to measure site traffic and improve this website. We do not use it for
+            any other purpose.
+          </p>
+
+          <h3>Who receives it</h3>
+          <p>
+            This information is shared with Google, LLC, acting as a service provider under
+            <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener noreferrer">Google's data processing terms</a>.
+            Google processes the data on our behalf to provide the Google Analytics service.
+          </p>
+
+          <h3>What we do not do</h3>
+          <p>
+            We do not sell your personal information. We do not share your personal information for cross-context
+            behavioral advertising. Google signals and ads personalization are disabled on this Analytics property,
+            and we have denied all ad-related storage in our tag configuration.
+          </p>
+
+          <h3>Retention</h3>
+          <p>
+            Google Analytics event data is retained for 14 months, after which it is automatically deleted.
+          </p>
+        </section>
+
+        <section id="choices">
+          <h2>Your Privacy Choices</h2>
+          <p>
+            You can opt out of Google Analytics at any time. Your choice is saved in your browser and does not
+            expire. If you clear your browser data you may need to opt out again.
+          </p>
+
+          <div class="privacy-choices" id="privacy-choices-panel">
+            <p class="privacy-choices__status" id="privacy-status">Loading&hellip;</p>
+            <button type="button" class="privacy-choices__btn" id="privacy-toggle">Loading&hellip;</button>
+          </div>
+
+          <p>
+            If your browser sends a <a href="https://globalprivacycontrol.org/" target="_blank" rel="noopener noreferrer">Global Privacy Control</a>
+            signal, we honor it automatically and do not load Google Analytics, regardless of any stored choice.
+          </p>
+
+          <p>
+            You can also install the
+            <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>
+            for a browser-level opt-out.
+          </p>
+        </section>
+
+        <section>
+          <h2>California Residents</h2>
+          <p>
+            If you are a California resident, you have the right to know what personal information we collect,
+            to request deletion of your personal information, and to request correction of inaccurate personal
+            information.
+          </p>
+          <p>
+            To exercise these rights, or for any privacy-related questions, contact us at:
+          </p>
+          <address>
+            <strong>Louisiana Purchase</strong><br />
+            2305 University Ave, North Park, San Diego, CA 92104<br />
+            <a href="mailto:info@louisianapurchasesd.com">info@louisianapurchasesd.com</a><br />
+            <a href="tel:+18586836828">(858) 683-6828</a>
+          </address>
+          <p>
+            We will respond to verified requests within 45 days.
+          </p>
+        </section>
+
+        <section>
+          <h2>Changes to This Policy</h2>
+          <p>
+            We may update this policy from time to time. When we do, we will update the "Last updated" date at
+            the top of this page.
+          </p>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script is:inline>
+  (function () {
+    var KEY = 'lilos-privacy-v1';
+
+    function isOptedOut() {
+      if (window.lilosPrivacy && typeof window.lilosPrivacy.isOptedOut === 'function') {
+        return window.lilosPrivacy.isOptedOut();
+      }
+      try {
+        var raw = localStorage.getItem(KEY);
+        if (!raw) return false;
+        var rec = JSON.parse(raw);
+        return !!(rec && rec.optOut);
+      } catch (e) {
+        return false;
+      }
+    }
+
+    function update() {
+      var optedOut = isOptedOut();
+      var status = document.getElementById('privacy-status');
+      var btn = document.getElementById('privacy-toggle');
+      if (!status || !btn) return;
+      if (optedOut) {
+        status.textContent = 'You are currently opted out of Google Analytics.';
+        btn.textContent = 'Opt back in to analytics';
+      } else {
+        status.textContent = 'You are currently opted in to Google Analytics.';
+        btn.textContent = 'Opt out of analytics';
+      }
+    }
+
+    function toggle() {
+      var optedOut = isOptedOut();
+      if (optedOut) {
+        if (window.lilosPrivacy && typeof window.lilosPrivacy.optIn === 'function') {
+          window.lilosPrivacy.optIn();
+        } else {
+          try { localStorage.setItem(KEY, JSON.stringify({ optOut: false, ts: Date.now() })); } catch (e) {}
+        }
+      } else {
+        if (window.lilosPrivacy && typeof window.lilosPrivacy.optOut === 'function') {
+          window.lilosPrivacy.optOut();
+        } else {
+          try { localStorage.setItem(KEY, JSON.stringify({ optOut: true, ts: Date.now() })); } catch (e) {}
+        }
+      }
+      update();
+    }
+
+    function init() {
+      if (navigator.globalPrivacyControl === true) {
+        var status = document.getElementById('privacy-status');
+        var btn = document.getElementById('privacy-toggle');
+        if (status) status.textContent = 'Your browser is sending a Global Privacy Control signal. Google Analytics is not loaded on this site for your browser.';
+        if (btn) btn.hidden = true;
+        return;
+      }
+      update();
+      var btn = document.getElementById('privacy-toggle');
+      if (btn) btn.addEventListener('click', toggle);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+<style>
+  .privacy-page {
+    padding: 8rem 1.5rem 6rem;
+    background: var(--color-obsidian);
+    min-height: 100vh;
+  }
+
+  .privacy-page__inner {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .privacy-page__header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding-bottom: 2rem;
+  }
+
+  .privacy-page__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .privacy-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-parchment);
+    margin-bottom: 0.75rem;
+  }
+
+  .privacy-page__meta {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--color-smoke);
+  }
+
+  .privacy-page__body section {
+    margin-bottom: 3rem;
+  }
+
+  .privacy-page__body h2 {
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .privacy-page__body h3 {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-parchment);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .privacy-page__body p,
+  .privacy-page__body address {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(242, 235, 224, 0.70);
+    margin-bottom: 1rem;
+    font-style: normal;
+  }
+
+  .privacy-page__body a {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .privacy-page__body a:hover {
+    color: var(--color-parchment);
+  }
+
+  .privacy-choices {
+    background: rgba(201, 168, 76, 0.06);
+    border: 1px solid rgba(201, 168, 76, 0.18);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .privacy-choices__status {
+    margin: 0;
+    flex: 1;
+  }
+
+  .privacy-choices__btn {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.5rem 1.125rem;
+    background: var(--color-gold);
+    color: var(--color-obsidian);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 280ms ease;
+  }
+
+  .privacy-choices__btn:hover {
+    background: var(--color-parchment);
+  }
+</style>
