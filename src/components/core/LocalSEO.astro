@@ -129,6 +129,7 @@ const restaurantSchema: Record<string, unknown> = {
   sameAs: [
     venueSettings.social.instagram,
     venueSettings.social.facebook,
+    ...(venueSettings.gbpUrl ? [venueSettings.gbpUrl] : []),
   ],
 };
 
