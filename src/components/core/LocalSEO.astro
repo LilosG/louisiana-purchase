@@ -75,9 +75,16 @@ const resolvedOgImage = ogImage
   : `${siteUrl}${venueSettings.defaultSocialImage}`;
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
+const googleRating   = venueSettings.googleRating ? parseFloat(venueSettings.googleRating) : null;
+const reviewCount    = venueSettings.googleReviewCount ?? 0;
+const aggregateRating = (googleRating && reviewCount > 0)
+  ? { '@type': 'AggregateRating', ratingValue: googleRating, bestRating: 5, worstRating: 1, reviewCount }
+  : null;
+
 const restaurantSchema: Record<string, unknown> = {
   '@context':   'https://schema.org',
   '@type':      VENUE.type,
+  '@id':        `${siteUrl}/#restaurant`,
   name:         VENUE.name,
   description:  VENUE.description,
   url:          VENUE.url,
@@ -102,6 +109,7 @@ const restaurantSchema: Record<string, unknown> = {
     latitude:   VENUE.geo.latitude,
     longitude:  VENUE.geo.longitude,
   },
+  hasMap:               venueSettings.mapsUrl,
   openingHoursSpecification: VENUE.hours.map((h) => ({
     '@type':     'OpeningHoursSpecification',
     dayOfWeek:   `https://schema.org/${h.dayOfWeek}`,
@@ -114,6 +122,7 @@ const restaurantSchema: Record<string, unknown> = {
   currenciesAccepted:   seoContent.currency,
   paymentAccepted:      seoContent.paymentAccepted,
   amenityFeature: (Array.isArray(seoContent.amenities) ? seoContent.amenities : []).map((name: string) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
+  ...(aggregateRating && { aggregateRating }),
   sameAs: [
     venueSettings.social.instagram,
     venueSettings.social.facebook,
