@@ -76,7 +76,7 @@ const resolvedOgImage = ogImage
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
 const googleRating   = venueSettings.googleRating ? parseFloat(venueSettings.googleRating) : null;
-const reviewCount    = venueSettings.googleReviewCount ?? 0;
+const reviewCount    = parseInt(import.meta.env.PUBLIC_GOOGLE_REVIEW_COUNT || String(venueSettings.googleReviewCount ?? 0), 10);
 const aggregateRating = (googleRating && reviewCount > 0)
   ? { '@type': 'AggregateRating', ratingValue: googleRating, bestRating: 5, worstRating: 1, reviewCount }
   : null;
