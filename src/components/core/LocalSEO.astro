@@ -123,6 +123,10 @@ const restaurantSchema: Record<string, unknown> = {
   paymentAccepted:      seoContent.paymentAccepted,
   amenityFeature: (Array.isArray(seoContent.amenities) ? seoContent.amenities : []).map((name: string) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
   ...(aggregateRating && { aggregateRating }),
+  areaServed: [
+    { '@type': 'Place', name: venueSettings.address.neighborhood },
+    { '@type': 'City', name: venueSettings.address.city },
+  ],
   sameAs: [
     venueSettings.social.instagram,
     venueSettings.social.facebook,
