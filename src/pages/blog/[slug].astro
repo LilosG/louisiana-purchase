@@ -28,8 +28,11 @@ const siteUrl = (import.meta.env.PUBLIC_SITE_URL || venue.domain).replace(/\/$/,
 const publishedISO = post.data.date.toISOString();
 const modifiedISO = (post.data.updatedDate ?? post.data.date).toISOString();
 
-const heroImage = post.data.image ? IMAGES[post.data.image as keyof typeof IMAGES] : undefined;
-const ogImagePath = heroImage ? heroImage.src : undefined;
+const imageValue = post.data.image;
+const isPublicPath = imageValue?.startsWith('/');
+const heroImage = (!isPublicPath && imageValue) ? IMAGES[imageValue as keyof typeof IMAGES] : undefined;
+const publicImageSrc = isPublicPath ? imageValue : undefined;
+const ogImagePath = heroImage?.src ?? publicImageSrc ?? undefined;
 
 const formattedDate = post.data.date.toLocaleDateString('en-US', {
   month: 'long',
@@ -92,12 +95,11 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
 
   <!-- ─── Hero ──────────────────────────────────────────────────────────── -->
   <section aria-labelledby="post-headline" class="relative flex flex-col justify-end min-h-[52vh] overflow-hidden bg-obsidian">
-    {heroImage && (
+    {(heroImage || publicImageSrc) && (
       <div class="absolute inset-0 z-0" aria-hidden="true">
         <img
-          src={heroImage.src}
-          width={heroImage.width}
-          height={heroImage.height}
+          src={heroImage ? heroImage.src : publicImageSrc!}
+          {...(heroImage ? { width: heroImage.width, height: heroImage.height } : {})}
           alt={post.data.imageAlt || post.data.title}
           loading="eager"
           decoding="async"
