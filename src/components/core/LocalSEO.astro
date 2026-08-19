@@ -13,6 +13,7 @@
 
 import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
 import { getSingleton } from '../../content/siteData';
+import ratingData from '../../data/google-rating.json';
 
 const venueSettings = await getSingleton('venueSettings', 'settings');
 const seoContent = await getSingleton('localSeo', 'localSeo');
@@ -75,10 +76,8 @@ const resolvedOgImage = ogImage
   : `${siteUrl}${venueSettings.defaultSocialImage}`;
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
-const googleRating   = venueSettings.googleRating ? parseFloat(venueSettings.googleRating) : null;
-const reviewCount    = parseInt(import.meta.env.PUBLIC_GOOGLE_REVIEW_COUNT || String(venueSettings.googleReviewCount ?? 0), 10);
-const aggregateRating = (googleRating && reviewCount > 0)
-  ? { '@type': 'AggregateRating', ratingValue: googleRating, bestRating: 5, worstRating: 1, reviewCount }
+const aggregateRating = (ratingData.rating && ratingData.count > 0)
+  ? { '@type': 'AggregateRating', ratingValue: ratingData.rating, bestRating: 5, worstRating: 1, reviewCount: ratingData.count }
   : null;
 
 const restaurantSchema: Record<string, unknown> = {
