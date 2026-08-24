@@ -41,10 +41,38 @@
     }
   ],
   "redirects": [
-    {
-      "source": "/reservations",
-      "destination": "/",
-      "permanent": false
-    }
+    { "source": "/reservations",                         "destination": "/",                "permanent": false },
+    { "source": "/home",                                 "destination": "/",                "permanent": true },
+    { "source": "/gallery",                              "destination": "/the-space",       "permanent": true },
+    { "source": "/vibes",                                "destination": "/the-space",       "permanent": true },
+    { "source": "/happenings",                           "destination": "/events",          "permanent": true },
+    { "source": "/eat",                                  "destination": "/menu/dinner",     "permanent": true },
+    { "source": "/join-our-team",                        "destination": "/contact",         "permanent": true },
+    { "source": "/christmas-catering",                   "destination": "/private-events",  "permanent": true },
+    { "source": "/holidaycatering",                      "destination": "/private-events",  "permanent": true },
+    { "source": "/king-cakes-order-copy",                "destination": "/",                "permanent": true },
+    { "source": "/reset-password",                       "destination": "/",                "permanent": true },
+    { "source": "/menus/bayou-hour",                     "destination": "/happy-hour",      "permanent": true },
+    { "source": "/menus/brunch",                         "destination": "/brunch",          "permanent": true },
+    { "source": "/menus/drinks",                         "destination": "/menu/cocktails",  "permanent": true },
+    { "source": "/menus/eats",                           "destination": "/menu/dinner",     "permanent": true },
+    { "source": "/menus/eats-toast",                     "destination": "/menu/dinner",     "permanent": true },
+    { "source": "/bayou-hour",                            "destination": "/happy-hour",      "permanent": true },
+    { "source": "/celebrations",                          "destination": "/private-events",  "permanent": true },
+    { "source": "/accessibility",                         "destination": "/contact",         "permanent": true },
+    { "source": "/gift-cards",                            "destination": "/",                "permanent": true },
+    { "source": "/reviews",                               "destination": "/about",           "permanent": true },
+    { "source": "/visit",                                 "destination": "/contact",         "permanent": true },
+    { "source": "/taste-of-nola",                         "destination": "/",                "permanent": true },
+    { "source": "/in-the-spotlight-press-and-media",      "destination": "/about",           "permanent": true },
+    { "source": "/menus/drinks-toast",                    "destination": "/menu/cocktails",  "permanent": true },
+    { "source": "/menus/king-cakes-by-louisiana-purchase","destination": "/",                "permanent": true },
+    { "source": "/events/:path+",                         "destination": "/events",          "permanent": true },
+    { "source": "/popmenu-order/:path*",                  "destination": "/menu",            "permanent": true },
+    { "source": "/order/:path*",                         "destination": "/menu",            "permanent": true },
+    { "source": "/online/:path*",                        "destination": "/menu",            "permanent": true },
+    { "source": "/tracking/:path*",                      "destination": "/",                "permanent": true },
+    { "source": "/items/:path*",                         "destination": "/menu",            "permanent": true },
+    { "source": "/menu/louisiana-purchase/:path*",       "destination": "/menu",            "permanent": true }
   ]
 }

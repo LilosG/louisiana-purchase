@@ -13,6 +13,7 @@
 
 import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
 import { getSingleton } from '../../content/siteData';
+import ratingData from '../../data/google-rating.json';
 
 const venueSettings = await getSingleton('venueSettings', 'settings');
 const seoContent = await getSingleton('localSeo', 'localSeo');
@@ -75,9 +76,14 @@ const resolvedOgImage = ogImage
   : `${siteUrl}${venueSettings.defaultSocialImage}`;
 
 // ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
+const aggregateRating = (ratingData.rating && ratingData.count > 0)
+  ? { '@type': 'AggregateRating', ratingValue: ratingData.rating, bestRating: 5, worstRating: 1, reviewCount: ratingData.count }
+  : null;
+
 const restaurantSchema: Record<string, unknown> = {
   '@context':   'https://schema.org',
   '@type':      VENUE.type,
+  '@id':        `${siteUrl}/#restaurant`,
   name:         VENUE.name,
   description:  VENUE.description,
   url:          VENUE.url,
@@ -102,6 +108,7 @@ const restaurantSchema: Record<string, unknown> = {
     latitude:   VENUE.geo.latitude,
     longitude:  VENUE.geo.longitude,
   },
+  hasMap:               venueSettings.mapsUrl,
   openingHoursSpecification: VENUE.hours.map((h) => ({
     '@type':     'OpeningHoursSpecification',
     dayOfWeek:   `https://schema.org/${h.dayOfWeek}`,
@@ -114,9 +121,15 @@ const restaurantSchema: Record<string, unknown> = {
   currenciesAccepted:   seoContent.currency,
   paymentAccepted:      seoContent.paymentAccepted,
   amenityFeature: (Array.isArray(seoContent.amenities) ? seoContent.amenities : []).map((name: string) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
+  ...(aggregateRating && { aggregateRating }),
+  areaServed: [
+    { '@type': 'Place', name: venueSettings.address.neighborhood },
+    { '@type': 'City', name: venueSettings.address.city },
+  ],
   sameAs: [
     venueSettings.social.instagram,
     venueSettings.social.facebook,
+    ...(venueSettings.gbpUrl ? [venueSettings.gbpUrl] : []),
   ],
 };
 
