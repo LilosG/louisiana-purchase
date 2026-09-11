@@ -7,6 +7,8 @@ import AlternatingRow from '../components/ui/AlternatingRow.astro';
 import StatBar from '../components/ui/StatBar.astro';
 import CTABand from '../components/ui/CTABand.astro';
 import MenuShowcase from '../components/ui/MenuShowcase.astro';
+import PromotionModal from '../components/core/PromotionModal.astro';
+import { PROMOTION_CONFIG } from '../config/promotion';
 import { IMAGES } from '../assets/images';
 
 const pageContent = await getSingleton('home', 'home');
@@ -15,6 +17,8 @@ const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map
 ---
 
 <Layout {...blocks[0]}>
+
+  <PromotionModal siteSlug={PROMOTION_CONFIG.venueSlug} />
 
   <!-- ─── HERO ──────────────────────────────────────────────── -->
   <PageHero {...blocks[1]} />

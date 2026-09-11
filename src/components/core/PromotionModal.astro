@@ -1,0 +1,458 @@
+---
+import { getPromotionFeedUrl } from '../../config/promotion';
+
+interface Props {
+  /** Venue identifier understood by the public promotion API. */
+  siteSlug: string;
+}
+
+const { siteSlug } = Astro.props;
+const feedUrl = getPromotionFeedUrl(siteSlug);
+const titleId = `promotion-title-${siteSlug.replace(/[^a-z0-9_-]/gi, '-')}`;
+---
+
+<dialog
+  class="promotion-dialog"
+  data-promotion-dialog
+  data-feed-url={feedUrl}
+  aria-labelledby={titleId}
+>
+  <article class="promotion-card" data-promotion-card>
+    <button
+      class="promotion-close"
+      type="button"
+      data-promotion-close
+      aria-label="Close promotion"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 6l12 12M18 6 6 18"></path>
+      </svg>
+    </button>
+
+    <div class="promotion-media" data-promotion-media hidden>
+      <img data-promotion-image alt="" />
+    </div>
+
+    <div class="promotion-content">
+      <h2 id={titleId} class="promotion-title" data-promotion-title></h2>
+      <p class="promotion-body" data-promotion-body></p>
+      <a
+        class="promotion-cta"
+        data-promotion-cta
+        target="_blank"
+        rel="noopener noreferrer"
+        hidden
+      ></a>
+    </div>
+  </article>
+</dialog>
+
+<style>
+  .promotion-dialog {
+    width: min(calc(100vw - 2rem), 58rem);
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: visible;
+    color: var(--color-parchment);
+    background: transparent;
+    border: 0;
+  }
+
+  .promotion-dialog::backdrop {
+    background: rgba(10, 8, 6, 0.86);
+    backdrop-filter: blur(5px);
+  }
+
+  .promotion-card {
+    position: relative;
+    width: 100%;
+    max-height: calc(100dvh - 2rem);
+    overflow: hidden auto;
+    background: linear-gradient(
+      135deg,
+      rgba(28, 20, 25, 0.98),
+      rgba(10, 8, 6, 0.98)
+    );
+    border: 1px solid rgba(201, 168, 76, 0.48);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 24px 72px rgba(10, 8, 6, 0.72);
+  }
+
+  .promotion-media {
+    min-height: 14rem;
+    background: var(--color-obsidian-700);
+  }
+
+  .promotion-media[hidden],
+  .promotion-cta[hidden] {
+    display: none;
+  }
+
+  .promotion-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 14rem;
+    max-height: 22rem;
+  }
+
+  .promotion-card--photo .promotion-media img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .promotion-card--flyer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .promotion-card--flyer .promotion-media {
+    display: grid;
+    min-height: 0;
+    padding: 1rem;
+    background: var(--color-obsidian);
+    place-items: center;
+  }
+
+  .promotion-card--flyer .promotion-media img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: calc(100dvh - 15rem);
+    min-height: 0;
+    object-fit: contain;
+  }
+
+  .promotion-card--text .promotion-media {
+    min-height: 10rem;
+  }
+
+  .promotion-card--text .promotion-media img {
+    min-height: 10rem;
+    max-height: 16rem;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .promotion-card--text .promotion-content {
+    order: -1;
+  }
+
+  .promotion-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2.5rem 2rem 2rem;
+  }
+
+  .promotion-title {
+    margin: 0;
+    padding-right: 2rem;
+    color: var(--color-parchment);
+    font-family: var(--font-serif);
+    font-size: clamp(2.25rem, 7vw, 3.75rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .promotion-body {
+    margin: 1rem 0 0;
+    color: rgba(242, 235, 224, 0.72);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .promotion-body:empty {
+    display: none;
+  }
+
+  .promotion-cta {
+    align-self: flex-start;
+    margin-top: 1.75rem;
+    padding: 1rem 2rem;
+    color: var(--color-obsidian);
+    background: var(--color-gold);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-sans);
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    transition: background-color 280ms var(--ease-luxury);
+  }
+
+  .promotion-cta:hover {
+    background: var(--color-gold-light);
+  }
+
+  .promotion-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 1;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.7rem;
+    color: var(--color-parchment);
+    cursor: pointer;
+    background: rgba(10, 8, 6, 0.88);
+    border: 1px solid rgba(201, 168, 76, 0.45);
+    border-radius: 9999px;
+    place-items: center;
+    transition:
+      color 280ms var(--ease-luxury),
+      background-color 280ms var(--ease-luxury);
+  }
+
+  .promotion-close:hover {
+    color: var(--color-obsidian);
+    background: var(--color-gold);
+  }
+
+  .promotion-close:focus-visible,
+  .promotion-cta:focus-visible {
+    outline: 2px solid var(--color-gold-light);
+    outline-offset: 3px;
+  }
+
+  .promotion-close svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 2;
+  }
+
+  @media (min-width: 48rem) {
+    .promotion-card--photo,
+    .promotion-card--text.promotion-card--with-image {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+    }
+
+    .promotion-card--photo .promotion-media,
+    .promotion-card--text.promotion-card--with-image .promotion-media {
+      min-height: 28rem;
+    }
+
+    .promotion-card--photo .promotion-media img,
+    .promotion-card--text.promotion-card--with-image .promotion-media img {
+      min-height: 28rem;
+      max-height: 32rem;
+    }
+
+    .promotion-card--flyer {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(19rem, 0.8fr);
+    }
+
+    .promotion-card--flyer .promotion-media {
+      min-height: 30rem;
+      padding: 1.5rem;
+    }
+
+    .promotion-card--flyer .promotion-media img {
+      max-height: calc(100dvh - 5rem);
+    }
+
+    .promotion-content {
+      padding: 3rem;
+    }
+  }
+
+  @media (max-width: 47.999rem) {
+    .promotion-card--flyer .promotion-content {
+      padding-top: 1.75rem;
+    }
+  }
+</style>
+
+<script>
+  const PROMOTION_DISPLAY_STYLES = ['photo', 'flyer', 'text'] as const;
+  type PromotionDisplayStyle = (typeof PROMOTION_DISPLAY_STYLES)[number];
+
+  type PublicPromotion = {
+    id: string;
+    headline: string;
+    body: string;
+    imageUrl: string | null;
+    imageAlt: string | null;
+    ctaLabel: string | null;
+    /** Final destination resolved by the public API for every CTA type. */
+    customCtaUrl: string | null;
+    displayStyle: PromotionDisplayStyle;
+  };
+
+  type PromotionFeedResponse = {
+    promotion: PublicPromotion | null;
+  };
+
+  const isNullableString = (value: unknown): value is string | null =>
+    value === null || typeof value === 'string';
+
+  const isPromotionDisplayStyle = (
+    value: unknown,
+  ): value is PromotionDisplayStyle =>
+    typeof value === 'string' &&
+    PROMOTION_DISPLAY_STYLES.includes(value as PromotionDisplayStyle);
+
+  function readPromotion(payload: unknown): PublicPromotion | null {
+    if (!payload || typeof payload !== 'object' || !('promotion' in payload)) {
+      return null;
+    }
+
+    const promotion = (payload as PromotionFeedResponse).promotion;
+    if (promotion === null || typeof promotion !== 'object') return null;
+
+    if (
+      typeof promotion.id !== 'string' ||
+      typeof promotion.headline !== 'string' ||
+      typeof promotion.body !== 'string' ||
+      !isNullableString(promotion.imageUrl) ||
+      !isNullableString(promotion.imageAlt) ||
+      !isNullableString(promotion.ctaLabel) ||
+      !isNullableString(promotion.customCtaUrl) ||
+      !isPromotionDisplayStyle(promotion.displayStyle)
+    ) {
+      return null;
+    }
+
+    return promotion;
+  }
+
+  function safeHttpUrl(value: string | null): string | null {
+    if (!value) return null;
+
+    try {
+      const url = new URL(value);
+      return url.protocol === 'https:' || url.protocol === 'http:'
+        ? url.href
+        : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function wasDismissed(promotionId: string): boolean {
+    try {
+      return sessionStorage.getItem(`gph-promotion-dismissed:${promotionId}`) === 'true';
+    } catch {
+      return false;
+    }
+  }
+
+  function rememberDismissal(promotionId: string): void {
+    try {
+      sessionStorage.setItem(`gph-promotion-dismissed:${promotionId}`, 'true');
+    } catch {
+      // Storage can be unavailable in privacy-restricted browser contexts.
+    }
+  }
+
+  async function initializePromotion(dialog: HTMLDialogElement): Promise<void> {
+    const feedUrl = dialog.dataset.feedUrl;
+    if (!feedUrl || typeof dialog.showModal !== 'function') return;
+
+    try {
+      const response = await fetch(feedUrl, {
+        credentials: 'omit',
+        headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) return;
+
+      // A null promotion is authoritative: this site does not duplicate the
+      // manager's status or scheduling decisions.
+      const promotion = readPromotion(await response.json());
+      if (!promotion || wasDismissed(promotion.id)) return;
+
+      const card = dialog.querySelector<HTMLElement>('[data-promotion-card]');
+      const title = dialog.querySelector<HTMLElement>('[data-promotion-title]');
+      const body = dialog.querySelector<HTMLElement>('[data-promotion-body]');
+      const media = dialog.querySelector<HTMLElement>('[data-promotion-media]');
+      const image = dialog.querySelector<HTMLImageElement>('[data-promotion-image]');
+      const cta = dialog.querySelector<HTMLAnchorElement>('[data-promotion-cta]');
+      const closeButton = dialog.querySelector<HTMLButtonElement>('[data-promotion-close]');
+
+      if (!card || !title || !body || !media || !image || !cta || !closeButton) return;
+
+      const imageUrl = safeHttpUrl(promotion.imageUrl);
+      if (promotion.displayStyle !== 'text' && !imageUrl) return;
+
+      title.textContent = promotion.headline;
+      body.textContent = promotion.body;
+      card.classList.add(`promotion-card--${promotion.displayStyle}`);
+
+      if (imageUrl) {
+        image.src = imageUrl;
+        image.alt = promotion.imageAlt ?? '';
+        media.hidden = false;
+        card.classList.add('promotion-card--with-image');
+      }
+
+      // The manager owns CTA resolution. Predefined and custom destinations
+      // arrive in customCtaUrl; this site never maps CTA types to venue URLs.
+      const ctaUrl = safeHttpUrl(promotion.customCtaUrl);
+      if (ctaUrl && promotion.ctaLabel) {
+        cta.href = ctaUrl;
+        cta.textContent = promotion.ctaLabel;
+        cta.hidden = false;
+      }
+
+      const previouslyFocused =
+        document.activeElement instanceof HTMLElement
+          ? document.activeElement
+          : null;
+      const previousHtmlOverflow = document.documentElement.style.overflow;
+      const previousBodyOverflow = document.body.style.overflow;
+
+      const dismiss = () => {
+        rememberDismissal(promotion.id);
+        if (dialog.open) dialog.close();
+      };
+
+      const unlockPage = () => {
+        document.documentElement.style.overflow = previousHtmlOverflow;
+        document.body.style.overflow = previousBodyOverflow;
+      };
+
+      closeButton.addEventListener('click', dismiss, { once: true });
+      cta.addEventListener(
+        'click',
+        () => rememberDismissal(promotion.id),
+        { once: true },
+      );
+      dialog.addEventListener(
+        'close',
+        () => {
+          rememberDismissal(promotion.id);
+          unlockPage();
+          previouslyFocused?.focus();
+        },
+        { once: true },
+      );
+      dialog.addEventListener('click', (event) => {
+        if (event.target === dialog) dismiss();
+      });
+
+      dialog.showModal();
+      document.documentElement.style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+      closeButton.focus();
+    } catch {
+      // Promotions are progressive enhancement; the site remains usable when
+      // the public feed is unavailable or malformed.
+    }
+  }
+
+  document
+    .querySelectorAll<HTMLDialogElement>('[data-promotion-dialog]')
+    .forEach((dialog) => void initializePromotion(dialog));
+</script>
