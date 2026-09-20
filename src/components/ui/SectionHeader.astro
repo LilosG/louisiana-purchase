@@ -11,6 +11,7 @@ interface Props {
   centered?:    boolean;
   light?:       boolean;
   id?:          string;
+  headingLevel?: 1 | 2;
 }
 
 const {
@@ -21,7 +22,10 @@ const {
   centered = true,
   light = false,
   id,
+  headingLevel = 2,
 } = Astro.props;
+
+const Heading = headingLevel === 1 ? 'h1' : 'h2';
 ---
 
 <header class:list={['mb-10 md:mb-14', { 'text-center': centered }]}>
@@ -32,7 +36,7 @@ const {
     </p>
   )}
 
-  <h2
+  <Heading
     id={id}
     class:list={[
       'font-serif font-light tracking-[-0.02em] leading-[1.05] mb-3',
@@ -52,7 +56,7 @@ const {
         {titleItalic}
       </span>
     )}
-  </h2>
+  </Heading>
 
   {subtitle && (
     <p

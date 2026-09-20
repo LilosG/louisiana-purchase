@@ -19,6 +19,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const CANONICAL = page.currentPage === 1 ? '/blog' : `/blog/${page.currentPage}`;
+const HEADING_SUFFIX =
+  page.currentPage === 1
+    ? 'North Park Dining, Cocktails, Brunch & Events'
+    : `North Park Dining, Cocktails, Brunch & Events — Page ${page.currentPage}`;
 ---
 
 <Layout
@@ -37,9 +41,10 @@ const CANONICAL = page.currentPage === 1 ? '/blog' : `/blog/${page.currentPage}`
       <SectionHeader
         id="blog-index-headline"
         eyebrow="Stories &amp; Guides"
-        title="From the"
-        titleItalic="French Quarter"
+        title="Louisiana Purchase Blog:"
+        titleItalic={HEADING_SUFFIX}
         subtitle="Dining guides, cocktail features, and North Park stories from Louisiana Purchase."
+        headingLevel={1}
       />
 
       {page.data.length === 0 ? (
