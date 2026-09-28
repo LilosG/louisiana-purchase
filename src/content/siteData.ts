@@ -130,6 +130,20 @@ async function contentTokens(): Promise<Record<string, any>> {
   return tokenCache;
 }
 
+// ─── Blog ─────────────────────────────────────────────────────────────────────
+/** URL slug for a blog category ("North Park Guide" → "north-park-guide"). */
+export function blogCategorySlug(category: string): string {
+  return category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+/** Up to `limit` related posts: same category first, then the rest; newest first; never the current post. */
+export function relatedPosts<T extends { id: string; data: { category: string; date: Date } }>(posts: T[], current: T, limit = 3): T[] {
+  const others = posts.filter((post) => post.id !== current.id).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  const sameCategory = others.filter((post) => post.data.category === current.data.category);
+  const rest = others.filter((post) => post.data.category !== current.data.category);
+  return [...sameCategory, ...rest].slice(0, limit);
+}
+
 // ─── Gift cards ──────────────────────────────────────────────────────────────
 /** Central gift-card link: PUBLIC_GIFT_CARD_URL when set, otherwise the internal /contact page. */
 export const GIFT_CARD_FALLBACK = '/contact';

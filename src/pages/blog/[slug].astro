@@ -7,7 +7,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 import Layout from '../../layouts/Layout.astro';
 import { IMAGES } from '../../assets/images';
-import { getSingleton } from '../../content/siteData';
+import { blogCategorySlug, getSingleton, relatedPosts } from '../../content/siteData';
 import { buildFaqSchema, pageId } from '../../content/schema';
 
 export async function getStaticPaths() {
@@ -47,6 +47,9 @@ if (publicImageSrc) {
   }
 }
 const ogImagePath = heroImage?.src ?? publicImageSrc ?? undefined;
+
+const related = relatedPosts(await getCollection('blog'), post, 3);
+const formatDate = (date: Date) => date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
 const formattedDate = post.data.date.toLocaleDateString('en-US', {
   month: 'long',
@@ -109,7 +112,7 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
     )}
     <div class="relative z-10 max-w-[860px] mx-auto w-full px-6 pb-14 md:pb-20 pt-24 md:pt-32">
       <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-4">
-        {post.data.category} &middot; {formattedDate}
+        <a href={`/blog/category/${blogCategorySlug(post.data.category)}`} class="hover:text-gold-200 transition-colors duration-[280ms]">{post.data.category}</a> &middot; {formattedDate}
       </p>
       <h1 id="post-headline" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.1]" style="font-size: clamp(2rem, 5vw, 3.5rem);">
         {post.data.title}
@@ -150,6 +153,34 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
             </div>
           ))}
         </dl>
+      </div>
+    </section>
+  )}
+
+  <!-- ─── Related posts (same category first) ──────────────────────────── -->
+  {related.length > 0 && (
+    <section aria-labelledby="related-posts-heading" class="bg-obsidian pt-16 md:pt-20">
+      <div class="max-w-[1280px] mx-auto px-6">
+        <h2 id="related-posts-heading" class="font-serif font-light text-parchment leading-tight mb-8 text-center" style="font-size: clamp(1.5rem, 3vw, 2rem);">
+          Related Posts
+        </h2>
+        <ul role="list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {related.map((item) => (
+            <li>
+              <a href={`/blog/${item.id}`} class="group block h-full flex flex-col">
+                <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-2">
+                  {item.data.category} &middot; {formatDate(item.data.date)}
+                </p>
+                <h3 class="font-serif font-light text-parchment leading-snug text-xl group-hover:text-gold transition-colors duration-[280ms] mb-2">
+                  {item.data.title}
+                </h3>
+                <p class="font-sans font-light text-smoke leading-relaxed text-sm flex-1">
+                  {item.data.description}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   )}

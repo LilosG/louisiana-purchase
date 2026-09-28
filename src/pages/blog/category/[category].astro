@@ -7,16 +7,17 @@ import Layout from '../../../layouts/Layout.astro';
 import SectionHeader from '../../../components/ui/SectionHeader.astro';
 import { IMAGES } from '../../../assets/images';
 import { BLOG_CATEGORIES } from '../../../content.config';
+import { blogCategorySlug } from '../../../content/siteData';
 
+// Only categories that have at least one post get an archive page.
 export async function getStaticPaths() {
-  return BLOG_CATEGORIES.map((category) => ({
-    params: { category: category.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') },
-    props: { category },
-  }));
-}
-
-function slugifyCategory(value: string) {
-  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  const posts = await getCollection('blog');
+  return BLOG_CATEGORIES
+    .filter((category) => posts.some((post) => post.data.category === category))
+    .map((category) => ({
+      params: { category: blogCategorySlug(category) },
+      props: { category },
+    }));
 }
 
 interface Props {
@@ -30,13 +31,14 @@ const posts = allPosts
   .filter((post) => post.data.category === category)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const categorySlug = slugifyCategory(category);
+const categorySlug = blogCategorySlug(category);
 ---
 
 <Layout
   title={`${category} — Blog`}
   description={`${category} guides and stories from Louisiana Purchase in North Park, San Diego.`}
   canonical={`/blog/category/${categorySlug}`}
+  noindex={true}
   breadcrumbs={[
     { name: 'Home', url: '/', position: 1 },
     { name: 'Blog', url: '/blog', position: 2 },
