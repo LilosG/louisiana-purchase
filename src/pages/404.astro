@@ -1,0 +1,51 @@
+---
+// src/pages/404.astro
+// Louisiana Purchase — Not Found page. Served by Vercel for unknown URLs with a
+// real 404 status; noindex so it never enters the index.
+
+import Layout from '../layouts/Layout.astro';
+import { getSingleton } from '../content/siteData';
+
+const venue = await getSingleton('venueSettings', 'settings');
+const reserveUrl = venue?.reservationsUrl || import.meta.env.PUBLIC_RESERVATIONS_URL;
+const links = [
+  { label: 'Home', href: '/', external: false },
+  { label: 'Menu', href: '/menu', external: false },
+  { label: 'Reserve a Table', href: reserveUrl, external: true },
+  { label: 'Contact', href: '/contact', external: false },
+];
+---
+
+<Layout
+  title="Page Not Found"
+  description={`The page you're looking for isn't here. Find the menu, reservations and contact details for ${venue.name} in ${venue.address.neighborhood}, ${venue.address.city}.`}
+  noindex={true}
+  transparentNav={false}
+>
+  <section aria-labelledby="not-found-headline" class="bg-obsidian py-32 md:py-40">
+    <div class="max-w-[1280px] mx-auto px-6 text-center">
+      <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3">404</p>
+      <h1 id="not-found-headline" class="font-serif font-light tracking-[-0.02em] leading-[1.05] mb-3 text-parchment" style="font-size: clamp(2.25rem, 5vw, 3.75rem);">
+        Page Not Found
+      </h1>
+      <p class="font-sans font-light leading-relaxed max-w-[58ch] text-[0.9375rem] mx-auto text-smoke mb-10">
+        The page you're looking for has moved or no longer exists.
+      </p>
+      <nav aria-label="Helpful links" class="flex flex-wrap justify-center gap-4">
+        {links.map((link, i) => (
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+            class:list={[
+              'inline-flex items-center justify-center font-sans text-[0.625rem] font-medium tracking-[0.24em] uppercase rounded-sm transition-all duration-[280ms] whitespace-nowrap px-8 py-4',
+              i === 0 ? 'bg-gold text-obsidian hover:bg-gold-200' : 'border border-gold/40 text-gold hover:border-gold hover:bg-gold/5',
+            ]}
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
+    </div>
+  </section>
+</Layout>
