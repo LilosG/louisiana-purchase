@@ -2,5 +2,5 @@
   "id": "days",
   "order": 0,
   "q": "What days does Louisiana Purchase serve brunch?",
-  "a": "Brunch is served every Saturday and Sunday from 12 PM to 3 PM. The full bar and kitchen are open for the full service window."
+  "a": "{{BRUNCH_AVAILABILITY}} Brunch isn't a separate seating with its own hours — the brunch dishes join the regular menu on those days."
 }

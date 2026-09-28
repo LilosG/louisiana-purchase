@@ -28,6 +28,50 @@ function crossStreetShort(address: any): string {
   return parts.find((part) => part.toLowerCase() !== streetName) ?? parts[0] ?? '';
 }
 
+export const WEEKDAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] as const;
+
+/** "15:00" → "3 PM", "11:30" → "11:30 AM", "24:00" → "12 AM"; noonWord turns "12:00" into "noon". */
+export function formatTime(time: string, noonWord = false): string {
+  const [h, m = '00'] = String(time ?? '').split(':');
+  const hour = Number(h);
+  if (!Number.isFinite(hour)) return '';
+  if (noonWord && hour === 12 && m === '00') return 'noon';
+  const suffix = hour % 24 < 12 ? 'AM' : 'PM';
+  const display = hour % 12 === 0 ? 12 : hour % 12;
+  return `${display}${m === '00' ? '' : `:${m}`} ${suffix}`;
+}
+
+function joinList(items: string[], last = 'and'): string {
+  if (items.length <= 1) return items.join('');
+  return `${items.slice(0, -1).join(', ')} ${last} ${items[items.length - 1]}`;
+}
+
+/**
+ * Brunch is not a separate service: brunch favorites are on the menu on the
+ * venueSettings.brunchDays, from that day's opening time in regularHours.
+ * No end time is ever stated.
+ */
+function brunchTokens(venue: any): Record<string, string> {
+  const days = WEEKDAYS.filter((day) => (Array.isArray(venue.brunchDays) ? venue.brunchDays : []).includes(day));
+  const hours = Array.isArray(venue.regularHours) ? venue.regularHours : [];
+  const opens = (day: string) => hours.find((h: any) => h.dayOfWeek === day)?.opens;
+  const byTime = new Map<string, string[]>();
+  for (const day of days) {
+    const time = opens(day);
+    if (!time) continue;
+    byTime.set(time, [...(byTime.get(time) ?? []), day]);
+  }
+  const sameTime = byTime.size === 1 ? [...byTime.keys()][0] : undefined;
+  const clauses = [...byTime].map(([time, group]) => `from ${formatTime(time, true)} on ${joinList(group.map((day) => `${day}s`))}`);
+  return {
+    BRUNCH_DAYS: joinList(days, '&'),
+    BRUNCH_DAYS_PLURAL: joinList(days.map((day) => `${day}s`)),
+    BRUNCH_START: sameTime ? formatTime(sameTime, true) : '',
+    BRUNCH_START_TIME: sameTime ? formatTime(sameTime) : '',
+    BRUNCH_AVAILABILITY: clauses.length ? `Brunch favorites are on the menu ${joinList(clauses)}.` : '',
+  };
+}
+
 export function venueTokens(venue: any, env: Record<string, any> = import.meta.env): Record<string, any> {
   if (!venue) return {};
   const address = venue.address ?? {};
@@ -50,6 +94,7 @@ export function venueTokens(venue: any, env: Record<string, any> = import.meta.e
     HAPPY_HOUR_WINDOW: venue.happyHour?.window,
     EVENT_CAPACITY: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+ guests` : '',
     EVENT_CAPACITY_SHORT: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+` : '',
+    ...brunchTokens(venue),
   };
 }
 

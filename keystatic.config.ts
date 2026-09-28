@@ -15,7 +15,6 @@ import happyHourPageData from './src/content/happyHourPage/page.json';
 import menuIndexPageData from './src/content/menuIndexPage/page.json';
 import menuDinnerPageData from './src/content/menuDinnerPage/page.json';
 import menuCocktailsPageData from './src/content/menuCocktailsPage/page.json';
-import menuBrunchPageData from './src/content/menuBrunchPage/page.json';
 import privateEventsIndexPageData from './src/content/privateEventsIndexPage/page.json';
 import privateEventsSlugTemplateData from './src/content/privateEventsSlugTemplate/template.json';
 import theSpacePageData from './src/content/theSpacePage/page.json';
@@ -42,7 +41,7 @@ const fieldLabels: Record<string, string> = {
   acceptsReservations: 'Accepts Reservations', address: 'Address', addressLabel: 'Address Link Text', ariaLabels: 'Accessibility Labels',
   ariaLabelPrefix: 'Event Link Introduction', ariaLabelSuffix: 'Event Link Ending', author: 'Business Name for Search Results',
   benefits: 'Private Brunch Benefits', bodyMiddle: 'Location Text — Middle', bodyPrefix: 'Location Text — Beginning', bodySuffix: 'Location Text — Ending',
-  bottom: 'Bottom Line', bottomCuisine: 'Cuisine Line', brunchHours: 'Brunch Hours',
+  bottom: 'Bottom Line', bottomCuisine: 'Cuisine Line', brunchDays: 'Brunch Days',
   capacity: 'Capacity Label', cards: 'Cards', city: 'City', cocktails: 'Cocktails Menu Link', collection: 'Menu Item Source',
   cols: 'Number of Columns', columnHeadings: 'Footer Column Headings', contact: 'Contact Link', contactMethods: 'Contact Options',
   copyrightVenue: 'Copyright Business Name', country: 'Country', creditLabel: 'Website Credit Text', creditUrl: 'Website Credit Link',
@@ -339,7 +338,19 @@ function pageBlocksField(blocks: PageBlockSample[], namespace: string, path: str
   ), { label, description });
 }
 
+const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
 function fieldFromValue(key: string, value: unknown, namespace: string, path: string[]): any {
+  // Brunch is not a separate service window: brunch dishes are on the menu on these
+  // days, from each day's opening time in Regular Hours. All brunch copy is generated from it.
+  if (namespace === 'venueSettings' && path.length === 0 && key === 'brunchDays') {
+    return fields.multiselect({
+      label: 'Brunch Days',
+      description: 'Days brunch favorites are on the menu. Brunch copy on the website is generated from these days and the opening time for each day in Regular Hours.',
+      options: weekdays.map((day) => ({ label: day, value: day })),
+      defaultValue: ['Saturday', 'Sunday'],
+    });
+  }
   const label = key === 'url' && typeof value === 'string' && ['reservations', 'privateEvents', 'order'].includes(value)
     ? '⚠️ Advanced — Button Destination Setting'
     : labelFor(key, path);
@@ -470,7 +481,7 @@ export default config({
     },
     navigation: {
       Website: ['home', 'about', 'contactPage'],
-      Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'menuBrunchPage', 'cocktailsMenu', 'kitchenOxtailKingdom', 'kitchenCreoleSoulBangers', 'kitchenGulf', 'kitchenFryHouse', 'brunchMenuItems'],
+      Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'cocktailsMenu', 'kitchenOxtailKingdom', 'kitchenCreoleSoulBangers', 'kitchenGulf', 'kitchenFryHouse', 'brunchMenuItems'],
       Events: ['eventsIndexPage', 'eventCategoryCards'],
       'Private Events': ['privateEventsIndexPage', 'privateEventsSlugTemplate', 'privateEventTypes', 'privateEventsProcessSteps', 'privateEventsFaqs'],
       'Brunch & Happy Hour': ['brunchPage', 'brunchFaqs', 'happyHourPage', 'happyHourFaqs'],
@@ -494,7 +505,6 @@ export default config({
     menuIndexPage: jsonSingleton('Menu Overview', 'menuIndexPage', 'page', menuIndexPageData),
     menuDinnerPage: jsonSingleton('Dinner Menu Page', 'menuDinnerPage', 'page', menuDinnerPageData),
     menuCocktailsPage: jsonSingleton('Cocktails Menu Page', 'menuCocktailsPage', 'page', menuCocktailsPageData),
-    menuBrunchPage: jsonSingleton('Brunch Menu Page', 'menuBrunchPage', 'page', menuBrunchPageData),
     privateEventsIndexPage: jsonSingleton('Private Events', 'privateEventsIndexPage', 'page', privateEventsIndexPageData),
     privateEventsSlugTemplate: jsonSingleton('Private Events — Shared Content', 'privateEventsSlugTemplate', 'template', privateEventsSlugTemplateData),
     theSpacePage: jsonSingleton('The Space', 'theSpacePage', 'page', theSpacePageData),

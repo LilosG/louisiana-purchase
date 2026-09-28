@@ -73,6 +73,7 @@
     { "source": "/online/:path*",                        "destination": "/menu",            "permanent": true },
     { "source": "/tracking/:path*",                      "destination": "/",                "permanent": true },
     { "source": "/items/:path*",                         "destination": "/menu",            "permanent": true },
-    { "source": "/menu/louisiana-purchase/:path*",       "destination": "/menu",            "permanent": true }
+    { "source": "/menu/louisiana-purchase/:path*",       "destination": "/menu",            "permanent": true },
+    { "source": "/menu/brunch",                          "destination": "/brunch",          "permanent": true }
   ]
 }

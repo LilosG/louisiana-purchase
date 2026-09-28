@@ -52,7 +52,6 @@ export const collections = {
   menuIndexPage: singleton('menuIndexPage'),
   menuDinnerPage: singleton('menuDinnerPage'),
   menuCocktailsPage: singleton('menuCocktailsPage'),
-  menuBrunchPage: singleton('menuBrunchPage'),
   privateEventsIndexPage: singleton('privateEventsIndexPage'),
   privateEventsSlugTemplate: singleton('privateEventsSlugTemplate'),
   theSpacePage: singleton('theSpacePage'),
