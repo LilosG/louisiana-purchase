@@ -130,6 +130,15 @@ async function contentTokens(): Promise<Record<string, any>> {
   return tokenCache;
 }
 
+// ─── Gift cards ──────────────────────────────────────────────────────────────
+/** Central gift-card link: PUBLIC_GIFT_CARD_URL when set, otherwise the internal /contact page. */
+export const GIFT_CARD_FALLBACK = '/contact';
+export function giftCardLink(env: Record<string, any> = import.meta.env): { href: string; external: boolean } {
+  const configured = String(env.PUBLIC_GIFT_CARD_URL ?? '').trim();
+  const href = configured || GIFT_CARD_FALLBACK;
+  return { href, external: /^https?:\/\//i.test(href) };
+}
+
 export async function getSingleton(collection: any, id: string): Promise<any> {
   const entries: any[] = await getCollection(collection as any) as any[];
   const entry: any = entries.find((item: any) => item.id === id) ?? entries[0];

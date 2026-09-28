@@ -9,7 +9,7 @@ interface ImportMetaEnv {
   readonly PUBLIC_RESERVATIONS_URL:     string;   // Primary reservation link (OpenTable)
   readonly PUBLIC_RESERVATIONS_URL_TOAST: string; // Secondary/legacy reservation link (Toast) — temporary dual-button period
   readonly PUBLIC_ORDER_URL:            string;   // Toast Tab online ordering link
-  readonly PUBLIC_GIFT_CARD_URL:        string;   // Gift card purchase portal
+  readonly PUBLIC_GIFT_CARD_URL?:       string;   // Gift card purchase portal (optional; falls back to /contact)
 
   // ─── Analytics & Tracking ─────────────────────────────────────────
   readonly PUBLIC_GA_MEASUREMENT_ID:    string;   // Google Analytics 4 Measurement ID

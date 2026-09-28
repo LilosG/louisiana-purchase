@@ -2,7 +2,7 @@
 // src/components/layout/SiteFooter.astro
 // Louisiana Purchase — Site Footer
 import { GPH_NETWORK, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
-import { getSingleton } from '../../content/siteData';
+import { getSingleton, giftCardLink } from '../../content/siteData';
 
 const venue = await getSingleton('venueSettings', 'settings');
 const eventsConfig = await getSingleton('eventsConfig', 'config');
@@ -17,6 +17,7 @@ const isOnPrivateEventsPage = Astro.url.pathname.startsWith('/private-events');
 const privateEventsHref = isOnPrivateEventsPage
   ? `#${eventsConfig.privateEventsFormAnchor}`
   : `/private-events#${eventsConfig.privateEventsFormAnchor}`;
+const giftCard = giftCardLink();
 const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city} &nbsp;&middot;&nbsp; ${footer.bottomCuisine.replace('&', '&amp;')}\n`;
 ---
 
@@ -126,9 +127,9 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
           </li>
           <li>
             <a
-              href={import.meta.env.PUBLIC_GIFT_CARD_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={giftCard.href}
+              target={giftCard.external ? '_blank' : undefined}
+              rel={giftCard.external ? 'noopener noreferrer' : undefined}
               class="site-footer__nav-link"
               set:text={`\n${footer.reservationLinks.giftCards}\n`}
             ></a>
