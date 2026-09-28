@@ -82,7 +82,7 @@ const updatesTitle = `\n${pageContent.updates.title}`;
         <div class="overflow-hidden aspect-[4/3]">
           <Image
             src={IMAGES[pageContent.updates.image as keyof typeof IMAGES]}
-            alt={pageContent.updates.imageAlt}
+            alt={pageContent.updates.imageAlt ?? ''}
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"

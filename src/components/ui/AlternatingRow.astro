@@ -50,7 +50,7 @@ const Heading = `h${headingLevel}` as 'h2' | 'h3';
   ]}>
     <Image
       src={image}
-      alt={imageAlt}
+      alt={imageAlt ?? ''}
       class="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)] hover:scale-[1.03]"
       loading="lazy"
       decoding="async"

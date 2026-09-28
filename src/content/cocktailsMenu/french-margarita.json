@@ -1,9 +1,9 @@
 {
   "name": "French Margarita",
   "id": "french-margarita",
-  "description": "Martel cognac • curaçao - lemon - lime • agave",
+  "description": "Martell cognac • curaçao - lemon - lime • agave",
   "image": "cms/cocktailsMenu/image/french-margarita/image.jpg",
-  "imageAlt": "Martel cognac • curaçao - lemon - lime • agave  — Louisiana Purchase signature cocktail with Pop Rocks garnish",
+  "imageAlt": "French Margarita — Martell cognac, curaçao, lemon, lime and agave with a Pop Rocks garnish at Louisiana Purchase in North Park",
   "order": 2,
   "available": true,
   "featured": true,

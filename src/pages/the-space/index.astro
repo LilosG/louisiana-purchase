@@ -94,7 +94,7 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet.
         <div class="overflow-hidden aspect-[4/3]">
           <Image
             src={IMAGES[pageContent.location.image as keyof typeof IMAGES]}
-            alt={pageContent.location.imageAlt}
+            alt={pageContent.location.imageAlt ?? ''}
             class="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"

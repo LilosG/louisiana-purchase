@@ -3,6 +3,8 @@
 // Louisiana Purchase — Individual Blog Post
 
 import { getCollection, render } from 'astro:content';
+import path from 'node:path';
+import sharp from 'sharp';
 import Layout from '../../layouts/Layout.astro';
 import { IMAGES } from '../../assets/images';
 import { getSingleton } from '../../content/siteData';
@@ -33,6 +35,17 @@ const imageValue = post.data.image;
 const isPublicPath = imageValue?.startsWith('/');
 const heroImage = (!isPublicPath && imageValue) ? IMAGES[imageValue as keyof typeof IMAGES] : undefined;
 const publicImageSrc = isPublicPath ? imageValue : undefined;
+// Blog hero images stay in /public (the blog pipeline writes them there); read their
+// intrinsic size at build time so the LCP image reserves its box (no CLS).
+let publicImageSize: { width: number; height: number } | undefined;
+if (publicImageSrc) {
+  try {
+    const meta = await sharp(path.join(process.cwd(), 'public', decodeURIComponent(publicImageSrc))).metadata();
+    if (meta.width && meta.height) publicImageSize = { width: meta.width, height: meta.height };
+  } catch {
+    publicImageSize = undefined;
+  }
+}
 const ogImagePath = heroImage?.src ?? publicImageSrc ?? undefined;
 
 const formattedDate = post.data.date.toLocaleDateString('en-US', {
@@ -84,9 +97,10 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
       <div class="absolute inset-0 z-0" aria-hidden="true">
         <img
           src={heroImage ? heroImage.src : publicImageSrc!}
-          {...(heroImage ? { width: heroImage.width, height: heroImage.height } : {})}
+          {...(heroImage ? { width: heroImage.width, height: heroImage.height } : publicImageSize ?? {})}
           alt={post.data.imageAlt || post.data.title}
           loading="eager"
+          fetchpriority="high"
           decoding="async"
           class="w-full h-full object-cover object-center"
         />

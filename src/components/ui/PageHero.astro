@@ -31,7 +31,7 @@ const {
   titleItalic,
   subtitle,
   image,
-  imageAlt = '',
+  imageAlt,
   ctas = [],
   headlineId = 'page-headline',
   centered = false,
@@ -46,7 +46,7 @@ const {
     <div class="absolute inset-0 z-0" aria-hidden="true">
       <Image
         src={image}
-        alt={imageAlt}
+        alt={imageAlt ?? ''}
         class="w-full h-full object-cover object-center"
         loading="eager"
         decoding="async"

@@ -1,0 +1,12 @@
+{
+  "name": "Praline Old Fashioned",
+  "id": "praline-old-fashioned",
+  "description": "bourbon-praline•creole bitters",
+  "image": "cms/cocktailsMenu/image/praline-old-fashioned/image.jpg",
+  "imageAlt": "Praline Old Fashioned — bourbon, praline and Creole bitters at Louisiana Purchase in North Park",
+  "order": 1,
+  "available": true,
+  "featured": true,
+  "dietary": [],
+  "tags": []
+}
