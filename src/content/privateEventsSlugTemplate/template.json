@@ -1,6 +1,6 @@
 {
   "seo":{"canonicalBase":"/private-events/","schemaNamePrefix":"Louisiana Purchase — ","breadcrumbs":[{"name":"Home","url":"/","position":1},{"name":"Private Events","url":"/private-events","position":2}]},
-  "hero":{"image":"louisiana-purchase-private-dining-san-diego-website","imageAlt":"{{title}} at Louisiana Purchase North Park San Diego","headlineId":"slug-headline"},
+  "hero":{"image":"louisiana-purchase-private-dining-san-diego-website","imageAlt":"{{title}} — Louisiana Purchase","headlineId":"slug-headline"},
   "experienceImage":{"image":"louisiana-purchase-date-night-north-park-website","imageAlt":"{{eventType}} venue at Louisiana Purchase North Park San Diego"},
   "heroCtas":[{"label":"Request a Proposal","href":"#event-inquiry","variant":"gold"},{"label":"View All Events","href":"/private-events","variant":"outline"}],
   "stats":[{"value":"{{capacity}}","label":"Guest Capacity"},{"value":"{{eventType}}","label":"Event Type"},{"value":"Custom","label":"Menu Options"},{"value":"24hr","label":"Response Time"}],
