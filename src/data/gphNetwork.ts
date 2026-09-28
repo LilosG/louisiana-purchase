@@ -17,3 +17,4 @@ export const GPH_NETWORK: GphVenue[] = [
 ];
 
 export const GRIND_AND_PROSPER_URL = 'https://grindprosper.com';
+export const GRIND_AND_PROSPER_NAME = 'Grind & Prosper Hospitality';

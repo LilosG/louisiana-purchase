@@ -13,39 +13,13 @@ import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import { IMAGES } from '../../assets/images';
 import { getOrderedCollection } from '../../content/siteData';
+import { buildFaqSchema } from '../../content/schema';
 
 const pageContent = await getSingleton('happyHourPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
-const CANONICAL_DOMAIN = venue.domain;
-const VENUE_ADDRESS = venue.address;
-
-const happyHourSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FoodEstablishment',
-  name: pageContent.seo.schemaName,
-  description: pageContent.seo.schemaDescription,
-  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/happy-hour`,
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: VENUE_ADDRESS.street,
-    addressLocality: VENUE_ADDRESS.city,
-    addressRegion: VENUE_ADDRESS.state,
-    postalCode: VENUE_ADDRESS.zip,
-    addressCountry: VENUE_ADDRESS.country,
-  },
-};
-
 const FAQ_ITEMS = await getOrderedCollection('happyHourFaqs');
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: { '@type': 'Answer', text: faq.a },
-  })),
-};
+const faqSchema = await buildFaqSchema(pageContent.seo.canonical, FAQ_ITEMS);
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
 
@@ -53,7 +27,7 @@ const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map
   title={pageContent.seo.title}
   description={pageContent.seo.description}
   canonical={pageContent.seo.canonical}
-  schema={[happyHourSchema, faqSchema]}
+  schema={faqSchema ?? undefined}
   breadcrumbs={pageContent.seo.breadcrumbs}
 >
 

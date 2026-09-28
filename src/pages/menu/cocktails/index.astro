@@ -11,6 +11,7 @@ import CTABand from '../../../components/ui/CTABand.astro';
 import MenuShowcase from '../../../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../../../assets/images';
 import { getSingleton } from '../../../content/siteData';
+import { buildMenuSchema } from '../../../content/schema';
 
 const page = await getSingleton('menuCocktailsPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
@@ -21,13 +22,7 @@ const resolveCtas = (ctas: any[] = []) => (Array.isArray(ctas) ? ctas : []).map(
       : cta.href,
 }));
 
-const cocktailsSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'Menu',
-  name: page.seo.schemaName,
-  description: page.seo.schemaDescription,
-  url: `${import.meta.env.PUBLIC_SITE_URL || venue.domain}/menu/cocktails`,
-};
+const cocktailsSchema = await buildMenuSchema('/menu/cocktails');
 ---
 
 <Layout

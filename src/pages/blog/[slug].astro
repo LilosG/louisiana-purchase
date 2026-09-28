@@ -6,6 +6,7 @@ import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { IMAGES } from '../../assets/images';
 import { getSingleton } from '../../content/siteData';
+import { buildFaqSchema, pageId } from '../../content/schema';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog');
@@ -41,40 +42,24 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
 });
 
 // ─── JSON-LD: BlogPosting ─────────────────────────────────────────────────
+const postPath = `/blog/${post.id}`;
 const blogPostingSchema: Record<string, unknown> = {
-  '@context': 'https://schema.org',
   '@type': 'BlogPosting',
+  '@id': `${siteUrl}${postPath}#article`,
   headline: post.data.title,
   description: post.data.description,
   ...(ogImagePath && { image: `${siteUrl}${ogImagePath}` }),
   datePublished: publishedISO,
   dateModified: modifiedISO,
-  author: {
-    '@type': 'Organization',
-    name: venue.name,
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: venue.name,
-    logo: {
-      '@type': 'ImageObject',
-      url: `${siteUrl}${venue.defaultSocialImage ?? '/og-image.jpg'}`,
-    },
-  },
-  mainEntityOfPage: `${siteUrl}/blog/${post.id}`,
+  author: { '@id': `${siteUrl}/#restaurant` },
+  publisher: { '@id': `${siteUrl}/#restaurant` },
+  isPartOf: { '@id': `${siteUrl}/#website` },
+  mainEntityOfPage: { '@id': pageId(siteUrl, postPath) },
 };
 
 // ─── JSON-LD: FAQPage (only if the post actually has FAQ content) ────────
 const faqs = post.data.faqs ?? [];
-const faqSchema = faqs.length > 0 ? {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: { '@type': 'Answer', text: faq.a },
-  })),
-} : null;
+const faqSchema = await buildFaqSchema(postPath, faqs);
 
 const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
 ---
@@ -82,7 +67,7 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
 <Layout
   title={post.data.seoTitle || post.data.title}
   description={post.data.description}
-  canonical={`/blog/${post.id}`}
+  canonical={postPath}
   ogType="article"
   ogImage={ogImagePath}
   schema={schema}

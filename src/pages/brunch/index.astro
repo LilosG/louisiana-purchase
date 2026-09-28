@@ -14,34 +14,15 @@ import MenuShowcase from '../../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
 import { getOrderedCollection } from '../../content/siteData';
+import { buildFaqSchema, buildMenuSchema } from '../../content/schema';
 
 const brunchFaqs = await getOrderedCollection('brunchFaqs');
 const pageContent = await getSingleton('brunchPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
-const CANONICAL_DOMAIN = venue.domain;
-const VENUE_ADDRESS = venue.address;
-const BRUNCH_HOURS = venue.brunchHours;
-
-const brunchSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FoodEstablishment',
-  name: pageContent.seo.schemaName,
-  description: pageContent.seo.schemaDescription,
-  url: `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}/brunch`,
-  servesCuisine: ['Creole', 'Southern American', 'New Orleans'],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: VENUE_ADDRESS.street,
-    addressLocality: VENUE_ADDRESS.city,
-    addressRegion: VENUE_ADDRESS.state,
-    postalCode: VENUE_ADDRESS.zip,
-    addressCountry: VENUE_ADDRESS.country,
-  },
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Saturday', opens: BRUNCH_HOURS.opens, closes: BRUNCH_HOURS.closes },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: 'https://schema.org/Sunday',   opens: BRUNCH_HOURS.opens, closes: BRUNCH_HOURS.closes },
-  ],
-};
+const brunchSchema = [
+  await buildMenuSchema('/brunch'),
+  await buildFaqSchema(pageContent.seo.canonical, brunchFaqs),
+].filter(Boolean) as Record<string, unknown>[];
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 const privateBrunch = pageContent.privateBrunch;
 const privateBrunchTitle = privateBrunch?.title ? `\n${privateBrunch.title}` : '';

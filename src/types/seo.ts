@@ -36,7 +36,6 @@ export interface VenueSchemaConfig {
   image:             string;
   logo:              string;
   acceptsReservations: boolean;
-  hasMenu:           string;
 }
 
 export interface PageSeoProps {
@@ -49,6 +48,7 @@ export interface PageSeoProps {
   noindex?:       boolean;
   schema?:        Record<string, unknown> | Record<string, unknown>[];
   breadcrumbs?:   BreadcrumbItem[];
+  webPage?:       Record<string, unknown>;  // extra properties merged into the page's WebPage entity (e.g. hasPart)
 }
 
 export interface BreadcrumbItem {

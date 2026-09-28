@@ -121,3 +121,30 @@ export function buildEnv(venue: any, env: Record<string, any>): Record<string, a
     PUBLIC_SOCIAL_INSTAGRAM_URL: venue?.social?.instagram,
   };
 }
+
+// ─── Menu data ───────────────────────────────────────────────────────────────
+// menuStructure (menuIndexPage singleton) + item collections, shared by the
+// MenuShowcase card grids and the Menu JSON-LD builder so both always agree.
+export async function getMenuData(): Promise<any> {
+  const [cocktails, oxtailKingdom, creoleSoulBangers, gulf, fryHouse, brunch] = await Promise.all([
+    getOrderedCollection('cocktailsMenu'),
+    getOrderedCollection('kitchenOxtailKingdom'),
+    getOrderedCollection('kitchenCreoleSoulBangers'),
+    getOrderedCollection('kitchenGulf'),
+    getOrderedCollection('kitchenFryHouse'),
+    getOrderedCollection('brunchMenuItems'),
+  ]);
+  const menuPage = await getSingleton('menuIndexPage', 'page');
+  const itemCollections: Record<string, any[]> = { cocktails, oxtailKingdom, creoleSoulBangers, gulf, fryHouse, brunch };
+  const menuSections = Array.isArray(menuPage.menuStructure?.sections) ? menuPage.menuStructure.sections : [];
+  return {
+    ...(menuPage.menuStructure ?? {}),
+    sections: menuSections.map((section: any) => ({
+      ...section,
+      categories: (Array.isArray(section.categories) ? section.categories : []).map((category: any) => ({
+        ...category,
+        items: itemCollections[category.collection] ?? [],
+      })),
+    })),
+  };
+}

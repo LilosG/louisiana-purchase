@@ -14,12 +14,16 @@ import CTABand from '../../components/ui/CTABand.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import MenuShowcase from '../../components/ui/MenuShowcase.astro';
 import { IMAGES } from '../../assets/images';
+import { MENU_PAGES, getSiteUrl, menuId } from '../../content/schema';
 const pageContent = await getSingleton('menuIndexPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
+// The hub carries no Menu of its own; its WebPage points to the three Menu entities.
+const siteUrl = await getSiteUrl();
+const hubWebPage = { hasPart: MENU_PAGES.map((menu) => ({ '@id': menuId(siteUrl, menu.path) })) };
 ---
 
-<Layout {...blocks[0]}>
+<Layout {...blocks[0]} webPage={hubWebPage}>
 
   <!-- ─── Hero ─────────────────────────────────────────────────────────── -->
   <PageHero {...blocks[1]} />

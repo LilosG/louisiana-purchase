@@ -4,16 +4,19 @@
 //
 // Responsibilities:
 //   1. Injects <meta> tags: title, description, canonical, OG, Twitter Card
-//   2. Programmatically builds and outputs JSON-LD Restaurant schema
-//   3. Outputs breadcrumb JSON-LD when breadcrumbs are supplied
-//   4. Manages robots directives
+//   2. Emits ONE JSON-LD <script> per page containing a single @graph:
+//      Organization (#gph) → Restaurant (#restaurant) → WebSite (#website) →
+//      WebPage (+ BreadcrumbList) → page-specific entities (schema prop),
+//      all linked by @id
+//   3. Manages robots directives
 //
 // This component is consumed exclusively by src/layouts/Layout.astro.
 // It must never be imported directly into page files.
 
 import type { PageSeoProps, VenueSchemaConfig, BreadcrumbItem } from '../../types/seo';
 import { getSingleton } from '../../content/siteData';
-import ratingData from '../../data/google-rating.json';
+import { menuStubs, pageId } from '../../content/schema';
+import { GRIND_AND_PROSPER_NAME, GRIND_AND_PROSPER_URL } from '../../data/gphNetwork';
 
 const venueSettings = await getSingleton('venueSettings', 'settings');
 const seoContent = await getSingleton('localSeo', 'localSeo');
@@ -30,6 +33,7 @@ const {
   noindex   = false,
   schema,
   breadcrumbs,
+  webPage,
 } = Astro.props;
 
 // ─── Venue Identity ─────────────────────────────────────────────────────────
@@ -61,7 +65,6 @@ const VENUE: VenueSchemaConfig = {
   image:                venueSettings.defaultSocialImage,
   logo:                 seoContent.logo,
   acceptsReservations:  seoContent.acceptsReservations,
-  hasMenu:              `${venueSettings.domain}/menu`,
 };
 
 // ─── Canonical URL Resolution ────────────────────────────────────────────────
@@ -76,15 +79,42 @@ const resolvedOgImage = ogImage
   ? `${siteUrl}${ogImage}`
   : `${siteUrl}${venueSettings.defaultSocialImage}`;
 
-// ─── JSON-LD: Restaurant Schema ──────────────────────────────────────────────
-const aggregateRating = (ratingData.rating && ratingData.count > 0)
-  ? { '@type': 'AggregateRating', ratingValue: ratingData.rating, bestRating: 5, worstRating: 1, reviewCount: ratingData.count }
-  : null;
+// ─── JSON-LD: shared entity @ids ───────────────────────────────────────────────
+const ORG_ID        = `${siteUrl}/#gph`;
+const RESTAURANT_ID = `${siteUrl}/#restaurant`;
+const WEBSITE_ID    = `${siteUrl}/#website`;
+const WEBPAGE_ID    = pageId(siteUrl, canonical ?? pagePath);
+const BREADCRUMB_ID = `${resolvedCanonical}#breadcrumb`;
+const MENU_STUBS    = await menuStubs(siteUrl);
 
+// Schema.org rejects "24:00"; emit 23:59 in schema only (stored data and display are unchanged).
+const schemaTime = (time: string) => (time === '24:00' ? '23:59' : time);
+
+// OpenTable profile URL for sameAs, derived from the reservations URL with its query string stripped.
+const openTableProfile = (() => {
+  try {
+    const url = new URL(venueSettings.reservationsUrl);
+    return url.hostname.endsWith('opentable.com') ? `${url.origin}${url.pathname}` : undefined;
+  } catch {
+    return undefined;
+  }
+})();
+
+// ─── JSON-LD: Organization (parent group) ─────────────────────────────────────
+const organizationSchema: Record<string, unknown> = {
+  '@type': 'Organization',
+  '@id':   ORG_ID,
+  name:    GRIND_AND_PROSPER_NAME,
+  url:     new URL(GRIND_AND_PROSPER_URL).href,
+};
+
+// ─── JSON-LD: Restaurant ───────────────────────────────────────────────────────
+// The Google rating is shown visually only (StatBar); no aggregateRating is
+// marked up, because Google's review-snippet policy disallows self-serving
+// ratings aggregated from another site.
 const restaurantSchema: Record<string, unknown> = {
-  '@context':   'https://schema.org',
   '@type':      VENUE.type,
-  '@id':        `${siteUrl}/#restaurant`,
+  '@id':        RESTAURANT_ID,
   name:         VENUE.name,
   description:  VENUE.description,
   url:          VENUE.url,
@@ -113,31 +143,42 @@ const restaurantSchema: Record<string, unknown> = {
   openingHoursSpecification: VENUE.hours.map((h) => ({
     '@type':     'OpeningHoursSpecification',
     dayOfWeek:   `https://schema.org/${h.dayOfWeek}`,
-    opens:       h.opens,
-    closes:      h.closes,
+    opens:       schemaTime(h.opens),
+    closes:      schemaTime(h.closes),
   })),
   servesCuisine:        VENUE.cuisines,
-  hasMenu:              VENUE.hasMenu,
+  hasMenu:              MENU_STUBS.map((menu) => ({ '@id': menu['@id'] })),
   acceptsReservations:  VENUE.acceptsReservations,
   currenciesAccepted:   seoContent.currency,
   paymentAccepted:      seoContent.paymentAccepted,
   amenityFeature: (Array.isArray(seoContent.amenities) ? seoContent.amenities : []).map((name: string) => ({ '@type': 'LocationFeatureSpecification', name, value: true })),
-  ...(aggregateRating && { aggregateRating }),
   areaServed: [
     { '@type': 'Place', name: venueSettings.address.neighborhood },
     { '@type': 'City', name: venueSettings.address.city },
   ],
+  parentOrganization: { '@id': ORG_ID },
   sameAs: [
     venueSettings.social.instagram,
     venueSettings.social.facebook,
     ...(venueSettings.gbpUrl ? [venueSettings.gbpUrl] : []),
+    ...(openTableProfile ? [openTableProfile] : []),
   ],
 };
 
-// ─── JSON-LD: Breadcrumb Schema ───────────────────────────────────────────────
+// ─── JSON-LD: WebSite ─────────────────────────────────────────────────────────
+const websiteSchema: Record<string, unknown> = {
+  '@type':    'WebSite',
+  '@id':      WEBSITE_ID,
+  url:        `${siteUrl}/`,
+  name:       VENUE.name,
+  inLanguage: 'en-US',
+  publisher:  { '@id': RESTAURANT_ID },
+};
+
+// ─── JSON-LD: BreadcrumbList ──────────────────────────────────────────────────
 const buildBreadcrumbSchema = (items: BreadcrumbItem[]): Record<string, unknown> => ({
-  '@context':        'https://schema.org',
   '@type':           'BreadcrumbList',
+  '@id':             BREADCRUMB_ID,
   itemListElement:   items.map((item) => ({
     '@type':   'ListItem',
     position:  item.position,
@@ -145,6 +186,14 @@ const buildBreadcrumbSchema = (items: BreadcrumbItem[]): Record<string, unknown>
     item:      `${siteUrl}${item.url}`,
   })),
 });
+const hasBreadcrumbs = Array.isArray(breadcrumbs) && breadcrumbs.length > 0;
+
+// ─── JSON-LD: page-specific entities ─────────────────────────────────────────
+const pageEntities = (Array.isArray(schema) ? schema : schema ? [schema] : [])
+  .filter(Boolean)
+  .map(({ ['@context']: _context, ...entity }) => entity as Record<string, unknown>);
+const pageEntityIds = new Set(pageEntities.map((entity) => entity['@id']).filter(Boolean));
+const mainEntity = pageEntities.find((entity) => entity['@id'] && entity['@type'] !== 'FAQPage');
 
 // ─── Page Title Formatting ────────────────────────────────────────────────────
 // Appends " | {titleSuffix}" only when the title doesn't already carry the brand
@@ -157,6 +206,34 @@ const formattedTitle = !BRAND_SUFFIX || title.includes(BRAND_SUFFIX) || title.in
   ? title
   : brandedTitle;
 const resolvedOgImageAlt = ogImageAlt || formattedTitle;
+
+// ─── JSON-LD: WebPage + the single @graph ─────────────────────────────────────
+const webPageSchema: Record<string, unknown> = {
+  '@type':     'WebPage',
+  '@id':       WEBPAGE_ID,
+  url:         resolvedCanonical,
+  name:        formattedTitle,
+  description,
+  inLanguage:  'en-US',
+  isPartOf:    { '@id': WEBSITE_ID },
+  about:       { '@id': RESTAURANT_ID },
+  ...(hasBreadcrumbs && { breadcrumb: { '@id': BREADCRUMB_ID } }),
+  ...(mainEntity && { mainEntity: { '@id': mainEntity['@id'] } }),
+  ...(webPage ?? {}),
+};
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organizationSchema,
+    restaurantSchema,
+    websiteSchema,
+    webPageSchema,
+    ...(hasBreadcrumbs ? [buildBreadcrumbSchema(breadcrumbs!)] : []),
+    ...MENU_STUBS.filter((menu) => !pageEntityIds.has(menu['@id'])),
+    ...pageEntities,
+  ],
+};
 ---
 
 <!-- ─── Primary Meta Tags ─────────────────────────────────────────────── -->
@@ -195,22 +272,5 @@ const resolvedOgImageAlt = ogImageAlt || formattedTitle;
 <meta name="geo.position"    content={`${VENUE.geo.latitude};${VENUE.geo.longitude}`} />
 <meta name="ICBM"            content={`${VENUE.geo.latitude}, ${VENUE.geo.longitude}`} />
 
-<!-- ─── JSON-LD: Restaurant Structured Data ─────────────────────────── -->
-<script type="application/ld+json" set:html={JSON.stringify(restaurantSchema, null, 0)} />
-
-<!-- ─── JSON-LD: Breadcrumbs (conditional) ──────────────────────────── -->
-{breadcrumbs && breadcrumbs.length > 0 && (
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify(buildBreadcrumbSchema(breadcrumbs), null, 0)}
-  />
-)}
-
-<!-- ─── JSON-LD: Page-Specific Override (conditional) ───────────────── -->
-{schema && (
-  Array.isArray(schema)
-    ? schema.map((s) => (
-        <script type="application/ld+json" set:html={JSON.stringify(s, null, 0)} />
-      ))
-    : <script type="application/ld+json" set:html={JSON.stringify(schema, null, 0)} />
-)}
+<!-- ─── JSON-LD: single @graph ──────────────────────────────────────── -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd, null, 0)} />

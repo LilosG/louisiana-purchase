@@ -15,6 +15,7 @@ import type { PrivateEventSlug } from '../../types/seo';
 import { IMAGES } from '../../assets/images';
 import { getOrderedCollection } from '../../content/siteData';
 import { getSingleton } from '../../content/siteData';
+import { buildFaqSchema, getSiteUrl } from '../../content/schema';
 
 export async function getStaticPaths() {
   const PRIVATE_EVENT_SLUGS = await getOrderedCollection('privateEventTypes');
@@ -31,7 +32,6 @@ interface Props {
 const { event } = Astro.props as Props;
 const template = await getSingleton('privateEventsSlugTemplate', 'template');
 const venue = await getSingleton('venueSettings', 'settings');
-const CANONICAL_DOMAIN = venue.domain;
 const VENUE_ADDRESS = venue.address;
 const fill = (value: any): any => {
   if (typeof value === 'string') return value.replaceAll('{{eventTypeLower}}', event.eventType.toLowerCase()).replaceAll('{{eventType}}', event.eventType).replaceAll('{{capacity}}', event.capacity).replaceAll('{{title}}', event.title);
@@ -40,12 +40,15 @@ const fill = (value: any): any => {
   return value;
 };
 
+const siteUrl = await getSiteUrl();
+const pagePath = `${template.seo.canonicalBase}${event.slug}`;
 const eventVenueSchema: Record<string, unknown> = {
-  '@context':  'https://schema.org',
   '@type':     'EventVenue',
+  '@id':       `${siteUrl}${pagePath}#venue`,
   name:        `${template.seo.schemaNamePrefix}${event.title}`,
   description: event.description,
-  url:         `${import.meta.env.PUBLIC_SITE_URL || CANONICAL_DOMAIN}${template.seo.canonicalBase}${event.slug}`,
+  url:         `${siteUrl}${pagePath}`,
+  containedInPlace: { '@id': `${siteUrl}/#restaurant` },
   address: {
     '@type':          'PostalAddress',
     streetAddress:    VENUE_ADDRESS.street,
@@ -60,22 +63,14 @@ const FAQ_ITEMS = fill(template.faqs) as Array<{ q: string; a: string }>;
 
 const INCLUDED_ITEMS = template.includedItems;
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: { '@type': 'Answer', text: faq.a },
-  })),
-};
+const faqSchema = await buildFaqSchema(pagePath, FAQ_ITEMS);
 ---
 
 <Layout
   title={event.metaTitle}
   description={event.description}
-  canonical={`${template.seo.canonicalBase}${event.slug}`}
-  schema={[eventVenueSchema, faqSchema]}
+  canonical={pagePath}
+  schema={[eventVenueSchema, faqSchema].filter(Boolean) as Record<string, unknown>[]}
   breadcrumbs={[
     ...template.seo.breadcrumbs,
     { name: event.title,      url: `/private-events/${event.slug}`, position: 3 },

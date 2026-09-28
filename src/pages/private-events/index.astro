@@ -14,21 +14,14 @@ import ChecklistItems from '../../components/ui/ChecklistItems.astro';
 import ToastEventForm from '../../components/ui/ToastEventForm.astro';
 import { IMAGES } from '../../assets/images';
 import { getOrderedCollection } from '../../content/siteData';
+import { buildFaqSchema } from '../../content/schema';
 
 const PRIVATE_EVENT_SLUGS = await getOrderedCollection('privateEventTypes');
 const PROCESS_STEPS = await getOrderedCollection('privateEventsProcessSteps');
 const FAQ_ITEMS = await getOrderedCollection('privateEventsFaqs');
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: FAQ_ITEMS.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: { '@type': 'Answer', text: faq.a },
-  })),
-};
 const pageContent = await getSingleton('privateEventsIndexPage', 'page');
+const faqSchema = await buildFaqSchema(pageContent.seo.canonical, FAQ_ITEMS);
 const venue = await getSingleton('venueSettings', 'settings');
 const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map((block: any) => resolveContent(block?.props ?? {}, IMAGES, buildEnv(venue, import.meta.env)));
 ---
@@ -37,7 +30,7 @@ const blocks = (Array.isArray(pageContent.blocks) ? pageContent.blocks : []).map
   title={pageContent.seo.title}
   description={pageContent.seo.description}
   canonical={pageContent.seo.canonical}
-  schema={faqSchema}
+  schema={faqSchema ?? undefined}
   breadcrumbs={pageContent.seo.breadcrumbs}
 >
 
