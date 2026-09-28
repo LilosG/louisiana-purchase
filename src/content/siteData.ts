@@ -46,6 +46,10 @@ export function venueTokens(venue: any, env: Record<string, any> = import.meta.e
     VENUE_PHONE_TEL: `tel:${phone}`,
     VENUE_MAPS_URL: venue.mapsUrl,
     INSTAGRAM_HANDLE: instagramHandle(venue.social?.instagram),
+    HAPPY_HOUR_DAYS: venue.happyHour?.days,
+    HAPPY_HOUR_WINDOW: venue.happyHour?.window,
+    EVENT_CAPACITY: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+ guests` : '',
+    EVENT_CAPACITY_SHORT: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+` : '',
   };
 }
 

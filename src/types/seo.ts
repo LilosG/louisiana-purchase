@@ -44,6 +44,7 @@ export interface PageSeoProps {
   description:    string;
   canonical?:     string;
   ogImage?:       string;
+  ogImageAlt?:    string;         // og:image:alt / twitter:image:alt — defaults to the page title
   ogType?:        'website' | 'article' | 'restaurant';
   noindex?:       boolean;
   schema?:        Record<string, unknown> | Record<string, unknown>[];
