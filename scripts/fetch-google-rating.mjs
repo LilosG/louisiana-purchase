@@ -14,12 +14,31 @@ function writeFallback(reason) {
   writeFileSync(outPath, JSON.stringify(fallback));
 }
 
-let placeId = process.env.GOOGLE_PLACE_ID;
-try {
-  placeId ||= JSON.parse(readFileSync(settingsPath, 'utf8')).mapsPlaceId;
-} catch {
-  // handled below
+const PLACE_ID_PATTERN = /^ChIJ[A-Za-z0-9_-]+$/;
+
+function readVenuePlaceId() {
+  try {
+    return JSON.parse(readFileSync(settingsPath, 'utf8')).mapsPlaceId;
+  } catch {
+    return undefined;
+  }
 }
+
+let placeIdSource = 'env';
+let placeId = process.env.GOOGLE_PLACE_ID?.trim();
+
+if (placeId && !PLACE_ID_PATTERN.test(placeId)) {
+  console.warn(`[google-rating] GOOGLE_PLACE_ID is invalid (starts with "${placeId.slice(0, 6)}") — falling back to venueSettings.mapsPlaceId`);
+  placeId = undefined;
+}
+
+if (!placeId) {
+  placeIdSource = 'venueSettings';
+  placeId = readVenuePlaceId()?.trim();
+}
+
+console.log(`[google-rating] using Place ID from ${placeIdSource}`);
+
 const apiKey = process.env.GOOGLE_PLACES_API_KEY;
 
 if (!apiKey) {
@@ -40,7 +59,7 @@ if (!apiKey) {
       }));
       console.log(`[google-rating] ${data.result.rating} (${data.result.user_ratings_total || 0} reviews)`);
     } else {
-      writeFallback(`Places API returned status ${data.status ?? res.status}`);
+      writeFallback(`Places API returned status ${data.status ?? res.status}${data.error_message ? ` — ${data.error_message}` : ''}`);
     }
   } catch (error) {
     writeFallback(`request failed (${error?.message ?? error})`);
