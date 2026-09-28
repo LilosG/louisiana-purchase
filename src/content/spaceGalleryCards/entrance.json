@@ -2,8 +2,8 @@
   "id": "entrance",
   "order": 0,
   "image": "cms/spaceGalleryCards/image/entrance/louisiana-purchase-restaurant-exterior-pergola-north-park-website.jpg",
-  "imageAlt": "Louisiana Purchase at night — University Ave and 23rd St, North Park",
+  "imageAlt": "Louisiana Purchase at night — {{VENUE_CROSS_STREET}}, {{VENUE_NEIGHBORHOOD}}",
   "eyebrow": "Exterior",
   "title": "The Entrance",
-  "body": "Louisiana Purchase at night — University Ave and 23rd St, North Park."
+  "body": "Louisiana Purchase at night — {{VENUE_CROSS_STREET}}, {{VENUE_NEIGHBORHOOD}}."
 }

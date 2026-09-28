@@ -100,6 +100,14 @@ export function venueTokens(venue: any, env: Record<string, any> = import.meta.e
     INSTAGRAM_HANDLE: instagramHandle(venue.social?.instagram),
     HAPPY_HOUR_DAYS: venue.happyHour?.days,
     HAPPY_HOUR_WINDOW: venue.happyHour?.window,
+    HAPPY_HOUR_START: formatTime(venue.happyHour?.opens),
+    // Weekly hours, from displayHours: per day ({{HOURS_MONDAY}} …) or as one sentence.
+    ...Object.fromEntries((Array.isArray(venue.displayHours) ? venue.displayHours : []).map((row: any) => [`HOURS_${String(row.label).toUpperCase()}`, row.value])),
+    HOURS_SUMMARY: (Array.isArray(venue.displayHours) ? venue.displayHours : []).map((row: any) => `${row.label} ${row.value}`).join(', '),
+    EARLIEST_OPEN: (() => {
+      const opens = (Array.isArray(venue.regularHours) ? venue.regularHours : []).map((h: any) => String(h.opens)).filter(Boolean).sort();
+      return opens.length ? formatTime(opens[0]) : '';
+    })(),
     EVENT_CAPACITY: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+ guests` : '',
     EVENT_CAPACITY_SHORT: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+` : '',
     GOOGLE_RATING: googleRatingDisplay(),
@@ -125,7 +133,10 @@ async function contentTokens(): Promise<Record<string, any>> {
   tokenCache ??= (async () => {
     const entries: any[] = await getCollection('venueSettings' as any) as any[];
     const venue = (entries.find((item: any) => item.id === 'settings') ?? entries[0])?.data;
-    return venueTokens(venue);
+    // Cocktail counts are computed from the cocktailsMenu collection, never typed.
+    const cocktails: any[] = await getCollection('cocktailsMenu' as any) as any[];
+    const signatureCocktails = cocktails.filter((entry: any) => entry.data.available !== false).length;
+    return { ...venueTokens(venue), SIGNATURE_COCKTAIL_COUNT: String(signatureCocktails) };
   })();
   return tokenCache;
 }

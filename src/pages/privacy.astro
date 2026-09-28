@@ -3,6 +3,12 @@
 // Louisiana Purchase — Privacy Policy
 
 import Layout from '../layouts/Layout.astro';
+import { formatPhone, getSingleton } from '../content/siteData';
+
+const venue = await getSingleton('venueSettings', 'settings');
+const address = venue.address;
+const email = import.meta.env.PUBLIC_VENUE_EMAIL || venue.emailFallback;
+const phone = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
 ---
 
 <Layout
@@ -101,10 +107,10 @@ import Layout from '../layouts/Layout.astro';
             To exercise these rights, or for any privacy-related questions, contact us at:
           </p>
           <address>
-            <strong>Louisiana Purchase</strong><br />
-            2305 University Ave, North Park, San Diego, CA 92104<br />
-            <a href="mailto:info@louisianapurchasesd.com">info@louisianapurchasesd.com</a><br />
-            <a href="tel:+18586836828">(858) 683-6828</a>
+            <strong>{venue.name}</strong><br />
+            {address.street}, {address.neighborhood}, {address.city}, {address.state} {address.zip}<br />
+            <a href={`mailto:${email}`}>{email}</a><br />
+            <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
           </address>
           <p>
             We will respond to verified requests within 45 days.
