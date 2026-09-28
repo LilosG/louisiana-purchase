@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import ratingData from '../data/google-rating.json';
 
 // ─── Venue data tokens ───────────────────────────────────────────────────────
 // Content (Keystatic singletons and collections) may reference venue facts with
@@ -72,6 +73,13 @@ function brunchTokens(venue: any): Record<string, string> {
   };
 }
 
+/** Live Google rating from the build-time fetch (scripts/fetch-google-rating.mjs); '' when unavailable. */
+function googleRatingDisplay(): string {
+  const { rating, count } = ratingData as { rating: number | null; count: number };
+  if (typeof rating !== 'number') return '';
+  return count > 0 ? `${rating.toFixed(1)}★ (${count.toLocaleString('en-US')})` : `${rating.toFixed(1)}★`;
+}
+
 export function venueTokens(venue: any, env: Record<string, any> = import.meta.env): Record<string, any> {
   if (!venue) return {};
   const address = venue.address ?? {};
@@ -94,6 +102,7 @@ export function venueTokens(venue: any, env: Record<string, any> = import.meta.e
     HAPPY_HOUR_WINDOW: venue.happyHour?.window,
     EVENT_CAPACITY: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+ guests` : '',
     EVENT_CAPACITY_SHORT: venue.eventCapacity?.fullVenue ? `${venue.eventCapacity.fullVenue}+` : '',
+    GOOGLE_RATING: googleRatingDisplay(),
     ...brunchTokens(venue),
   };
 }

@@ -32,7 +32,6 @@
   ],
   "happyHour": { "label": "Happy Hour", "days": "Monday – Friday", "window": "3 PM – 5 PM", "opens": "15:00", "closes": "17:00" },
   "brunchDays": ["Saturday", "Sunday"],
-  "googleRating": "4.6",
   "eventCapacity": { "fullVenue": 80, "privateRoom": 40, "patio": 50 },
   "defaultSocialImage": "/og-image.jpg"
 }

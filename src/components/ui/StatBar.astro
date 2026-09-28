@@ -15,7 +15,10 @@ interface Props {
   dark?: boolean;
 }
 
-const { stats = [], dark = true } = Astro.props;
+const { stats: allStats = [], dark = true } = Astro.props;
+// A stat whose value resolves empty (e.g. the Google rating when the build-time
+// fetch has no data) is not rendered; the grid sizes itself to what remains.
+const stats = allStats.filter((stat) => stat && String(stat.value ?? '').trim() !== '');
 ---
 
 <div
