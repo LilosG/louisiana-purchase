@@ -78,7 +78,7 @@ const privateBrunchTitle = privateBrunch?.title ? `\n${privateBrunch.title}` : '
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={privateBrunch.eyebrow}></p>
-          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{privateBrunchTitle}<br /><span class="italic text-gold" set:text={privateBrunch.titleItalic}></span>
+          <h2 id="private-brunch-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{privateBrunchTitle}{' '}<br /><span class="italic text-gold" set:text={privateBrunch.titleItalic}></span>
           </h2>
           <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-6 max-w-[46ch]" set:text={`\n${privateBrunch.body ?? ''}\n`}></p>
           <ul role="list" class="flex flex-col gap-2.5 mb-8">

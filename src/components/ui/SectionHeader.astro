@@ -44,7 +44,7 @@ const Heading = headingLevel === 1 ? 'h1' : 'h2';
     ]}
     style="font-size: clamp(2.25rem, 5vw, 3.75rem);"
   >
-    {title}
+    {title}{titleItalic && ' '}
     {titleItalic && (
       <span
         class:list={[

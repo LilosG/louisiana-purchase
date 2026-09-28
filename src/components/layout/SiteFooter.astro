@@ -77,7 +77,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 
       <!-- Explore column -->
       <nav aria-labelledby="footer-explore-heading" class="site-footer__nav-col">
-        <h3 id="footer-explore-heading" class="site-footer__col-heading">{footer.columnHeadings.explore}</h3>
+        <p id="footer-explore-heading" class="site-footer__col-heading">{footer.columnHeadings.explore}</p>
         <ul role="list" class="site-footer__nav-list">
           {(Array.isArray(footer.exploreLinks) ? footer.exploreLinks : []).map((link: any) => (
             <li>
@@ -91,7 +91,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 
       <!-- Hours column -->
       <section aria-labelledby="footer-hours-heading" class="site-footer__hours-col">
-        <h3 id="footer-hours-heading" class="site-footer__col-heading">{footer.columnHeadings.hours}</h3>
+        <p id="footer-hours-heading" class="site-footer__col-heading">{footer.columnHeadings.hours}</p>
         <dl class="site-footer__hours">
           {(Array.isArray(venue.displayHours) ? venue.displayHours : []).map((h: any) => (
             <div class="site-footer__hour-row">
@@ -104,7 +104,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 
       <!-- Reserve column -->
       <section aria-labelledby="footer-reserve-heading" class="site-footer__reserve-col">
-        <h3 id="footer-reserve-heading" class="site-footer__col-heading">{footer.columnHeadings.reservations}</h3>
+        <p id="footer-reserve-heading" class="site-footer__col-heading">{footer.columnHeadings.reservations}</p>
         <ul role="list" class="site-footer__nav-list">
           <li>
             <a
@@ -290,6 +290,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 /* Nav columns */
 .site-footer__col-heading {
   font-family: var(--font-sans);
+  line-height: 1.15;
   font-size: 0.5625rem;
   font-weight: 500;
   letter-spacing: 0.28em;

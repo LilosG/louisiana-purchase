@@ -7,6 +7,7 @@ import Layout from '../../layouts/Layout.astro';
 import PageHero from '../../components/ui/PageHero.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
 import CTABand from '../../components/ui/CTABand.astro';
+import LocationHeading from '../../components/ui/LocationHeading.astro';
 import { IMAGES } from '../../assets/images';
 const pageContent = await getSingleton('contactPage', 'page');
 const venue = await getSingleton('venueSettings', 'settings');
@@ -92,9 +93,7 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet}
         <!-- Address & Directions -->
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.location.eyebrow}></p>
-          <h2 id="location-hours-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);">
-            {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
-          </h2>
+          <LocationHeading id="location-hours-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(1.875rem, 3.5vw, 2.75rem);" />
           <p class="font-sans font-light text-smoke text-sm leading-relaxed mb-6 max-w-[40ch]" set:text={locationBody}></p>
           <a
             href={VENUE_MAPS_URL}

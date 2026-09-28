@@ -18,6 +18,7 @@ interface Props {
   reverse?:     boolean;
   dark?:        boolean;
   headingId?:   string;
+  headingLevel?: 2 | 3;
 }
 
 const {
@@ -32,7 +33,10 @@ const {
   reverse = false,
   dark = true,
   headingId,
+  headingLevel = 2,
 } = Astro.props;
+
+const Heading = `h${headingLevel}` as 'h2' | 'h3';
 ---
 
 <div class:list={[
@@ -72,18 +76,18 @@ const {
       </p>
     )}
 
-    <h2
+    <Heading
       id={headingId}
       class="font-display font-light text-parchment tracking-[-0.03em] leading-none mb-5 reveal"
       style="font-size: clamp(2rem, 4vw, 3.25rem);"
     >
-      {title}
+      {title}{titleItalic && ' '}
       {titleItalic && (
         <span class="block font-serif italic font-light text-gold tracking-[-0.01em]" style="font-size: clamp(1.875rem, 3.75vw, 3rem);">
           {titleItalic}
         </span>
       )}
-    </h2>
+    </Heading>
 
     {body.map((paragraph) => (
       <p class="font-sans font-light text-smoke leading-relaxed mb-4 reveal" style="font-size: clamp(0.9375rem, 1.25vw, 1rem);">

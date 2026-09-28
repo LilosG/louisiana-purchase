@@ -1,0 +1,24 @@
+---
+// src/components/ui/LocationHeading.astro
+// Louisiana Purchase — Shared location heading (street / neighborhood, city).
+// Single source for the address heading used on /contact and /the-space,
+// sourced from venueSettings.address. The explicit space before <br /> keeps
+// plain-text extraction readable ("2305 University Ave North Park, San Diego")
+// without changing the rendered layout.
+
+import { getSingleton } from '../../content/siteData';
+
+interface Props {
+  id:     string;
+  class?: string;
+  style?: string;
+}
+
+const { id, class: className, style } = Astro.props;
+const venue = await getSingleton('venueSettings', 'settings');
+const address = venue.address;
+---
+
+<h2 id={id} class={className} style={style}>
+  {address.street}{' '}<br /><span class="italic text-gold">{address.neighborhood}, {address.city}</span>
+</h2>

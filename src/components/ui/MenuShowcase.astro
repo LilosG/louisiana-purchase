@@ -41,6 +41,7 @@ interface Props {
   dark?:         boolean;
   divided?:      boolean;
   showPrice?:    boolean;              // default false — price remains stored with each menu item
+  headingLevel?: 2 | 3 | 4;            // heading level for item titles (passed to FourColumnGrid)
 }
 
 const {
@@ -53,6 +54,7 @@ const {
   dark = true,
   divided = true,
   showPrice = false,
+  headingLevel = 3,
 } = Astro.props as Props;
 
 interface ItemWithCategory {
@@ -113,4 +115,5 @@ const cards = entries.map(({ item, categoryLabel }) => {
   dark={dark}
   divided={divided}
   cards={cards}
+  headingLevel={headingLevel}
 />

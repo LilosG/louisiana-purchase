@@ -24,6 +24,8 @@ interface Props {
   cols?:    2 | 3 | 4;
   dark?:    boolean;
   divided?: boolean;
+  /** Heading level for each card title, so the grid fits the surrounding outline. */
+  headingLevel?: 2 | 3 | 4;
 }
 
 const {
@@ -31,7 +33,10 @@ const {
   cols = 4,
   dark = true,
   divided = true,
+  headingLevel = 3,
 } = Astro.props;
+
+const CardHeading = `h${headingLevel}` as 'h2' | 'h3' | 'h4';
 
 const colClass = {
   2: 'grid-cols-1 sm:grid-cols-2',
@@ -88,10 +93,10 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
                 {card.eyebrow}
               </p>
             )}
-            <h3 class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-[280ms]"
+            <CardHeading class="font-serif font-light text-parchment leading-snug group-hover:text-gold transition-colors duration-[280ms]"
                 style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
               {card.title}
-            </h3>
+            </CardHeading>
             {card.body && (
               <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm mt-1">
                 {card.body}
@@ -138,10 +143,10 @@ const cardBg = dark ? 'bg-obsidian-800' : 'bg-velvet-800';
                 {card.eyebrow}
               </p>
             )}
-            <h3 class="font-serif font-light text-parchment leading-snug"
+            <CardHeading class="font-serif font-light text-parchment leading-snug"
                 style="font-size: clamp(1rem, 1.5vw, 1.125rem);">
               {card.title}
-            </h3>
+            </CardHeading>
             {card.body && (
               <p class="font-sans font-light text-smoke leading-relaxed flex-1 text-sm mt-1">
                 {card.body}

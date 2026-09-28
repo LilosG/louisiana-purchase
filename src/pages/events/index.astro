@@ -58,7 +58,7 @@ const updatesTitle = `\n${pageContent.updates.title}`;
 
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.updates.eyebrow}></p>
-          <h2 id="updates-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{updatesTitle}<br /><span class="italic text-gold" set:text={pageContent.updates.titleItalic}></span>
+          <h2 id="updates-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">{updatesTitle}{' '}<br /><span class="italic text-gold" set:text={pageContent.updates.titleItalic}></span>
           </h2>
           <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]" set:html={`\n${pageContent.updates.body}\n`}></p>
           <div class="flex flex-wrap gap-4">

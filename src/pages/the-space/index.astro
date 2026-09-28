@@ -10,6 +10,7 @@ import SectionHeader from '../../components/ui/SectionHeader.astro';
 import AlternatingRow from '../../components/ui/AlternatingRow.astro';
 import StatBar from '../../components/ui/StatBar.astro';
 import CTABand from '../../components/ui/CTABand.astro';
+import LocationHeading from '../../components/ui/LocationHeading.astro';
 import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
 import { IMAGES } from '../../assets/images';
 import { Image } from 'astro:assets';
@@ -67,9 +68,7 @@ const locationBody = `\n${location.bodyPrefix ?? ''}${VENUE_ADDRESS.crossStreet.
 
         <div>
           <p class="font-sans text-[0.5625rem] font-medium tracking-[0.28em] uppercase text-gold mb-3" set:text={pageContent.location.eyebrow}></p>
-          <h2 id="location-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);">
-            {VENUE_ADDRESS.street}<br /><span class="italic text-gold">{VENUE_ADDRESS.neighborhood}, {VENUE_ADDRESS.city}</span>
-          </h2>
+          <LocationHeading id="location-heading" class="font-serif font-light text-parchment tracking-[-0.02em] leading-[1.05] mb-5" style="font-size: clamp(2rem, 4vw, 3rem);" />
           <p class="font-sans font-light text-smoke leading-relaxed text-[0.9375rem] mb-8 max-w-[44ch]" set:html={locationBody}></p>
 
           <dl class="flex flex-col gap-4 mb-8 pt-6 border-t border-gold/15">
