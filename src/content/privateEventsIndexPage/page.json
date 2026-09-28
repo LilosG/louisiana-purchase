@@ -116,8 +116,8 @@
       "discriminant": "SectionHeader",
       "value": {
         "eyebrow": "Browse by Event Type",
-        "title": "Every Occasion,",
-        "titleItalic": "Elevated",
+        "title": "Private Event Types",
+        "titleItalic": "Every Occasion, Elevated",
         "subtitle": "From intimate corporate dinners to full venue buyouts — Louisiana Purchase handles events of every scale with the same level of care.",
         "id": "event-types-heading"
       }
@@ -126,8 +126,8 @@
       "discriminant": "SectionHeader",
       "value": {
         "eyebrow": "How It Works",
-        "title": "From First Inquiry",
-        "titleItalic": "to Your Event",
+        "title": "How to Book a Private Event",
+        "titleItalic": "From First Inquiry to Your Event",
         "subtitle": "Our events team handles every detail from first contact to last call.",
         "id": "process-heading"
       }
@@ -138,8 +138,8 @@
         "image": "__IMAGE__louisiana-purchase-group-dining-san-diego-website",
         "imageAlt": "Group dining at Louisiana Purchase North Park San Diego",
         "eyebrow": "The Space",
-        "title": "Three Distinct",
-        "titleItalic": "Event Spaces",
+        "title": "Three Private Event Spaces",
+        "titleItalic": "in North Park",
         "body": [
           "Louisiana Purchase offers three configurable spaces — the intimate private dining room for seated dinners up to 40, the full restaurant buyout for groups up to 80, and the lush open patio for cocktail receptions and standing events.",
           "Each space can be configured independently or combined for larger events. Our team will recommend the best configuration for your headcount and event style."
@@ -205,7 +205,11 @@
     },
     {
       "discriminant": "ToastEventForm",
-      "value": {}
+      "value": {
+        "eyebrow": "Request a Proposal",
+        "title": "Private Event Inquiry",
+        "titleItalic": "Tell Us About Your Event"
+      }
     }
   ]
 }

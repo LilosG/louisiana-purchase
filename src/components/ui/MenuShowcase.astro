@@ -42,6 +42,7 @@ interface Props {
   divided?:      boolean;
   showPrice?:    boolean;              // default false — price remains stored with each menu item
   headingLevel?: 2 | 3 | 4;            // heading level for item titles (passed to FourColumnGrid)
+  categoryHeadingLevel?: 2 | 3;        // when set, items are grouped under their menuStructure category label as headings of this level
 }
 
 const {
@@ -55,6 +56,7 @@ const {
   divided = true,
   showPrice = false,
   headingLevel = 3,
+  categoryHeadingLevel,
 } = Astro.props as Props;
 
 interface ItemWithCategory {
@@ -95,7 +97,7 @@ if (limit) {
   entries = entries.slice(0, limit);
 }
 
-const cards = entries.map(({ item, categoryLabel }) => {
+const toCard = ({ item, categoryLabel }: ItemWithCategory) => {
   const image = item.image ? IMAGES[item.image as keyof typeof IMAGES] : undefined;
 
   return {
@@ -107,13 +109,42 @@ const cards = entries.map(({ item, categoryLabel }) => {
     body:     item.description,
     meta:     showPrice ? item.priceDisplay : undefined,
   };
-});
+};
+const cards = entries.map(toCard);
+
+// Category groups keep the menuStructure order (entries are already in that order).
+const groups: { label: string; cards: ReturnType<typeof toCard>[] }[] = [];
+for (const entry of entries) {
+  const group = groups.find((g) => g.label === entry.categoryLabel);
+  if (group) group.cards.push(toCard(entry));
+  else groups.push({ label: entry.categoryLabel, cards: [toCard(entry)] });
+}
+const CategoryHeading = `h${categoryHeadingLevel ?? 3}` as 'h2' | 'h3';
 ---
 
-<FourColumnGrid
-  cols={cols}
-  dark={dark}
-  divided={divided}
-  cards={cards}
-  headingLevel={headingLevel}
-/>
+{categoryHeadingLevel ? (
+  <div class="flex flex-col gap-12 md:gap-16">
+    {groups.map((group) => (
+      <div>
+        <CategoryHeading class="font-sans text-[0.625rem] font-medium tracking-[0.32em] uppercase text-gold mb-5">
+          {group.label}
+        </CategoryHeading>
+        <FourColumnGrid
+          cols={cols}
+          dark={dark}
+          divided={divided}
+          cards={group.cards}
+          headingLevel={headingLevel}
+        />
+      </div>
+    ))}
+  </div>
+) : (
+  <FourColumnGrid
+    cols={cols}
+    dark={dark}
+    divided={divided}
+    cards={cards}
+    headingLevel={headingLevel}
+  />
+)}
