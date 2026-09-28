@@ -75,6 +75,8 @@
     { "source": "/items/:path*",                         "destination": "/menu",            "permanent": true },
     { "source": "/menu/louisiana-purchase/:path*",       "destination": "/menu",            "permanent": true },
     { "source": "/menu/brunch",                          "destination": "/brunch",          "permanent": true },
-    { "source": "/private-events/north-park-rooftop-buyout", "destination": "/private-events/north-park-patio-buyout", "permanent": true }
+    { "source": "/private-events/north-park-rooftop-buyout", "destination": "/private-events/north-park-patio-buyout", "permanent": true },
+    { "source": "/blog/best-happy-hour-north-park",       "destination": "/blog/north-park-happy-hour-guide", "permanent": true },
+    { "source": "/blog/best-creole-restaurants-north-park-san-diego", "destination": "/blog/top-creole-restaurants-san-diego-local-guide", "permanent": true }
   ]
 }
