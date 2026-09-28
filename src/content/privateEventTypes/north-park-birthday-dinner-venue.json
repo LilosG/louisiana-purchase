@@ -11,6 +11,6 @@
     "birthday celebration venue san diego"
   ],
   "eventType": "Birthday Celebration",
-  "capacity": "2–80 guests",
+  "capacity": "2–{{EVENT_CAPACITY}}",
   "priceGuide": "No minimum for standard reservations"
 }

@@ -1,0 +1,16 @@
+{
+  "id": "north-park-full-restaurant-buyout",
+  "order": 5,
+  "slug": "north-park-full-restaurant-buyout",
+  "title": "Full Restaurant Buyout in North Park, San Diego",
+  "metaTitle": "Full Restaurant Buyout in North Park | Louisiana Purchase",
+  "description": "Book a full restaurant buyout at Louisiana Purchase in North Park, San Diego, for {{EVENT_CAPACITY}}: the dining room, bar and outdoor patio, all yours.",
+  "keywords": [
+    "full restaurant buyout north park",
+    "restaurant buyout san diego",
+    "private event venue north park"
+  ],
+  "eventType": "Full Restaurant Buyout",
+  "capacity": "{{EVENT_CAPACITY}}",
+  "priceGuide": "Contact our events team for pricing"
+}

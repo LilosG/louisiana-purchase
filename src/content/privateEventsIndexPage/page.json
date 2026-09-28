@@ -53,8 +53,8 @@
       "value": {
         "stats": [
           {
-            "value": "80",
-            "label": "Max Capacity"
+            "value": "{{EVENT_CAPACITY_SHORT}}",
+            "label": "Guest Capacity"
           },
           {
             "value": "40",
@@ -87,7 +87,7 @@
         "facts": [
           {
             "label": "Full Venue",
-            "value": "Up to 80 Guests"
+            "value": "{{EVENT_CAPACITY}}"
           },
           {
             "label": "Private Room",
@@ -141,7 +141,7 @@
         "title": "Three Private Event Spaces",
         "titleItalic": "in North Park",
         "body": [
-          "Louisiana Purchase offers three configurable spaces — the intimate private dining room for seated dinners up to 40, the full restaurant buyout for groups up to 80, and the lush open patio for cocktail receptions and standing events.",
+          "Louisiana Purchase offers three configurable spaces — the intimate private dining room for seated dinners up to 40, the full restaurant buyout for groups of {{EVENT_CAPACITY}}, and the lush open patio for cocktail receptions and standing events.",
           "Each space can be configured independently or combined for larger events. Our team will recommend the best configuration for your headcount and event style."
         ],
         "facts": [
@@ -151,7 +151,7 @@
           },
           {
             "label": "Full Venue",
-            "value": "Up to 80 guests"
+            "value": "{{EVENT_CAPACITY}}"
           },
           {
             "label": "Patio Reception",

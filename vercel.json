@@ -74,6 +74,7 @@
     { "source": "/tracking/:path*",                      "destination": "/",                "permanent": true },
     { "source": "/items/:path*",                         "destination": "/menu",            "permanent": true },
     { "source": "/menu/louisiana-purchase/:path*",       "destination": "/menu",            "permanent": true },
-    { "source": "/menu/brunch",                          "destination": "/brunch",          "permanent": true }
+    { "source": "/menu/brunch",                          "destination": "/brunch",          "permanent": true },
+    { "source": "/private-events/north-park-rooftop-buyout", "destination": "/private-events/north-park-patio-buyout", "permanent": true }
   ]
 }

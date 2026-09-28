@@ -1,7 +1,7 @@
 {
-  "id": "north-park-rooftop-buyout",
+  "id": "north-park-patio-buyout",
   "order": 4,
-  "slug": "north-park-rooftop-buyout",
+  "slug": "north-park-patio-buyout",
   "title": "Patio Buyout in North Park, San Diego",
   "metaTitle": "Patio Buyout in North Park, San Diego | Louisiana Purchase",
   "description": "Book a patio buyout at Louisiana Purchase in North Park, San Diego: our lush outdoor patio, exclusively yours for cocktail receptions and rehearsal dinners.",
@@ -11,6 +11,6 @@
     "cocktail reception venue san diego"
   ],
   "eventType": "Patio Buyout",
-  "capacity": "30–80 guests",
+  "capacity": "30–{{EVENT_CAPACITY}}",
   "priceGuide": "F&B minimum + venue fee"
 }

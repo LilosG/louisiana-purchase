@@ -11,6 +11,6 @@
     "business dinner san diego"
   ],
   "eventType": "Corporate Dinner",
-  "capacity": "20–80 guests",
+  "capacity": "20–{{EVENT_CAPACITY}}",
   "priceGuide": "Contact for corporate pricing"
 }
