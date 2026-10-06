@@ -22,10 +22,15 @@
 
 /* One shared reserve for the fixed bar, including two lines of enlarged CTA
    text and the device safe area. Desktop keeps its existing layout. */
-:root { --mobile-action-bar-space: 0px; }
+:root {
+  --mobile-action-bar-font-size: var(--text-xs);
+  --mobile-action-bar-line-height: 1.2;
+  --mobile-action-bar-padding: 0.75rem;
+  --mobile-action-bar-space: 0px;
+}
 @media (width < 1280px) {
   :root {
-    --mobile-action-bar-space: calc(max(3.5rem, 2 * 0.625rem * 1.2 + 2rem) + env(safe-area-inset-bottom, 0px));
+    --mobile-action-bar-space: calc(max(3.5rem, 2 * var(--mobile-action-bar-font-size) * var(--mobile-action-bar-line-height) + 2 * var(--mobile-action-bar-padding)) + env(safe-area-inset-bottom, 0px));
   }
   html { scroll-padding-bottom: var(--mobile-action-bar-space); }
   body.public-site { padding-bottom: var(--mobile-action-bar-space); }

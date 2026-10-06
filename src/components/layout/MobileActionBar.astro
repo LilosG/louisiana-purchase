@@ -29,21 +29,24 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
     z-index: var(--z-index-overlay);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    block-size: var(--mobile-action-bar-space);
   }
 
   .mobile-action-bar a {
     display: flex;
+    flex-wrap: wrap;
+    align-content: center;
     align-items: center;
     justify-content: center;
     gap: 8px;
     min-width: 0;
-    min-height: var(--mobile-action-bar-space);
-    padding: 1rem 8px calc(1rem + env(safe-area-inset-bottom, 0px));
+    min-height: 0;
+    padding: 0 8px env(safe-area-inset-bottom, 0px);
     font-family: var(--font-sans);
-    font-size: var(--text-2xs);
+    font-size: var(--mobile-action-bar-font-size);
     font-weight: 500;
-    line-height: 1.2;
-    letter-spacing: var(--tracking-ultra);
+    line-height: var(--mobile-action-bar-line-height);
+    letter-spacing: var(--tracking-widest);
     text-transform: uppercase;
     text-align: center;
   }

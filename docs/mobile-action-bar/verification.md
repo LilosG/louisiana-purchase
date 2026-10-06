@@ -6,9 +6,9 @@ Implemented on `feature/mobile-reserve-call-bar`, based on current `origin/main`
 
 `MobileActionBar.astro` is rendered once by the shared public Layout. All 36 built public HTML pages (including blog, event detail pages, privacy and 404) have the two semantic links. No framework hydration, dependencies or page edits. Visibility uses SiteNav's 1280px desktop breakpoint. The existing viewport already includes `viewport-fit=cover`.
 
-Actions have a 56px minimum height plus `env(safe-area-inset-bottom)`. A shared CSS reserve supplies body padding, scroll padding and the privacy notice offset; its text allowance supports wrapped labels. Decorative SVGs, real hrefs and inset focus outlines support access without site JavaScript. The bar uses z-index overlay (20), below drawer (39), navigation (40), privacy notice (9999), and native dialog top layer. Privacy actions can wrap at 320px.
+Actions have a shared 56px normal height plus `env(safe-area-inset-bottom)`. Shared CSS values for the 12px font token, line height and text space compute the bar height, body padding, scroll padding and privacy notice offset. The bar uses that computed block size so wrapped labels cannot expand its grid beyond the page reserve. Icon and label groups can wrap when text is enlarged. Decorative SVGs, real hrefs and inset focus outlines support access without site JavaScript. The bar uses z-index overlay (20), below drawer (39), navigation (40), privacy notice (9999), and native dialog top layer. Privacy actions can wrap at 320px.
 
-Colors from the active Tailwind 4 global @theme: gold `#C9A84C`, obsidian `#0A0806`, parchment `#F2EBE0`. Contrast: gold/obsidian 8.75:1; parchment/obsidian 16.89:1. Typography matches the existing mobile Reserve a Table CTA: DM Sans Variable, 500 weight, 0.625rem, uppercase, 0.24em tracking. Installed versions: Astro 6.4.4, Tailwind 4.3.0; npm/package-lock.
+Colors from the active Tailwind 4 global @theme: gold `#C9A84C`, obsidian `#0A0806`, parchment `#F2EBE0`. Contrast: gold/obsidian 8.75:1; parchment/obsidian 16.89:1. Typography matches the existing mobile Reserve a Table CTA: DM Sans Variable, 500 weight, the existing 0.75rem / 12px `--text-xs` token, uppercase, and the existing 0.16em `--tracking-widest` token. Installed versions: Astro 6.4.4, Tailwind 4.3.0; npm/package-lock.
 
 ## Destinations
 
@@ -44,6 +44,30 @@ External follow-up: in GA4 Admin → Custom definitions, check for an existing e
 - JavaScript-disabled mobile context: both semantic links render with exact destinations and 56px touch targets; reservation default navigation verified with the external response intercepted. Telephone OS handoff is not available in this browser.
 - Analytics: original shared inline script injected into a local test response with a synthetic measurement ID, Google script blocked. Programmatic browser link activation gives exactly one business event per link through contact → menu → contact navigation; the site did not prevent default. Opt out prevents further events. This confirms local dispatch, not GA4 receipt.
 - Private event page iframe and surrounding scroll reserve inspected. Toast's external iframe stayed unloaded, so its internal fields/submission controls and keyboard interaction could not be verified. Physical mobile keyboard, telephone app handoff and physical device checks remain for review.
+
+## PR #12 scoped corrections (2026-10-06)
+
+The existing SiteNav controller now sets native `inert` on the bar when opening its drawer and removes it through the existing closeDrawer function. Toggle, Escape and menu-link navigation use that same lifecycle. A desktop matchMedia change calls closeDrawer, preventing a retained lock when returning to mobile. No inert attribute is rendered in HTML, so links retain normal interaction without site JavaScript. No second menu controller or menu state was added.
+
+Labels now use the existing 12px typography token with 0.16em tracking. The former duplicated 0.625rem sizing assumption is removed. Font, line height and text allowance feed one shared computed block size, used by both the fixed bar and the page reserve. Normal height remains 56px; enlarged groups can wrap inside their action.
+
+Actual local Chrome / Playwright browser regression verification (Chrome 154):
+
+- Native Enter opens the menu. 70 forward Tabs plus 70 reverse Tabs never focus either bar link; a focusin listener records zero bar focus events while inert.
+- Native toggle Enter, Escape, menu-link Enter navigation, and crossing 1280px then returning to 320px all clear inert. After every close path, native Tab from the final footer link reaches Reserve, then Call Us. No-JavaScript HTML retains both real links without inert.
+- At 320/375/390/430px and 100/200/300/400% root text: equal halves, all label bounds inside their actions, and bar height equal to body reserve (56/112/168/224px respectively). Normal text has no horizontal overflow. Existing page headings can overflow when enlarged; their presentation was preserved.
+- Visible at 1279px; hidden at 1280px and 1440px. No retained inert state after returning to mobile.
+- A 34px Chromium safe-area override produces matching 90px bar and body reserve. Footer bottom scrolls above the bar.
+- Native keyboard Enter activation of each bar link produces exactly one reservation_click and one phone_click, with cta_location: mobile_bottom_bar, through contact → menu → contact. Synthetic GA ID and blocked Google network requests verify local dispatch only.
+- Final production build passes. Five focused Node tests pass. Full npm test has 9 passing and the same four baseline Keystatic image failures. Astro check has only the previously documented Keystatic TS2353 baseline error and two existing hints. Available Prettier passes the browser checker and report; Astro formatting plugin/lint script remain unavailable. git diff --check passes.
+
+The repeatable browser checker is `tests/mobile-action-bar.browser.mjs`. It uses a separately available Playwright installation and local Chrome, without adding project dependencies. Run against the built site served on port 4322 (or set LP_BASE_URL):
+
+```sh
+LP_PLAYWRIGHT_MODULE=/absolute/path/to/playwright/index.mjs node tests/mobile-action-bar.browser.mjs
+```
+
+All eight affected screenshots were refreshed and inspected. These are browser simulations, not physical-device testing. Prior Toast iframe/physical keyboard and GA4 DebugView limitations remain. GA4 custom-dimension follow-up is unchanged.
 
 ## Screenshots
 
