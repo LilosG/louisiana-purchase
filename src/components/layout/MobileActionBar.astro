@@ -1,0 +1,66 @@
+---
+import { getSingleton } from '../../content/siteData';
+import type venueSettings from '../../content/venueSettings/settings.json';
+
+const venue: typeof venueSettings = await getSingleton('venueSettings', 'settings');
+const phone = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
+---
+
+<nav class="mobile-action-bar" aria-label="Reservations and phone">
+  <a href={venue.reservationsUrl} target="_blank" rel="noopener noreferrer"
+    class="mobile-action-bar__reserve" data-cta-location="mobile_bottom_bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M8 3v4m8-4v4M4 10h16M6 5h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z" />
+    </svg>
+    <span>Reserve</span>
+  </a>
+  <a href={`tel:${phone}`} class="mobile-action-bar__call" data-cta-location="mobile_bottom_bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true" focusable="false">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h2.28a1 1 0 0 1 .948.684l1.498 4.493a1 1 0 0 1-.502 1.21l-2.257 1.13a11.042 11.042 0 0 0 5.516 5.516l1.13-2.257a1 1 0 0 1 1.21-.502l4.493 1.498a1 1 0 0 1 .684.949V19a2 2 0 0 1-2 2h-1C9.716 21 3 14.284 3 6V5Z" />
+    </svg>
+    <span>Call Us</span>
+  </a>
+</nav>
+
+<style>
+  .mobile-action-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: var(--z-index-overlay);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .mobile-action-bar a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 0;
+    min-height: var(--mobile-action-bar-space);
+    padding: 1rem 8px calc(1rem + env(safe-area-inset-bottom, 0px));
+    font-family: var(--font-sans);
+    font-size: var(--text-2xs);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: var(--tracking-ultra);
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .mobile-action-bar svg {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .mobile-action-bar span { min-width: 0; overflow-wrap: anywhere; }
+  .mobile-action-bar__reserve { background: var(--color-gold); color: var(--color-obsidian); }
+  .mobile-action-bar__call { background: var(--color-obsidian); color: var(--color-parchment); }
+  .mobile-action-bar a:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
+
+  /* Match SiteNav's desktop navigation breakpoint. */
+  @media (min-width: 1280px) {
+    .mobile-action-bar { display: none; }
+  }
+</style>

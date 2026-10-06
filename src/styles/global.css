@@ -20,6 +20,17 @@
 @import "@fontsource/dm-mono/300.css";
 @import "@fontsource/dm-mono/400.css";
 
+/* One shared reserve for the fixed bar, including two lines of enlarged CTA
+   text and the device safe area. Desktop keeps its existing layout. */
+:root { --mobile-action-bar-space: 0px; }
+@media (width < 1280px) {
+  :root {
+    --mobile-action-bar-space: calc(max(3.5rem, 2 * 0.625rem * 1.2 + 2rem) + env(safe-area-inset-bottom, 0px));
+  }
+  html { scroll-padding-bottom: var(--mobile-action-bar-space); }
+  body.public-site { padding-bottom: var(--mobile-action-bar-space); }
+}
+
 /* ─── Brand Token System (@theme) ────────────────────────────────────────── */
 /* Tailwind v4: all custom tokens defined here become utility classes.        */
 
