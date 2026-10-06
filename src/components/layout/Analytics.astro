@@ -63,14 +63,17 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         document.head.appendChild(s);
 
         document.addEventListener('click', function (e) {
-          var link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"]');
+          if (!(e.target instanceof Element)) return;
+          if (navigator.globalPrivacyControl === true || window.lilosPrivacy.isOptedOut()) return;
+          var link = e.target.closest('a[href*="resy.com"], a[href*="toasttab.com"], a[href*="opentable.com"], a[href*="toast.app"], a[href^="tel:"]');
           if (!link) return;
 
           var eventName = 'external_link_click';
           var reservationSystem = null;
           try {
             var href = link.href.toLowerCase();
-            if (href.includes('opentable.com')) { eventName = 'reservation_click'; reservationSystem = 'opentable'; }
+            if (href.startsWith('tel:')) eventName = 'phone_click';
+            else if (href.includes('opentable.com')) { eventName = 'reservation_click'; reservationSystem = 'opentable'; }
             else if (href.includes('toast.app')) { eventName = 'reservation_click'; reservationSystem = 'toast_legacy'; }
             else if (href.includes('resy.com')) { eventName = 'reservation_click'; reservationSystem = 'resy'; }
             else if (href.includes('giftcard')) eventName = 'gift_card_click';
@@ -79,11 +82,14 @@ const GA_ID = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
           } catch (err) {}
 
           if (typeof gtag === 'function') {
-            gtag('event', eventName, {
-              link_url: link.href,
-              page_path: window.location.pathname,
-              ...(reservationSystem ? { reservation_system: reservationSystem } : {}),
-            });
+            try {
+              gtag('event', eventName, {
+                link_url: link.href,
+                page_path: window.location.pathname,
+                ...(reservationSystem ? { reservation_system: reservationSystem } : {}),
+                ...(link.dataset.ctaLocation ? { cta_location: link.dataset.ctaLocation } : {}),
+              });
+            } catch (err) { /* Analytics must never block link activation. */ }
           }
         }, { passive: true });
 

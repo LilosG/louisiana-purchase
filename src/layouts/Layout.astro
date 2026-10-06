@@ -7,6 +7,7 @@ import SiteFooter from '../components/layout/SiteFooter.astro';
 import LocalSEO from '../components/core/LocalSEO.astro';
 import Analytics from '../components/layout/Analytics.astro';
 import ConsentBanner from '../components/layout/ConsentBanner.astro';
+import MobileActionBar from '../components/layout/MobileActionBar.astro';
 import type { PageSeoProps } from '../types/seo';
 
 import '../styles/global.css';
@@ -36,7 +37,7 @@ const { transparentNav = true, ...seoProps } = Astro.props;
     <Analytics />
   </head>
 
-  <body class="bg-obsidian text-parchment font-sans antialiased overflow-x-hidden">
+  <body class="public-site bg-obsidian text-parchment font-sans antialiased overflow-x-hidden">
 
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-gold-500 focus:text-obsidian focus:text-sm focus:rounded-sm">
       Skip to main content
@@ -49,6 +50,8 @@ const { transparentNav = true, ...seoProps } = Astro.props;
     </main>
 
     <SiteFooter />
+
+    <MobileActionBar />
 
     <ConsentBanner siteName="Louisiana Purchase" />
 

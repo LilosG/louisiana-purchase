@@ -429,6 +429,7 @@ const mobileLinks = [
   const nav    = document.getElementById('site-nav') as HTMLElement | null;
   const toggle = document.getElementById('nav-mobile-toggle') as HTMLButtonElement | null;
   const drawer = document.getElementById('nav-mobile-drawer') as HTMLElement | null;
+  const actionBar = document.querySelector<HTMLElement>('.mobile-action-bar');
 
   if (!nav || !toggle || !drawer) return;
 
@@ -449,6 +450,7 @@ const mobileLinks = [
   }
 
   function openDrawer(): void {
+    if (actionBar) actionBar.inert = true;
     drawer!.classList.add('is-open');
     drawer!.setAttribute('aria-hidden', 'false');
     toggle!.setAttribute('aria-expanded', 'true');
@@ -457,6 +459,7 @@ const mobileLinks = [
   }
 
   function closeDrawer(): void {
+    if (actionBar) actionBar.inert = false;
     drawer!.classList.remove('is-open');
     drawer!.setAttribute('aria-hidden', 'true');
     toggle!.setAttribute('aria-expanded', 'false');
@@ -474,6 +477,13 @@ const mobileLinks = [
 
   document.addEventListener('keydown', (e: KeyboardEvent): void => {
     if (e.key === 'Escape') closeDrawer();
+  });
+
+  // A drawer opened on mobile must not retain its interaction lock when the
+  // visitor switches to desktop and then returns to mobile.
+  const desktopNavigation = window.matchMedia('(min-width: 1280px)');
+  desktopNavigation.addEventListener('change', (event): void => {
+    if (event.matches) closeDrawer();
   });
 })();
 </script>
