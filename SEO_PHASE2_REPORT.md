@@ -126,7 +126,7 @@ The homepage stat is now `{{GOOGLE_RATING}}` (for example `4.7★ (1,234)`), lab
 - `src/pages/404.astro` uses `Layout`, `noindex, follow`, and links to Home, Menu, Reserve a Table and Contact. The adapter's `.vercel/output/config.json` route `{"src":"^/.*$","dest":"/404.html","status":404}` keeps the live status at 404. `robots.txt` is unchanged.
 
 ### WP14 — NAP and data consistency
-- Homepage phone CTA is now `{{VENUE_PHONE}}` → `(858) 683-6828` with `{{VENUE_PHONE_TEL}}`. The homepage StatBar maps link and every "Get Directions" link now use `{{VENUE_MAPS_URL}}` (the Place-ID URL). `maps.google.com/?q=` occurrences in `src/`: 0.
+- Homepage phone CTA is now `{{VENUE_PHONE}}` → `(858) 223-9405` with `{{VENUE_PHONE_TEL}}`. The homepage StatBar maps link and every "Get Directions" link now use `{{VENUE_MAPS_URL}}` (the Place-ID URL). `maps.google.com/?q=` occurrences in `src/`: 0.
 - Cocktail counts: every hard-coded "20+" claim is now `{{SIGNATURE_COCKTAIL_COUNT}}` (11), computed from the `cocktailsMenu` collection and labelled "Signature Cocktails". The duplicate hard-typed "4+ Signature Cocktails" stat on `/menu/cocktails` was removed. **Phase 1 §12 miscounted the collection as 12 files; it has 11.**
 - `SiteNav` reads the phone from `venueSettings`, using the shared `formatPhone`. The duplicate `navigation.phoneFallback` field was removed.
 - `privacy.astro` reads name, address, email and phone from `venueSettings`.
@@ -138,7 +138,7 @@ The homepage stat is now `{{GOOGLE_RATING}}` (for example `4.7★ (1,234)`), lab
   - home StatBar 2: 20+ Craft Cocktails -> computed count
   - home Visit Us: 7 hard-typed hours facts -> venueSettings.displayHours
   - home Visit Us: maps.google.com/?q= link -> venueSettings.mapsUrl
-  - home Visit Us: phone CTA +18586836828 -> formatted venue phone
+  - home Visit Us: phone CTA +18582239405 -> formatted venue phone
   - menu StatBar: 20+ -> computed count
   - menu kitchen row: fact ('Kitchen', 'From 12 PM') -> From {{EARLIEST_OPEN}}
   - menu bar row: fact ('Selection', '20+ Cocktails') -> {{SIGNATURE_COCKTAIL_COUNT}} Signature Cocktails
@@ -177,7 +177,7 @@ The homepage stat is now `{{GOOGLE_RATING}}` (for example `4.7★ (1,234)`), lab
   - brunch setting row "corner of University Ave and 23rd St" → {{VENUE_CROSS_STREET}}
   - menuIndexPage unrendered brunch row "craft cocktails from noon" → {{BRUNCH_START}}
   - SiteNav.astro: navigation.phoneFallback → venueSettings.phoneFallback; local formatPhone → shared siteData.formatPhone
-  - privacy.astro: hard-typed "2305 University Ave, North Park, San Diego, CA 92104", info@… and (858) 683-6828 → venueSettings
+  - privacy.astro: hard-typed "2305 University Ave, North Park, San Diego, CA 92104", info@… and (858) 223-9405 → venueSettings
   - Blog NAP corrections (static MDX text, see below): "30th and University" (Cajun, Host an event) → University Ave and 23rd St; "location on 30th Street" (Gumbo) → University Ave; LP happy hour "4–6 PM weekdays" (Small plates) → Monday through Friday 3–5 PM
 
 - Blog MDX hours/address text that already **matches** venueSettings was left as static text. The external pipeline writes plain MDX, and `{{TOKEN}}` braces are MDX expressions. Occurrences: `best-cajun-restaurants…` (FAQ + "Planning Your Visit" weekly hours, "2305 University Ave, North Park, San Diego, CA 92104", happy hour 3–5 PM ×3, brunch-from-noon sentence), `north-park-happy-hour-guide` (3–5 PM ×4), `top-creole…` (brunch-from-noon sentence), `best-creole-small-plates…` (3–5 PM). If venueSettings changes, these need a manual edit.
@@ -313,7 +313,7 @@ Site-wide: the footer column labels `<h3>Explore</h3>`, `<h3>Hours</h3>`, `<h3>R
 | `/blog/top-creole-restaurants-san-diego-local-guide` | Discover authentic Creole restaurants in San Diego. Compare Louisiana Purchase, The Taco Stand, and other local spots for genuine New Orleans cuisine in North Park. (164) | Where to find authentic Creole cooking in San Diego: what sets Louisiana Purchase in North Park apart, from the dark-roux gumbo to the New Orleans bar program. (159) |
 | `/blog/top-new-orleans-cocktails-san-diego-local-guide` | Discover authentic New Orleans cocktails in San Diego. Louisiana Purchase leads with Voo Doo Carre and Praline Old Fashion in North Park. (137) | Discover authentic New Orleans cocktails in San Diego. Louisiana Purchase leads with Voo Doo Carre and Praline Old Fashioned in North Park. (139) |
 | `/brunch` | Weekend brunch at Louisiana Purchase — North Park's most indulgent Saturday and Sunday ritual. Creole brunch plates, craft cocktails, and an open patio from 12 PM. Reserve your table. (183) | Weekend Creole brunch at Louisiana Purchase in North Park, San Diego: chicken and waffles, shrimp and grits, catfish and grits, plus New Orleans cocktails. (155) |
-| `/contact` | Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave. (149) | Contact Louisiana Purchase in North Park, San Diego: directions to 2305 University Ave, hours, phone (858) 683-6828, reservations and event inquiries. (150) |
+| `/contact` | Contact Louisiana Purchase in North Park, San Diego. Reservations, private event inquiries, general questions, and directions to 2305 University Ave. (149) | Contact Louisiana Purchase in North Park, San Diego: directions to 2305 University Ave, hours, phone (858) 223-9405, reservations and event inquiries. (150) |
 | `/events` | Mardi Gras, seasonal menus, live music, and limited-time experiences at Louisiana Purchase in North Park, San Diego. Year-round events at San Diego's premier Creole restaurant. (176) | Events and live music on select nights at Louisiana Purchase in North Park, San Diego, plus Mardi Gras, seasonal menus and New Orleans cocktail features. (153) |
 | `/happy-hour` | Louisiana Purchase's Happy Hour — North Park's best happy hour deals. Discounted craft cocktails, draft beer, and Creole bites every Monday through Friday, 3 PM to 5 PM. Walk-ins welcome. (187) | Happy hour at Louisiana Purchase in North Park, San Diego, Monday – Friday, 3 PM – 5 PM: craft cocktails, draft beer, house wine and Creole bites. (146) |
 | `/menu` | Chef Quinnton Austin's elevated Creole dinner and 20+ craft cocktails at Louisiana Purchase in North Park, San Diego. Fire-forward, deeply rooted, open daily. (158) | Explore the Creole dinner and New Orleans cocktail menus at Louisiana Purchase in North Park, San Diego, from Chef Quinnton Austin's kitchen and craft bar. (155) |
@@ -351,7 +351,7 @@ Site-wide: the footer column labels `<h3>Explore</h3>`, `<h3>Hours</h3>`, `<h3>R
       "name": "Louisiana Purchase",
       "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
       "url": "https://louisianapurchasesd.com",
-      "telephone": "+18586836828",
+      "telephone": "+18582239405",
       "email": "info@louisianapurchasesd.com",
       "priceRange": "$$$",
       "image": "https://louisianapurchasesd.com/og-image.jpg",
@@ -554,7 +554,7 @@ Site-wide: the footer column labels `<h3>Explore</h3>`, `<h3>Hours</h3>`, `<h3>R
       "name": "Louisiana Purchase",
       "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
       "url": "https://louisianapurchasesd.com",
-      "telephone": "+18586836828",
+      "telephone": "+18582239405",
       "email": "info@louisianapurchasesd.com",
       "priceRange": "$$$",
       "image": "https://louisianapurchasesd.com/og-image.jpg",
@@ -919,7 +919,7 @@ Site-wide: the footer column labels `<h3>Explore</h3>`, `<h3>Hours</h3>`, `<h3>R
       "name": "Louisiana Purchase",
       "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
       "url": "https://louisianapurchasesd.com",
-      "telephone": "+18586836828",
+      "telephone": "+18582239405",
       "email": "info@louisianapurchasesd.com",
       "priceRange": "$$$",
       "image": "https://louisianapurchasesd.com/og-image.jpg",
@@ -1229,7 +1229,7 @@ Site-wide: the footer column labels `<h3>Explore</h3>`, `<h3>Hours</h3>`, `<h3>R
       "name": "Louisiana Purchase",
       "description": "An opulent French Quarter-inspired cocktail lounge and Creole dining destination in North Park, San Diego. Renowned for fire-charred oysters, craft Praline Old Fashioneds, and Chef Quinnton Austin's elevated Louisiana culinary program.",
       "url": "https://louisianapurchasesd.com",
-      "telephone": "+18586836828",
+      "telephone": "+18582239405",
       "email": "info@louisianapurchasesd.com",
       "priceRange": "$$$",
       "image": "https://louisianapurchasesd.com/og-image.jpg",

@@ -9,7 +9,7 @@ import ratingData from '../data/google-rating.json';
 // (which may be an array, e.g. hours rows); unknown tokens are left untouched so
 // page-local placeholders such as {{eventType}} keep working.
 
-/** Formats a US E.164 number (+18586836828) as (858) 683-6828; other formats pass through. */
+/** Formats a US E.164 number (+18582239405) as (858) 223-9405; other formats pass through. */
 export function formatPhone(value: string): string {
   const digits = String(value ?? '').replace(/\D/g, '').replace(/^1/, '');
   if (digits.length !== 10) return value;

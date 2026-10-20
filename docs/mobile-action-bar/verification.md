@@ -18,7 +18,7 @@ Reservation URL (all existing provider/campaign parameters retained):
 
 https://www.opentable.com/r/louisiana-purchase-sd-reservations-san-diego?restref=1039495&lang=en-US&ot_source=Restaurant%20website&utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=reservations
 
-Phone: `tel:+18586836828` — (858) 683-6828.
+Phone: `tel:+18582239405` — (858) 223-9405.
 
 The live [Louisiana Purchase contact page](https://louisianapurchasesd.com/contact) agrees with this phone and reservation URL. Opening its [OpenTable reservation link](https://www.opentable.com/r/louisiana-purchase-sd-reservations-san-diego?restref=1039495&lang=en-US&ot_source=Restaurant%20website&utm_source=louisianapurchasesd.com&utm_medium=website&utm_campaign=reservations) identifies Louisiana Purchase SD, confirming venue ID 1039495. No reservation or call was completed.
 

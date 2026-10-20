@@ -14,7 +14,7 @@ const venue = await getSingleton('venueSettings', 'settings');
 const { transparent = true } = Astro.props;
 const currentPath = Astro.url.pathname;
 
-// Phone comes from venueSettings (the single NAP source); formatPhone renders (858) 683-6828.
+// Phone comes from venueSettings (the single NAP source); formatPhone renders (858) 223-9405.
 const phoneRaw = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
 const phoneDisplay = formatPhone(phoneRaw);
 
