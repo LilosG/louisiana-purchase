@@ -1,6 +1,6 @@
 # Gift cards
 
-The `/gift-cards` page uses the existing `Layout`, `PageHero`, `AlternatingRow`, `SectionHeader`, `FourColumnGrid`, and `CTABand` components. Checkout stays on Toast; this site does not collect gift-card payment details.
+The `/gift-cards` page uses the existing `Layout`, `PageHero`, `AlternatingRow`, `SectionHeader`, `FourColumnGrid`, and `CTABand` components. The retired Vercel redirect from `/gift-cards` to the homepage is removed so the new route can be served. Checkout stays on Toast; this site does not collect gift-card payment details.
 
 ## Editing
 

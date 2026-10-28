@@ -45,3 +45,11 @@ test('both gift articles use slug-scoped CMS images that survive an editor save'
     assert.ok(config.collections.blog.schema.cta.fields.href);
   }
 });
+
+test('the new gift routes are not overridden by legacy Vercel redirects', async () => {
+  const deployment = JSON.parse(await readFile('vercel.json', 'utf8'));
+  const routes = ['/gift-cards', '/blog/restaurant-gift-cards-north-park-san-diego', '/blog/thank-you-gifts-san-diego-dinner-gift-card'];
+  for (const route of routes) {
+    assert.ok(!deployment.redirects.some((redirect) => redirect.source === route), route);
+  }
+});
