@@ -3,9 +3,11 @@
 // Louisiana Purchase — Individual Blog Post
 
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import path from 'node:path';
 import sharp from 'sharp';
 import Layout from '../../layouts/Layout.astro';
+import CTABand from '../../components/ui/CTABand.astro';
 import { IMAGES } from '../../assets/images';
 import { blogCategorySlug, getSingleton, relatedPosts } from '../../content/siteData';
 import { buildFaqSchema, pageId } from '../../content/schema';
@@ -74,6 +76,8 @@ const blogPostingSchema: Record<string, unknown> = {
 };
 
 // ─── JSON-LD: FAQPage (only if the post actually has FAQ content) ────────
+const articleCTA = post.data.cta;
+const hasArticleCTA = articleCTA?.title.trim() && articleCTA.label.trim() && articleCTA.href.trim();
 const faqs = post.data.faqs ?? [];
 const faqSchema = await buildFaqSchema(postPath, faqs);
 
@@ -98,15 +102,29 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
   <section aria-labelledby="post-headline" class="relative flex flex-col justify-end min-h-[52vh] overflow-hidden bg-obsidian">
     {(heroImage || publicImageSrc) && (
       <div class="absolute inset-0 z-0" aria-hidden="true">
-        <img
-          src={heroImage ? heroImage.src : publicImageSrc!}
-          {...(heroImage ? { width: heroImage.width, height: heroImage.height } : publicImageSize ?? {})}
-          alt={post.data.imageAlt || post.data.title}
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          class="w-full h-full object-cover object-center"
-        />
+        {heroImage ? (
+          <Image
+            src={heroImage}
+            widths={[640, 1024, 1600, 2000]}
+            sizes="100vw"
+            format="webp"
+            alt={post.data.imageAlt || post.data.title}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-full object-cover object-center"
+          />
+        ) : (
+          <img
+            src={publicImageSrc!}
+            {...(publicImageSize ?? {})}
+            alt={post.data.imageAlt || post.data.title}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="w-full h-full object-cover object-center"
+          />
+        )}
         <div class="absolute inset-0 bg-gradient-to-b from-obsidian/30 via-obsidian/60 to-obsidian/95"></div>
       </div>
     )}
@@ -155,6 +173,11 @@ const schema = faqSchema ? [blogPostingSchema, faqSchema] : [blogPostingSchema];
         </dl>
       </div>
     </section>
+  )}
+
+  {hasArticleCTA && articleCTA && (
+    <CTABand title={articleCTA.title} subtitle={articleCTA.subtitle}
+      ctas={[{ label: articleCTA.label, href: articleCTA.href, variant: 'gold' }]} />
   )}
 
   <!-- ─── Related posts (same category first) ──────────────────────────── -->

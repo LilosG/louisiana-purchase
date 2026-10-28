@@ -1,0 +1,56 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHero from '../../components/ui/PageHero.astro';
+import AlternatingRow from '../../components/ui/AlternatingRow.astro';
+import SectionHeader from '../../components/ui/SectionHeader.astro';
+import FourColumnGrid from '../../components/ui/FourColumnGrid.astro';
+import CTABand from '../../components/ui/CTABand.astro';
+import { IMAGES } from '../../assets/images';
+import { getSingleton, resolveContent } from '../../content/siteData';
+
+const venue = await getSingleton('venueSettings', 'settings');
+const page = resolveContent(await getSingleton('giftCardsPage', 'page'), IMAGES, {});
+const purchaseCTA = { label: page.purchaseLabel, href: venue.giftCards.purchaseUrl, variant: 'gold' as const };
+---
+
+<Layout {...page.seo} canonical="/gift-cards" breadcrumbs={[
+  { name: 'Home', url: '/', position: 1 },
+  { name: 'Gift Cards', url: '/gift-cards', position: 2 },
+]}>
+  <PageHero {...page.hero} ctas={[purchaseCTA]}>
+    <p class="mt-4 font-sans text-sm text-parchment/70">{page.purchaseNote}</p>
+  </PageHero>
+
+  <section aria-labelledby="gift-intro-heading">
+    <AlternatingRow {...page.intro} headingId="gift-intro-heading" />
+  </section>
+
+  <section aria-labelledby="gift-steps-heading" class="bg-velvet py-16 md:py-20">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <SectionHeader {...page.stepsHeader} id="gift-steps-heading" />
+      <ol class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        {page.steps.map((step: { title: string; body: string }, index: number) => (
+          <li class="border-t border-gold/25 pt-6">
+            <span class="font-mono text-sm text-gold" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <h3 class="font-serif text-2xl text-parchment mt-3 mb-3">{step.title}</h3>
+            <p class="font-sans font-light text-smoke leading-relaxed">{step.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section aria-labelledby="gift-guides-heading" class="bg-obsidian py-16 md:py-20">
+    <div class="max-w-[1280px] mx-auto px-6">
+      <SectionHeader {...page.guidesHeader} id="gift-guides-heading" />
+      <FourColumnGrid cards={page.guides} cols={2} divided={false} />
+    </div>
+  </section>
+
+  <CTABand {...page.cta} ctas={[purchaseCTA]}>
+    <div slot="support" class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
+      <a href={venue.giftCards.balanceUrl} class="underline underline-offset-4 hover:text-parchment">{page.balanceLabel}</a>
+      <a href="/contact" class="underline underline-offset-4 hover:text-parchment">{page.contactLabel}</a>
+    </div>
+  </CTABand>
+</Layout>

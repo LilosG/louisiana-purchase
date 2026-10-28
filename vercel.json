@@ -60,7 +60,6 @@
     { "source": "/bayou-hour",                            "destination": "/happy-hour",      "permanent": true },
     { "source": "/celebrations",                          "destination": "/private-events",  "permanent": true },
     { "source": "/accessibility",                         "destination": "/contact",         "permanent": true },
-    { "source": "/gift-cards",                            "destination": "/",                "permanent": true },
     { "source": "/reviews",                               "destination": "/about",           "permanent": true },
     { "source": "/visit",                                 "destination": "/contact",         "permanent": true },
     { "source": "/taste-of-nola",                         "destination": "/",                "permanent": true },

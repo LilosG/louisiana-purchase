@@ -33,6 +33,12 @@ const blog = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     tags: z.array(z.string()).optional(),
+    cta: z.object({
+      title: z.string(),
+      subtitle: z.string().optional(),
+      label: z.string(),
+      href: z.string(),
+    }).optional(),
     faqs: z.array(z.object({ q: z.string(), a: z.string() })).optional(),
   }),
 });
@@ -55,6 +61,20 @@ export const collections = {
   privateEventsIndexPage: singleton('privateEventsIndexPage'),
   privateEventsSlugTemplate: singleton('privateEventsSlugTemplate'),
   theSpacePage: singleton('theSpacePage'),
+  giftCardsPage: defineCollection({
+    loader: glob({ pattern: '*.json', base: './src/content/giftCardsPage' }),
+    schema: z.object({
+      seo: z.object({ title: z.string(), description: z.string(), ogImage: z.string() }),
+      hero: z.object({ eyebrow: z.string(), title: z.string(), titleItalic: z.string(), subtitle: z.string(), image: z.string(), imageAlt: z.string() }),
+      intro: z.object({ eyebrow: z.string(), title: z.string(), titleItalic: z.string(), body: z.array(z.string()), image: z.string(), imageAlt: z.string(), ctas: z.array(z.object({ label: z.string(), href: z.string(), variant: z.enum(['gold', 'outline', 'text']) })) }),
+      stepsHeader: z.object({ eyebrow: z.string(), title: z.string(), subtitle: z.string() }),
+      steps: z.array(z.object({ title: z.string(), body: z.string() })),
+      guidesHeader: z.object({ eyebrow: z.string(), title: z.string(), subtitle: z.string() }),
+      guides: z.array(z.object({ title: z.string(), body: z.string(), href: z.string(), linkLabel: z.string() })),
+      cta: z.object({ eyebrow: z.string(), title: z.string(), subtitle: z.string() }),
+      purchaseLabel: z.string(), purchaseNote: z.string(), balanceLabel: z.string(), contactLabel: z.string(),
+    }),
+  }),
   cocktailsMenu: repeatable('cocktailsMenu'),
   kitchenOxtailKingdom: repeatable('kitchenOxtailKingdom'),
   kitchenCreoleSoulBangers: repeatable('kitchenCreoleSoulBangers'),

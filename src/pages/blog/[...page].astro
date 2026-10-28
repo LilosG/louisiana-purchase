@@ -5,6 +5,7 @@
 // subsequent pages render at /blog/2, /blog/3, etc.
 
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import SectionHeader from '../../components/ui/SectionHeader.astro';
@@ -60,10 +61,11 @@ const HEADING_SUFFIX =
                 <a href={`/blog/${post.id}`} class="group block h-full flex flex-col">
                   {image && (
                     <div class="aspect-[4/3] overflow-hidden mb-5">
-                      <img
-                        src={image.src}
-                        width={image.width}
-                        height={image.height}
+                      <Image
+                        src={image}
+                        widths={[400, 640, 900]}
+                        sizes="(min-width: 1280px) 400px, (min-width: 768px) 33vw, 100vw"
+                        format="webp"
                         alt={post.data.imageAlt || post.data.title}
                         loading="lazy"
                         decoding="async"

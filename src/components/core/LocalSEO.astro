@@ -273,4 +273,4 @@ const jsonLd = {
 <meta name="ICBM"            content={`${VENUE.geo.latitude}, ${VENUE.geo.longitude}`} />
 
 <!-- ─── JSON-LD: single @graph ──────────────────────────────────────── -->
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd, null, 0)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd, null, 0)} />
