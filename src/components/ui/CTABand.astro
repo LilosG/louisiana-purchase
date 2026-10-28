@@ -103,6 +103,10 @@ const {
       ))}
     </div>
 
+    {Astro.slots.has('support') && (
+      <div class="mt-6 font-sans text-sm text-smoke"><slot name="support" /></div>
+    )}
+
   </div>
 
   <div class="absolute bottom-0 left-0 right-0 h-px bg-[linear-gradient(to_right,transparent,rgba(201,168,76,0.40),transparent)]" aria-hidden="true"></div>

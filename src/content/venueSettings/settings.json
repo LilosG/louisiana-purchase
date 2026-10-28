@@ -33,5 +33,9 @@
   "happyHour": { "label": "Happy Hour", "days": "Monday – Friday", "window": "3 PM – 5 PM", "opens": "15:00", "closes": "17:00" },
   "brunchDays": ["Saturday", "Sunday"],
   "eventCapacity": { "fullVenue": 80, "privateRoom": 40, "patio": 50 },
-  "defaultSocialImage": "/og-image.jpg"
+  "defaultSocialImage": "/og-image.jpg",
+  "giftCards": {
+    "purchaseUrl": "https://order.toasttab.com/egiftcards/louisiana-purchase",
+    "balanceUrl": "https://www.toasttab.com//louisiana-purchase/findcard"
+  }
 }

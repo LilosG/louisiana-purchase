@@ -96,6 +96,23 @@ test("existing reservation placements keep their parameters without a bar locati
   assert.equal(events()[0][2].cta_location, undefined);
 });
 
+test("central gift-card purchase URL emits one gift event without becoming an online order", () => {
+  const { context, activate, events } = analytics();
+  context.location.pathname = "/gift-cards";
+  activate(venue.giftCards.purchaseUrl, null);
+  activate(venue.orderUrl, null);
+  assert.equal(events().length, 2);
+  assert.equal(events()[0][1], "gift_card_click");
+  assert.equal(events()[0][2].link_url, venue.giftCards.purchaseUrl);
+  assert.equal(events()[0][2].page_path, "/gift-cards");
+  assert.equal(events()[1][1], "order_click");
+  for (const options of [{ optOut: true }, { gpc: true }]) {
+    const blocked = analytics(options);
+    blocked.activate(venue.giftCards.purchaseUrl, null);
+    assert.equal(blocked.events().length, 0);
+  }
+});
+
 test("privacy opt out and GPC suppress clicks, including opt out after initialization", () => {
   for (const options of [{ optOut: true }, { gpc: true }]) {
     const { activate, events } = analytics(options);

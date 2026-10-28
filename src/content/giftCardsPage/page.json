@@ -1,0 +1,85 @@
+{
+  "seo": {
+    "title": "Louisiana Purchase Gift Cards | North Park, San Diego",
+    "description": "Give a Louisiana Purchase eGift card for Creole dining and craft cocktails in North Park, San Diego. Personalize your gift and purchase securely through Toast.",
+    "ogImage": "/images/louisiana-purchase-bar-and-restaurant-north-park-website.jpg"
+  },
+  "hero": {
+    "eyebrow": "A Taste of New Orleans. A Gift from North Park.",
+    "title": "Louisiana Purchase",
+    "titleItalic": "Gift Cards",
+    "subtitle": "Give them an evening of elevated Creole cuisine, craft cocktails, and good company in North Park, San Diego.",
+    "image": "__IMAGE__louisiana-purchase-dining-room-bar-north-park-website",
+    "imageAlt": "The dining room and bar at Louisiana Purchase in North Park, San Diego"
+  },
+  "intro": {
+    "eyebrow": "For the People You Want to Treat",
+    "title": "Big flavor.",
+    "titleItalic": "A personal gesture.",
+    "body": [
+      "A birthday worth sitting down for. A thank-you that goes beyond a text. A night out for the couple who always hosts. A Louisiana Purchase gift card gives them something to look forward to, with the freedom to make the plans themselves.",
+      "Our New Orleans-inspired kitchen brings elevated Creole cooking to North Park. Explore the dinner menu, discover the cocktail program, or let the recipient decide what their next visit looks like."
+    ],
+    "image": "__IMAGE__louisiana-purchase-dinner-north-park-san-diego-website",
+    "imageAlt": "Charred oysters, toast, and a flower-garnished cocktail at Louisiana Purchase",
+    "ctas": [
+      {
+        "label": "Explore the Dinner Menu",
+        "href": "/menu/dinner",
+        "variant": "text"
+      },
+      {
+        "label": "Discover the Cocktails",
+        "href": "/menu/cocktails",
+        "variant": "text"
+      }
+    ]
+  },
+  "stepsHeader": {
+    "eyebrow": "Easy to Give",
+    "title": "Make it theirs in a few simple steps.",
+    "subtitle": "Choose the details on Toast. We’ll give you something good to write in the card."
+  },
+  "steps": [
+    {
+      "title": "Choose the amount",
+      "body": "Select a gift amount on Louisiana Purchase’s secure Toast page. Current amounts and checkout details are shown there."
+    },
+    {
+      "title": "Add a personal note",
+      "body": "Include their name and a message that makes it feel like your gift: a birthday wish, a thank-you, or an invitation to enjoy a night out."
+    },
+    {
+      "title": "Pick the delivery",
+      "body": "Send by email or text, choose a later delivery, or send the card to yourself first. Review the recipient details before completing your purchase."
+    }
+  ],
+  "guidesHeader": {
+    "eyebrow": "A Little Inspiration",
+    "title": "Put some thought into the gift.",
+    "subtitle": "Find the right occasion, choose a comfortable budget, and add a message that sounds like you."
+  },
+  "guides": [
+    {
+      "title": "Give them a North Park night out",
+      "body": "A practical guide to restaurant gift cards for birthdays, couples, and people who love discovering somewhere good to eat.",
+      "href": "/blog/restaurant-gift-cards-north-park-san-diego",
+      "linkLabel": "Read the gifting guide"
+    },
+    {
+      "title": "Say thank you with a meal",
+      "body": "Thoughtful ways to thank a host, a helpful neighbor, or a colleague, from choosing the gift to writing the note.",
+      "href": "/blog/thank-you-gifts-san-diego-dinner-gift-card",
+      "linkLabel": "Find a thoughtful thank-you"
+    }
+  ],
+  "cta": {
+    "eyebrow": "A Little Louisiana, On You",
+    "title": "Give them a night worth making plans for.",
+    "subtitle": "Choose your amount, add a message, and arrange digital delivery through Toast."
+  },
+  "purchaseLabel": "Buy an eGift Card",
+  "purchaseNote": "Purchase securely through Toast.",
+  "balanceLabel": "Check gift card balance",
+  "contactLabel": "Contact Louisiana Purchase"
+}

@@ -8,6 +8,7 @@ import footerData from './src/content/footer/footer.json';
 import localSeoData from './src/content/localSeo/localSeo.json';
 import homeData from './src/content/home/home.json';
 import aboutData from './src/content/about/about.json';
+import giftCardsPageData from './src/content/giftCardsPage/page.json';
 import brunchPageData from './src/content/brunchPage/page.json';
 import contactPageData from './src/content/contactPage/page.json';
 import eventsIndexPageData from './src/content/eventsIndexPage/page.json';
@@ -480,7 +481,7 @@ export default config({
         createElement('text', { x: 16, y: 21, textAnchor: 'middle', fontFamily: 'Georgia, serif', fontSize: 15, fontWeight: 700, fill: colorScheme === 'dark' ? '#24140f' : '#d6aa62' }, 'LP')),
     },
     navigation: {
-      Website: ['home', 'about', 'contactPage'],
+      Website: ['home', 'about', 'contactPage', 'giftCardsPage'],
       Menus: ['menuIndexPage', 'menuDinnerPage', 'menuCocktailsPage', 'cocktailsMenu', 'kitchenOxtailKingdom', 'kitchenCreoleSoulBangers', 'kitchenGulf', 'kitchenFryHouse', 'brunchMenuItems'],
       Events: ['eventsIndexPage', 'eventCategoryCards'],
       'Private Events': ['privateEventsIndexPage', 'privateEventsSlugTemplate', 'privateEventTypes', 'privateEventsProcessSteps', 'privateEventsFaqs'],
@@ -498,6 +499,7 @@ export default config({
     localSeo: jsonSingleton('Local Search Settings', 'localSeo', 'localSeo', localSeoData),
     home: jsonSingleton('Home', 'home', 'home', homeData),
     about: jsonSingleton('About', 'about', 'about', aboutData),
+    giftCardsPage: jsonSingleton('Gift Cards', 'giftCardsPage', 'page', giftCardsPageData),
     brunchPage: jsonSingleton('Brunch', 'brunchPage', 'page', brunchPageData),
     contactPage: jsonSingleton('Contact', 'contactPage', 'page', contactPageData),
     eventsIndexPage: jsonSingleton('Events', 'eventsIndexPage', 'page', eventsIndexPageData),
@@ -534,7 +536,6 @@ export default config({
             { label: 'Dinner', value: 'Dinner' },
           ],
           defaultValue: 'North Park Guide',
-          validation: { isRequired: true },
         }),
         image: optionalImageField('blog/image', 'Hero Image', 'Optional photo shown at the top of the post, on the blog index, and in social link previews.'),
         imageAlt: optionalText('Image Description for Accessibility', 'Describe what is visible in the photo for screen readers and search engines.'),
@@ -552,6 +553,12 @@ export default config({
             itemLabel: (props) => props.fields.q.value || 'Question',
           },
         ),
+        cta: fields.object({
+          title: optionalText('Heading', 'Complete the heading, button text and destination together, or leave all blank to omit the article CTA.'),
+          subtitle: optionalText('Supporting Text', 'Optional short explanation above the button.', true),
+          label: optionalText('Button Text', 'Describe the next step, such as Explore Gift Cards.'),
+          href: optionalText('Button Destination', 'Use an internal path such as /gift-cards.'),
+        }, { label: 'Article Call to Action (optional)' }),
         content: fields.mdx({
           label: 'Body Content',
           description: 'The main article body. Supports headings (use ## for section headings), bold/italic, bullet and numbered lists, and links — including links to other pages on this site, e.g. [see the menu](/menu).',
