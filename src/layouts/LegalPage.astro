@@ -1,0 +1,125 @@
+---
+import Layout from './Layout.astro';
+interface Props { title: string; description: string; }
+const { title, description } = Astro.props;
+---
+<Layout title={`${title} | Louisiana Purchase`} description={description} transparentNav={false}
+  breadcrumbs={[
+    { name: 'Home', url: '/', position: 1 },
+    { name: title, url: Astro.url.pathname, position: 2 },
+  ]}
+>
+  <section class="legal-page" aria-labelledby="legal-title">
+    <div class="legal-page__inner">
+      <header class="legal-page__header">
+        <p class="legal-page__eyebrow">Louisiana Purchase</p>
+        <h1 id="legal-title" class="legal-page__title">{title}</h1>
+        <p class="legal-page__meta">Last updated: <time datetime="2026-10-29">October 29, 2026</time></p>
+        <nav aria-label="Legal information" class="legal-page__links">
+          <a href="/privacy" aria-current={Astro.url.pathname === '/privacy' ? 'page' : undefined}>Privacy Policy</a>
+          <a href="/terms" aria-current={Astro.url.pathname === '/terms' ? 'page' : undefined}>Terms of Service</a>
+          <a href="/privacy#choices">Your Privacy Choices</a>
+        </nav>
+      </header>
+      <div class="legal-page__body"><slot /></div>
+    </div>
+  </section>
+</Layout>
+<style>
+  .legal-page {
+    padding: 8rem 1.5rem 6rem;
+    background: var(--color-obsidian);
+    min-height: 100vh;
+  }
+
+  .legal-page__inner {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+
+  .legal-page__header {
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+    padding-bottom: 2rem;
+  }
+
+  .legal-page__eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-page__title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-parchment);
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-page__meta {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--color-smoke);
+  }
+
+  .legal-page__body :global(section) {
+    margin-bottom: 3rem;
+  }
+
+  .legal-page__body :global(h2) {
+    font-family: var(--font-sans);
+    font-size: 0.5625rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+    margin-bottom: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .legal-page__body :global(h3) {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-parchment);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .legal-page__body :global(p),
+  .legal-page__body :global(address) {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.75;
+    color: rgba(242, 235, 224, 0.70);
+    margin-bottom: 1rem;
+    font-style: normal;
+  }
+
+  .legal-page__body :global(a) {
+    color: var(--color-gold);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .legal-page__body :global(a:hover) {
+    color: var(--color-parchment);
+  }
+
+
+  .legal-page { overflow-wrap: anywhere; }
+  .legal-page__body :global(h2) { font-size: 0.875rem; letter-spacing: 0.12em; line-height: 1.5; }
+  .legal-page__body :global([id]) { scroll-margin-top: 6rem; }
+  .legal-page__body :global(ul) { padding-left: 1.5rem; list-style: disc; margin-bottom: 1rem; }
+  .legal-page__body :global(li) { font-family: var(--font-sans); font-size: 0.9375rem; line-height: 1.75; color: rgba(242,235,224,0.70); margin-bottom: 0.5rem; }
+  .legal-page__links { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; margin-top: 1.5rem; font-size: 0.875rem; }
+  .legal-page__links a { color: var(--color-gold); text-decoration: underline; text-underline-offset: 3px; }
+  .legal-page :global(a:focus-visible), .legal-page :global(button:focus-visible) { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+</style>

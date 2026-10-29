@@ -1,134 +1,68 @@
 ---
-// src/pages/privacy.astro
-// Louisiana Purchase — Privacy Policy
-
-import Layout from '../layouts/Layout.astro';
+import LegalPage from '../layouts/LegalPage.astro';
 import { formatPhone, getSingleton } from '../content/siteData';
-
 const venue = await getSingleton('venueSettings', 'settings');
 const address = venue.address;
 const email = import.meta.env.PUBLIC_VENUE_EMAIL || venue.emailFallback;
 const phone = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
 ---
+<LegalPage title="Privacy Policy" description="How Louisiana Purchase handles website analytics, customer inquiries, and AI-enabled business messaging, with privacy choices and contact details.">
+    <p>This policy explains how {venue.name} (“we,” “us,” or “our”) handles personal information in connection with this website, customer inquiries, and business messaging, including Google Business Profile AI-enabled messaging when available.</p>
 
-<Layout
-  title="Privacy Policy | Louisiana Purchase"
-  description="How Louisiana Purchase, a Creole restaurant in North Park, San Diego, collects, uses and protects your information, and the privacy choices available to you."
-  transparentNav={false}
-  breadcrumbs={[
-    { name: 'Home', url: '/', position: 1 },
-    { name: 'Privacy Policy', url: '/privacy', position: 2 },
-  ]}
->
-  <div class="privacy-page">
-    <div class="privacy-page__inner">
+    <h2>Information We Collect and Why</h2>
+    <ul>
+      <li><strong>Inquiries and correspondence:</strong> Your name, email address, phone number, message, and details you choose to provide, such as an event date or party size. We use these to answer questions, follow up on requests, and assist with restaurant services.</li>
+      <li><strong>Business messaging:</strong> When you message us, we may receive your phone number, available profile information, messages and attachments you send, and related conversation and delivery information. We use this information to provide automated or staff responses and manage your inquiry.</li>
+      <li><strong>Website activity:</strong> Google Analytics may collect pages viewed, referring websites, approximate location derived from IP address, device and browser information, and online identifiers such as analytics cookie IDs. We use this to measure traffic and interactions, such as reservation, ordering, gift card, and phone link clicks, and improve the website.</li>
+      <li><strong>Privacy preferences:</strong> This website stores your analytics preference locally in your browser so it can honor your choice.</li>
+    </ul>
 
-      <header class="privacy-page__header">
-        <p class="privacy-page__eyebrow">Louisiana Purchase</p>
-        <h1 class="privacy-page__title">Privacy Policy</h1>
-        <p class="privacy-page__meta">Effective date: June 1, 2025 &nbsp;&middot;&nbsp; Last updated: June 1, 2025</p>
-      </header>
+    <h2>Google Business Profile and AI-Enabled Messaging</h2>
+    <p>When available, messaging through our Google Business Profile uses Google's RCS for Business service. An AI agent may answer common questions using our Business Profile and website information. Staff can review conversations, take over a chat, and respond when a question requires personal assistance.</p>
+    <p>Google, its service providers, and participating mobile carriers may process message content and related information to deliver and operate messaging, generate automated responses, and maintain service security. Google's RCS terms also permit processing message content to train AI models for spam detection and prevention. Relevant carriers may have access to messages sent over their networks.</p>
+    <p>See <a href="https://policies.google.com/privacy">Google's Privacy Policy</a> and the <a href="https://developers.google.com/business-communications/rcs-business-messaging/terms-and-policies/tos">RCS for Business terms</a> for Google's applicable practices. Our <a href="/terms#messaging">messaging terms</a> explain automated responses, human assistance, and messaging choices.</p>
+    <p>Please do not send payment card or bank details, passwords, government identification numbers, or sensitive medical information in chat. For allergies or dietary requirements, contact restaurant staff directly before ordering; automated answers should not be relied upon for food safety.</p>
 
-      <div class="privacy-page__body">
+    <h2>How Information Is Shared</h2>
+    <p>Information may be processed by authorized restaurant staff and service providers supporting our website, analytics, communications, and customer service. Messaging also involves Google and participating carriers as described above. We may disclose information where required by law or reasonably necessary to protect safety, prevent fraud, or defend legal rights.</p>
+    <p>Our website links to services such as OpenTable for reservations and Toast for ordering, gift cards, and event inquiries. Information you submit through those services is handled under their privacy policies and may also be provided to us to fulfill your request. Review <a href="https://www.opentable.com/legal/privacy-policy">OpenTable's Privacy Policy</a> and <a href="https://pos.toasttab.com/privacy">Toast's Privacy Statement</a> before using those services.</p>
 
-        <section>
-          <h2>Notice at Collection</h2>
-          <p>
-            When you visit this website, we automatically collect certain information about your visit. This section
-            describes what we collect, why, and your choices.
-          </p>
+    <h2>Website Analytics</h2>
+    <p>Google Analytics is configured with advertising storage, ad user data, ad personalization, Google Signals, and ads personalization signals disabled. We do not use this website analytics data for cross-context behavioral advertising. Google Analytics event data is retained for 14 months, after which it is automatically deleted.</p>
+    <p>You can opt out of Google Analytics measurement on this site using the control below. This browser setting controls this website's analytics; it does not stop a separate messaging conversation, delete prior messages, or change privacy settings on Google, OpenTable, Toast, or other services.</p>
 
-          <h3>What we collect</h3>
-          <p>
-            We collect internet and network activity information, including: pages you viewed on this site,
-            the website that referred you here, your approximate location derived from your IP address, and your
-            device and browser type. We also collect online identifiers such as cookie IDs assigned by Google
-            Analytics.
-          </p>
-
-          <h3>Why we collect it</h3>
-          <p>
-            We use this information solely to measure site traffic and improve this website. We do not use it for
-            any other purpose.
-          </p>
-
-          <h3>Who receives it</h3>
-          <p>
-            This information is shared with Google, LLC, acting as a service provider under
-            <a href="https://business.safety.google/adsprocessorterms/" target="_blank" rel="noopener noreferrer">Google's data processing terms</a>.
-            Google processes the data on our behalf to provide the Google Analytics service.
-          </p>
-
-          <h3>What we do not do</h3>
-          <p>
-            We do not sell your personal information. We do not share your personal information for cross-context
-            behavioral advertising. Google signals and ads personalization are disabled on this Analytics property,
-            and we have denied all ad-related storage in our tag configuration.
-          </p>
-
-          <h3>Retention</h3>
-          <p>
-            Google Analytics event data is retained for 14 months, after which it is automatically deleted.
-          </p>
-        </section>
-
-        <section id="choices">
-          <h2>Your Privacy Choices</h2>
-          <p>
-            You can opt out of Google Analytics at any time. Your choice is saved in your browser and does not
-            expire. If you clear your browser data you may need to opt out again.
-          </p>
-
+    <h2 id="choices">Your Privacy Choices</h2>
+    <p>Your analytics preference is stored locally in this browser without an automatic expiration. Clearing browser storage removes the saved preference. If your browser sends a Global Privacy Control signal, Google Analytics is not loaded.</p>
           <div class="privacy-choices" id="privacy-choices-panel">
             <p class="privacy-choices__status" id="privacy-status">Loading&hellip;</p>
             <button type="button" class="privacy-choices__btn" id="privacy-toggle">Loading&hellip;</button>
           </div>
 
-          <p>
-            If your browser sends a <a href="https://globalprivacycontrol.org/" target="_blank" rel="noopener noreferrer">Global Privacy Control</a>
-            signal, we honor it automatically and do not load Google Analytics, regardless of any stored choice.
-          </p>
 
-          <p>
-            You can also install the
-            <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Google Analytics Opt-out Browser Add-on</a>
-            for a browser-level opt-out.
-          </p>
-        </section>
+    <h2>Messaging Choices and Privacy Requests</h2>
+    <p>You can stop business messages by replying STOP or using the block or unsubscribe options in your messaging app. For help, or to request access to, correction of, or deletion of information we hold about you, contact us using the details below. We may need to verify your identity, and legal requirements or the rights of others may limit a request. Requests concerning information held independently by Google, your carrier, or a booking or ordering provider should also be directed to that provider.</p>
+    <p>Starting a customer-service conversation does not enroll you in promotional messaging. Any separate marketing messaging requires the applicable consent.</p>
 
-        <section>
-          <h2>California Residents</h2>
-          <p>
-            If you are a California resident, you have the right to know what personal information we collect,
-            to request deletion of your personal information, and to request correction of inaccurate personal
-            information.
-          </p>
-          <p>
-            To exercise these rights, or for any privacy-related questions, contact us at:
-          </p>
-          <address>
-            <strong>{venue.name}</strong><br />
-            {address.street}, {address.neighborhood}, {address.city}, {address.state} {address.zip}<br />
-            <a href={`mailto:${email}`}>{email}</a><br />
-            <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
-          </address>
-          <p>
-            We will respond to verified requests within 45 days.
-          </p>
-        </section>
+    <h2>Retention and Security</h2>
+    <p>Retention depends on the type of information, the purpose of the inquiry or transaction, applicable service settings, and legal or recordkeeping requirements. Contact us for information about a particular record or to request deletion. Google, carriers, and other providers apply their own retention practices to information they hold; deleting information from our records does not necessarily delete their copies.</p>
+    <p>No internet transmission or storage system can be guaranteed completely secure. Please use the designated reservation or ordering provider for payment information rather than sending it by email or chat.</p>
 
-        <section>
-          <h2>Changes to This Policy</h2>
-          <p>
-            We may update this policy from time to time. When we do, we will update the "Last updated" date at
-            the top of this page.
-          </p>
-        </section>
+    <h2>Children's Privacy</h2>
+    <p>Our website and messaging are not directed to children under 13. If you believe a child has provided personal information to us, please contact us so we can address it.</p>
 
-      </div>
-    </div>
-  </div>
-</Layout>
+    <h2>Changes to This Policy</h2>
+    <p>We may update this policy as our services or practices change. The date above identifies the latest revision. Where required, we will provide additional notice or obtain consent.</p>
+
+    <h2 id="contact">Contact Us</h2>
+    <p>For privacy questions or requests, contact:</p>
+    <address class="not-italic">
+      {venue.name}<br />
+      {address.street}<br />
+      {address.city}, {address.state} {address.zip}<br />
+      <a href={`mailto:${email}`}>{email}</a><br />
+      <a href={`tel:${phone}`}>{formatPhone(phone)}</a>
+    </address>
+</LegalPage>
 
 <script is:inline>
   (function () {
@@ -202,93 +136,6 @@ const phone = import.meta.env.PUBLIC_VENUE_PHONE || venue.phoneFallback;
 </script>
 
 <style>
-  .privacy-page {
-    padding: 8rem 1.5rem 6rem;
-    background: var(--color-obsidian);
-    min-height: 100vh;
-  }
-
-  .privacy-page__inner {
-    max-width: 48rem;
-    margin: 0 auto;
-  }
-
-  .privacy-page__header {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-    padding-bottom: 2rem;
-  }
-
-  .privacy-page__eyebrow {
-    font-family: var(--font-sans);
-    font-size: 0.5625rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .privacy-page__title {
-    font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-parchment);
-    margin-bottom: 0.75rem;
-  }
-
-  .privacy-page__meta {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    color: var(--color-smoke);
-  }
-
-  .privacy-page__body section {
-    margin-bottom: 3rem;
-  }
-
-  .privacy-page__body h2 {
-    font-family: var(--font-sans);
-    font-size: 0.5625rem;
-    font-weight: 500;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--color-gold);
-    margin-bottom: 1.25rem;
-    margin-top: 2.5rem;
-  }
-
-  .privacy-page__body h3 {
-    font-family: var(--font-serif);
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: var(--color-parchment);
-    margin-bottom: 0.5rem;
-    margin-top: 1.5rem;
-  }
-
-  .privacy-page__body p,
-  .privacy-page__body address {
-    font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    line-height: 1.75;
-    color: rgba(242, 235, 224, 0.70);
-    margin-bottom: 1rem;
-    font-style: normal;
-  }
-
-  .privacy-page__body a {
-    color: var(--color-gold);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .privacy-page__body a:hover {
-    color: var(--color-parchment);
-  }
-
   .privacy-choices {
     background: rgba(201, 168, 76, 0.06);
     border: 1px solid rgba(201, 168, 76, 0.18);

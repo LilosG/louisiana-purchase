@@ -169,6 +169,11 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
         &copy; {new Date().getFullYear()} {footer.copyrightVenue} &bull; {venue.address.street}, {venue.address.city}, {venue.address.state} {venue.address.zip}
       </p>
       <div class="site-footer__bottom-right">
+        <nav aria-label="Legal information" class="site-footer__legal">
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/privacy#choices">Your Privacy Choices</a>
+        </nav>
         <p class="site-footer__sub" set:html={bottomDescription}></p>
         <a href={footer.creditUrl} target="_blank" rel="noopener noreferrer" class="site-footer__lilos-credit" set:text={`\n${footer.creditLabel}\n`}></a>
       </div>
@@ -448,6 +453,7 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 
 .site-footer__bottom-right {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem;
 }
@@ -461,4 +467,9 @@ const bottomDescription = `\n${venue.address.neighborhood}, ${venue.address.city
 }
 
 .site-footer__lilos-credit:hover { color: var(--color-gold); }
+
+.site-footer__legal { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; }
+.site-footer__legal a { font-family: var(--font-sans); font-size: 0.75rem; color: rgba(242,235,224,0.75); text-decoration: underline; text-underline-offset: 3px; }
+.site-footer__legal a:hover { color: var(--color-gold); }
+.site-footer__legal a:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
 </style>
