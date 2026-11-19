@@ -3,9 +3,7 @@ import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
-import keystatic from '@keystatic/astro';
 import react from '@astrojs/react';
-import vercel from '@astrojs/vercel';
 import mdx from '@astrojs/mdx';
 
 import { readdirSync, readFileSync } from 'node:fs';
@@ -44,8 +42,9 @@ const excludeFromSitemap = (page) => {
 export default defineConfig({
   site: venueSettings.domain,
   trailingSlash: 'never',
-  integrations: [sitemap({ filter: excludeFromSitemap, serialize: serializeSitemapItem }), keystatic(), react(), mdx()],
-  adapter: vercel(),
+  integrations: [sitemap({ filter: excludeFromSitemap, serialize: serializeSitemapItem }), react(), mdx()],
+  output: 'static',
+  build: { format: 'file' },
   vite: {
     plugins: [tailwindcss()]
   }
